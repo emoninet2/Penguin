@@ -130,11 +130,12 @@ main.d main.o: .././main.c .././main.h \
  ../XMEGA_DRIVERS/twi_master_driver.h ../XMEGA_DRIVERS/twi_slave_driver.h \
  ../XMEGA_DRIVERS/pmic_driver.h ../XMEGA_DRIVERS/eeprom_driver.h \
  ../XMEGA_DRIVERS/dma_driver.h ../XMEGA_DRIVERS/adc_driver.h \
- ../XMEGA_DRIVERS/rtc_driver.h ../XMEGA_DRIVERS/TC_driver.h \
- ../Component_Drivers/components.h \
+ ../XMEGA_DRIVERS/clksys_driver.h ../XMEGA_DRIVERS/rtc_driver.h \
+ ../XMEGA_DRIVERS/TC_driver.h ../Component_Drivers/components.h \
  ../Component_Drivers/nrf24l01p/nrf24l01p.h \
  ../Component_Drivers/nrf24l01p/nrf24l01p_arch_driver.h \
- ../Component_Drivers/ssd1306/ssd1306.h \
+ ../xmega_API/xmega_api.h ../xmega_API/USART.h ../xmega_API/api_common.h \
+ ../xmega_API/DIGITALPIN.h ../Component_Drivers/ssd1306/ssd1306.h \
  ../Component_Drivers/ssd1306/ssd130g_arch_driver.h \
  ../Component_Drivers/ssd1306/font.h \
  ../Component_Drivers/ssd1306/gfx_mono.h
@@ -415,6 +416,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../XMEGA_DRIVERS/adc_driver.h:
 
+../XMEGA_DRIVERS/clksys_driver.h:
+
 ../XMEGA_DRIVERS/rtc_driver.h:
 
 ../XMEGA_DRIVERS/TC_driver.h:
@@ -424,6 +427,14 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../Component_Drivers/nrf24l01p/nrf24l01p.h:
 
 ../Component_Drivers/nrf24l01p/nrf24l01p_arch_driver.h:
+
+../xmega_API/xmega_api.h:
+
+../xmega_API/USART.h:
+
+../xmega_API/api_common.h:
+
+../xmega_API/DIGITALPIN.h:
 
 ../Component_Drivers/ssd1306/ssd1306.h:
 

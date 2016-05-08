@@ -42,6 +42,7 @@
 
 #include "main.h"
 #include "components.h"
+#include "xmega_api.h"
 
 /** Buffer to hold the previously generated HID report, for comparison purposes inside the HID class driver. */
 static uint8_t PrevHIDReportBuffer[GENERIC_REPORT_SIZE];
@@ -72,6 +73,13 @@ USB_ClassInfo_HID_Device_t Generic_HID_Interface =
  */
 int main(void)
 {
+	
+	DigitalPin_t led = {&PORTR, 0};
+	
+	
+	
+	
+	
 	_nrf24l01p_init();
 	_nrf24l01p_enable_dynamic_payload();
 	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P0);
@@ -115,38 +123,38 @@ int main(void)
 
 
 	
- 	SetupHardware();
+ 	//SetupHardware();
 // 
- 	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
- 	GlobalInterruptEnable();
+ 	//LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
+ 	//GlobalInterruptEnable();
 
-	PORT_SetDirection(&PORTR,(1<<0));
+	DigitalPin_SetDIr(&led,1);
+	//PORT_SetDirection(&PORTR,(1<<0));
 
+	CLKSYS_Enable( OSC_RC32MEN_bm );
+	do {} while ( CLKSYS_IsReady( OSC_RC32MRDY_bm ) == 0 );
+	CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_RC32M_gc );
+	CLKSYS_Disable( OSC_RC2MEN_bm );
+	
+		
 	while(1)
 	{
 
 			
-// 			PORT_TogglePins(&PORTR,(1<<0));
+ 			PORT_TogglePins(&PORTR,(1<<0));
+			 _delay_ms(1000);
  			char myname[] = "test";
 			_nrf24l01p_write((uint8_t*) myname, strlen(myname));
 
 		
- 			HID_Device_USBTask(&Generic_HID_Interface);
- 			USB_USBTask();
+ 			//HID_Device_USBTask(&Generic_HID_Interface);
+ 			//USB_USBTask();
 	}
 }
 
 /** Configures the board hardware and chip peripherals for the demo's functionality. */
 void SetupHardware(void)
 {
-#if (ARCH == ARCH_AVR8)
-	/* Disable watchdog if enabled by bootloader/fuses */
-	MCUSR &= ~(1 << WDRF);
-	wdt_disable();
-
-	/* Disable clock division */
-	clock_prescale_set(clock_div_1);
-#elif (ARCH == ARCH_XMEGA)
 	/* Start the PLL to multiply the 2MHz RC oscillator to 32MHz and switch the CPU core to run from it */
 	XMEGACLK_StartPLL(CLOCK_SRC_INT_RC2MHZ, 2000000, F_CPU);
 	XMEGACLK_SetCPUClockSource(CLOCK_SRC_PLL);
@@ -156,7 +164,6 @@ void SetupHardware(void)
 	XMEGACLK_StartDFLL(CLOCK_SRC_INT_RC32MHZ, DFLL_REF_INT_USBSOF, F_USB);
 
 	PMIC.CTRL = PMIC_LOLVLEN_bm | PMIC_MEDLVLEN_bm | PMIC_HILVLEN_bm;
-#endif
 
 	/* Hardware Initialization */
 	LEDs_Init();

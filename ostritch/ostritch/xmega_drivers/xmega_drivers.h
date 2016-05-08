@@ -18,6 +18,7 @@
 #include "eeprom_driver.h"
 #include "dma_driver.h"
 #include "adc_driver.h"
+#include "clksys_driver.h"
 //#include "dac_driver.h"
 #include "rtc_driver.h"
 #include "TC_driver.h"

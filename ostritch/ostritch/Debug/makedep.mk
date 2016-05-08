@@ -10,6 +10,8 @@ Descriptors.c
 
 main.c
 
+xmega_API\DIGITALPIN.c
+
 xmega_drivers\adc_driver.c
 
 xmega_drivers\clksys_driver.c

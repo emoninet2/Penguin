@@ -36,6 +36,7 @@ SUBDIRS :=  \
 ../Component_Drivers \
 ../Component_Drivers/nrf24l01p \
 ../Component_Drivers/ssd1306 \
+../xmega_API \
 ../xmega_drivers \
 ../xmega_drivers/LUFA \
 ../xmega_drivers/LUFA/Common \
@@ -116,6 +117,7 @@ C_SRCS +=  \
 ../Component_Drivers/ssd1306/font.c \
 ../Descriptors.c \
 ../main.c \
+../xmega_API/DIGITALPIN.c \
 ../xmega_drivers/adc_driver.c \
 ../xmega_drivers/clksys_driver.c \
 ../xmega_drivers/dma_driver.c \
@@ -205,6 +207,7 @@ Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
 main.o \
+xmega_API/DIGITALPIN.o \
 xmega_drivers/adc_driver.o \
 xmega_drivers/clksys_driver.o \
 xmega_drivers/dma_driver.o \
@@ -287,6 +290,7 @@ Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
 main.o \
+xmega_API/DIGITALPIN.o \
 xmega_drivers/adc_driver.o \
 xmega_drivers/clksys_driver.o \
 xmega_drivers/dma_driver.o \
@@ -369,6 +373,7 @@ Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
 main.d \
+xmega_API/DIGITALPIN.d \
 xmega_drivers/adc_driver.d \
 xmega_drivers/clksys_driver.d \
 xmega_drivers/dma_driver.d \
@@ -451,6 +456,7 @@ Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
 main.d \
+xmega_API/DIGITALPIN.d \
 xmega_drivers/adc_driver.d \
 xmega_drivers/clksys_driver.d \
 xmega_drivers/dma_driver.d \
@@ -701,129 +707,138 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
 Component_Drivers/nrf24l01p/%.o: ../Component_Drivers/nrf24l01p/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 Component_Drivers/ssd1306/%.o: ../Component_Drivers/ssd1306/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 ./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+xmega_API/%.o: ../xmega_API/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/%.o: ../xmega_drivers/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/Board/%.o: ../xmega_drivers/LUFA/Drivers/Board/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/%.o: ../xmega_drivers/LUFA/Drivers/Peripheral/AVR8/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/Peripheral/XMEGA/%.o: ../xmega_drivers/LUFA/Drivers/Peripheral/XMEGA/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Class/Common/%.o: ../xmega_drivers/LUFA/Drivers/USB/Class/Common/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Class/Device/%.o: ../xmega_drivers/LUFA/Drivers/USB/Class/Device/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Class/Host/%.o: ../xmega_drivers/LUFA/Drivers/USB/Class/Host/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Core/AVR8/%.o: ../xmega_drivers/LUFA/Drivers/USB/Core/AVR8/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Core/AVR8/Template/%.o: ../xmega_drivers/LUFA/Drivers/USB/Core/AVR8/Template/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Core/%.o: ../xmega_drivers/LUFA/Drivers/USB/Core/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Core/UC3/%.o: ../xmega_drivers/LUFA/Drivers/USB/Core/UC3/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Core/UC3/Template/%.o: ../xmega_drivers/LUFA/Drivers/USB/Core/UC3/Template/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/%.o: ../xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/Template/%.o: ../xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/Template/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
 xmega_drivers/LUFA/Platform/UC3/%.o: ../xmega_drivers/LUFA/Platform/UC3/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../Component_Drivers" -I"../xmega_API" -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 

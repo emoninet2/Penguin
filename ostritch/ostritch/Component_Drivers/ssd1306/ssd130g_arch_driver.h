@@ -13,7 +13,7 @@
 
 #include <avr/io.h>
 
-#define delay_us(us) _delay_us(us)
+//#define delay_us(us) _delay_us(us)
 
 
 #define port_direction(port,val) (port)->DIR = val

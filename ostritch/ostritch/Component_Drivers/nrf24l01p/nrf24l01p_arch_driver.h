@@ -14,6 +14,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "xmega_api.h"
+
 
 #if defined (__cplusplus)
 extern "C"{
@@ -21,13 +23,20 @@ extern "C"{
 
 
 
+
+
+
 #define _nrf24l01p_delay_us _delay_us
 #define _nrf24l01p_delay_ms _delay_ms
+
 
 #define set_bit(reg,bit) reg|= (1<<bit);
 #define clr_bit(reg,bit) reg&= ~(1<<bit);
 #define tgl_bit(reg,bit) reg^= (1<<bit);
 
+
+static DigitalPin_t nrf24l01p_csn_pin = {&PORTC, 4};
+static DigitalPin_t nrf24l01p_ce_pin = {&PORTC, 1};
 
 #define NRF24L01P_CSN_PIN_PORT	PORTC
 #define NRF24L01P_CSN_PIN_BIT	4
@@ -40,13 +49,19 @@ extern "C"{
 
 
 static void arch_nrf24l01p_ce_pin(bool state){
-	if(state) NRF24L01P_CE_PIN_PORT.OUTSET = (1<<NRF24L01P_CE_PIN_BIT) ;
-	else NRF24L01P_CE_PIN_PORT.OUTCLR = (1<<NRF24L01P_CE_PIN_BIT);
+	//if(state) NRF24L01P_CE_PIN_PORT.OUTSET = (1<<NRF24L01P_CE_PIN_BIT) ;
+	//else NRF24L01P_CE_PIN_PORT.OUTCLR = (1<<NRF24L01P_CE_PIN_BIT);
+	
+	if(state) DigitalPin_SetValue(&nrf24l01p_ce_pin) ;
+	else DigitalPin_ClearValue(&nrf24l01p_ce_pin);
+	
 }
 
 static void arch_nrf24l01p_csn_pin(bool state){
-	if(state) NRF24L01P_CSN_PIN_PORT.OUTSET = (1<<NRF24L01P_CSN_PIN_BIT) ;
-	else NRF24L01P_CSN_PIN_PORT.OUTCLR = (1<<NRF24L01P_CSN_PIN_BIT);
+// 	if(state) NRF24L01P_CSN_PIN_PORT.OUTSET = (1<<NRF24L01P_CSN_PIN_BIT) ;
+// 	else NRF24L01P_CSN_PIN_PORT.OUTCLR = (1<<NRF24L01P_CSN_PIN_BIT);
+	if(state) DigitalPin_SetValue(&nrf24l01p_csn_pin) ;
+	else DigitalPin_ClearValue(&nrf24l01p_csn_pin);
 }
 
 static void arch_nrf24l01p_initialize(){

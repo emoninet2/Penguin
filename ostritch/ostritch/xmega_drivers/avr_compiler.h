@@ -139,10 +139,7 @@
 /*! \brief Define the no operation macro. */
 #define nop()   do { __asm__ __volatile__ ("nop"); } while (0)
 
-#define MAIN_TASK_PROLOGUE int
 
-
-#define MAIN_TASK_EPILOGUE() return -1;
 
 #define SHORTENUM __attribute__ ((packed))
 
