@@ -228,6 +228,154 @@ Discarded input sections
                 0x00000000       0x80 main.o
  .text.gfx_mono_framebuffer_mask_byte
                 0x00000000       0x42 main.o
+ .text          0x00000000        0x0 xmega_drivers/adc_driver.o
+ .data          0x00000000        0x0 xmega_drivers/adc_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/adc_driver.o
+ .text.ADC_ResultCh_GetWord_Unsigned
+                0x00000000       0x10 xmega_drivers/adc_driver.o
+ .text.ADC_ResultCh_GetWord_Signed
+                0x00000000       0x14 xmega_drivers/adc_driver.o
+ .text.ADC_ResultCh_GetWord
+                0x00000000        0xc xmega_drivers/adc_driver.o
+ .text.ADC_ResultCh_GetLowByte
+                0x00000000        0xa xmega_drivers/adc_driver.o
+ .text.ADC_ResultCh_GetHighByte
+                0x00000000        0xa xmega_drivers/adc_driver.o
+ .text.ADC_Wait_8MHz
+                0x00000000       0x16 xmega_drivers/adc_driver.o
+ .text.ADC_Wait_32MHz
+                0x00000000       0x18 xmega_drivers/adc_driver.o
+ .text.ADC_Offset_Get_Unsigned
+                0x00000000       0x4e xmega_drivers/adc_driver.o
+ .text.ADC_Offset_Get_Signed
+                0x00000000       0x54 xmega_drivers/adc_driver.o
+ .text.SP_ReadCalibrationByte
+                0x00000000       0x12 xmega_drivers/adc_driver.o
+ .text.ADC_CalibrationValues_Load
+                0x00000000       0x3a xmega_drivers/adc_driver.o
+ .debug_info    0x00000000      0xa82 xmega_drivers/adc_driver.o
+ .debug_abbrev  0x00000000      0x2d6 xmega_drivers/adc_driver.o
+ .debug_loc     0x00000000      0x4e8 xmega_drivers/adc_driver.o
+ .debug_aranges
+                0x00000000       0x70 xmega_drivers/adc_driver.o
+ .debug_ranges  0x00000000       0x90 xmega_drivers/adc_driver.o
+ .debug_line    0x00000000      0x294 xmega_drivers/adc_driver.o
+ .debug_str     0x00000000      0x97a xmega_drivers/adc_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/adc_driver.o
+ .debug_frame   0x00000000       0xd0 xmega_drivers/adc_driver.o
+ .text          0x00000000        0x0 xmega_drivers/clksys_driver.o
+ .data          0x00000000        0x0 xmega_drivers/clksys_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/clksys_driver.o
+ .text.CCPWrite
+                0x00000000       0x2a xmega_drivers/clksys_driver.o
+ .text.CLKSYS_XOSC_Config
+                0x00000000       0x14 xmega_drivers/clksys_driver.o
+ .text.CLKSYS_PLL_Config
+                0x00000000        0xa xmega_drivers/clksys_driver.o
+ .text.CLKSYS_Disable
+                0x00000000       0x14 xmega_drivers/clksys_driver.o
+ .text.CLKSYS_Prescalers_Config
+                0x00000000        0xc xmega_drivers/clksys_driver.o
+ .text.CLKSYS_Main_ClockSource_Select
+                0x00000000       0x2a xmega_drivers/clksys_driver.o
+ .text.CLKSYS_RTC_ClockSource_Enable
+                0x00000000       0x10 xmega_drivers/clksys_driver.o
+ .text.CLKSYS_AutoCalibration_Enable
+                0x00000000       0x28 xmega_drivers/clksys_driver.o
+ .text.CLKSYS_XOSC_FailureDetection_Enable
+                0x00000000        0xc xmega_drivers/clksys_driver.o
+ .text.CLKSYS_Configuration_Lock
+                0x00000000        0xc xmega_drivers/clksys_driver.o
+ .debug_info    0x00000000      0x645 xmega_drivers/clksys_driver.o
+ .debug_abbrev  0x00000000      0x1c8 xmega_drivers/clksys_driver.o
+ .debug_loc     0x00000000      0x2b6 xmega_drivers/clksys_driver.o
+ .debug_aranges
+                0x00000000       0x68 xmega_drivers/clksys_driver.o
+ .debug_ranges  0x00000000       0x58 xmega_drivers/clksys_driver.o
+ .debug_line    0x00000000      0x1cc xmega_drivers/clksys_driver.o
+ .debug_str     0x00000000      0x7ca xmega_drivers/clksys_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/clksys_driver.o
+ .debug_frame   0x00000000       0xdc xmega_drivers/clksys_driver.o
+ .text          0x00000000        0x0 xmega_drivers/dma_driver.o
+ .data          0x00000000        0x0 xmega_drivers/dma_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/dma_driver.o
+ .text.DMA_ConfigDoubleBuffering
+                0x00000000        0xe xmega_drivers/dma_driver.o
+ .text.DMA_SetPriority
+                0x00000000        0xe xmega_drivers/dma_driver.o
+ .text.DMA_CH_IsOngoing
+                0x00000000        0x8 xmega_drivers/dma_driver.o
+ .text.DMA_IsOngoing
+                0x00000000        0x8 xmega_drivers/dma_driver.o
+ .text.DMA_CH_IsPending
+                0x00000000        0x8 xmega_drivers/dma_driver.o
+ .text.DMA_IsPending
+                0x00000000        0x8 xmega_drivers/dma_driver.o
+ .text.DMA_ReturnStatus_non_blocking
+                0x00000000        0x8 xmega_drivers/dma_driver.o
+ .text.DMA_ReturnStatus_blocking
+                0x00000000        0xe xmega_drivers/dma_driver.o
+ .text.DMA_EnableChannel
+                0x00000000        0xa xmega_drivers/dma_driver.o
+ .text.DMA_DisableChannel
+                0x00000000        0xa xmega_drivers/dma_driver.o
+ .text.DMA_ResetChannel
+                0x00000000       0x16 xmega_drivers/dma_driver.o
+ .text.DMA_SetIntLevel
+                0x00000000        0xe xmega_drivers/dma_driver.o
+ .text.DMA_SetupBlock
+                0x00000000       0x58 xmega_drivers/dma_driver.o
+ .text.DMA_EnableSingleShot
+                0x00000000        0xa xmega_drivers/dma_driver.o
+ .text.DMA_DisableSingleShot
+                0x00000000        0xa xmega_drivers/dma_driver.o
+ .text.DMA_SetTriggerSource
+                0x00000000        0x6 xmega_drivers/dma_driver.o
+ .text.DMA_StartTransfer
+                0x00000000        0xa xmega_drivers/dma_driver.o
+ .debug_info    0x00000000      0x8f9 xmega_drivers/dma_driver.o
+ .debug_abbrev  0x00000000      0x1c9 xmega_drivers/dma_driver.o
+ .debug_loc     0x00000000      0x388 xmega_drivers/dma_driver.o
+ .debug_aranges
+                0x00000000       0xa0 xmega_drivers/dma_driver.o
+ .debug_ranges  0x00000000       0x90 xmega_drivers/dma_driver.o
+ .debug_line    0x00000000      0x239 xmega_drivers/dma_driver.o
+ .debug_str     0x00000000      0x92e xmega_drivers/dma_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/dma_driver.o
+ .debug_frame   0x00000000      0x154 xmega_drivers/dma_driver.o
+ .text          0x00000000        0x0 xmega_drivers/eeprom_driver.o
+ .data          0x00000000        0x0 xmega_drivers/eeprom_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/eeprom_driver.o
+ .text.EEPROM_WaitForNVM
+                0x00000000        0xc xmega_drivers/eeprom_driver.o
+ .text.EEPROM_ReadByte
+                0x00000000       0x4e xmega_drivers/eeprom_driver.o
+ .text.EEPROM_FlushBuffer
+                0x00000000       0x30 xmega_drivers/eeprom_driver.o
+ .text.EEPROM_WriteByte
+                0x00000000       0x58 xmega_drivers/eeprom_driver.o
+ .text.EEPROM_LoadByte
+                0x00000000       0x22 xmega_drivers/eeprom_driver.o
+ .text.EEPROM_LoadPage
+                0x00000000       0x3c xmega_drivers/eeprom_driver.o
+ .text.EEPROM_AtomicWritePage
+                0x00000000       0x42 xmega_drivers/eeprom_driver.o
+ .text.EEPROM_ErasePage
+                0x00000000       0x42 xmega_drivers/eeprom_driver.o
+ .text.EEPROM_SplitWritePage
+                0x00000000       0x42 xmega_drivers/eeprom_driver.o
+ .text.EEPROM_EraseAll
+                0x00000000       0x28 xmega_drivers/eeprom_driver.o
+ .debug_info    0x00000000      0x4fe xmega_drivers/eeprom_driver.o
+ .debug_abbrev  0x00000000      0x19d xmega_drivers/eeprom_driver.o
+ .debug_loc     0x00000000      0x486 xmega_drivers/eeprom_driver.o
+ .debug_aranges
+                0x00000000       0x68 xmega_drivers/eeprom_driver.o
+ .debug_ranges  0x00000000       0x58 xmega_drivers/eeprom_driver.o
+ .debug_line    0x00000000      0x1fd xmega_drivers/eeprom_driver.o
+ .debug_str     0x00000000      0x6a9 xmega_drivers/eeprom_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/eeprom_driver.o
+ .debug_frame   0x00000000      0x100 xmega_drivers/eeprom_driver.o
  .text          0x00000000        0x0 xmega_drivers/LUFA/Drivers/Board/Temperature.o
  .data          0x00000000        0x0 xmega_drivers/LUFA/Drivers/Board/Temperature.o
  .bss           0x00000000        0x0 xmega_drivers/LUFA/Drivers/Board/Temperature.o
@@ -978,6 +1126,22 @@ Discarded input sections
  .debug_line    0x00000000       0x1a xmega_drivers/LUFA/Platform/UC3/InterruptManagement.o
  .debug_str     0x00000000      0x19f xmega_drivers/LUFA/Platform/UC3/InterruptManagement.o
  .comment       0x00000000       0x31 xmega_drivers/LUFA/Platform/UC3/InterruptManagement.o
+ .text          0x00000000        0x0 xmega_drivers/pmic_driver.o
+ .data          0x00000000        0x0 xmega_drivers/pmic_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/pmic_driver.o
+ .text.PMIC_SetVectorLocationToBoot
+                0x00000000       0x10 xmega_drivers/pmic_driver.o
+ .text.PMIC_SetVectorLocationToApplication
+                0x00000000       0x10 xmega_drivers/pmic_driver.o
+ .debug_info    0x00000000      0x1f5 xmega_drivers/pmic_driver.o
+ .debug_abbrev  0x00000000       0xc4 xmega_drivers/pmic_driver.o
+ .debug_aranges
+                0x00000000       0x28 xmega_drivers/pmic_driver.o
+ .debug_ranges  0x00000000       0x18 xmega_drivers/pmic_driver.o
+ .debug_line    0x00000000      0x124 xmega_drivers/pmic_driver.o
+ .debug_str     0x00000000      0x2d2 xmega_drivers/pmic_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/pmic_driver.o
+ .debug_frame   0x00000000       0x34 xmega_drivers/pmic_driver.o
  .text          0x00000000        0x0 xmega_drivers/port_driver.o
  .data          0x00000000        0x0 xmega_drivers/port_driver.o
  .bss           0x00000000        0x0 xmega_drivers/port_driver.o
@@ -997,6 +1161,214 @@ Discarded input sections
  .debug_str     0x00000000      0x55f xmega_drivers/port_driver.o
  .comment       0x00000000       0x31 xmega_drivers/port_driver.o
  .debug_frame   0x00000000       0x50 xmega_drivers/port_driver.o
+ .text          0x00000000        0x0 xmega_drivers/rtc_driver.o
+ .data          0x00000000        0x0 xmega_drivers/rtc_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/rtc_driver.o
+ .text.RTC_Initialize
+                0x00000000       0x1c xmega_drivers/rtc_driver.o
+ .text.RTC_SetOverflowIntLevel
+                0x00000000        0xe xmega_drivers/rtc_driver.o
+ .text.RTC_SetCompareIntLevel
+                0x00000000        0xe xmega_drivers/rtc_driver.o
+ .text.RTC_SetIntLevels
+                0x00000000       0x10 xmega_drivers/rtc_driver.o
+ .text.RTC_SetAlarm
+                0x00000000       0x2c xmega_drivers/rtc_driver.o
+ .text.RTC_SetPrescaler
+                0x00000000        0xe xmega_drivers/rtc_driver.o
+ .debug_info    0x00000000      0x40c xmega_drivers/rtc_driver.o
+ .debug_abbrev  0x00000000      0x126 xmega_drivers/rtc_driver.o
+ .debug_loc     0x00000000      0x11f xmega_drivers/rtc_driver.o
+ .debug_aranges
+                0x00000000       0x48 xmega_drivers/rtc_driver.o
+ .debug_ranges  0x00000000       0x38 xmega_drivers/rtc_driver.o
+ .debug_line    0x00000000      0x169 xmega_drivers/rtc_driver.o
+ .debug_str     0x00000000      0x4af xmega_drivers/rtc_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/rtc_driver.o
+ .debug_frame   0x00000000       0x74 xmega_drivers/rtc_driver.o
+ .text          0x00000000        0x0 xmega_drivers/spi_driver.o
+ .data          0x00000000        0x0 xmega_drivers/spi_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/spi_driver.o
+ .text.SPI_MasterInit
+                0x00000000       0x5e xmega_drivers/spi_driver.o
+ .text.SPI_SlaveInit
+                0x00000000       0x36 xmega_drivers/spi_driver.o
+ .text.SPI_MasterCreateDataPacket
+                0x00000000       0x24 xmega_drivers/spi_driver.o
+ .text.SPI_MasterInterruptHandler
+                0x00000000       0x80 xmega_drivers/spi_driver.o
+ .text.SPI_MasterInterruptTransceivePacket
+                0x00000000       0x6e xmega_drivers/spi_driver.o
+ .text.SPI_MasterTransceiveByte
+                0x00000000       0x18 xmega_drivers/spi_driver.o
+ .text.SPI_MasterTransceivePacket
+                0x00000000       0xbe xmega_drivers/spi_driver.o
+ .debug_info    0x00000000      0x75e xmega_drivers/spi_driver.o
+ .debug_abbrev  0x00000000      0x1af xmega_drivers/spi_driver.o
+ .debug_loc     0x00000000      0x580 xmega_drivers/spi_driver.o
+ .debug_aranges
+                0x00000000       0x50 xmega_drivers/spi_driver.o
+ .debug_ranges  0x00000000       0x40 xmega_drivers/spi_driver.o
+ .debug_line    0x00000000      0x223 xmega_drivers/spi_driver.o
+ .debug_str     0x00000000      0x563 xmega_drivers/spi_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/spi_driver.o
+ .debug_frame   0x00000000       0xcc xmega_drivers/spi_driver.o
+ .text          0x00000000        0x0 xmega_drivers/TC_driver.o
+ .data          0x00000000        0x0 xmega_drivers/TC_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/TC_driver.o
+ .text.TC0_ConfigClockSource
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC1_ConfigClockSource
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_ConfigWGM
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC1_ConfigWGM
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_ConfigInputCapture
+                0x00000000        0xe xmega_drivers/TC_driver.o
+ .text.TC1_ConfigInputCapture
+                0x00000000        0xe xmega_drivers/TC_driver.o
+ .text.TC0_EnableCCChannels
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC1_EnableCCChannels
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_DisableCCChannels
+                0x00000000        0xe xmega_drivers/TC_driver.o
+ .text.TC1_DisableCCChannels
+                0x00000000        0xe xmega_drivers/TC_driver.o
+ .text.TC0_SetOverflowIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC1_SetOverflowIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_SetErrorIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC1_SetErrorIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_SetCCAIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC1_SetCCAIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_SetCCBIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC1_SetCCBIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_SetCCCIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_SetCCDIntLevel
+                0x00000000        0xc xmega_drivers/TC_driver.o
+ .text.TC0_Reset
+                0x00000000        0xe xmega_drivers/TC_driver.o
+ .text.TC1_Reset
+                0x00000000        0xe xmega_drivers/TC_driver.o
+ .debug_info    0x00000000     0x12e1 xmega_drivers/TC_driver.o
+ .debug_abbrev  0x00000000      0x185 xmega_drivers/TC_driver.o
+ .debug_loc     0x00000000      0x336 xmega_drivers/TC_driver.o
+ .debug_aranges
+                0x00000000       0xc8 xmega_drivers/TC_driver.o
+ .debug_ranges  0x00000000       0xb8 xmega_drivers/TC_driver.o
+ .debug_line    0x00000000      0x27c xmega_drivers/TC_driver.o
+ .debug_str     0x00000000      0xc3b xmega_drivers/TC_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/TC_driver.o
+ .debug_frame   0x00000000      0x174 xmega_drivers/TC_driver.o
+ .text          0x00000000        0x0 xmega_drivers/twi_master_driver.o
+ .data          0x00000000        0x0 xmega_drivers/twi_master_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterInit
+                0x00000000       0x22 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterState
+                0x00000000        0xc xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterReady
+                0x00000000        0x8 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterWriteRead
+                0x00000000       0x88 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterWrite
+                0x00000000        0xc xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterRead
+                0x00000000       0x12 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterArbitrationLostBusErrorHandler
+                0x00000000       0x24 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterWriteHandler
+                0x00000000       0x64 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterReadHandler
+                0x00000000       0x5a xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterInterruptHandler
+                0x00000000       0x32 xmega_drivers/twi_master_driver.o
+ .text.TWI_MasterTransactionFinished
+                0x00000000        0x8 xmega_drivers/twi_master_driver.o
+ .debug_info    0x00000000      0x86f xmega_drivers/twi_master_driver.o
+ .debug_abbrev  0x00000000      0x293 xmega_drivers/twi_master_driver.o
+ .debug_loc     0x00000000      0x637 xmega_drivers/twi_master_driver.o
+ .debug_aranges
+                0x00000000       0x70 xmega_drivers/twi_master_driver.o
+ .debug_ranges  0x00000000       0x60 xmega_drivers/twi_master_driver.o
+ .debug_line    0x00000000      0x23b xmega_drivers/twi_master_driver.o
+ .debug_str     0x00000000      0x65a xmega_drivers/twi_master_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/twi_master_driver.o
+ .debug_frame   0x00000000       0xf0 xmega_drivers/twi_master_driver.o
+ .text          0x00000000        0x0 xmega_drivers/twi_slave_driver.o
+ .data          0x00000000        0x0 xmega_drivers/twi_slave_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveInitializeDriver
+                0x00000000       0x16 xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveInitializeModule
+                0x00000000       0x16 xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveAddressMatchHandler
+                0x00000000       0x42 xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveStopHandler
+                0x00000000       0x2a xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveReadHandler
+                0x00000000       0x74 xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveWriteHandler
+                0x00000000       0x60 xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveDataHandler
+                0x00000000       0x18 xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveInterruptHandler
+                0x00000000       0x5e xmega_drivers/twi_slave_driver.o
+ .text.TWI_SlaveTransactionFinished
+                0x00000000        0x8 xmega_drivers/twi_slave_driver.o
+ .debug_info    0x00000000      0x6fc xmega_drivers/twi_slave_driver.o
+ .debug_abbrev  0x00000000      0x264 xmega_drivers/twi_slave_driver.o
+ .debug_loc     0x00000000      0x3a9 xmega_drivers/twi_slave_driver.o
+ .debug_aranges
+                0x00000000       0x60 xmega_drivers/twi_slave_driver.o
+ .debug_ranges  0x00000000       0x50 xmega_drivers/twi_slave_driver.o
+ .debug_line    0x00000000      0x21a xmega_drivers/twi_slave_driver.o
+ .debug_str     0x00000000      0x552 xmega_drivers/twi_slave_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/twi_slave_driver.o
+ .debug_frame   0x00000000       0xb0 xmega_drivers/twi_slave_driver.o
+ .text          0x00000000        0x0 xmega_drivers/usart_driver.o
+ .data          0x00000000        0x0 xmega_drivers/usart_driver.o
+ .bss           0x00000000        0x0 xmega_drivers/usart_driver.o
+ .text.USART_InterruptDriver_Initialize
+                0x00000000       0x12 xmega_drivers/usart_driver.o
+ .text.USART_InterruptDriver_DreInterruptLevel_Set
+                0x00000000        0x6 xmega_drivers/usart_driver.o
+ .text.USART_TXBuffer_FreeSpace
+                0x00000000       0x14 xmega_drivers/usart_driver.o
+ .text.USART_TXBuffer_PutByte
+                0x00000000       0x38 xmega_drivers/usart_driver.o
+ .text.USART_RXBufferData_Available
+                0x00000000       0x10 xmega_drivers/usart_driver.o
+ .text.USART_RXBuffer_GetByte
+                0x00000000       0x18 xmega_drivers/usart_driver.o
+ .text.USART_RXComplete
+                0x00000000       0x2a xmega_drivers/usart_driver.o
+ .text.USART_DataRegEmpty
+                0x00000000       0x34 xmega_drivers/usart_driver.o
+ .text.USART_NineBits_PutChar
+                0x00000000       0x18 xmega_drivers/usart_driver.o
+ .text.USART_NineBits_GetChar
+                0x00000000       0x18 xmega_drivers/usart_driver.o
+ .debug_info    0x00000000      0x584 xmega_drivers/usart_driver.o
+ .debug_abbrev  0x00000000      0x203 xmega_drivers/usart_driver.o
+ .debug_loc     0x00000000      0x3c5 xmega_drivers/usart_driver.o
+ .debug_aranges
+                0x00000000       0x68 xmega_drivers/usart_driver.o
+ .debug_ranges  0x00000000       0x58 xmega_drivers/usart_driver.o
+ .debug_line    0x00000000      0x1e6 xmega_drivers/usart_driver.o
+ .debug_str     0x00000000      0x46a xmega_drivers/usart_driver.o
+ .comment       0x00000000       0x31 xmega_drivers/usart_driver.o
+ .debug_frame   0x00000000       0xc4 xmega_drivers/usart_driver.o
  .text          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodsi4.o)
  .data          0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodsi4.o)
  .bss           0x00000000        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodsi4.o)
@@ -1192,6 +1564,10 @@ LOAD Component_Drivers/nrf24l01p/nrf24l01p.o
 LOAD Component_Drivers/ssd1306/font.o
 LOAD Descriptors.o
 LOAD main.o
+LOAD xmega_drivers/adc_driver.o
+LOAD xmega_drivers/clksys_driver.o
+LOAD xmega_drivers/dma_driver.o
+LOAD xmega_drivers/eeprom_driver.o
 LOAD xmega_drivers/LUFA/Drivers/Board/Temperature.o
 LOAD xmega_drivers/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.o
 LOAD xmega_drivers/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.o
@@ -1256,7 +1632,14 @@ LOAD xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
 LOAD xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
 LOAD xmega_drivers/LUFA/Platform/UC3/Exception.o
 LOAD xmega_drivers/LUFA/Platform/UC3/InterruptManagement.o
+LOAD xmega_drivers/pmic_driver.o
 LOAD xmega_drivers/port_driver.o
+LOAD xmega_drivers/rtc_driver.o
+LOAD xmega_drivers/spi_driver.o
+LOAD xmega_drivers/TC_driver.o
+LOAD xmega_drivers/twi_master_driver.o
+LOAD xmega_drivers/twi_slave_driver.o
+LOAD xmega_drivers/usart_driver.o
 START GROUP
 LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libm.a
 END GROUP
@@ -2330,7 +2713,7 @@ END GROUP
  .debug_frame   0x000015a4       0x5c xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
  .debug_frame   0x00001600       0x8c xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
 
-.debug_str      0x00000000     0x468a
+.debug_str      0x00000000     0x46c2
  *(.debug_str)
  .debug_str     0x00000000      0xf76 Component_Drivers/nrf24l01p/nrf24l01p.o
                                0x1016 (size before relaxing)
@@ -2338,23 +2721,23 @@ END GROUP
                                 0x615 (size before relaxing)
  .debug_str     0x0000141d      0x84c Descriptors.o
                                 0xa3e (size before relaxing)
- .debug_str     0x00001c69     0x176e main.o
-                               0x1d68 (size before relaxing)
- .debug_str     0x000033d7      0x3c2 xmega_drivers/LUFA/Drivers/USB/Class/Device/HIDClassDevice.o
+ .debug_str     0x00001c69     0x17a6 main.o
+                               0x1d5e (size before relaxing)
+ .debug_str     0x0000340f      0x3c2 xmega_drivers/LUFA/Drivers/USB/Class/Device/HIDClassDevice.o
                                 0xb3c (size before relaxing)
- .debug_str     0x00003799      0x481 xmega_drivers/LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_str     0x000037d1      0x481 xmega_drivers/LUFA/Drivers/USB/Core/DeviceStandardReq.o
                                0x11f7 (size before relaxing)
- .debug_str     0x00003c1a       0x3f xmega_drivers/LUFA/Drivers/USB/Core/Events.o
+ .debug_str     0x00003c52       0x3f xmega_drivers/LUFA/Drivers/USB/Core/Events.o
                                 0x1a5 (size before relaxing)
- .debug_str     0x00003c59       0x7b xmega_drivers/LUFA/Drivers/USB/Core/USBTask.o
+ .debug_str     0x00003c91       0x7b xmega_drivers/LUFA/Drivers/USB/Core/USBTask.o
                                 0x471 (size before relaxing)
- .debug_str     0x00003cd4      0x499 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_str     0x00003d0c      0x499 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
                                 0x986 (size before relaxing)
- .debug_str     0x0000416d      0x286 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_str     0x000041a5      0x286 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
                                 0xaf7 (size before relaxing)
- .debug_str     0x000043f3      0x1fd xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_str     0x0000442b      0x1fd xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
                                 0xea5 (size before relaxing)
- .debug_str     0x000045f0       0x9a xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_str     0x00004628       0x9a xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
                                 0x958 (size before relaxing)
 
 .debug_loc      0x00000000     0x6e28

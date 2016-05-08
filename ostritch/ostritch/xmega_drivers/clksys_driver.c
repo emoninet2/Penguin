@@ -263,9 +263,12 @@ void CLKSYS_AutoCalibration_Enable( uint8_t clkSource, bool extReference )
 	               ( extReference ? clkSource : 0 );
 	if (clkSource == OSC_RC2MCREF_bm) {
 		DFLLRC2M.CTRL |= DFLL_ENABLE_bm;
-	} else if (clkSource == OSC_RC32MCREF_bm) {
+	} 
+	#if defined(OSC_RC32MCREF_bm)
+	else if (clkSource == OSC_RC32MCREF_bm) {
 		DFLLRC32M.CTRL |= DFLL_ENABLE_bm;
 	}
+	#endif
 }
 
 

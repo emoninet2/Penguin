@@ -10,6 +10,14 @@ Descriptors.c
 
 main.c
 
+xmega_drivers\adc_driver.c
+
+xmega_drivers\clksys_driver.c
+
+xmega_drivers\dma_driver.c
+
+xmega_drivers\eeprom_driver.c
+
 xmega_drivers\LUFA\Drivers\Board\Temperature.c
 
 xmega_drivers\LUFA\Drivers\Peripheral\AVR8\Serial_AVR8.c
@@ -138,5 +146,19 @@ xmega_drivers\LUFA\Platform\UC3\Exception.S
 
 xmega_drivers\LUFA\Platform\UC3\InterruptManagement.c
 
+xmega_drivers\pmic_driver.c
+
 xmega_drivers\port_driver.c
+
+xmega_drivers\rtc_driver.c
+
+xmega_drivers\spi_driver.c
+
+xmega_drivers\TC_driver.c
+
+xmega_drivers\twi_master_driver.c
+
+xmega_drivers\twi_slave_driver.c
+
+xmega_drivers\usart_driver.c
 

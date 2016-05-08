@@ -116,6 +116,10 @@ C_SRCS +=  \
 ../Component_Drivers/ssd1306/font.c \
 ../Descriptors.c \
 ../main.c \
+../xmega_drivers/adc_driver.c \
+../xmega_drivers/clksys_driver.c \
+../xmega_drivers/dma_driver.c \
+../xmega_drivers/eeprom_driver.c \
 ../xmega_drivers/LUFA/Drivers/Board/Temperature.c \
 ../xmega_drivers/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c \
 ../xmega_drivers/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c \
@@ -179,7 +183,14 @@ C_SRCS +=  \
 ../xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.c \
 ../xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c \
 ../xmega_drivers/LUFA/Platform/UC3/InterruptManagement.c \
-../xmega_drivers/port_driver.c
+../xmega_drivers/pmic_driver.c \
+../xmega_drivers/port_driver.c \
+../xmega_drivers/rtc_driver.c \
+../xmega_drivers/spi_driver.c \
+../xmega_drivers/TC_driver.c \
+../xmega_drivers/twi_master_driver.c \
+../xmega_drivers/twi_slave_driver.c \
+../xmega_drivers/usart_driver.c
 
 
 PREPROCESSING_SRCS +=  \
@@ -194,6 +205,10 @@ Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
 main.o \
+xmega_drivers/adc_driver.o \
+xmega_drivers/clksys_driver.o \
+xmega_drivers/dma_driver.o \
+xmega_drivers/eeprom_driver.o \
 xmega_drivers/LUFA/Drivers/Board/Temperature.o \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.o \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.o \
@@ -258,13 +273,24 @@ xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o \
 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o \
 xmega_drivers/LUFA/Platform/UC3/Exception.o \
 xmega_drivers/LUFA/Platform/UC3/InterruptManagement.o \
-xmega_drivers/port_driver.o
+xmega_drivers/pmic_driver.o \
+xmega_drivers/port_driver.o \
+xmega_drivers/rtc_driver.o \
+xmega_drivers/spi_driver.o \
+xmega_drivers/TC_driver.o \
+xmega_drivers/twi_master_driver.o \
+xmega_drivers/twi_slave_driver.o \
+xmega_drivers/usart_driver.o
 
 OBJS_AS_ARGS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
 main.o \
+xmega_drivers/adc_driver.o \
+xmega_drivers/clksys_driver.o \
+xmega_drivers/dma_driver.o \
+xmega_drivers/eeprom_driver.o \
 xmega_drivers/LUFA/Drivers/Board/Temperature.o \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.o \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.o \
@@ -329,13 +355,24 @@ xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o \
 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o \
 xmega_drivers/LUFA/Platform/UC3/Exception.o \
 xmega_drivers/LUFA/Platform/UC3/InterruptManagement.o \
-xmega_drivers/port_driver.o
+xmega_drivers/pmic_driver.o \
+xmega_drivers/port_driver.o \
+xmega_drivers/rtc_driver.o \
+xmega_drivers/spi_driver.o \
+xmega_drivers/TC_driver.o \
+xmega_drivers/twi_master_driver.o \
+xmega_drivers/twi_slave_driver.o \
+xmega_drivers/usart_driver.o
 
 C_DEPS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
 main.d \
+xmega_drivers/adc_driver.d \
+xmega_drivers/clksys_driver.d \
+xmega_drivers/dma_driver.d \
+xmega_drivers/eeprom_driver.d \
 xmega_drivers/LUFA/Drivers/Board/Temperature.d \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.d \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.d \
@@ -400,13 +437,24 @@ xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.d \
 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.d \
 xmega_drivers/LUFA/Platform/UC3/Exception.d \
 xmega_drivers/LUFA/Platform/UC3/InterruptManagement.d \
-xmega_drivers/port_driver.d
+xmega_drivers/pmic_driver.d \
+xmega_drivers/port_driver.d \
+xmega_drivers/rtc_driver.d \
+xmega_drivers/spi_driver.d \
+xmega_drivers/TC_driver.d \
+xmega_drivers/twi_master_driver.d \
+xmega_drivers/twi_slave_driver.d \
+xmega_drivers/usart_driver.d
 
 C_DEPS_AS_ARGS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
 main.d \
+xmega_drivers/adc_driver.d \
+xmega_drivers/clksys_driver.d \
+xmega_drivers/dma_driver.d \
+xmega_drivers/eeprom_driver.d \
 xmega_drivers/LUFA/Drivers/Board/Temperature.d \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.d \
 xmega_drivers/LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.d \
@@ -471,7 +519,14 @@ xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.d \
 xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.d \
 xmega_drivers/LUFA/Platform/UC3/Exception.d \
 xmega_drivers/LUFA/Platform/UC3/InterruptManagement.d \
-xmega_drivers/port_driver.d
+xmega_drivers/pmic_driver.d \
+xmega_drivers/port_driver.d \
+xmega_drivers/rtc_driver.d \
+xmega_drivers/spi_driver.d \
+xmega_drivers/TC_driver.d \
+xmega_drivers/twi_master_driver.d \
+xmega_drivers/twi_slave_driver.d \
+xmega_drivers/usart_driver.d
 
 OUTPUT_FILE_PATH +=ostritch.elf
 
@@ -487,6 +542,28 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -645,6 +722,13 @@ Component_Drivers/ssd1306/%.o: ../Component_Drivers/ssd1306/%.c
 	@echo Finished building: $<
 	
 
+xmega_drivers/%.o: ../xmega_drivers/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 xmega_drivers/LUFA/Drivers/Board/%.o: ../xmega_drivers/LUFA/Drivers/Board/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
@@ -737,13 +821,6 @@ xmega_drivers/LUFA/Drivers/USB/Core/XMEGA/Template/%.o: ../xmega_drivers/LUFA/Dr
 	
 
 xmega_drivers/LUFA/Platform/UC3/%.o: ../xmega_drivers/LUFA/Platform/UC3/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-xmega_drivers/%.o: ../xmega_drivers/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=48000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS/LUFA" -I"../XMEGA_DRIVERS" -I"../Component_Drivers"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

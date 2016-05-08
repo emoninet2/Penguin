@@ -73,7 +73,11 @@
  */
 void DMA_ConfigDoubleBuffering( DMA_DBUFMODE_t dbufMode )
 {
+	#if defined(DMA_DBUFMODE_gm)
 	DMA.CTRL = ( DMA.CTRL & ~DMA_DBUFMODE_gm ) | dbufMode;
+	#else
+	DMA.CTRL = ( DMA.CTRL & ~DMA_DBUFMODE_bm ) | dbufMode;
+	#endif
 }
 
 
@@ -90,7 +94,11 @@ void DMA_ConfigDoubleBuffering( DMA_DBUFMODE_t dbufMode )
  */
 void DMA_SetPriority( DMA_PRIMODE_t priMode )
 {
+	#if defined(DMA_PRIMODE_gm)
 	DMA.CTRL = ( DMA.CTRL & ~DMA_PRIMODE_gm ) | priMode;
+	#else 
+	DMA.CTRL = ( DMA.CTRL & ~DMA_PRIMODE_bm ) | priMode;
+	#endif
 }
 
 
@@ -301,11 +309,15 @@ void DMA_SetupBlock( volatile DMA_CH_t * channel,
 {
 	channel->SRCADDR0 = (( (uint16_t) srcAddr) >> 0*8 ) & 0xFF;
 	channel->SRCADDR1 = (( (uint16_t) srcAddr) >> 1*8 ) & 0xFF;
+	#if defined(SRCADDR2)
 	channel->SRCADDR2 = 0;
+	#endif
 
 	channel->DESTADDR0 = (( (uint16_t) destAddr) >> 0*8 ) & 0xFF;
 	channel->DESTADDR1 = (( (uint16_t) destAddr) >> 1*8 ) & 0xFF;
+	#if defined (DESTADDR2)
 	channel->DESTADDR2 = 0;
+	#endif
 
 	channel->ADDRCTRL = (uint8_t) srcReload | srcDirection |
 	                              destReload | destDirection;

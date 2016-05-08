@@ -23,11 +23,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   9 .debug_frame  0000168c  00000000  00000000  00014aa4  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000468a  00000000  00000000  00016130  2**0
+ 10 .debug_str    000046c2  00000000  00000000  00016130  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00006e28  00000000  00000000  0001a7ba  2**0
+ 11 .debug_loc    00006e28  00000000  00000000  0001a7f2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000008f8  00000000  00000000  000215e2  2**0
+ 12 .debug_ranges 000008f8  00000000  00000000  0002161a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -172,13 +172,13 @@ Disassembly of section .text:
      20e:	b8 0a       	sbc	r11, r24
 
 00000210 <__trampolines_start>:
-     210:	0c 94 ab 0a 	jmp	0x1556	; 0x1556 <USB_Device_ProcessControlRequest+0x20e>
-     214:	0c 94 02 0a 	jmp	0x1404	; 0x1404 <USB_Device_ProcessControlRequest+0xbc>
-     218:	0c 94 b8 0a 	jmp	0x1570	; 0x1570 <USB_Device_ProcessControlRequest+0x228>
-     21c:	0c 94 54 0a 	jmp	0x14a8	; 0x14a8 <USB_Device_ProcessControlRequest+0x160>
-     220:	0c 94 d7 09 	jmp	0x13ae	; 0x13ae <USB_Device_ProcessControlRequest+0x66>
-     224:	0c 94 3d 0a 	jmp	0x147a	; 0x147a <USB_Device_ProcessControlRequest+0x132>
-     228:	0c 94 d9 0a 	jmp	0x15b2	; 0x15b2 <USB_Device_ProcessControlRequest+0x26a>
+     210:	0c 94 d7 09 	jmp	0x13ae	; 0x13ae <USB_Device_ProcessControlRequest+0x66>
+     214:	0c 94 ab 0a 	jmp	0x1556	; 0x1556 <USB_Device_ProcessControlRequest+0x20e>
+     218:	0c 94 3d 0a 	jmp	0x147a	; 0x147a <USB_Device_ProcessControlRequest+0x132>
+     21c:	0c 94 d9 0a 	jmp	0x15b2	; 0x15b2 <USB_Device_ProcessControlRequest+0x26a>
+     220:	0c 94 b8 0a 	jmp	0x1570	; 0x1570 <USB_Device_ProcessControlRequest+0x228>
+     224:	0c 94 02 0a 	jmp	0x1404	; 0x1404 <USB_Device_ProcessControlRequest+0xbc>
+     228:	0c 94 54 0a 	jmp	0x14a8	; 0x14a8 <USB_Device_ProcessControlRequest+0x160>
 
 0000022c <ProductString>:
      22c:	2c 03 4c 00 55 00 46 00 41 00 20 00 47 00 65 00     ,.L.U.F.A. .G.e.
