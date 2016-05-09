@@ -41,8 +41,10 @@
 
 
 #include "main.h"
-#include "components.h"
-#include "xmega_api.h"
+#include "Component_Drivers/components.h"
+#include "XMEGA_API/xmega_api.h"
+#include "XMEGA_SERVICES/xmega_services.h"
+
 
 /** Buffer to hold the previously generated HID report, for comparison purposes inside the HID class driver. */
 static uint8_t PrevHIDReportBuffer[GENERIC_REPORT_SIZE];
@@ -73,6 +75,7 @@ USB_ClassInfo_HID_Device_t Generic_HID_Interface =
  */
 int main(void)
 {
+	rtc_initialize();
 	
 	DigitalPin_t led = {&PORTR, 0};
 	
@@ -123,10 +126,10 @@ int main(void)
 
 
 	
- 	//SetupHardware();
+ 	SetupHardware();
 // 
- 	//LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
- 	//GlobalInterruptEnable();
+ 	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
+ 	GlobalInterruptEnable();
 
 	DigitalPin_SetDIr(&led,1);
 	//PORT_SetDirection(&PORTR,(1<<0));
@@ -141,14 +144,15 @@ int main(void)
 	{
 
 			
- 			PORT_TogglePins(&PORTR,(1<<0));
-			 _delay_ms(1000);
- 			char myname[] = "test";
+ 			//PORT_TogglePins(&PORTR,(1<<0));
+			 //_delay_ms(1000);
+			 rtc_ms_delay(500);
+ 			char myname[] = "cctv yaw 6.9";
 			_nrf24l01p_write((uint8_t*) myname, strlen(myname));
 
 		
- 			//HID_Device_USBTask(&Generic_HID_Interface);
- 			//USB_USBTask();
+ 			HID_Device_USBTask(&Generic_HID_Interface);
+ 			USB_USBTask();
 	}
 }
 

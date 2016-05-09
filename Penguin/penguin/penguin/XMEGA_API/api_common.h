@@ -13,5 +13,4 @@
 #include "xmega_drivers.h"
 
 
-
 #endif /* API_COMMON_H_ */

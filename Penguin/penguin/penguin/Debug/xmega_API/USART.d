@@ -1,5 +1,5 @@
-XMEGA_API/DIGITALPIN.d XMEGA_API/DIGITALPIN.o: ../XMEGA_API/DIGITALPIN.c \
- ../XMEGA_API/DIGITALPIN.h ../XMEGA_API/api_common.h \
+XMEGA_API/USART.d XMEGA_API/USART.o: ../XMEGA_API/USART.c \
+ ../XMEGA_API/USART.h ../XMEGA_API/api_common.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\io.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\sfr_defs.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -29,7 +29,7 @@ XMEGA_API/DIGITALPIN.d XMEGA_API/DIGITALPIN.o: ../XMEGA_API/DIGITALPIN.c \
  ../XMEGA_DRIVERS/clksys_driver.h ../XMEGA_DRIVERS/rtc_driver.h \
  ../XMEGA_DRIVERS/TC_driver.h
 
-../XMEGA_API/DIGITALPIN.h:
+../XMEGA_API/USART.h:
 
 ../XMEGA_API/api_common.h:
 

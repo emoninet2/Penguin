@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "xmega_api.h"
+#include "../XMEGA_API/xmega_api.h"
 
 
 #if defined (__cplusplus)

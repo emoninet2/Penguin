@@ -10,7 +10,9 @@ Descriptors.c
 
 main.c
 
-XMEGA_API\DigitalPin.c
+XMEGA_API\DIGITALPIN.c
+
+XMEGA_API\USART.c
 
 XMEGA_DRIVERS\adc_driver.c
 
@@ -167,4 +169,6 @@ XMEGA_DRIVERS\twi_slave_driver.c
 XMEGA_DRIVERS\usart_driver.c
 
 XMEGA_DRIVERS\wdt_driver.c
+
+XMEGA_SERVICES\RTCServices.c
 

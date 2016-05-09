@@ -22,7 +22,9 @@ Component_Drivers/nrf24l01p/nrf24l01p.d \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stddef.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdbool.h \
- ../XMEGA_API/xmega_api.h ../XMEGA_API/USART.h ../XMEGA_API/api_common.h \
+ ../XMEGA_DRIVERS/../XMEGA_API/xmega_api.h \
+ ../XMEGA_DRIVERS/../XMEGA_API/USART.h \
+ ../XMEGA_DRIVERS/../XMEGA_API/api_common.h \
  ../XMEGA_DRIVERS/xmega_drivers.h ../XMEGA_DRIVERS/port_driver.h \
  ../XMEGA_DRIVERS/avr_compiler.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
@@ -33,7 +35,7 @@ Component_Drivers/nrf24l01p/nrf24l01p.d \
  ../XMEGA_DRIVERS/pmic_driver.h ../XMEGA_DRIVERS/eeprom_driver.h \
  ../XMEGA_DRIVERS/dma_driver.h ../XMEGA_DRIVERS/adc_driver.h \
  ../XMEGA_DRIVERS/clksys_driver.h ../XMEGA_DRIVERS/rtc_driver.h \
- ../XMEGA_DRIVERS/TC_driver.h ../XMEGA_API/DIGITALPIN.h
+ ../XMEGA_DRIVERS/TC_driver.h ../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h
 
 ../Component_Drivers/nrf24l01p/nrf24l01p.h:
 
@@ -77,11 +79,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdbool.h:
 
-../XMEGA_API/xmega_api.h:
+../XMEGA_DRIVERS/../XMEGA_API/xmega_api.h:
 
-../XMEGA_API/USART.h:
+../XMEGA_DRIVERS/../XMEGA_API/USART.h:
 
-../XMEGA_API/api_common.h:
+../XMEGA_DRIVERS/../XMEGA_API/api_common.h:
 
 ../XMEGA_DRIVERS/xmega_drivers.h:
 
@@ -117,4 +119,4 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../XMEGA_DRIVERS/TC_driver.h:
 
-../XMEGA_API/DIGITALPIN.h:
+../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h:

@@ -12,7 +12,7 @@
 
 
 #include <avr/io.h>
-
+#include "../XMEGA_API/xmega_api.h"
 //#define delay_us(us) _delay_us(us)
 
 
@@ -31,8 +31,6 @@
 
 
 //////////////////////////////////////////////////////////////////////////
-
-#define BAUD_VALUE(BAUDRATE,BSCALE) (BSCALE>=0)? (F_CPU/16/BAUDRATE/(2<<(BSCALE-1)) - 1):(F_CPU*(2<<(-BSCALE))/16/BAUDRATE/2 - 1)
 
 
 
