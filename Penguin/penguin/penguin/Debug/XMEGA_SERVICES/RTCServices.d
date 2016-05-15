@@ -27,7 +27,7 @@ XMEGA_SERVICES/RTCServices.d XMEGA_SERVICES/RTCServices.o: \
  ../XMEGA_DRIVERS/pmic_driver.h ../XMEGA_DRIVERS/eeprom_driver.h \
  ../XMEGA_DRIVERS/dma_driver.h ../XMEGA_DRIVERS/adc_driver.h \
  ../XMEGA_DRIVERS/clksys_driver.h ../XMEGA_DRIVERS/rtc_driver.h \
- ../XMEGA_DRIVERS/TC_driver.h
+ ../XMEGA_DRIVERS/TC_driver.h ../XMEGA_SERVICES/time.h
 
 ../XMEGA_SERVICES/RTCServices.h:
 
@@ -98,3 +98,5 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../XMEGA_DRIVERS/rtc_driver.h:
 
 ../XMEGA_DRIVERS/TC_driver.h:
+
+../XMEGA_SERVICES/time.h:

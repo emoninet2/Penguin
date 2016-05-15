@@ -8,6 +8,8 @@ Component_Drivers\ssd1306\font.c
 
 Descriptors.c
 
+JSON\jsmn.c
+
 main.c
 
 XMEGA_API\DIGITALPIN.c
@@ -171,4 +173,6 @@ XMEGA_DRIVERS\usart_driver.c
 XMEGA_DRIVERS\wdt_driver.c
 
 XMEGA_SERVICES\RTCServices.c
+
+XMEGA_SERVICES\time.c
 

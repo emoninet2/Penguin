@@ -14,4 +14,6 @@
 
 
 
+volatile time_t __system_time;
+
 #endif /* XMEGA_SERVICES_H_ */

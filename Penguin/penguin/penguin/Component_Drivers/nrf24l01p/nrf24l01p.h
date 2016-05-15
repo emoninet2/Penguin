@@ -217,13 +217,17 @@ typedef enum {
 
 void _nrf24l01p_print_info();
 
-
 void _nrf24l01p_startup();
+
 bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe);
+
 int _nrf24l01p_write(uint8_t *data, int datalen);
 int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen);
 int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen);
 int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data);
+
+
+
 
 void _nrf24l01p_ce_pin(bool state);
 void _nrf24l01p_csn_pin(bool state);

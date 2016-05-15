@@ -9,6 +9,9 @@
 #include "RTCServices.h"
 
 
+
+
+
 #if (USE_RTC_TICK == 1)
 typedef volatile unsigned long rtctick_t;
 volatile rtctick_t rtc_tick_global = 0;
@@ -29,6 +32,8 @@ void rtc_initialize(){
 	//selecting clock prescaling
 	RTC_CTRL = (1<<0);//no prescaling
 	sei();
+	
+	
 }
 
 
@@ -51,6 +56,10 @@ ISR(RTC_OVF_vect)
 	#if (USE_RTC_TICK == 1)
 	rtc_tick_global++;	
 	#endif
+	
+	system_tick();
+
+	
 }
 
 

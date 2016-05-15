@@ -308,10 +308,10 @@ static inline void ssd1306_clear(void)
 
 	for (page = 0; page < 4; ++page)
 	{
-		ssd1306_set_page_address(page);
-		ssd1306_set_column_address(0);
 		for (col = 0; col < 128; ++col)
 		{
+			ssd1306_set_page_address(page);
+			ssd1306_set_column_address(col);
 			ssd1306_write_data(0x00);
 		}
 	}

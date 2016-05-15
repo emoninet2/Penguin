@@ -143,7 +143,8 @@ main.d main.o: .././main.c .././main.h \
  .././Component_Drivers/ssd1306/font.h \
  .././Component_Drivers/ssd1306/gfx_mono.h .././XMEGA_API/xmega_api.h \
  .././XMEGA_SERVICES/xmega_services.h .././XMEGA_SERVICES/Stream.h \
- .././XMEGA_SERVICES/RTCServices.h
+ .././XMEGA_SERVICES/RTCServices.h .././XMEGA_SERVICES/time.h \
+ .././JSON/jsmn.h
 
 .././main.h:
 
@@ -456,3 +457,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././XMEGA_SERVICES/Stream.h:
 
 .././XMEGA_SERVICES/RTCServices.h:
+
+.././XMEGA_SERVICES/time.h:
+
+.././JSON/jsmn.h:

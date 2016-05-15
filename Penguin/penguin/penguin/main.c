@@ -31,12 +31,8 @@
 /** \file
  *
  *  Main source file for the GenericHID demo. This file contains the main tasks of
- *  the demo and is responsible for the initial application hardware configuration.
+ *  the demo and is responsible for the application hardware configuration.
  */
-
-
-
-
 
 
 
@@ -44,6 +40,7 @@
 #include "Component_Drivers/components.h"
 #include "XMEGA_API/xmega_api.h"
 #include "XMEGA_SERVICES/xmega_services.h"
+#include "JSON/jsmn.h"
 
 
 /** Buffer to hold the previously generated HID report, for comparison purposes inside the HID class driver. */
@@ -75,16 +72,18 @@ USB_ClassInfo_HID_Device_t Generic_HID_Interface =
  */
 int main(void)
 {
+	
+	//set_system_time (1463064367);
 	rtc_initialize();
 	
 	DigitalPin_t led = {&PORTR, 0};
 	
-	
-	
-	
+
 	
 	_nrf24l01p_init();
 	_nrf24l01p_enable_dynamic_payload();
+	_nrf24l01p_enable_payload_with_ack();
+	
 	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P0);
 	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P1);
 	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P2);
@@ -99,8 +98,14 @@ int main(void)
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P4);
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P5);
 	
-	
-	
+	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P0);
+	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P1);
+	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P2);
+	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P3);
+	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P4);
+	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P5);
+	 
+	_nrf24l01p_set_auto_retransmission_delay(15);
 	
 	uint8_t page;
 	uint8_t column;
@@ -126,7 +131,7 @@ int main(void)
 
 
 	
- 	SetupHardware();
+ 	//SetupHardware();
 // 
  	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
  	GlobalInterruptEnable();
@@ -139,20 +144,56 @@ int main(void)
 	CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_RC32M_gc );
 	CLKSYS_Disable( OSC_RC2MEN_bm );
 	
+	_nrf24l01p_flush_rx();
+		
+	//_nrf24l01p_set_TX_pipe_address(0xc2c2c2c2c4);	
 		
 	while(1)
 	{
-
+			uint8_t emon_rxData[100];
 			
- 			//PORT_TogglePins(&PORTR,(1<<0));
-			 //_delay_ms(1000);
-			 rtc_ms_delay(500);
- 			char myname[] = "cctv yaw 6.9";
-			_nrf24l01p_write((uint8_t*) myname, strlen(myname));
+			//_delay_ms(1000);
+// 			rtc_ms_delay(1000);
+// 			
+// 			char msg[] = "get time";
+// 			_nrf24l01p_write(msg,strlen(msg));
+			 //_nrf24l01p_write_ack(_NRF24L01P_PIPE_P0,msg,strlen(msg));
+		
+			
+			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P4))){
+				PORTR.OUTTGL = (1<<0);
+				//printf("status %x\r\n",_nrf24l01p_get_status());
+				//printf("pipe : %d\r\n", _nrf24l01p_get_rx_payload_pipe());
+				//led1 = !led1;
+				
+				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P4, (uint8_t*) emon_rxData);
+				emon_rxData[width] = '\0';
+				_nrf24l01p_flush_rx();
+				_nrf24l01p_clear_data_ready_flag();
+	
+// 				int arg_index = 0;
+// 				char *pch;
+// 				char *remotch_args[ 10];
+// 				pch = strtok((char*)emon_rxData, "\"{},\r");
+// 				while(pch != NULL) {
+// 					remotch_args[arg_index] = pch;
+// 					arg_index++;
+// 					if(arg_index >=10) break;
+// 					pch = strtok (NULL, "\"{},\r");
+// 				}
+		  
+// 	  			ssd1306_clear();
+// 	  			ssd1306_set_column_address(0);
+// 				ssd1306_set_page_address(0);
+// 	  			ssd1306_write_text(emon_rxData);
+				  
+				_nrf24l01p_flush_rx();
+			}
+
 
 		
- 			HID_Device_USBTask(&Generic_HID_Interface);
- 			USB_USBTask();
+ 			//HID_Device_USBTask(&Generic_HID_Interface);
+ 			//USB_USBTask();
 	}
 }
 
@@ -220,6 +261,9 @@ void EVENT_USB_Device_StartOfFrame(void)
  *
  *  \return Boolean \c true to force the sending of the report, \c false to let the library determine if it needs to be sent
  */
+
+volatile int i=0;
+
 bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo,
                                          uint8_t* const ReportID,
                                          const uint8_t ReportType,
@@ -233,6 +277,10 @@ bool CALLBACK_HID_Device_CreateHIDReport(USB_ClassInfo_HID_Device_t* const HIDIn
 	Data[1] = ((CurrLEDMask & LEDS_LED2) ? 1 : 0);
 	Data[2] = ((CurrLEDMask & LEDS_LED3) ? 1 : 0);
 	Data[3] = ((CurrLEDMask & LEDS_LED4) ? 1 : 0);
+
+
+
+
 
 	*ReportSize = GENERIC_REPORT_SIZE;
 	return false;
@@ -255,18 +303,35 @@ void CALLBACK_HID_Device_ProcessHIDReport(USB_ClassInfo_HID_Device_t* const HIDI
 	uint8_t* Data       = (uint8_t*)ReportData;
 	uint8_t  NewLEDMask = LEDS_NO_LEDS;
 
-	if (Data[0])
-	  NewLEDMask |= LEDS_LED1;
 
-	if (Data[1])
-	  NewLEDMask |= LEDS_LED2;
+	char myprintbuff[20];
+	sprintf(myprintbuff,"%d : %c%c%c%c%c",i, Data[0],Data[1],Data[2],Data[3],Data[4] );
+	for (int page = 0; page < GFX_MONO_LCD_PAGES; page++) {
+		for (int column = 0; column < GFX_MONO_LCD_WIDTH; column++) {
+			gfx_mono_ssd1306_put_byte(page, column, 0x00, 1);
+		}
+	}
+	i++;
+	asm("nop");
+	ssd1306_set_page_address(0);
+	ssd1306_set_column_address(0);
+	ssd1306_write_text(myprintbuff);
 
-	if (Data[2])
-	  NewLEDMask |= LEDS_LED3;
 
-	if (Data[3])
-	  NewLEDMask |= LEDS_LED4;
 
-	LEDs_SetAllLEDs(NewLEDMask);
+// 
+// 	if (Data[0])
+// 	  NewLEDMask |= LEDS_LED1;
+// 
+// 	if (Data[1])
+// 	  NewLEDMask |= LEDS_LED2;
+// 
+// 	if (Data[2])
+// 	  NewLEDMask |= LEDS_LED3;
+// 
+// 	if (Data[3])
+// 	  NewLEDMask |= LEDS_LED4;
+// 
+// 	LEDs_SetAllLEDs(NewLEDMask);
 }
 

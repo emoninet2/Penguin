@@ -10,7 +10,7 @@
 #define RTCSERVICES_H_
 
 #include "xmega_drivers.h"
-
+#include "time.h"
 
 
 #define USE_RTC_TICK	1

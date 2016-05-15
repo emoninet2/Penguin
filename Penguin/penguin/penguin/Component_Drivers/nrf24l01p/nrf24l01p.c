@@ -333,8 +333,7 @@ void _nrf24l01p_clear_data_ready_flag(){
 }
 
 _nrf24l01p_pipe_t _nrf24l01p_get_rx_payload_pipe(){
-	_nrf24l01p_pipe_t pipe;
-	pipe = (_nrf24l01p_pipe_t) ((_nrf24l01p_get_status()&_NRF24L01P_STATUS_RX_P_NO)>>1);
+	_nrf24l01p_pipe_t pipe = (_nrf24l01p_pipe_t) ((_nrf24l01p_get_status()&_NRF24L01P_STATUS_RX_P_NO)>>1);
 	return pipe;
 }
 
@@ -450,8 +449,7 @@ void _nrf24l01p_disable_dynamic_payload_pipe(_nrf24l01p_pipe_t pipe){
 }
 void _nrf24l01p_disable_dynamic_payload_all_pipe(){
 	uint8_t temp = 0x00;
-	_nrf24l01p_write_register(_NRF24L01P_REG_DYNPD,&temp,sizeof(temp));
-	
+	_nrf24l01p_write_register(_NRF24L01P_REG_DYNPD,&temp,sizeof(temp));	
 }
 void _nrf24l01p_enable_dynamic_payload(){
 	uint8_t temp;
@@ -526,7 +524,33 @@ void _nrf24l01p_startup(){
 bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe){
 	bool flag = 0;
 	if((pipe >=0)   && (pipe <=5)){
-		flag = (_nrf24l01p_get_data_ready_flag() && (_nrf24l01p_get_rx_payload_pipe() == pipe) );
+		//flag = (_nrf24l01p_get_data_ready_flag()/* && (_nrf24l01p_get_rx_payload_pipe() == pipe)*/ );
+		//OCD.OCDR0 = (_nrf24l01p_get_rx_payload_pipe());
+		int status = _nrf24l01p_get_status();
+		//OCD.OCDR0 = status;
+		
+		if(   (status&_NRF24L01P_STATUS_RX_DR)  && ((status&_NRF24L01P_STATUS_RX_P_NO)>>1)==pipe){
+			flag = 1;
+			//OCD.OCDR0 = status;
+			
+		}
+		else{
+			flag = 0;
+		}
+
+		//flag = (_nrf24l01p_get_data_ready_flag()/* && (_nrf24l01p_get_rx_payload_pipe() == pipe)*/ );
+// 		if(status&_NRF24L01P_STATUS_RX_DR){
+// 			flag = 1;
+// 			OCD.OCDR0 = ((status&_NRF24L01P_STATUS_RX_P_NO)>>1);
+// 		}
+// 		else {
+// 			flag = 0;
+// 		}
+		
+		
+// 
+// 		return flag;
+		
 	}
 	return flag;
 }
@@ -534,6 +558,7 @@ bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe){
 volatile int mystat;
 
 int _nrf24l01p_write(uint8_t *data, int datalen){
+	int error_status = 0;
 	int originalCe = ce_value;//backup original ce_value
 	_nrf24l01p_ce_pin(0);//disable();
 	if ( datalen <= 0 ) return 0;
@@ -549,21 +574,32 @@ int _nrf24l01p_write(uint8_t *data, int datalen){
 	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Thce_us);
 	_nrf24l01p_ce_pin(0);
 	
+	//bool max_retry_flag_reached= 0;
 	while ( !(_nrf24l01p_get_data_sent_flag()) ){
-		mystat = _nrf24l01p_get_status();
-		asm("nop");
+		
+		if(_nrf24l01p_get_max_retry_flag()){
+			error_status = -1;
+			printf("TRIED MAXIMUM TIMES\r\n");
+			break;
+		}
 	}
-	asm("nop");//UFFFFFFFFFF
+
+	_nrf24l01p_flush_tx();
+	
+	
 	_nrf24l01p_clear_data_sent_flag();
-	if ( originalMode == _NRF24L01P_MODE_RX ) _nrf24l01p_rx_mode();//restore original mode
+	_nrf24l01p_clear_max_retry_flag();
+	if ( originalMode == _NRF24L01P_MODE_RX ) rx_mode();//restore original mode
 	_nrf24l01p_ce_pin(originalCe);//restore original CE pin status
 	_nrf24l01p_delay_us( _NRF24L01P_TIMING_Tpece2csn_us );
 	
-	return 0;
+	return error_status;
 }
 
 
 int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
+	int error_status = 0;
+	
 	int originalCe = ce_value;//backup original ce_value
 	_nrf24l01p_ce_pin(0);//disable();
 	if ( datalen <= 0 ) return 0;
@@ -579,14 +615,20 @@ int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
 	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Thce_us);
 	_nrf24l01p_ce_pin(0);
 	
-	while ( !(_nrf24l01p_get_data_sent_flag()) );
+	while ( !(_nrf24l01p_get_data_sent_flag()) ){
+		if(_nrf24l01p_get_max_retry_flag()){
+			error_status = -1;
+			break;
+		}
+	}
 	
 	_nrf24l01p_clear_data_sent_flag();
+	_nrf24l01p_clear_max_retry_flag();
 	if ( originalMode == _NRF24L01P_MODE_RX ) _nrf24l01p_rx_mode();//restore original mode
 	_nrf24l01p_ce_pin(originalCe);//restore original CE pin status
 	_nrf24l01p_delay_us( _NRF24L01P_TIMING_Tpece2csn_us );
 	
-	return 0;
+	return error_status;
 }
 int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
 	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
@@ -619,25 +661,25 @@ int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
 	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
 		return -1;
 	}
-
-	if ( _nrf24l01p_readable(pipe) ) {
+	int x;
+	if (x = _nrf24l01p_readable(pipe) ) {
+		asm("nop");
 		int rxPayloadWidth = _nrf24l01p_read_rx_payload_width();
 		if ( ( rxPayloadWidth < 0 ) || ( rxPayloadWidth > _NRF24L01P_RX_FIFO_SIZE ) ) {
 			_nrf24l01p_flush_rx();
 		}
-		else {
-			_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
-			if(_nrf24l01p_get_fifo_flag_rx_empty()) {
-				_nrf24l01p_clear_data_ready_flag();
-			}
-			return rxPayloadWidth;
+	else {
+		_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
+		if(_nrf24l01p_get_fifo_flag_rx_empty()) {
+			_nrf24l01p_clear_data_ready_flag();
 		}
+		return rxPayloadWidth;
+	}
 	}
 	else {//if pipe not readable
 		return 0;
 	}
 	return 0;
-
 }
 
 
