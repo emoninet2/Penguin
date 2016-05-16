@@ -524,6 +524,8 @@ void _nrf24l01p_print_info(){
 
 
 //////////////////////////////////////////////////////////////////////////
+
+
 void _nrf24l01p_startup(){
 	#define TRANSFER_SIZE 1
 	uint8_t temp = 0b00000111;
@@ -535,7 +537,7 @@ void _nrf24l01p_startup(){
 	_nrf24l01p_write_register(_NRF24L01P_REG_RF_SETUP,&temp, sizeof(temp));
 	_nrf24l01p_power_up();
 	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Tpd2stby_us);
-	//
+
 	_nrf24l01p_rx_mode();
 	_nrf24l01p_ce_pin(1);
 }
@@ -551,8 +553,6 @@ bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe){
 		else{
 			flag = 0;
 		}
-
-		
 	}
 	return flag;
 }
@@ -578,10 +578,9 @@ int _nrf24l01p_write(uint8_t *data, int datalen){
 	
 	//bool max_retry_flag_reached= 0;
 	while ( !(_nrf24l01p_get_data_sent_flag()) ){
-		
 		if(_nrf24l01p_get_max_retry_flag()){
+			PORTR.OUTTGL = (1<<1);/////////////////////////////////DELETE
 			error_status = -1;
-			printf("TRIED MAXIMUM TIMES\r\n");
 			break;
 		}
 	}
@@ -591,12 +590,102 @@ int _nrf24l01p_write(uint8_t *data, int datalen){
 	
 	_nrf24l01p_clear_data_sent_flag();
 	_nrf24l01p_clear_max_retry_flag();
-	if ( originalMode == _NRF24L01P_MODE_RX ) rx_mode();//restore original mode
+	if ( originalMode == _NRF24L01P_MODE_RX ) _nrf24l01p_rx_mode();//restore original mode
 	_nrf24l01p_ce_pin(originalCe);//restore original CE pin status
 	_nrf24l01p_delay_us( _NRF24L01P_TIMING_Tpece2csn_us );
 	
 	return error_status;
 }
+
+int _nrf24l01p_write_to_address(uint64_t address, uint8_t *data, int datalen){
+	_nrf24l01p_set_TX_pipe_address(address);
+	_nrf24l01p_write(data,datalen);
+	
+}
+int _nrf24l01p_write_to_address_ack(uint64_t address, uint8_t *data, int datalen){
+	_nrf24l01p_set_TX_pipe_address(address);
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, address);
+	_nrf24l01p_write(data,datalen);
+	
+	
+}
+
+
+
+int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
+
+	int rxPayloadWidth;
+	
+	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
+		return -1;
+	}
+	
+	if (_nrf24l01p_readable(pipe) ) {
+		asm("nop");
+		rxPayloadWidth = _NRF24L01P_TX_FIFO_SIZE;
+		
+		if ( ( rxPayloadWidth < 0 ) || ( rxPayloadWidth > _NRF24L01P_RX_FIFO_SIZE ) ) {
+			_nrf24l01p_flush_rx();
+		}
+		else{
+			_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
+			
+			if(_nrf24l01p_get_fifo_flag_rx_empty()) {
+				_nrf24l01p_clear_data_ready_flag();
+			}
+		}
+
+		return rxPayloadWidth;
+	}
+
+	else {//if pipe not readable
+		return 0;
+	}
+	return 0;	
+}
+int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
+	
+	int rxPayloadWidth;
+	
+	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
+		return -1;
+	}
+	
+	if (_nrf24l01p_readable(pipe) ) {
+		asm("nop");
+		rxPayloadWidth = _nrf24l01p_read_rx_payload_width();
+	
+		if ( ( rxPayloadWidth < 0 ) || ( rxPayloadWidth > _NRF24L01P_RX_FIFO_SIZE ) ) {
+			_nrf24l01p_flush_rx();
+		}
+		else{
+			_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
+					
+			if(_nrf24l01p_get_fifo_flag_rx_empty()) {
+				_nrf24l01p_clear_data_ready_flag();
+			}
+		}
+
+		return rxPayloadWidth;
+	}
+//	else {
+// 		_nrf24l01p_read_rx_payload(data,&rxPayloadWidth);
+// 		if(_nrf24l01p_get_fifo_flag_rx_empty()) {
+// 			_nrf24l01p_clear_data_ready_flag();
+// 		}
+// 		return rxPayloadWidth;
+//	}
+	else {//if pipe not readable
+		return 0;
+	}
+	return 0;
+}
+
+
+
+
+
+
 
 
 int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
@@ -607,64 +696,6 @@ int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
 	_nrf24l01p_write_ack_payload(pipe,data,datalen);
 	
 }
-int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
-	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
-		return -1;
-	}
-	if ( datalen <= 0 ) return 0;
-	if ( datalen > _NRF24L01P_TX_FIFO_SIZE ) datalen = _NRF24L01P_TX_FIFO_SIZE;
-	
-	if ( _nrf24l01p_readable(pipe) ) {
-		
-		int rxPayloadWidth = datalen;
-
-		if ( ( rxPayloadWidth < 0 ) || ( rxPayloadWidth > _NRF24L01P_RX_FIFO_SIZE ) ) {
-			_nrf24l01p_flush_rx();
-		}
-		else {
-			_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
-			if(_nrf24l01p_get_fifo_flag_rx_empty()) {
-				_nrf24l01p_clear_data_ready_flag();
-			}
-			return rxPayloadWidth;
-		}
-	}
-	else {//if pipe not readable
-		return 0;
-	}
-	return 0;
-}
-int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
-	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
-		return -1;
-	}
-	//int x;
-	if (_nrf24l01p_readable(pipe) ) {
-		asm("nop");
-		int rxPayloadWidth = _nrf24l01p_read_rx_payload_width();
-		if ( ( rxPayloadWidth < 0 ) || ( rxPayloadWidth > _NRF24L01P_RX_FIFO_SIZE ) ) {
-			_nrf24l01p_flush_rx();
-		}
-	else {
-		_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
-		if(_nrf24l01p_get_fifo_flag_rx_empty()) {
-			_nrf24l01p_clear_data_ready_flag();
-		}
-		return rxPayloadWidth;
-	}
-	}
-	else {//if pipe not readable
-		return 0;
-	}
-	return 0;
-}
-
-
-
-
-
-
-
 
 
 

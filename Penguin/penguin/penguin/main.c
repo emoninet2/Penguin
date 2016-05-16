@@ -77,7 +77,7 @@ int main(void)
 	rtc_initialize();
 	
 	DigitalPin_t led = {&PORTR, 0};
-	
+	DigitalPin_t led2 = {&PORTR, 1};
 
 	
 	_nrf24l01p_init();
@@ -138,6 +138,7 @@ int main(void)
  	GlobalInterruptEnable();
 
 	DigitalPin_SetDIr(&led,1);
+	DigitalPin_SetDIr(&led2,1);
 	//PORT_SetDirection(&PORTR,(1<<0));
 
 	CLKSYS_Enable( OSC_RC32MEN_bm );
@@ -147,75 +148,55 @@ int main(void)
 	
 	_nrf24l01p_flush_rx();
 		
-	//_nrf24l01p_set_TX_pipe_address(0x1918171615);	
-	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, 0x1918171615);
+	//_nrf24l01p_set_TX_pipe_address(0x1122334455);	
+	//_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, 0x1122334455);
 	
-	//volatile uint64_t bladdress = _nrf24l01p_get_TX_pipe_address();
-	volatile uint64_t bladdress = _nrf24l01p_get_RX_pipe_address(_NRF24L01P_PIPE_P0);
-	//volatile uint64_t bladdress;
-	//_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P1,&bladdress,5);
-	asm("nop");
-	
-	//below is the code for the TX counterpart
-	//_nrf24l01p_set_TX_pipe_address(0xc2c2c2c2c4);
-	//_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, 0xc2c2c2c2c4);
-	
-	
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P1, 0xC2C2C2C255);
+
 	while(1)
 	{
+ 		//char txData[] = "sample text";
+ 		//_nrf24l01p_write((uint8_t*)txData,strlen(txData));
+ 		//_nrf24l01p_write_to_address_ack(0x1122334455, (uint8_t*)txData,strlen(txData));
 		
-			//below is the code for the TX counterpart
+		
+		
+		uint8_t emon_rxData[33];
+		
+		if((_nrf24l01p_readable(_NRF24L01P_PIPE_P1))){
+			PORTR.OUTTGL = (1<<0);
+
+			volatile int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P1, (uint8_t*) emon_rxData);
+			emon_rxData[width] = '\0';
+			_nrf24l01p_flush_rx();
+			_nrf24l01p_clear_data_ready_flag();
 			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-			uint8_t emon_rxData[100];
+			volatile char printlcd[20];
+			sprintf(printlcd,"width : %d\0", width);
+			ssd1306_clear();
+
+			ssd1306_set_page_address(0);
+			ssd1306_set_column_address(0);
+			ssd1306_write_text(emon_rxData);
 			
+			
+			char txData[] = "sample text";
+			_nrf24l01p_write_to_address_ack(0x1122334455, (uint8_t*)txData,strlen(txData));
+			
+		}
+		
+			//char txData[] = "sample text";
+			//_nrf24l01p_write_to_address_ack(0x1122334455, (uint8_t*)txData,strlen(txData));
+
+
 			//_delay_ms(1000);
-// 			rtc_ms_delay(1000);
-// 			
-// 			char msg[] = "get time";
-// 			_nrf24l01p_write(msg,strlen(msg));
-			 //_nrf24l01p_write_ack(_NRF24L01P_PIPE_P0,msg,strlen(msg));
 		
-			
-			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P3))){
-				PORTR.OUTTGL = (1<<0);
-				//printf("status %x\r\n",_nrf24l01p_get_status());
-				//printf("pipe : %d\r\n", _nrf24l01p_get_rx_payload_pipe());
-				//led1 = !led1;
-				
-				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P3, (uint8_t*) emon_rxData);
-				emon_rxData[width] = '\0';
-				_nrf24l01p_flush_rx();
-				_nrf24l01p_clear_data_ready_flag();
-	
-// 				int arg_index = 0;
-// 				char *pch;
-// 				char *remotch_args[ 10];
-// 				pch = strtok((char*)emon_rxData, "\"{},\r");
-// 				while(pch != NULL) {
-// 					remotch_args[arg_index] = pch;
-// 					arg_index++;
-// 					if(arg_index >=10) break;
-// 					pch = strtok (NULL, "\"{},\r");
-// 				}
-		  
-	  			ssd1306_clear();
-	  			ssd1306_set_column_address(0);
-				ssd1306_set_page_address(0);
-	  			ssd1306_write_text(emon_rxData);
-				  
-				_nrf24l01p_flush_rx();
-			}
 
-
+		
+		
+		
+		
+		
 		
  			//HID_Device_USBTask(&Generic_HID_Interface);
  			//USB_USBTask();
