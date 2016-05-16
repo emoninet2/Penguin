@@ -83,13 +83,13 @@ int main(void)
 	_nrf24l01p_init();
 	_nrf24l01p_enable_dynamic_payload();
 	_nrf24l01p_enable_payload_with_ack();
-	
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P0);
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P1);
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P2);
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P3);
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P4);
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P5);
+
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P0);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P1);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P2);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P3);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P4);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P5);
 	
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P0);
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P1);
@@ -98,13 +98,14 @@ int main(void)
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P4);
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P5);
 	
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P0);
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P1);
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P2);
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P3);
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P4);
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P5);
-	 
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P0);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P1);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P2);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P3);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P4);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P5);
+
+
 	_nrf24l01p_set_auto_retransmission_delay(15);
 	
 	uint8_t page;
@@ -146,8 +147,15 @@ int main(void)
 	
 	_nrf24l01p_flush_rx();
 		
-	//_nrf24l01p_set_TX_pipe_address(0xc2c2c2c2c4);	
-		
+	_nrf24l01p_set_TX_pipe_address(0x1918171615);	
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, 0x1918171615);
+	
+	//volatile uint64_t bladdress = _nrf24l01p_get_TX_pipe_address();
+	volatile uint64_t bladdress = _nrf24l01p_get_RX_pipe_address(_NRF24L01P_PIPE_P0);
+	//volatile uint64_t bladdress;
+	//_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P1,&bladdress,5);
+	asm("nop");
+	
 	while(1)
 	{
 			uint8_t emon_rxData[100];
@@ -160,13 +168,13 @@ int main(void)
 			 //_nrf24l01p_write_ack(_NRF24L01P_PIPE_P0,msg,strlen(msg));
 		
 			
-			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P4))){
+			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P0))){
 				PORTR.OUTTGL = (1<<0);
 				//printf("status %x\r\n",_nrf24l01p_get_status());
 				//printf("pipe : %d\r\n", _nrf24l01p_get_rx_payload_pipe());
 				//led1 = !led1;
 				
-				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P4, (uint8_t*) emon_rxData);
+				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P0, (uint8_t*) emon_rxData);
 				emon_rxData[width] = '\0';
 				_nrf24l01p_flush_rx();
 				_nrf24l01p_clear_data_ready_flag();
@@ -182,10 +190,10 @@ int main(void)
 // 					pch = strtok (NULL, "\"{},\r");
 // 				}
 		  
-// 	  			ssd1306_clear();
-// 	  			ssd1306_set_column_address(0);
-// 				ssd1306_set_page_address(0);
-// 	  			ssd1306_write_text(emon_rxData);
+	  			ssd1306_clear();
+	  			ssd1306_set_column_address(0);
+				ssd1306_set_page_address(0);
+	  			ssd1306_write_text(emon_rxData);
 				  
 				_nrf24l01p_flush_rx();
 			}

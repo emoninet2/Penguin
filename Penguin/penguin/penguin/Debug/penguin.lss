@@ -3,31 +3,31 @@ penguin.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         00001298  00000000  00000000  00000094  2**1
+  0 .text         00001586  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         000002b4  00802000  00001298  0000132c  2**0
+  1 .data         000002b4  00802000  00001586  0000161a  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          000004bd  008022b4  008022b4  000015e0  2**0
+  2 .bss          000004bd  008022b4  008022b4  000018ce  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  000015e0  2**0
+  3 .comment      00000030  00000000  00000000  000018ce  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00001610  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00001900  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000740  00000000  00000000  00001650  2**0
+  5 .debug_aranges 00000740  00000000  00000000  00001940  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000a600  00000000  00000000  00001d90  2**0
+  6 .debug_info   0000a849  00000000  00000000  00002080  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00001c53  00000000  00000000  0000c390  2**0
+  7 .debug_abbrev 00001c0e  00000000  00000000  0000c8c9  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00002bb1  00000000  00000000  0000dfe3  2**0
+  8 .debug_line   00002c14  00000000  00000000  0000e4d7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000015a4  00000000  00000000  00010b94  2**2
+  9 .debug_frame  00001620  00000000  00000000  000110ec  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    000043eb  00000000  00000000  00012138  2**0
+ 10 .debug_str    00004426  00000000  00000000  0001270c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00005436  00000000  00000000  00016523  2**0
+ 11 .debug_loc    00005818  00000000  00000000  00016b32  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000770  00000000  00000000  0001b959  2**0
+ 12 .debug_ranges 000007c0  00000000  00000000  0001c34a  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -55,8 +55,8 @@ void USB_Device_ProcessControlRequest(void)
 
 	for (uint8_t RequestHeaderByte = 0; RequestHeaderByte < sizeof(USB_Request_Header_t); RequestHeaderByte++)
 	  *(RequestHeader++) = Endpoint_Read_8();
-      28:	0c 94 cf 08 	jmp	0x119e	; 0x119e <__vector_10>
-      2c:	0c 94 0a 09 	jmp	0x1214	; 0x1214 <__vector_11>
+      28:	0c 94 28 0a 	jmp	0x1450	; 0x1450 <__vector_10>
+      2c:	0c 94 63 0a 	jmp	0x14c6	; 0x14c6 <__vector_11>
 	USB_ControlRequest.wIndex        = Endpoint_Read_16_LE();
 	USB_ControlRequest.wLength       = Endpoint_Read_16_LE();
 	#else
@@ -86,27 +86,27 @@ void USB_Device_ProcessControlRequest(void)
       58:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
       5c:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
       60:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
-      64:	0c 94 f0 06 	jmp	0xde0	; 0xde0 <__vector_25>
+      64:	0c 94 49 08 	jmp	0x1092	; 0x1092 <__vector_25>
 		{
 			case REQ_GetStatus:
 				if ((bmRequestType == (REQDIR_DEVICETOHOST | REQTYPE_STANDARD | REQREC_DEVICE)) ||
-      68:	0c 94 04 07 	jmp	0xe08	; 0xe08 <__vector_26>
-      6c:	0c 94 fa 06 	jmp	0xdf4	; 0xdf4 <__vector_27>
-      70:	0c 94 0e 07 	jmp	0xe1c	; 0xe1c <__vector_28>
+      68:	0c 94 5d 08 	jmp	0x10ba	; 0x10ba <__vector_26>
+      6c:	0c 94 53 08 	jmp	0x10a6	; 0x10a6 <__vector_27>
+      70:	0c 94 67 08 	jmp	0x10ce	; 0x10ce <__vector_28>
 	Endpoint_ClearOUT();
 }
 
 static void USB_Device_GetStatus(void)
 {
 	uint8_t CurrentStatus = 0;
-      74:	0c 94 22 07 	jmp	0xe44	; 0xe44 <__vector_29>
+      74:	0c 94 7b 08 	jmp	0x10f6	; 0x10f6 <__vector_29>
 			if (USB_Device_CurrentlySelfPowered)
 			  CurrentStatus |= FEATURE_SELFPOWERED_ENABLED;
 			#endif
 
 			#if !defined(NO_DEVICE_REMOTE_WAKEUP)
 			if (USB_Device_RemoteWakeupEnabled)
-      78:	0c 94 18 07 	jmp	0xe30	; 0xe30 <__vector_30>
+      78:	0c 94 71 08 	jmp	0x10e2	; 0x10e2 <__vector_30>
       7c:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
 			  CurrentStatus |= FEATURE_REMOTE_WAKEUP_ENABLED;
       80:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
@@ -191,13 +191,13 @@ static void USB_Device_GetStatus(void)
 
 				Endpoint_SelectEndpoint(EndpointIndex);
       e4:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
-      e8:	0c 94 4a 07 	jmp	0xe94	; 0xe94 <__vector_58>
+      e8:	0c 94 a3 08 	jmp	0x1146	; 0x1146 <__vector_58>
 
 				if (Endpoint_IsEnabled())
 				{
 					if (USB_ControlRequest.bRequest == REQ_SetFeature)
-      ec:	0c 94 5e 07 	jmp	0xebc	; 0xebc <__vector_59>
-      f0:	0c 94 54 07 	jmp	0xea8	; 0xea8 <__vector_60>
+      ec:	0c 94 b7 08 	jmp	0x116e	; 0x116e <__vector_59>
+      f0:	0c 94 ad 08 	jmp	0x115a	; 0x115a <__vector_60>
 					{
 						Endpoint_StallTransaction();
       f4:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
@@ -291,15 +291,15 @@ static void USB_Device_SetAddress(void)
 				break;
 			case REQ_GetDescriptor:
 				if ((bmRequestType == (REQDIR_DEVICETOHOST | REQTYPE_STANDARD | REQREC_DEVICE)) ||
-     160:	0c 94 2c 07 	jmp	0xe58	; 0xe58 <__vector_88>
-     164:	0c 94 40 07 	jmp	0xe80	; 0xe80 <__vector_89>
+     160:	0c 94 85 08 	jmp	0x110a	; 0x110a <__vector_88>
+     164:	0c 94 99 08 	jmp	0x1132	; 0x1132 <__vector_89>
 	    !(defined(USE_FLASH_DESCRIPTORS) || defined(USE_EEPROM_DESCRIPTORS) || defined(USE_RAM_DESCRIPTORS))
 	uint8_t DescriptorAddressSpace;
 	#endif
 
 	#if !defined(NO_INTERNAL_SERIAL) && (USE_INTERNAL_SERIAL != NO_DESCRIPTOR)
 	if (USB_ControlRequest.wValue == ((DTYPE_String << 8) | USE_INTERNAL_SERIAL))
-     168:	0c 94 36 07 	jmp	0xe6c	; 0xe6c <__vector_90>
+     168:	0c 94 8f 08 	jmp	0x111e	; 0x111e <__vector_90>
      16c:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
      170:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
      174:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
@@ -396,7 +396,7 @@ static void USB_Device_SetAddress(void)
      1e8:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
      1ec:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
      1f0:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
-     1f4:	0c 94 43 08 	jmp	0x1086	; 0x1086 <__vector_125>
+     1f4:	0c 94 9c 09 	jmp	0x1338	; 0x1338 <__vector_125>
      1f8:	0c 94 1f 01 	jmp	0x23e	; 0x23e <__bad_interrupt>
 
 000001fc <__ctors_end>:
@@ -443,8 +443,8 @@ static void USB_Device_SetAddress(void)
 static void USB_Device_GetConfiguration(void)
 {
 	Endpoint_ClearSETUP();
-     212:	e8 e9       	ldi	r30, 0x98	; 152
-     214:	f2 e1       	ldi	r31, 0x12	; 18
+     212:	e6 e8       	ldi	r30, 0x86	; 134
+     214:	f5 e1       	ldi	r31, 0x15	; 21
 
 	Endpoint_Write_8(USB_Device_ConfigurationNumber);
      216:	00 e0       	ldi	r16, 0x00	; 0
@@ -490,10 +490,10 @@ static void USB_Device_SetConfiguration(void)
 
 	Endpoint_ClearSETUP();
      234:	e1 f7       	brne	.-8      	; 0x22e <.do_clear_bss_loop>
-     236:	0e 94 d0 05 	call	0xba0	; 0xba0 <main>
+     236:	0e 94 ea 06 	call	0xdd4	; 0xdd4 <main>
 
 	USB_Device_ConfigurationNumber = (uint8_t)USB_ControlRequest.wValue;
-     23a:	0c 94 4a 09 	jmp	0x1294	; 0x1294 <_exit>
+     23a:	0c 94 c1 0a 	jmp	0x1582	; 0x1582 <_exit>
 
 0000023e <__bad_interrupt>:
      23e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
@@ -555,12 +555,12 @@ static void arch_nrf24l01p_ce_pin(bool state){
      274:	29 f0       	breq	.+10     	; 0x280 <_nrf24l01p_ce_pin+0x12>
      276:	80 e0       	ldi	r24, 0x00	; 0
      278:	90 e2       	ldi	r25, 0x20	; 32
-     27a:	0e 94 d0 06 	call	0xda0	; 0xda0 <DigitalPin_SetValue>
+     27a:	0e 94 29 08 	call	0x1052	; 0x1052 <DigitalPin_SetValue>
      27e:	04 c0       	rjmp	.+8      	; 0x288 <_nrf24l01p_ce_pin+0x1a>
 	else DigitalPin_ClearValue(&nrf24l01p_ce_pin);
      280:	80 e0       	ldi	r24, 0x00	; 0
      282:	90 e2       	ldi	r25, 0x20	; 32
-     284:	0e 94 e0 06 	call	0xdc0	; 0xdc0 <DigitalPin_ClearValue>
+     284:	0e 94 39 08 	call	0x1072	; 0x1072 <DigitalPin_ClearValue>
 	arch_nrf24l01p_ce_pin(state);
 	ce_value = state;
      288:	c0 93 c3 24 	sts	0x24C3, r28
@@ -582,12 +582,12 @@ static void arch_nrf24l01p_csn_pin(bool state){
      296:	29 f0       	breq	.+10     	; 0x2a2 <_nrf24l01p_csn_pin+0x12>
      298:	83 e0       	ldi	r24, 0x03	; 3
      29a:	90 e2       	ldi	r25, 0x20	; 32
-     29c:	0e 94 d0 06 	call	0xda0	; 0xda0 <DigitalPin_SetValue>
+     29c:	0e 94 29 08 	call	0x1052	; 0x1052 <DigitalPin_SetValue>
      2a0:	04 c0       	rjmp	.+8      	; 0x2aa <_nrf24l01p_csn_pin+0x1a>
 	else DigitalPin_ClearValue(&nrf24l01p_csn_pin);
      2a2:	83 e0       	ldi	r24, 0x03	; 3
      2a4:	90 e2       	ldi	r25, 0x20	; 32
-     2a6:	0e 94 e0 06 	call	0xdc0	; 0xdc0 <DigitalPin_ClearValue>
+     2a6:	0e 94 39 08 	call	0x1072	; 0x1072 <DigitalPin_ClearValue>
 
 	arch_nrf24l01p_csn_pin(state);
 	csn_value = state;
@@ -1194,2559 +1194,3121 @@ void _nrf24l01p_clear_data_ready_flag(){
      604:	cf 91       	pop	r28
      606:	08 95       	ret
 
-00000608 <_nrf24l01p_get_fifo_flag_rx_empty>:
+00000608 <_nrf24l01p_set_RX_pipe_address>:
+	else flag = 0;
+	return flag;
+}
+
+
+void _nrf24l01p_set_RX_pipe_address(_nrf24l01p_pipe_t pipe,uint64_t address){
+     608:	2f 92       	push	r2
+     60a:	3f 92       	push	r3
+     60c:	4f 92       	push	r4
+     60e:	5f 92       	push	r5
+     610:	6f 92       	push	r6
+     612:	7f 92       	push	r7
+     614:	8f 92       	push	r8
+     616:	9f 92       	push	r9
+     618:	af 92       	push	r10
+     61a:	bf 92       	push	r11
+     61c:	cf 92       	push	r12
+     61e:	df 92       	push	r13
+     620:	ef 92       	push	r14
+     622:	ff 92       	push	r15
+     624:	0f 93       	push	r16
+     626:	1f 93       	push	r17
+     628:	cf 93       	push	r28
+     62a:	df 93       	push	r29
+     62c:	cd b7       	in	r28, 0x3d	; 61
+     62e:	de b7       	in	r29, 0x3e	; 62
+     630:	25 97       	sbiw	r28, 0x05	; 5
+     632:	cd bf       	out	0x3d, r28	; 61
+     634:	de bf       	out	0x3e, r29	; 62
+     636:	48 2e       	mov	r4, r24
+     638:	b0 2e       	mov	r11, r16
+     63a:	a2 2e       	mov	r10, r18
+     63c:	93 2e       	mov	r9, r19
+     63e:	84 2e       	mov	r8, r20
+     640:	75 2e       	mov	r7, r21
+     642:	66 2e       	mov	r6, r22
+     644:	57 2e       	mov	r5, r23
+	int max_pipe_addr_width = 0;
+	if(pipe == 0) max_pipe_addr_width = 5;
+     646:	21 e0       	ldi	r18, 0x01	; 1
+     648:	28 17       	cp	r18, r24
+     64a:	98 f5       	brcc	.+102    	; 0x6b2 <_nrf24l01p_set_RX_pipe_address+0xaa>
+	else if (pipe == 1) max_pipe_addr_width = 5;
+	else if (pipe == 2) max_pipe_addr_width = 1;
+     64c:	8e ef       	ldi	r24, 0xFE	; 254
+     64e:	84 0d       	add	r24, r4
+     650:	83 30       	cpi	r24, 0x03	; 3
+     652:	a8 f1       	brcs	.+106    	; 0x6be <_nrf24l01p_set_RX_pipe_address+0xb6>
+	else if (pipe == 3) max_pipe_addr_width = 1;
+	else if (pipe == 4) max_pipe_addr_width = 1;
+	else if (pipe == 5) max_pipe_addr_width = 1;
+     654:	91 e0       	ldi	r25, 0x01	; 1
+     656:	80 e0       	ldi	r24, 0x00	; 0
+     658:	a5 e0       	ldi	r26, 0x05	; 5
+     65a:	4a 12       	cpse	r4, r26
+     65c:	90 e0       	ldi	r25, 0x00	; 0
+}
+
+
+void _nrf24l01p_set_RX_pipe_address(_nrf24l01p_pipe_t pipe,uint64_t address){
+	int max_pipe_addr_width = 0;
+	if(pipe == 0) max_pipe_addr_width = 5;
+     65e:	c9 2e       	mov	r12, r25
+     660:	d8 2e       	mov	r13, r24
+	else if (pipe == 4) max_pipe_addr_width = 1;
+	else if (pipe == 5) max_pipe_addr_width = 1;
+	
+	
+	uint8_t temp[5];
+	for(int i=0;i<max_pipe_addr_width;i++){
+     662:	1c 14       	cp	r1, r12
+     664:	1d 04       	cpc	r1, r13
+     666:	e4 f4       	brge	.+56     	; 0x6a0 <_nrf24l01p_set_RX_pipe_address+0x98>
+     668:	ce 01       	movw	r24, r28
+     66a:	01 96       	adiw	r24, 0x01	; 1
+     66c:	7c 01       	movw	r14, r24
+	else flag = 0;
+	return flag;
+}
+
+
+void _nrf24l01p_set_RX_pipe_address(_nrf24l01p_pipe_t pipe,uint64_t address){
+     66e:	21 2c       	mov	r2, r1
+     670:	31 2c       	mov	r3, r1
+     672:	e0 e0       	ldi	r30, 0x00	; 0
+     674:	f0 e0       	ldi	r31, 0x00	; 0
+	else if (pipe == 5) max_pipe_addr_width = 1;
+	
+	
+	uint8_t temp[5];
+	for(int i=0;i<max_pipe_addr_width;i++){
+		temp[i] = (address>>(8*i))&0xFF;
+     676:	2b 2d       	mov	r18, r11
+     678:	31 2f       	mov	r19, r17
+     67a:	4a 2d       	mov	r20, r10
+     67c:	59 2d       	mov	r21, r9
+     67e:	68 2d       	mov	r22, r8
+     680:	77 2d       	mov	r23, r7
+     682:	86 2d       	mov	r24, r6
+     684:	95 2d       	mov	r25, r5
+     686:	02 2d       	mov	r16, r2
+     688:	0e 94 a5 0a 	call	0x154a	; 0x154a <__lshrdi3>
+     68c:	d7 01       	movw	r26, r14
+     68e:	2d 93       	st	X+, r18
+     690:	7d 01       	movw	r14, r26
+	else if (pipe == 4) max_pipe_addr_width = 1;
+	else if (pipe == 5) max_pipe_addr_width = 1;
+	
+	
+	uint8_t temp[5];
+	for(int i=0;i<max_pipe_addr_width;i++){
+     692:	31 96       	adiw	r30, 0x01	; 1
+     694:	b8 e0       	ldi	r27, 0x08	; 8
+     696:	2b 0e       	add	r2, r27
+     698:	31 1c       	adc	r3, r1
+     69a:	ec 15       	cp	r30, r12
+     69c:	fd 05       	cpc	r31, r13
+     69e:	5c f3       	brlt	.-42     	; 0x676 <_nrf24l01p_set_RX_pipe_address+0x6e>
+		temp[i] = (address>>(8*i))&0xFF;
+	}
+	_nrf24l01p_write_register(_NRF24L01P_REG_RX_ADDR_P0 + pipe,temp,max_pipe_addr_width);
+     6a0:	a6 01       	movw	r20, r12
+     6a2:	be 01       	movw	r22, r28
+     6a4:	6f 5f       	subi	r22, 0xFF	; 255
+     6a6:	7f 4f       	sbci	r23, 0xFF	; 255
+     6a8:	8a e0       	ldi	r24, 0x0A	; 10
+     6aa:	84 0d       	add	r24, r4
+     6ac:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     6b0:	0a c0       	rjmp	.+20     	; 0x6c6 <_nrf24l01p_set_RX_pipe_address+0xbe>
+}
+
+
+void _nrf24l01p_set_RX_pipe_address(_nrf24l01p_pipe_t pipe,uint64_t address){
+	int max_pipe_addr_width = 0;
+	if(pipe == 0) max_pipe_addr_width = 5;
+     6b2:	0f 2e       	mov	r0, r31
+     6b4:	f5 e0       	ldi	r31, 0x05	; 5
+     6b6:	cf 2e       	mov	r12, r31
+     6b8:	d1 2c       	mov	r13, r1
+     6ba:	f0 2d       	mov	r31, r0
+     6bc:	d5 cf       	rjmp	.-86     	; 0x668 <_nrf24l01p_set_RX_pipe_address+0x60>
+	else if (pipe == 1) max_pipe_addr_width = 5;
+	else if (pipe == 2) max_pipe_addr_width = 1;
+     6be:	cc 24       	eor	r12, r12
+     6c0:	c3 94       	inc	r12
+     6c2:	d1 2c       	mov	r13, r1
+     6c4:	d1 cf       	rjmp	.-94     	; 0x668 <_nrf24l01p_set_RX_pipe_address+0x60>
+	for(int i=0;i<max_pipe_addr_width;i++){
+		temp[i] = (address>>(8*i))&0xFF;
+	}
+	_nrf24l01p_write_register(_NRF24L01P_REG_RX_ADDR_P0 + pipe,temp,max_pipe_addr_width);
+	
+}
+     6c6:	25 96       	adiw	r28, 0x05	; 5
+     6c8:	cd bf       	out	0x3d, r28	; 61
+     6ca:	de bf       	out	0x3e, r29	; 62
+     6cc:	df 91       	pop	r29
+     6ce:	cf 91       	pop	r28
+     6d0:	1f 91       	pop	r17
+     6d2:	0f 91       	pop	r16
+     6d4:	ff 90       	pop	r15
+     6d6:	ef 90       	pop	r14
+     6d8:	df 90       	pop	r13
+     6da:	cf 90       	pop	r12
+     6dc:	bf 90       	pop	r11
+     6de:	af 90       	pop	r10
+     6e0:	9f 90       	pop	r9
+     6e2:	8f 90       	pop	r8
+     6e4:	7f 90       	pop	r7
+     6e6:	6f 90       	pop	r6
+     6e8:	5f 90       	pop	r5
+     6ea:	4f 90       	pop	r4
+     6ec:	3f 90       	pop	r3
+     6ee:	2f 90       	pop	r2
+     6f0:	08 95       	ret
+
+000006f2 <_nrf24l01p_get_RX_pipe_address>:
+uint64_t _nrf24l01p_get_RX_pipe_address(_nrf24l01p_pipe_t pipe){
+     6f2:	0f 93       	push	r16
+     6f4:	1f 93       	push	r17
+     6f6:	cf 93       	push	r28
+     6f8:	df 93       	push	r29
+     6fa:	cd b7       	in	r28, 0x3d	; 61
+     6fc:	de b7       	in	r29, 0x3e	; 62
+     6fe:	2d 97       	sbiw	r28, 0x0d	; 13
+     700:	cd bf       	out	0x3d, r28	; 61
+     702:	de bf       	out	0x3e, r29	; 62
+	
+	int max_pipe_addr_width = 0;
+	if(pipe == 0) max_pipe_addr_width = 5;
+     704:	82 30       	cpi	r24, 0x02	; 2
+     706:	a0 f1       	brcs	.+104    	; 0x770 <_nrf24l01p_get_RX_pipe_address+0x7e>
+	else if (pipe == 1) max_pipe_addr_width = 5;
+	else if (pipe == 2) max_pipe_addr_width = 1;
+     708:	9e ef       	ldi	r25, 0xFE	; 254
+     70a:	98 0f       	add	r25, r24
+     70c:	93 30       	cpi	r25, 0x03	; 3
+     70e:	98 f1       	brcs	.+102    	; 0x776 <_nrf24l01p_get_RX_pipe_address+0x84>
+	else if (pipe == 3) max_pipe_addr_width = 1;
+	else if (pipe == 4) max_pipe_addr_width = 1;
+	else if (pipe == 5) max_pipe_addr_width = 1;
+     710:	41 e0       	ldi	r20, 0x01	; 1
+     712:	50 e0       	ldi	r21, 0x00	; 0
+     714:	85 30       	cpi	r24, 0x05	; 5
+     716:	09 f0       	breq	.+2      	; 0x71a <_nrf24l01p_get_RX_pipe_address+0x28>
+     718:	40 e0       	ldi	r20, 0x00	; 0
+	
+}
+uint64_t _nrf24l01p_get_RX_pipe_address(_nrf24l01p_pipe_t pipe){
+	
+	int max_pipe_addr_width = 0;
+	if(pipe == 0) max_pipe_addr_width = 5;
+     71a:	04 2f       	mov	r16, r20
+     71c:	15 2f       	mov	r17, r21
+	else if (pipe == 4) max_pipe_addr_width = 1;
+	else if (pipe == 5) max_pipe_addr_width = 1;
+	
+	
+	uint8_t temp[5];
+	_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P0 + pipe,temp,max_pipe_addr_width);
+     71e:	be 01       	movw	r22, r28
+     720:	6f 5f       	subi	r22, 0xFF	; 255
+     722:	7f 4f       	sbci	r23, 0xFF	; 255
+     724:	86 5f       	subi	r24, 0xF6	; 246
+     726:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
+	
+	uint64_t temp_addr = 0;
+     72a:	1e 82       	std	Y+6, r1	; 0x06
+     72c:	1f 82       	std	Y+7, r1	; 0x07
+     72e:	18 86       	std	Y+8, r1	; 0x08
+     730:	19 86       	std	Y+9, r1	; 0x09
+     732:	1a 86       	std	Y+10, r1	; 0x0a
+     734:	1b 86       	std	Y+11, r1	; 0x0b
+     736:	1c 86       	std	Y+12, r1	; 0x0c
+     738:	1d 86       	std	Y+13, r1	; 0x0d
+	uint8_t *temp_addr_ptr = (uint8_t*) &temp_addr;
+	for(int i=0;i<max_pipe_addr_width;i++){
+     73a:	10 16       	cp	r1, r16
+     73c:	11 06       	cpc	r1, r17
+     73e:	7c f4       	brge	.+30     	; 0x75e <_nrf24l01p_get_RX_pipe_address+0x6c>
+     740:	de 01       	movw	r26, r28
+     742:	11 96       	adiw	r26, 0x01	; 1
+     744:	fe 01       	movw	r30, r28
+     746:	36 96       	adiw	r30, 0x06	; 6
+		temp[i] = (address>>(8*i))&0xFF;
+	}
+	_nrf24l01p_write_register(_NRF24L01P_REG_RX_ADDR_P0 + pipe,temp,max_pipe_addr_width);
+	
+}
+uint64_t _nrf24l01p_get_RX_pipe_address(_nrf24l01p_pipe_t pipe){
+     748:	20 e0       	ldi	r18, 0x00	; 0
+     74a:	30 e0       	ldi	r19, 0x00	; 0
+	_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P0 + pipe,temp,max_pipe_addr_width);
+	
+	uint64_t temp_addr = 0;
+	uint8_t *temp_addr_ptr = (uint8_t*) &temp_addr;
+	for(int i=0;i<max_pipe_addr_width;i++){
+		*(temp_addr_ptr+i)|= (temp[i]);
+     74c:	8d 91       	ld	r24, X+
+     74e:	90 81       	ld	r25, Z
+     750:	89 2b       	or	r24, r25
+     752:	81 93       	st	Z+, r24
+	uint8_t temp[5];
+	_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P0 + pipe,temp,max_pipe_addr_width);
+	
+	uint64_t temp_addr = 0;
+	uint8_t *temp_addr_ptr = (uint8_t*) &temp_addr;
+	for(int i=0;i<max_pipe_addr_width;i++){
+     754:	2f 5f       	subi	r18, 0xFF	; 255
+     756:	3f 4f       	sbci	r19, 0xFF	; 255
+     758:	20 17       	cp	r18, r16
+     75a:	31 07       	cpc	r19, r17
+     75c:	bc f3       	brlt	.-18     	; 0x74c <_nrf24l01p_get_RX_pipe_address+0x5a>
+		*(temp_addr_ptr+i)|= (temp[i]);
+	}
+	
+	return temp_addr;	
+     75e:	2e 81       	ldd	r18, Y+6	; 0x06
+     760:	3f 81       	ldd	r19, Y+7	; 0x07
+     762:	48 85       	ldd	r20, Y+8	; 0x08
+     764:	59 85       	ldd	r21, Y+9	; 0x09
+     766:	6a 85       	ldd	r22, Y+10	; 0x0a
+     768:	7b 85       	ldd	r23, Y+11	; 0x0b
+     76a:	8c 85       	ldd	r24, Y+12	; 0x0c
+     76c:	9d 85       	ldd	r25, Y+13	; 0x0d
+     76e:	15 c0       	rjmp	.+42     	; 0x79a <_nrf24l01p_get_RX_pipe_address+0xa8>
+	
+}
+uint64_t _nrf24l01p_get_RX_pipe_address(_nrf24l01p_pipe_t pipe){
+	
+	int max_pipe_addr_width = 0;
+	if(pipe == 0) max_pipe_addr_width = 5;
+     770:	05 e0       	ldi	r16, 0x05	; 5
+     772:	10 e0       	ldi	r17, 0x00	; 0
+     774:	02 c0       	rjmp	.+4      	; 0x77a <_nrf24l01p_get_RX_pipe_address+0x88>
+	else if (pipe == 1) max_pipe_addr_width = 5;
+	else if (pipe == 2) max_pipe_addr_width = 1;
+     776:	01 e0       	ldi	r16, 0x01	; 1
+     778:	10 e0       	ldi	r17, 0x00	; 0
+	else if (pipe == 4) max_pipe_addr_width = 1;
+	else if (pipe == 5) max_pipe_addr_width = 1;
+	
+	
+	uint8_t temp[5];
+	_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P0 + pipe,temp,max_pipe_addr_width);
+     77a:	a8 01       	movw	r20, r16
+     77c:	be 01       	movw	r22, r28
+     77e:	6f 5f       	subi	r22, 0xFF	; 255
+     780:	7f 4f       	sbci	r23, 0xFF	; 255
+     782:	86 5f       	subi	r24, 0xF6	; 246
+     784:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
+	
+	uint64_t temp_addr = 0;
+     788:	1e 82       	std	Y+6, r1	; 0x06
+     78a:	1f 82       	std	Y+7, r1	; 0x07
+     78c:	18 86       	std	Y+8, r1	; 0x08
+     78e:	19 86       	std	Y+9, r1	; 0x09
+     790:	1a 86       	std	Y+10, r1	; 0x0a
+     792:	1b 86       	std	Y+11, r1	; 0x0b
+     794:	1c 86       	std	Y+12, r1	; 0x0c
+     796:	1d 86       	std	Y+13, r1	; 0x0d
+     798:	d3 cf       	rjmp	.-90     	; 0x740 <_nrf24l01p_get_RX_pipe_address+0x4e>
+	for(int i=0;i<max_pipe_addr_width;i++){
+		*(temp_addr_ptr+i)|= (temp[i]);
+	}
+	
+	return temp_addr;	
+}
+     79a:	2d 96       	adiw	r28, 0x0d	; 13
+     79c:	cd bf       	out	0x3d, r28	; 61
+     79e:	de bf       	out	0x3e, r29	; 62
+     7a0:	df 91       	pop	r29
+     7a2:	cf 91       	pop	r28
+     7a4:	1f 91       	pop	r17
+     7a6:	0f 91       	pop	r16
+     7a8:	08 95       	ret
+
+000007aa <_nrf24l01p_set_TX_pipe_address>:
+
+void _nrf24l01p_set_TX_pipe_address(uint64_t address){
+     7aa:	9f 92       	push	r9
+     7ac:	af 92       	push	r10
+     7ae:	bf 92       	push	r11
+     7b0:	cf 92       	push	r12
+     7b2:	df 92       	push	r13
+     7b4:	ef 92       	push	r14
+     7b6:	ff 92       	push	r15
+     7b8:	0f 93       	push	r16
+     7ba:	1f 93       	push	r17
+     7bc:	cf 93       	push	r28
+     7be:	df 93       	push	r29
+     7c0:	cd b7       	in	r28, 0x3d	; 61
+     7c2:	de b7       	in	r29, 0x3e	; 62
+     7c4:	25 97       	sbiw	r28, 0x05	; 5
+     7c6:	cd bf       	out	0x3d, r28	; 61
+     7c8:	de bf       	out	0x3e, r29	; 62
+     7ca:	92 2e       	mov	r9, r18
+     7cc:	a3 2e       	mov	r10, r19
+     7ce:	b4 2e       	mov	r11, r20
+     7d0:	c5 2e       	mov	r12, r21
+     7d2:	d6 2e       	mov	r13, r22
+     7d4:	e7 2e       	mov	r14, r23
+     7d6:	f8 2e       	mov	r15, r24
+     7d8:	19 2f       	mov	r17, r25
+     7da:	de 01       	movw	r26, r28
+     7dc:	11 96       	adiw	r26, 0x01	; 1
+     7de:	e0 e0       	ldi	r30, 0x00	; 0
+     7e0:	f0 e0       	ldi	r31, 0x00	; 0
+	uint8_t temp[5];
+	
+	for(int i=0;i<5;i++){
+		temp[i] = (address>>(8*i))&0xFF;
+     7e2:	29 2d       	mov	r18, r9
+     7e4:	3a 2d       	mov	r19, r10
+     7e6:	4b 2d       	mov	r20, r11
+     7e8:	5c 2d       	mov	r21, r12
+     7ea:	6d 2d       	mov	r22, r13
+     7ec:	7e 2d       	mov	r23, r14
+     7ee:	8f 2d       	mov	r24, r15
+     7f0:	91 2f       	mov	r25, r17
+     7f2:	0e 2f       	mov	r16, r30
+     7f4:	0e 94 a5 0a 	call	0x154a	; 0x154a <__lshrdi3>
+     7f8:	2d 93       	st	X+, r18
+     7fa:	38 96       	adiw	r30, 0x08	; 8
+}
+
+void _nrf24l01p_set_TX_pipe_address(uint64_t address){
+	uint8_t temp[5];
+	
+	for(int i=0;i<5;i++){
+     7fc:	e8 32       	cpi	r30, 0x28	; 40
+     7fe:	f1 05       	cpc	r31, r1
+     800:	81 f7       	brne	.-32     	; 0x7e2 <_nrf24l01p_set_TX_pipe_address+0x38>
+		temp[i] = (address>>(8*i))&0xFF;
+	}
+	_nrf24l01p_write_register(_NRF24L01P_REG_TX_ADDR,temp,5);
+     802:	45 e0       	ldi	r20, 0x05	; 5
+     804:	50 e0       	ldi	r21, 0x00	; 0
+     806:	be 01       	movw	r22, r28
+     808:	6f 5f       	subi	r22, 0xFF	; 255
+     80a:	7f 4f       	sbci	r23, 0xFF	; 255
+     80c:	80 e1       	ldi	r24, 0x10	; 16
+     80e:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+}
+     812:	25 96       	adiw	r28, 0x05	; 5
+     814:	cd bf       	out	0x3d, r28	; 61
+     816:	de bf       	out	0x3e, r29	; 62
+     818:	df 91       	pop	r29
+     81a:	cf 91       	pop	r28
+     81c:	1f 91       	pop	r17
+     81e:	0f 91       	pop	r16
+     820:	ff 90       	pop	r15
+     822:	ef 90       	pop	r14
+     824:	df 90       	pop	r13
+     826:	cf 90       	pop	r12
+     828:	bf 90       	pop	r11
+     82a:	af 90       	pop	r10
+     82c:	9f 90       	pop	r9
+     82e:	08 95       	ret
+
+00000830 <_nrf24l01p_get_fifo_flag_rx_empty>:
 uint8_t _nrf24l01p_get_RX_pipe_width(_nrf24l01p_pipe_t pipe){
 	uint8_t temp;
 	_nrf24l01p_read_register((_NRF24L01P_REG_RX_PW_P0+pipe),&temp,sizeof(temp));
 	return (temp&(0x3F));
 }
 bool _nrf24l01p_get_fifo_flag_rx_empty(){
-     608:	cf 93       	push	r28
-     60a:	df 93       	push	r29
-     60c:	1f 92       	push	r1
-     60e:	cd b7       	in	r28, 0x3d	; 61
-     610:	de b7       	in	r29, 0x3e	; 62
+     830:	cf 93       	push	r28
+     832:	df 93       	push	r29
+     834:	1f 92       	push	r1
+     836:	cd b7       	in	r28, 0x3d	; 61
+     838:	de b7       	in	r29, 0x3e	; 62
 	uint8_t temp;
 	bool flag;
 	_nrf24l01p_read_register(_NRF24L01P_REG_FIFO_STATUS,&temp,sizeof(temp));
-     612:	41 e0       	ldi	r20, 0x01	; 1
-     614:	50 e0       	ldi	r21, 0x00	; 0
-     616:	be 01       	movw	r22, r28
-     618:	6f 5f       	subi	r22, 0xFF	; 255
-     61a:	7f 4f       	sbci	r23, 0xFF	; 255
-     61c:	87 e1       	ldi	r24, 0x17	; 23
-     61e:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
+     83a:	41 e0       	ldi	r20, 0x01	; 1
+     83c:	50 e0       	ldi	r21, 0x00	; 0
+     83e:	be 01       	movw	r22, r28
+     840:	6f 5f       	subi	r22, 0xFF	; 255
+     842:	7f 4f       	sbci	r23, 0xFF	; 255
+     844:	87 e1       	ldi	r24, 0x17	; 23
+     846:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
 	if(temp&_NRF24L01P_FIFO_STATUS_RX_EMPTY) flag = 1 ;
-     622:	89 81       	ldd	r24, Y+1	; 0x01
+     84a:	89 81       	ldd	r24, Y+1	; 0x01
 	else flag = 0;
 	return flag;
 	
 }
-     624:	81 70       	andi	r24, 0x01	; 1
-     626:	0f 90       	pop	r0
-     628:	df 91       	pop	r29
-     62a:	cf 91       	pop	r28
-     62c:	08 95       	ret
+     84c:	81 70       	andi	r24, 0x01	; 1
+     84e:	0f 90       	pop	r0
+     850:	df 91       	pop	r29
+     852:	cf 91       	pop	r28
+     854:	08 95       	ret
 
-0000062e <_nrf24l01p_enable_dynamic_payload_pipe>:
+00000856 <_nrf24l01p_enable_dynamic_payload_pipe>:
 	if(temp&_NRF24L01P_FIFO_STATUS_RX_REUSE) flag = 1 ;
 	else flag = 0;
 	return flag;
 }
 
 void _nrf24l01p_enable_dynamic_payload_pipe(_nrf24l01p_pipe_t pipe){
-     62e:	1f 93       	push	r17
-     630:	cf 93       	push	r28
-     632:	df 93       	push	r29
-     634:	1f 92       	push	r1
-     636:	cd b7       	in	r28, 0x3d	; 61
-     638:	de b7       	in	r29, 0x3e	; 62
-     63a:	18 2f       	mov	r17, r24
+     856:	1f 93       	push	r17
+     858:	cf 93       	push	r28
+     85a:	df 93       	push	r29
+     85c:	1f 92       	push	r1
+     85e:	cd b7       	in	r28, 0x3d	; 61
+     860:	de b7       	in	r29, 0x3e	; 62
+     862:	18 2f       	mov	r17, r24
 	uint8_t temp;
 	_nrf24l01p_read_register(_NRF24L01P_REG_DYNPD,&temp,sizeof(temp));
-     63c:	41 e0       	ldi	r20, 0x01	; 1
-     63e:	50 e0       	ldi	r21, 0x00	; 0
-     640:	be 01       	movw	r22, r28
-     642:	6f 5f       	subi	r22, 0xFF	; 255
-     644:	7f 4f       	sbci	r23, 0xFF	; 255
-     646:	8c e1       	ldi	r24, 0x1C	; 28
-     648:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
+     864:	41 e0       	ldi	r20, 0x01	; 1
+     866:	50 e0       	ldi	r21, 0x00	; 0
+     868:	be 01       	movw	r22, r28
+     86a:	6f 5f       	subi	r22, 0xFF	; 255
+     86c:	7f 4f       	sbci	r23, 0xFF	; 255
+     86e:	8c e1       	ldi	r24, 0x1C	; 28
+     870:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
 	temp |= (1<<pipe);
-     64c:	21 e0       	ldi	r18, 0x01	; 1
-     64e:	30 e0       	ldi	r19, 0x00	; 0
-     650:	c9 01       	movw	r24, r18
-     652:	02 c0       	rjmp	.+4      	; 0x658 <_nrf24l01p_enable_dynamic_payload_pipe+0x2a>
-     654:	88 0f       	add	r24, r24
-     656:	99 1f       	adc	r25, r25
-     658:	1a 95       	dec	r17
-     65a:	e2 f7       	brpl	.-8      	; 0x654 <_nrf24l01p_enable_dynamic_payload_pipe+0x26>
-     65c:	99 81       	ldd	r25, Y+1	; 0x01
-     65e:	89 2b       	or	r24, r25
-     660:	89 83       	std	Y+1, r24	; 0x01
+     874:	21 e0       	ldi	r18, 0x01	; 1
+     876:	30 e0       	ldi	r19, 0x00	; 0
+     878:	c9 01       	movw	r24, r18
+     87a:	02 c0       	rjmp	.+4      	; 0x880 <_nrf24l01p_enable_dynamic_payload_pipe+0x2a>
+     87c:	88 0f       	add	r24, r24
+     87e:	99 1f       	adc	r25, r25
+     880:	1a 95       	dec	r17
+     882:	e2 f7       	brpl	.-8      	; 0x87c <_nrf24l01p_enable_dynamic_payload_pipe+0x26>
+     884:	99 81       	ldd	r25, Y+1	; 0x01
+     886:	89 2b       	or	r24, r25
+     888:	89 83       	std	Y+1, r24	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_DYNPD,&temp,sizeof(temp));
-     662:	41 e0       	ldi	r20, 0x01	; 1
-     664:	50 e0       	ldi	r21, 0x00	; 0
-     666:	be 01       	movw	r22, r28
-     668:	6f 5f       	subi	r22, 0xFF	; 255
-     66a:	7f 4f       	sbci	r23, 0xFF	; 255
-     66c:	8c e1       	ldi	r24, 0x1C	; 28
-     66e:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     88a:	41 e0       	ldi	r20, 0x01	; 1
+     88c:	50 e0       	ldi	r21, 0x00	; 0
+     88e:	be 01       	movw	r22, r28
+     890:	6f 5f       	subi	r22, 0xFF	; 255
+     892:	7f 4f       	sbci	r23, 0xFF	; 255
+     894:	8c e1       	ldi	r24, 0x1C	; 28
+     896:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 }
-     672:	0f 90       	pop	r0
-     674:	df 91       	pop	r29
-     676:	cf 91       	pop	r28
-     678:	1f 91       	pop	r17
-     67a:	08 95       	ret
+     89a:	0f 90       	pop	r0
+     89c:	df 91       	pop	r29
+     89e:	cf 91       	pop	r28
+     8a0:	1f 91       	pop	r17
+     8a2:	08 95       	ret
 
-0000067c <_nrf24l01p_disable_dynamic_payload_all_pipe>:
+000008a4 <_nrf24l01p_disable_dynamic_payload_all_pipe>:
 	uint8_t temp;
 	_nrf24l01p_read_register(_NRF24L01P_REG_DYNPD,&temp,sizeof(temp));
 	temp &= ~(1<<pipe);
 	_nrf24l01p_write_register(_NRF24L01P_REG_DYNPD,&temp,sizeof(temp));
 }
 void _nrf24l01p_disable_dynamic_payload_all_pipe(){
-     67c:	cf 93       	push	r28
-     67e:	df 93       	push	r29
-     680:	1f 92       	push	r1
-     682:	cd b7       	in	r28, 0x3d	; 61
-     684:	de b7       	in	r29, 0x3e	; 62
+     8a4:	cf 93       	push	r28
+     8a6:	df 93       	push	r29
+     8a8:	1f 92       	push	r1
+     8aa:	cd b7       	in	r28, 0x3d	; 61
+     8ac:	de b7       	in	r29, 0x3e	; 62
 	uint8_t temp = 0x00;
-     686:	19 82       	std	Y+1, r1	; 0x01
+     8ae:	19 82       	std	Y+1, r1	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_DYNPD,&temp,sizeof(temp));	
-     688:	41 e0       	ldi	r20, 0x01	; 1
-     68a:	50 e0       	ldi	r21, 0x00	; 0
-     68c:	be 01       	movw	r22, r28
-     68e:	6f 5f       	subi	r22, 0xFF	; 255
-     690:	7f 4f       	sbci	r23, 0xFF	; 255
-     692:	8c e1       	ldi	r24, 0x1C	; 28
-     694:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     8b0:	41 e0       	ldi	r20, 0x01	; 1
+     8b2:	50 e0       	ldi	r21, 0x00	; 0
+     8b4:	be 01       	movw	r22, r28
+     8b6:	6f 5f       	subi	r22, 0xFF	; 255
+     8b8:	7f 4f       	sbci	r23, 0xFF	; 255
+     8ba:	8c e1       	ldi	r24, 0x1C	; 28
+     8bc:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 }
-     698:	0f 90       	pop	r0
-     69a:	df 91       	pop	r29
-     69c:	cf 91       	pop	r28
-     69e:	08 95       	ret
+     8c0:	0f 90       	pop	r0
+     8c2:	df 91       	pop	r29
+     8c4:	cf 91       	pop	r28
+     8c6:	08 95       	ret
 
-000006a0 <_nrf24l01p_enable_dynamic_payload>:
+000008c8 <_nrf24l01p_enable_dynamic_payload>:
 void _nrf24l01p_enable_dynamic_payload(){
-     6a0:	cf 93       	push	r28
-     6a2:	df 93       	push	r29
-     6a4:	1f 92       	push	r1
-     6a6:	cd b7       	in	r28, 0x3d	; 61
-     6a8:	de b7       	in	r29, 0x3e	; 62
+     8c8:	cf 93       	push	r28
+     8ca:	df 93       	push	r29
+     8cc:	1f 92       	push	r1
+     8ce:	cd b7       	in	r28, 0x3d	; 61
+     8d0:	de b7       	in	r29, 0x3e	; 62
 	uint8_t temp;
 	_nrf24l01p_read_register(_NRF24L01P_REG_FEATURE,&temp,sizeof(temp));
-     6aa:	41 e0       	ldi	r20, 0x01	; 1
-     6ac:	50 e0       	ldi	r21, 0x00	; 0
-     6ae:	be 01       	movw	r22, r28
-     6b0:	6f 5f       	subi	r22, 0xFF	; 255
-     6b2:	7f 4f       	sbci	r23, 0xFF	; 255
-     6b4:	8d e1       	ldi	r24, 0x1D	; 29
-     6b6:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
+     8d2:	41 e0       	ldi	r20, 0x01	; 1
+     8d4:	50 e0       	ldi	r21, 0x00	; 0
+     8d6:	be 01       	movw	r22, r28
+     8d8:	6f 5f       	subi	r22, 0xFF	; 255
+     8da:	7f 4f       	sbci	r23, 0xFF	; 255
+     8dc:	8d e1       	ldi	r24, 0x1D	; 29
+     8de:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
 	temp |= _NRF24L01_FEATURE_EN_DPL;
-     6ba:	89 81       	ldd	r24, Y+1	; 0x01
-     6bc:	84 60       	ori	r24, 0x04	; 4
-     6be:	89 83       	std	Y+1, r24	; 0x01
+     8e2:	89 81       	ldd	r24, Y+1	; 0x01
+     8e4:	84 60       	ori	r24, 0x04	; 4
+     8e6:	89 83       	std	Y+1, r24	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_FEATURE,&temp,sizeof(temp));
-     6c0:	41 e0       	ldi	r20, 0x01	; 1
-     6c2:	50 e0       	ldi	r21, 0x00	; 0
-     6c4:	be 01       	movw	r22, r28
-     6c6:	6f 5f       	subi	r22, 0xFF	; 255
-     6c8:	7f 4f       	sbci	r23, 0xFF	; 255
-     6ca:	8d e1       	ldi	r24, 0x1D	; 29
-     6cc:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     8e8:	41 e0       	ldi	r20, 0x01	; 1
+     8ea:	50 e0       	ldi	r21, 0x00	; 0
+     8ec:	be 01       	movw	r22, r28
+     8ee:	6f 5f       	subi	r22, 0xFF	; 255
+     8f0:	7f 4f       	sbci	r23, 0xFF	; 255
+     8f2:	8d e1       	ldi	r24, 0x1D	; 29
+     8f4:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 }
-     6d0:	0f 90       	pop	r0
-     6d2:	df 91       	pop	r29
-     6d4:	cf 91       	pop	r28
-     6d6:	08 95       	ret
+     8f8:	0f 90       	pop	r0
+     8fa:	df 91       	pop	r29
+     8fc:	cf 91       	pop	r28
+     8fe:	08 95       	ret
 
-000006d8 <_nrf24l01p_enable_payload_with_ack>:
+00000900 <_nrf24l01p_enable_payload_with_ack>:
 	uint8_t temp;
 	_nrf24l01p_read_register(_NRF24L01P_REG_FEATURE,&temp,sizeof(temp));
 	temp &= ~_NRF24L01_FEATURE_EN_DPL;
 	_nrf24l01p_write_register(_NRF24L01P_REG_FEATURE,&temp,sizeof(temp));
 }
 void _nrf24l01p_enable_payload_with_ack(){
-     6d8:	cf 93       	push	r28
-     6da:	df 93       	push	r29
-     6dc:	1f 92       	push	r1
-     6de:	cd b7       	in	r28, 0x3d	; 61
-     6e0:	de b7       	in	r29, 0x3e	; 62
+     900:	cf 93       	push	r28
+     902:	df 93       	push	r29
+     904:	1f 92       	push	r1
+     906:	cd b7       	in	r28, 0x3d	; 61
+     908:	de b7       	in	r29, 0x3e	; 62
 	uint8_t temp;
 	_nrf24l01p_read_register(_NRF24L01P_REG_FEATURE,&temp,sizeof(temp));
-     6e2:	41 e0       	ldi	r20, 0x01	; 1
-     6e4:	50 e0       	ldi	r21, 0x00	; 0
-     6e6:	be 01       	movw	r22, r28
-     6e8:	6f 5f       	subi	r22, 0xFF	; 255
-     6ea:	7f 4f       	sbci	r23, 0xFF	; 255
-     6ec:	8d e1       	ldi	r24, 0x1D	; 29
-     6ee:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
+     90a:	41 e0       	ldi	r20, 0x01	; 1
+     90c:	50 e0       	ldi	r21, 0x00	; 0
+     90e:	be 01       	movw	r22, r28
+     910:	6f 5f       	subi	r22, 0xFF	; 255
+     912:	7f 4f       	sbci	r23, 0xFF	; 255
+     914:	8d e1       	ldi	r24, 0x1D	; 29
+     916:	0e 94 59 01 	call	0x2b2	; 0x2b2 <_nrf24l01p_read_register>
 	temp |= _NRF24L01_FEATURE_EN_ACK_PAY;
-     6f2:	89 81       	ldd	r24, Y+1	; 0x01
-     6f4:	82 60       	ori	r24, 0x02	; 2
-     6f6:	89 83       	std	Y+1, r24	; 0x01
+     91a:	89 81       	ldd	r24, Y+1	; 0x01
+     91c:	82 60       	ori	r24, 0x02	; 2
+     91e:	89 83       	std	Y+1, r24	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_FEATURE,&temp,sizeof(temp));
-     6f8:	41 e0       	ldi	r20, 0x01	; 1
-     6fa:	50 e0       	ldi	r21, 0x00	; 0
-     6fc:	be 01       	movw	r22, r28
-     6fe:	6f 5f       	subi	r22, 0xFF	; 255
-     700:	7f 4f       	sbci	r23, 0xFF	; 255
-     702:	8d e1       	ldi	r24, 0x1D	; 29
-     704:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     920:	41 e0       	ldi	r20, 0x01	; 1
+     922:	50 e0       	ldi	r21, 0x00	; 0
+     924:	be 01       	movw	r22, r28
+     926:	6f 5f       	subi	r22, 0xFF	; 255
+     928:	7f 4f       	sbci	r23, 0xFF	; 255
+     92a:	8d e1       	ldi	r24, 0x1D	; 29
+     92c:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 }
-     708:	0f 90       	pop	r0
-     70a:	df 91       	pop	r29
-     70c:	cf 91       	pop	r28
-     70e:	08 95       	ret
+     930:	0f 90       	pop	r0
+     932:	df 91       	pop	r29
+     934:	cf 91       	pop	r28
+     936:	08 95       	ret
 
-00000710 <_nrf24l01p_startup>:
+00000938 <_nrf24l01p_startup>:
 // 	printf("fifo status : %x\r\n",read_register(_NRF24L01P_REG_FIFO_STATUS));
 }
 
 
 //////////////////////////////////////////////////////////////////////////
 void _nrf24l01p_startup(){
-     710:	cf 93       	push	r28
-     712:	df 93       	push	r29
-     714:	1f 92       	push	r1
-     716:	cd b7       	in	r28, 0x3d	; 61
-     718:	de b7       	in	r29, 0x3e	; 62
+     938:	cf 93       	push	r28
+     93a:	df 93       	push	r29
+     93c:	1f 92       	push	r1
+     93e:	cd b7       	in	r28, 0x3d	; 61
+     940:	de b7       	in	r29, 0x3e	; 62
 	#define TRANSFER_SIZE 1
 	//nrf24l01p_write_rf_setup(0b00000111);
 	uint8_t temp = 0b00000111;
-     71a:	87 e0       	ldi	r24, 0x07	; 7
-     71c:	89 83       	std	Y+1, r24	; 0x01
+     942:	87 e0       	ldi	r24, 0x07	; 7
+     944:	89 83       	std	Y+1, r24	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_RF_SETUP,&temp, sizeof(temp));
-     71e:	41 e0       	ldi	r20, 0x01	; 1
-     720:	50 e0       	ldi	r21, 0x00	; 0
-     722:	be 01       	movw	r22, r28
-     724:	6f 5f       	subi	r22, 0xFF	; 255
-     726:	7f 4f       	sbci	r23, 0xFF	; 255
-     728:	86 e0       	ldi	r24, 0x06	; 6
-     72a:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     946:	41 e0       	ldi	r20, 0x01	; 1
+     948:	50 e0       	ldi	r21, 0x00	; 0
+     94a:	be 01       	movw	r22, r28
+     94c:	6f 5f       	subi	r22, 0xFF	; 255
+     94e:	7f 4f       	sbci	r23, 0xFF	; 255
+     950:	86 e0       	ldi	r24, 0x06	; 6
+     952:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 	//
 	// 	nrf24l01p_write_en_aa(0);
 	temp = 0;
-     72e:	19 82       	std	Y+1, r1	; 0x01
+     956:	19 82       	std	Y+1, r1	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_EN_AA,&temp,sizeof(uint8_t));
-     730:	41 e0       	ldi	r20, 0x01	; 1
-     732:	50 e0       	ldi	r21, 0x00	; 0
-     734:	be 01       	movw	r22, r28
-     736:	6f 5f       	subi	r22, 0xFF	; 255
-     738:	7f 4f       	sbci	r23, 0xFF	; 255
-     73a:	81 e0       	ldi	r24, 0x01	; 1
-     73c:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     958:	41 e0       	ldi	r20, 0x01	; 1
+     95a:	50 e0       	ldi	r21, 0x00	; 0
+     95c:	be 01       	movw	r22, r28
+     95e:	6f 5f       	subi	r22, 0xFF	; 255
+     960:	7f 4f       	sbci	r23, 0xFF	; 255
+     962:	81 e0       	ldi	r24, 0x01	; 1
+     964:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 	//
 	// 	nrf24l01p_write_rx_pw(0, TRANSFER_SIZE);
 	temp = TRANSFER_SIZE;
-     740:	81 e0       	ldi	r24, 0x01	; 1
-     742:	89 83       	std	Y+1, r24	; 0x01
+     968:	81 e0       	ldi	r24, 0x01	; 1
+     96a:	89 83       	std	Y+1, r24	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_RF_SETUP,&temp, sizeof(temp));
-     744:	41 e0       	ldi	r20, 0x01	; 1
-     746:	50 e0       	ldi	r21, 0x00	; 0
-     748:	be 01       	movw	r22, r28
-     74a:	6f 5f       	subi	r22, 0xFF	; 255
-     74c:	7f 4f       	sbci	r23, 0xFF	; 255
-     74e:	86 e0       	ldi	r24, 0x06	; 6
-     750:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     96c:	41 e0       	ldi	r20, 0x01	; 1
+     96e:	50 e0       	ldi	r21, 0x00	; 0
+     970:	be 01       	movw	r22, r28
+     972:	6f 5f       	subi	r22, 0xFF	; 255
+     974:	7f 4f       	sbci	r23, 0xFF	; 255
+     976:	86 e0       	ldi	r24, 0x06	; 6
+     978:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 	_nrf24l01p_power_up();
-     754:	0e 94 08 02 	call	0x410	; 0x410 <_nrf24l01p_power_up>
-     758:	8f e9       	ldi	r24, 0x9F	; 159
-     75a:	9c e8       	ldi	r25, 0x8C	; 140
-     75c:	01 97       	sbiw	r24, 0x01	; 1
-     75e:	f1 f7       	brne	.-4      	; 0x75c <_nrf24l01p_startup+0x4c>
-     760:	00 c0       	rjmp	.+0      	; 0x762 <_nrf24l01p_startup+0x52>
-     762:	00 00       	nop
+     97c:	0e 94 08 02 	call	0x410	; 0x410 <_nrf24l01p_power_up>
+     980:	8f e9       	ldi	r24, 0x9F	; 159
+     982:	9c e8       	ldi	r25, 0x8C	; 140
+     984:	01 97       	sbiw	r24, 0x01	; 1
+     986:	f1 f7       	brne	.-4      	; 0x984 <_nrf24l01p_startup+0x4c>
+     988:	00 c0       	rjmp	.+0      	; 0x98a <_nrf24l01p_startup+0x52>
+     98a:	00 00       	nop
 	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Tpd2stby_us);
 	//
 	_nrf24l01p_rx_mode();
-     764:	0e 94 4c 02 	call	0x498	; 0x498 <_nrf24l01p_rx_mode>
+     98c:	0e 94 4c 02 	call	0x498	; 0x498 <_nrf24l01p_rx_mode>
 	_nrf24l01p_ce_pin(1);
-     768:	81 e0       	ldi	r24, 0x01	; 1
-     76a:	0e 94 37 01 	call	0x26e	; 0x26e <_nrf24l01p_ce_pin>
+     990:	81 e0       	ldi	r24, 0x01	; 1
+     992:	0e 94 37 01 	call	0x26e	; 0x26e <_nrf24l01p_ce_pin>
 
 }
-     76e:	0f 90       	pop	r0
-     770:	df 91       	pop	r29
-     772:	cf 91       	pop	r28
-     774:	08 95       	ret
+     996:	0f 90       	pop	r0
+     998:	df 91       	pop	r29
+     99a:	cf 91       	pop	r28
+     99c:	08 95       	ret
 
-00000776 <_nrf24l01p_init>:
+0000099e <_nrf24l01p_init>:
 
 	arch_nrf24l01p_csn_pin(state);
 	csn_value = state;
 }
 
 void _nrf24l01p_init(){
-     776:	cf 93       	push	r28
-     778:	df 93       	push	r29
-     77a:	1f 92       	push	r1
-     77c:	1f 92       	push	r1
-     77e:	cd b7       	in	r28, 0x3d	; 61
-     780:	de b7       	in	r29, 0x3e	; 62
+     99e:	cf 93       	push	r28
+     9a0:	df 93       	push	r29
+     9a2:	1f 92       	push	r1
+     9a4:	1f 92       	push	r1
+     9a6:	cd b7       	in	r28, 0x3d	; 61
+     9a8:	de b7       	in	r29, 0x3e	; 62
 	if(state) DigitalPin_SetValue(&nrf24l01p_csn_pin) ;
 	else DigitalPin_ClearValue(&nrf24l01p_csn_pin);
 }
 
 static void arch_nrf24l01p_initialize(){
 	NRF24L01P_SPI_PORT.DIRSET = (1<<5) | (1<<4) | (1<<7);
-     782:	e0 e4       	ldi	r30, 0x40	; 64
-     784:	f6 e0       	ldi	r31, 0x06	; 6
-     786:	80 eb       	ldi	r24, 0xB0	; 176
-     788:	81 83       	std	Z+1, r24	; 0x01
+     9aa:	e0 e4       	ldi	r30, 0x40	; 64
+     9ac:	f6 e0       	ldi	r31, 0x06	; 6
+     9ae:	80 eb       	ldi	r24, 0xB0	; 176
+     9b0:	81 83       	std	Z+1, r24	; 0x01
 	NRF24L01P_SPI.CTRL = (1<<SPI_ENABLE_bp) | (1<<SPI_MASTER_bp);
-     78a:	80 e5       	ldi	r24, 0x50	; 80
-     78c:	80 93 c0 08 	sts	0x08C0, r24
+     9b2:	80 e5       	ldi	r24, 0x50	; 80
+     9b4:	80 93 c0 08 	sts	0x08C0, r24
 	NRF24L01P_CSN_PIN_PORT.DIRSET = (1<<NRF24L01P_CSN_PIN_BIT);
-     790:	80 e1       	ldi	r24, 0x10	; 16
-     792:	81 83       	std	Z+1, r24	; 0x01
+     9b8:	80 e1       	ldi	r24, 0x10	; 16
+     9ba:	81 83       	std	Z+1, r24	; 0x01
 	NRF24L01P_CE_PIN_PORT.DIRSET = (1<<NRF24L01P_CE_PIN_BIT);
-     794:	82 e0       	ldi	r24, 0x02	; 2
-     796:	81 83       	std	Z+1, r24	; 0x01
+     9bc:	82 e0       	ldi	r24, 0x02	; 2
+     9be:	81 83       	std	Z+1, r24	; 0x01
 	arch_nrf24l01p_initialize();
 	
 	_nrf24l01p_ce_pin(0);
-     798:	80 e0       	ldi	r24, 0x00	; 0
-     79a:	0e 94 37 01 	call	0x26e	; 0x26e <_nrf24l01p_ce_pin>
+     9c0:	80 e0       	ldi	r24, 0x00	; 0
+     9c2:	0e 94 37 01 	call	0x26e	; 0x26e <_nrf24l01p_ce_pin>
 	_nrf24l01p_csn_pin(1);
-     79e:	81 e0       	ldi	r24, 0x01	; 1
-     7a0:	0e 94 48 01 	call	0x290	; 0x290 <_nrf24l01p_csn_pin>
+     9c6:	81 e0       	ldi	r24, 0x01	; 1
+     9c8:	0e 94 48 01 	call	0x290	; 0x290 <_nrf24l01p_csn_pin>
 	
 	
 	_nrf24l01p_flush_rx();
-     7a4:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
+     9cc:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
 	_nrf24l01p_power_down();
-     7a8:	0e 94 2d 02 	call	0x45a	; 0x45a <_nrf24l01p_power_down>
+     9d0:	0e 94 2d 02 	call	0x45a	; 0x45a <_nrf24l01p_power_down>
 	uint8_t status_rst_val = 0x0e;//reset status
-     7ac:	8e e0       	ldi	r24, 0x0E	; 14
-     7ae:	89 83       	std	Y+1, r24	; 0x01
+     9d4:	8e e0       	ldi	r24, 0x0E	; 14
+     9d6:	89 83       	std	Y+1, r24	; 0x01
 	_nrf24l01p_write_register(_NRF24L01P_REG_STATUS, &status_rst_val,1);
-     7b0:	41 e0       	ldi	r20, 0x01	; 1
-     7b2:	50 e0       	ldi	r21, 0x00	; 0
-     7b4:	be 01       	movw	r22, r28
-     7b6:	6f 5f       	subi	r22, 0xFF	; 255
-     7b8:	7f 4f       	sbci	r23, 0xFF	; 255
-     7ba:	87 e0       	ldi	r24, 0x07	; 7
-     7bc:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     9d8:	41 e0       	ldi	r20, 0x01	; 1
+     9da:	50 e0       	ldi	r21, 0x00	; 0
+     9dc:	be 01       	movw	r22, r28
+     9de:	6f 5f       	subi	r22, 0xFF	; 255
+     9e0:	7f 4f       	sbci	r23, 0xFF	; 255
+     9e2:	87 e0       	ldi	r24, 0x07	; 7
+     9e4:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 	uint8_t config_rst_val = 0x0b;//reset config
-     7c0:	8b e0       	ldi	r24, 0x0B	; 11
-     7c2:	8a 83       	std	Y+2, r24	; 0x02
+     9e8:	8b e0       	ldi	r24, 0x0B	; 11
+     9ea:	8a 83       	std	Y+2, r24	; 0x02
 	_nrf24l01p_write_register(_NRF24L01P_REG_CONFIG, &config_rst_val,1);
-     7c4:	41 e0       	ldi	r20, 0x01	; 1
-     7c6:	50 e0       	ldi	r21, 0x00	; 0
-     7c8:	be 01       	movw	r22, r28
-     7ca:	6e 5f       	subi	r22, 0xFE	; 254
-     7cc:	7f 4f       	sbci	r23, 0xFF	; 255
-     7ce:	80 e0       	ldi	r24, 0x00	; 0
-     7d0:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
+     9ec:	41 e0       	ldi	r20, 0x01	; 1
+     9ee:	50 e0       	ldi	r21, 0x00	; 0
+     9f0:	be 01       	movw	r22, r28
+     9f2:	6e 5f       	subi	r22, 0xFE	; 254
+     9f4:	7f 4f       	sbci	r23, 0xFF	; 255
+     9f6:	80 e0       	ldi	r24, 0x00	; 0
+     9f8:	0e 94 88 01 	call	0x310	; 0x310 <_nrf24l01p_write_register>
 	_nrf24l01p_disable_auto_ack_all_pipes();
-     7d4:	0e 94 92 02 	call	0x524	; 0x524 <_nrf24l01p_disable_auto_ack_all_pipes>
+     9fc:	0e 94 92 02 	call	0x524	; 0x524 <_nrf24l01p_disable_auto_ack_all_pipes>
 	_nrf24l01p_disable_dynamic_payload_all_pipe();/////////ALSO CREEATE FOR DISABLE AUTO ACK FOR ALL PIPE
-     7d8:	0e 94 3e 03 	call	0x67c	; 0x67c <_nrf24l01p_disable_dynamic_payload_all_pipe>
+     a00:	0e 94 52 04 	call	0x8a4	; 0x8a4 <_nrf24l01p_disable_dynamic_payload_all_pipe>
 	_nrf24l01p_startup();
-     7dc:	0e 94 88 03 	call	0x710	; 0x710 <_nrf24l01p_startup>
+     a04:	0e 94 9c 04 	call	0x938	; 0x938 <_nrf24l01p_startup>
 	
 }
-     7e0:	0f 90       	pop	r0
-     7e2:	0f 90       	pop	r0
-     7e4:	df 91       	pop	r29
-     7e6:	cf 91       	pop	r28
-     7e8:	08 95       	ret
+     a08:	0f 90       	pop	r0
+     a0a:	0f 90       	pop	r0
+     a0c:	df 91       	pop	r29
+     a0e:	cf 91       	pop	r28
+     a10:	08 95       	ret
 
-000007ea <_nrf24l01p_readable>:
+00000a12 <_nrf24l01p_readable>:
 	_nrf24l01p_ce_pin(1);
 
 }
 
 
 bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe){
-     7ea:	cf 93       	push	r28
+     a12:	cf 93       	push	r28
 	bool flag = 0;
 	if((pipe >=0)   && (pipe <=5)){
-     7ec:	86 30       	cpi	r24, 0x06	; 6
-     7ee:	90 f4       	brcc	.+36     	; 0x814 <_nrf24l01p_readable+0x2a>
-     7f0:	c8 2f       	mov	r28, r24
+     a14:	86 30       	cpi	r24, 0x06	; 6
+     a16:	b0 f4       	brcc	.+44     	; 0xa44 <_nrf24l01p_readable+0x32>
+     a18:	c8 2f       	mov	r28, r24
 		//flag = (_nrf24l01p_get_data_ready_flag()/* && (_nrf24l01p_get_rx_payload_pipe() == pipe)*/ );
 		//OCD.OCDR0 = (_nrf24l01p_get_rx_payload_pipe());
 		int status = _nrf24l01p_get_status();
-     7f2:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <_nrf24l01p_get_status>
+     a1a:	0e 94 f9 01 	call	0x3f2	; 0x3f2 <_nrf24l01p_get_status>
 		//OCD.OCDR0 = status;
 		
 		if(   (status&_NRF24L01P_STATUS_RX_DR)  && ((status&_NRF24L01P_STATUS_RX_P_NO)>>1)==pipe){
-     7f6:	86 ff       	sbrs	r24, 6
-     7f8:	0f c0       	rjmp	.+30     	; 0x818 <_nrf24l01p_readable+0x2e>
-     7fa:	8e 70       	andi	r24, 0x0E	; 14
-     7fc:	99 27       	eor	r25, r25
-     7fe:	ac 01       	movw	r20, r24
-     800:	55 95       	asr	r21
-     802:	47 95       	ror	r20
-     804:	2c 2f       	mov	r18, r28
-     806:	30 e0       	ldi	r19, 0x00	; 0
-     808:	81 e0       	ldi	r24, 0x01	; 1
-     80a:	42 17       	cp	r20, r18
-     80c:	53 07       	cpc	r21, r19
-     80e:	29 f0       	breq	.+10     	; 0x81a <_nrf24l01p_readable+0x30>
-     810:	80 e0       	ldi	r24, 0x00	; 0
-     812:	03 c0       	rjmp	.+6      	; 0x81a <_nrf24l01p_readable+0x30>
+     a1e:	86 ff       	sbrs	r24, 6
+     a20:	13 c0       	rjmp	.+38     	; 0xa48 <_nrf24l01p_readable+0x36>
+     a22:	ac 01       	movw	r20, r24
+     a24:	4e 70       	andi	r20, 0x0E	; 14
+     a26:	55 27       	eor	r21, r21
+     a28:	55 95       	asr	r21
+     a2a:	47 95       	ror	r20
+     a2c:	2c 2f       	mov	r18, r28
+     a2e:	30 e0       	ldi	r19, 0x00	; 0
+     a30:	42 17       	cp	r20, r18
+     a32:	53 07       	cpc	r21, r19
+     a34:	59 f4       	brne	.+22     	; 0xa4c <_nrf24l01p_readable+0x3a>
+			flag = 1;
+			OCD.OCDR0 = (status&0x0F)>>1;
+     a36:	8f 70       	andi	r24, 0x0F	; 15
+     a38:	99 27       	eor	r25, r25
+     a3a:	95 95       	asr	r25
+     a3c:	87 95       	ror	r24
+     a3e:	8e bd       	out	0x2e, r24	; 46
+		//OCD.OCDR0 = (_nrf24l01p_get_rx_payload_pipe());
+		int status = _nrf24l01p_get_status();
+		//OCD.OCDR0 = status;
+		
+		if(   (status&_NRF24L01P_STATUS_RX_DR)  && ((status&_NRF24L01P_STATUS_RX_P_NO)>>1)==pipe){
+			flag = 1;
+     a40:	81 e0       	ldi	r24, 0x01	; 1
+			OCD.OCDR0 = (status&0x0F)>>1;
+     a42:	05 c0       	rjmp	.+10     	; 0xa4e <_nrf24l01p_readable+0x3c>
 
 }
 
 
 bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe){
 	bool flag = 0;
-     814:	80 e0       	ldi	r24, 0x00	; 0
-     816:	01 c0       	rjmp	.+2      	; 0x81a <_nrf24l01p_readable+0x30>
+     a44:	80 e0       	ldi	r24, 0x00	; 0
+     a46:	03 c0       	rjmp	.+6      	; 0xa4e <_nrf24l01p_readable+0x3c>
 			flag = 1;
-			//OCD.OCDR0 = status;
+			OCD.OCDR0 = (status&0x0F)>>1;
 			
 		}
 		else{
 			flag = 0;
-     818:	80 e0       	ldi	r24, 0x00	; 0
+     a48:	80 e0       	ldi	r24, 0x00	; 0
+     a4a:	01 c0       	rjmp	.+2      	; 0xa4e <_nrf24l01p_readable+0x3c>
+     a4c:	80 e0       	ldi	r24, 0x00	; 0
 // 
 // 		return flag;
 		
 	}
 	return flag;
 }
-     81a:	cf 91       	pop	r28
-     81c:	08 95       	ret
+     a4e:	cf 91       	pop	r28
+     a50:	08 95       	ret
 
-0000081e <_nrf24l01p_read_dyn_pld>:
+00000a52 <_nrf24l01p_read_dyn_pld>:
 	else {//if pipe not readable
 		return 0;
 	}
 	return 0;
 }
 int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
-     81e:	0f 93       	push	r16
-     820:	1f 93       	push	r17
-     822:	cf 93       	push	r28
-     824:	df 93       	push	r29
+     a52:	0f 93       	push	r16
+     a54:	1f 93       	push	r17
+     a56:	cf 93       	push	r28
+     a58:	df 93       	push	r29
 	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
-     826:	86 30       	cpi	r24, 0x06	; 6
-     828:	f0 f4       	brcc	.+60     	; 0x866 <_nrf24l01p_read_dyn_pld+0x48>
-     82a:	eb 01       	movw	r28, r22
+     a5a:	86 30       	cpi	r24, 0x06	; 6
+     a5c:	f0 f4       	brcc	.+60     	; 0xa9a <_nrf24l01p_read_dyn_pld+0x48>
+     a5e:	eb 01       	movw	r28, r22
 		return -1;
 	}
-	int x;
-	if (x = _nrf24l01p_readable(pipe) ) {
-     82c:	0e 94 f5 03 	call	0x7ea	; 0x7ea <_nrf24l01p_readable>
-     830:	88 23       	and	r24, r24
-     832:	e1 f0       	breq	.+56     	; 0x86c <_nrf24l01p_read_dyn_pld+0x4e>
+	//int x;
+	if (_nrf24l01p_readable(pipe) ) {
+     a60:	0e 94 09 05 	call	0xa12	; 0xa12 <_nrf24l01p_readable>
+     a64:	88 23       	and	r24, r24
+     a66:	e1 f0       	breq	.+56     	; 0xaa0 <_nrf24l01p_read_dyn_pld+0x4e>
 		asm("nop");
-     834:	00 00       	nop
+     a68:	00 00       	nop
 		int rxPayloadWidth = _nrf24l01p_read_rx_payload_width();
-     836:	0e 94 e7 01 	call	0x3ce	; 0x3ce <_nrf24l01p_read_rx_payload_width>
-     83a:	8c 01       	movw	r16, r24
+     a6a:	0e 94 e7 01 	call	0x3ce	; 0x3ce <_nrf24l01p_read_rx_payload_width>
+     a6e:	8c 01       	movw	r16, r24
 		if ( ( rxPayloadWidth < 0 ) || ( rxPayloadWidth > _NRF24L01P_RX_FIFO_SIZE ) ) {
-     83c:	81 32       	cpi	r24, 0x21	; 33
-     83e:	91 05       	cpc	r25, r1
-     840:	28 f0       	brcs	.+10     	; 0x84c <_nrf24l01p_read_dyn_pld+0x2e>
+     a70:	81 32       	cpi	r24, 0x21	; 33
+     a72:	91 05       	cpc	r25, r1
+     a74:	28 f0       	brcs	.+10     	; 0xa80 <_nrf24l01p_read_dyn_pld+0x2e>
 			_nrf24l01p_flush_rx();
-     842:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
+     a76:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
 	}
 	}
 	else {//if pipe not readable
 		return 0;
 	}
 	return 0;
-     846:	80 e0       	ldi	r24, 0x00	; 0
-     848:	90 e0       	ldi	r25, 0x00	; 0
-     84a:	15 c0       	rjmp	.+42     	; 0x876 <_nrf24l01p_read_dyn_pld+0x58>
+     a7a:	80 e0       	ldi	r24, 0x00	; 0
+     a7c:	90 e0       	ldi	r25, 0x00	; 0
+     a7e:	15 c0       	rjmp	.+42     	; 0xaaa <_nrf24l01p_read_dyn_pld+0x58>
 		int rxPayloadWidth = _nrf24l01p_read_rx_payload_width();
 		if ( ( rxPayloadWidth < 0 ) || ( rxPayloadWidth > _NRF24L01P_RX_FIFO_SIZE ) ) {
 			_nrf24l01p_flush_rx();
 		}
 	else {
 		_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
-     84c:	bc 01       	movw	r22, r24
-     84e:	ce 01       	movw	r24, r28
-     850:	0e 94 b0 01 	call	0x360	; 0x360 <_nrf24l01p_read_rx_payload>
+     a80:	bc 01       	movw	r22, r24
+     a82:	ce 01       	movw	r24, r28
+     a84:	0e 94 b0 01 	call	0x360	; 0x360 <_nrf24l01p_read_rx_payload>
 		if(_nrf24l01p_get_fifo_flag_rx_empty()) {
-     854:	0e 94 04 03 	call	0x608	; 0x608 <_nrf24l01p_get_fifo_flag_rx_empty>
-     858:	88 23       	and	r24, r24
-     85a:	59 f0       	breq	.+22     	; 0x872 <_nrf24l01p_read_dyn_pld+0x54>
+     a88:	0e 94 18 04 	call	0x830	; 0x830 <_nrf24l01p_get_fifo_flag_rx_empty>
+     a8c:	88 23       	and	r24, r24
+     a8e:	59 f0       	breq	.+22     	; 0xaa6 <_nrf24l01p_read_dyn_pld+0x54>
 			_nrf24l01p_clear_data_ready_flag();
-     85c:	0e 94 ef 02 	call	0x5de	; 0x5de <_nrf24l01p_clear_data_ready_flag>
+     a90:	0e 94 ef 02 	call	0x5de	; 0x5de <_nrf24l01p_clear_data_ready_flag>
 		}
 		return rxPayloadWidth;
-     860:	80 2f       	mov	r24, r16
-     862:	91 2f       	mov	r25, r17
-     864:	08 c0       	rjmp	.+16     	; 0x876 <_nrf24l01p_read_dyn_pld+0x58>
+     a94:	80 2f       	mov	r24, r16
+     a96:	91 2f       	mov	r25, r17
+     a98:	08 c0       	rjmp	.+16     	; 0xaaa <_nrf24l01p_read_dyn_pld+0x58>
 	}
 	return 0;
 }
 int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
 	if ( ( pipe < 0 ) || ( pipe > 5 ) ) {
 		return -1;
-     866:	8f ef       	ldi	r24, 0xFF	; 255
-     868:	9f ef       	ldi	r25, 0xFF	; 255
-     86a:	05 c0       	rjmp	.+10     	; 0x876 <_nrf24l01p_read_dyn_pld+0x58>
+     a9a:	8f ef       	ldi	r24, 0xFF	; 255
+     a9c:	9f ef       	ldi	r25, 0xFF	; 255
+     a9e:	05 c0       	rjmp	.+10     	; 0xaaa <_nrf24l01p_read_dyn_pld+0x58>
 		}
 		return rxPayloadWidth;
 	}
 	}
 	else {//if pipe not readable
 		return 0;
-     86c:	80 e0       	ldi	r24, 0x00	; 0
-     86e:	90 e0       	ldi	r25, 0x00	; 0
-     870:	02 c0       	rjmp	.+4      	; 0x876 <_nrf24l01p_read_dyn_pld+0x58>
+     aa0:	80 e0       	ldi	r24, 0x00	; 0
+     aa2:	90 e0       	ldi	r25, 0x00	; 0
+     aa4:	02 c0       	rjmp	.+4      	; 0xaaa <_nrf24l01p_read_dyn_pld+0x58>
 	else {
 		_nrf24l01p_read_rx_payload(data,rxPayloadWidth);
 		if(_nrf24l01p_get_fifo_flag_rx_empty()) {
 			_nrf24l01p_clear_data_ready_flag();
 		}
 		return rxPayloadWidth;
-     872:	80 2f       	mov	r24, r16
-     874:	91 2f       	mov	r25, r17
+     aa6:	80 2f       	mov	r24, r16
+     aa8:	91 2f       	mov	r25, r17
 	}
 	else {//if pipe not readable
 		return 0;
 	}
 	return 0;
 }
-     876:	df 91       	pop	r29
-     878:	cf 91       	pop	r28
-     87a:	1f 91       	pop	r17
-     87c:	0f 91       	pop	r16
-     87e:	08 95       	ret
+     aaa:	df 91       	pop	r29
+     aac:	cf 91       	pop	r28
+     aae:	1f 91       	pop	r17
+     ab0:	0f 91       	pop	r16
+     ab2:	08 95       	ret
 
-00000880 <usart_spi_transmit_receive>:
+00000ab4 <usart_spi_transmit_receive>:
  *
  * @param usart
  * @param txdata
  * @return data received from slave
  */
 uint8_t usart_spi_transmit_receive(USART_t * usart,uint8_t txdata){
-     880:	fc 01       	movw	r30, r24
+     ab4:	fc 01       	movw	r30, r24
 	
 	while ((usart->STATUS & USART_DREIF_bm) == 0);
-     882:	81 81       	ldd	r24, Z+1	; 0x01
-     884:	85 ff       	sbrs	r24, 5
-     886:	fd cf       	rjmp	.-6      	; 0x882 <usart_spi_transmit_receive+0x2>
+     ab6:	81 81       	ldd	r24, Z+1	; 0x01
+     ab8:	85 ff       	sbrs	r24, 5
+     aba:	fd cf       	rjmp	.-6      	; 0xab6 <usart_spi_transmit_receive+0x2>
 	usart->DATA = txdata;
-     888:	60 83       	st	Z, r22
+     abc:	60 83       	st	Z, r22
 	while((usart->STATUS & USART_TXCIF_bm) == 0);
-     88a:	81 81       	ldd	r24, Z+1	; 0x01
-     88c:	86 ff       	sbrs	r24, 6
-     88e:	fd cf       	rjmp	.-6      	; 0x88a <usart_spi_transmit_receive+0xa>
+     abe:	81 81       	ldd	r24, Z+1	; 0x01
+     ac0:	86 ff       	sbrs	r24, 6
+     ac2:	fd cf       	rjmp	.-6      	; 0xabe <usart_spi_transmit_receive+0xa>
 	(usart)->STATUS = USART_TXCIF_bm;
-     890:	80 e4       	ldi	r24, 0x40	; 64
-     892:	81 83       	std	Z+1, r24	; 0x01
+     ac4:	80 e4       	ldi	r24, 0x40	; 64
+     ac6:	81 83       	std	Z+1, r24	; 0x01
 	return (usart)->DATA;
-     894:	80 81       	ld	r24, Z
+     ac8:	80 81       	ld	r24, Z
 }
-     896:	08 95       	ret
+     aca:	08 95       	ret
 
-00000898 <ssd1306_write_command>:
+00000acc <ssd1306_write_command>:
  * data write function is called based on the selected interface.
  *
  * \param command the command to write
  */
 static void ssd1306_write_command(uint8_t command)
 {
-     898:	1f 93       	push	r17
-     89a:	cf 93       	push	r28
-     89c:	df 93       	push	r29
+     acc:	1f 93       	push	r17
+     ace:	cf 93       	push	r28
+     ad0:	df 93       	push	r29
 	port_out_value_clear_mask(&PORTF,(1<<3));//select device
-     89e:	c0 ea       	ldi	r28, 0xA0	; 160
-     8a0:	d6 e0       	ldi	r29, 0x06	; 6
-     8a2:	18 e0       	ldi	r17, 0x08	; 8
-     8a4:	1e 83       	std	Y+6, r17	; 0x06
+     ad2:	c0 ea       	ldi	r28, 0xA0	; 160
+     ad4:	d6 e0       	ldi	r29, 0x06	; 6
+     ad6:	18 e0       	ldi	r17, 0x08	; 8
+     ad8:	1e 83       	std	Y+6, r17	; 0x06
 	port_out_value_clear_mask(&PORTD,(1<<0));//select command
-     8a6:	e0 e6       	ldi	r30, 0x60	; 96
-     8a8:	f6 e0       	ldi	r31, 0x06	; 6
-     8aa:	91 e0       	ldi	r25, 0x01	; 1
-     8ac:	96 83       	std	Z+6, r25	; 0x06
+     ada:	e0 e6       	ldi	r30, 0x60	; 96
+     adc:	f6 e0       	ldi	r31, 0x06	; 6
+     ade:	91 e0       	ldi	r25, 0x01	; 1
+     ae0:	96 83       	std	Z+6, r25	; 0x06
 	ssd1306_sel_cmd() ;
-     8ae:	96 83       	std	Z+6, r25	; 0x06
+     ae2:	96 83       	std	Z+6, r25	; 0x06
 	usart_spi_transmit_receive(&USARTD0, command);//transmit
-     8b0:	68 2f       	mov	r22, r24
-     8b2:	80 ea       	ldi	r24, 0xA0	; 160
-     8b4:	99 e0       	ldi	r25, 0x09	; 9
-     8b6:	0e 94 40 04 	call	0x880	; 0x880 <usart_spi_transmit_receive>
+     ae4:	68 2f       	mov	r22, r24
+     ae6:	80 ea       	ldi	r24, 0xA0	; 160
+     ae8:	99 e0       	ldi	r25, 0x09	; 9
+     aea:	0e 94 5a 05 	call	0xab4	; 0xab4 <usart_spi_transmit_receive>
 	port_out_value_set_mask(&PORTF,(1<<3));//deselect device
-     8ba:	1d 83       	std	Y+5, r17	; 0x05
+     aee:	1d 83       	std	Y+5, r17	; 0x05
 	
 }
-     8bc:	df 91       	pop	r29
-     8be:	cf 91       	pop	r28
-     8c0:	1f 91       	pop	r17
-     8c2:	08 95       	ret
+     af0:	df 91       	pop	r29
+     af2:	cf 91       	pop	r28
+     af4:	1f 91       	pop	r17
+     af6:	08 95       	ret
 
-000008c4 <ssd1306_write_data>:
+00000af8 <ssd1306_write_data>:
  * data write function is called based on the selected interface.
  *
  * \param data the data to write
  */
 void ssd1306_write_data(uint8_t data)
 {
-     8c4:	ef 92       	push	r14
-     8c6:	ff 92       	push	r15
-     8c8:	0f 93       	push	r16
-     8ca:	1f 93       	push	r17
-     8cc:	cf 93       	push	r28
-     8ce:	df 93       	push	r29
+     af8:	ef 92       	push	r14
+     afa:	ff 92       	push	r15
+     afc:	0f 93       	push	r16
+     afe:	1f 93       	push	r17
+     b00:	cf 93       	push	r28
+     b02:	df 93       	push	r29
 	
 	port_out_value_clear_mask(&PORTF,(1<<3));//select device
-     8d0:	c0 ea       	ldi	r28, 0xA0	; 160
-     8d2:	d6 e0       	ldi	r29, 0x06	; 6
-     8d4:	18 e0       	ldi	r17, 0x08	; 8
-     8d6:	1e 83       	std	Y+6, r17	; 0x06
+     b04:	c0 ea       	ldi	r28, 0xA0	; 160
+     b06:	d6 e0       	ldi	r29, 0x06	; 6
+     b08:	18 e0       	ldi	r17, 0x08	; 8
+     b0a:	1e 83       	std	Y+6, r17	; 0x06
 	ssd1306_sel_data() ;
-     8d8:	0f 2e       	mov	r0, r31
-     8da:	f0 e6       	ldi	r31, 0x60	; 96
-     8dc:	ef 2e       	mov	r14, r31
-     8de:	f6 e0       	ldi	r31, 0x06	; 6
-     8e0:	ff 2e       	mov	r15, r31
-     8e2:	f0 2d       	mov	r31, r0
-     8e4:	01 e0       	ldi	r16, 0x01	; 1
-     8e6:	f7 01       	movw	r30, r14
-     8e8:	05 83       	std	Z+5, r16	; 0x05
+     b0c:	0f 2e       	mov	r0, r31
+     b0e:	f0 e6       	ldi	r31, 0x60	; 96
+     b10:	ef 2e       	mov	r14, r31
+     b12:	f6 e0       	ldi	r31, 0x06	; 6
+     b14:	ff 2e       	mov	r15, r31
+     b16:	f0 2d       	mov	r31, r0
+     b18:	01 e0       	ldi	r16, 0x01	; 1
+     b1a:	f7 01       	movw	r30, r14
+     b1c:	05 83       	std	Z+5, r16	; 0x05
 	usart_spi_transmit_receive(&USARTD0, data);//transmit
-     8ea:	68 2f       	mov	r22, r24
-     8ec:	80 ea       	ldi	r24, 0xA0	; 160
-     8ee:	99 e0       	ldi	r25, 0x09	; 9
-     8f0:	0e 94 40 04 	call	0x880	; 0x880 <usart_spi_transmit_receive>
+     b1e:	68 2f       	mov	r22, r24
+     b20:	80 ea       	ldi	r24, 0xA0	; 160
+     b22:	99 e0       	ldi	r25, 0x09	; 9
+     b24:	0e 94 5a 05 	call	0xab4	; 0xab4 <usart_spi_transmit_receive>
 	ssd1306_sel_cmd();
-     8f4:	f7 01       	movw	r30, r14
-     8f6:	06 83       	std	Z+6, r16	; 0x06
+     b28:	f7 01       	movw	r30, r14
+     b2a:	06 83       	std	Z+6, r16	; 0x06
 	port_out_value_set_mask(&PORTF,(1<<3));//deselect device
-     8f8:	1d 83       	std	Y+5, r17	; 0x05
+     b2c:	1d 83       	std	Y+5, r17	; 0x05
 
 }
-     8fa:	df 91       	pop	r29
-     8fc:	cf 91       	pop	r28
-     8fe:	1f 91       	pop	r17
-     900:	0f 91       	pop	r16
-     902:	ff 90       	pop	r15
-     904:	ef 90       	pop	r14
-     906:	08 95       	ret
+     b2e:	df 91       	pop	r29
+     b30:	cf 91       	pop	r28
+     b32:	1f 91       	pop	r17
+     b34:	0f 91       	pop	r16
+     b36:	ff 90       	pop	r15
+     b38:	ef 90       	pop	r14
+     b3a:	08 95       	ret
 
-00000908 <ssd1306_set_page_address>:
+00000b3c <ssd1306_set_page_address>:
  */
 void ssd1306_set_page_address(uint8_t address)
 {
 	// Make sure that the address is 4 bits (only 8 pages)
 	address &= 0x0F;
 	ssd1306_write_command(SSD1306_CMD_SET_PAGE_START_ADDRESS(address));
-     908:	87 70       	andi	r24, 0x07	; 7
-     90a:	80 6b       	ori	r24, 0xB0	; 176
-     90c:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
-     910:	08 95       	ret
+     b3c:	87 70       	andi	r24, 0x07	; 7
+     b3e:	80 6b       	ori	r24, 0xB0	; 176
+     b40:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
+     b44:	08 95       	ret
 
-00000912 <ssd1306_set_column_address>:
+00000b46 <ssd1306_set_column_address>:
  * \brief Set current column in display RAM
  *
  * \param address the column address
  */
 void ssd1306_set_column_address(uint8_t address)
 {
-     912:	cf 93       	push	r28
-     914:	c8 2f       	mov	r28, r24
+     b46:	cf 93       	push	r28
+     b48:	c8 2f       	mov	r28, r24
 	// Make sure the address is 7 bits
 	address &= 0x7F;
-     916:	98 2f       	mov	r25, r24
-     918:	9f 77       	andi	r25, 0x7F	; 127
+     b4a:	98 2f       	mov	r25, r24
+     b4c:	9f 77       	andi	r25, 0x7F	; 127
 	ssd1306_write_command(SSD1306_CMD_SET_HIGH_COL(address >> 4));
-     91a:	89 2f       	mov	r24, r25
-     91c:	82 95       	swap	r24
-     91e:	8f 70       	andi	r24, 0x0F	; 15
-     920:	80 61       	ori	r24, 0x10	; 16
-     922:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     b4e:	89 2f       	mov	r24, r25
+     b50:	82 95       	swap	r24
+     b52:	8f 70       	andi	r24, 0x0F	; 15
+     b54:	80 61       	ori	r24, 0x10	; 16
+     b56:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(SSD1306_CMD_SET_LOW_COL(address & 0x0F));
-     926:	8c 2f       	mov	r24, r28
-     928:	8f 70       	andi	r24, 0x0F	; 15
-     92a:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     b5a:	8c 2f       	mov	r24, r28
+     b5c:	8f 70       	andi	r24, 0x0F	; 15
+     b5e:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 }
-     92e:	cf 91       	pop	r28
-     930:	08 95       	ret
+     b62:	cf 91       	pop	r28
+     b64:	08 95       	ret
 
-00000932 <usart_init_spi>:
+00000b66 <usart_init_spi>:
 	}
 }
 
 
 void usart_init_spi(USART_t *usart, const usart_spi_options_emon_t *opt)
 {
-     932:	cf 93       	push	r28
-     934:	df 93       	push	r29
-     936:	ec 01       	movw	r28, r24
-     938:	fb 01       	movw	r30, r22
+     b66:	cf 93       	push	r28
+     b68:	df 93       	push	r29
+     b6a:	ec 01       	movw	r28, r24
+     b6c:	fb 01       	movw	r30, r22
 	//ioport_pin_t sck_pin;
 	//uint8_t invert_sck;
 
 	(usart)->CTRLB &= ~USART_RXEN_bm;
-     93a:	8c 81       	ldd	r24, Y+4	; 0x04
-     93c:	8f 7e       	andi	r24, 0xEF	; 239
-     93e:	8c 83       	std	Y+4, r24	; 0x04
+     b6e:	8c 81       	ldd	r24, Y+4	; 0x04
+     b70:	8f 7e       	andi	r24, 0xEF	; 239
+     b72:	8c 83       	std	Y+4, r24	; 0x04
 
 	//invert_sck = (opt->spimode == 2) || (opt->spimode == 3);
 
 	PORTD.DIRSET = (1<<1);//sck pin output
-     940:	a0 e6       	ldi	r26, 0x60	; 96
-     942:	b6 e0       	ldi	r27, 0x06	; 6
-     944:	82 e0       	ldi	r24, 0x02	; 2
-     946:	11 96       	adiw	r26, 0x01	; 1
-     948:	8c 93       	st	X, r24
-     94a:	11 97       	sbiw	r26, 0x01	; 1
+     b74:	a0 e6       	ldi	r26, 0x60	; 96
+     b76:	b6 e0       	ldi	r27, 0x06	; 6
+     b78:	82 e0       	ldi	r24, 0x02	; 2
+     b7a:	11 96       	adiw	r26, 0x01	; 1
+     b7c:	8c 93       	st	X, r24
+     b7e:	11 97       	sbiw	r26, 0x01	; 1
 	PORTD.OUTSET = (1<<1);//sck pin output level high
-     94c:	15 96       	adiw	r26, 0x05	; 5
-     94e:	8c 93       	st	X, r24
+     b80:	15 96       	adiw	r26, 0x05	; 5
+     b82:	8c 93       	st	X, r24
 
 	(usart)->CTRLC = ((usart)->CTRLC & (~USART_CMODE_gm)) | USART_CMODE_MSPI_gc;
-     950:	8d 81       	ldd	r24, Y+5	; 0x05
-     952:	80 6c       	ori	r24, 0xC0	; 192
-     954:	8d 83       	std	Y+5, r24	; 0x05
+     b84:	8d 81       	ldd	r24, Y+5	; 0x05
+     b86:	80 6c       	ori	r24, 0xC0	; 192
+     b88:	8d 83       	std	Y+5, r24	; 0x05
 
 	if (opt->spimode == 1 || opt->spimode == 3) {
-     956:	84 81       	ldd	r24, Z+4	; 0x04
-     958:	8d 7f       	andi	r24, 0xFD	; 253
-     95a:	81 30       	cpi	r24, 0x01	; 1
-     95c:	21 f4       	brne	.+8      	; 0x966 <usart_init_spi+0x34>
+     b8a:	84 81       	ldd	r24, Z+4	; 0x04
+     b8c:	8d 7f       	andi	r24, 0xFD	; 253
+     b8e:	81 30       	cpi	r24, 0x01	; 1
+     b90:	21 f4       	brne	.+8      	; 0xb9a <usart_init_spi+0x34>
 		usart->CTRLC |= USART_UCPHA_bm;
-     95e:	8d 81       	ldd	r24, Y+5	; 0x05
-     960:	82 60       	ori	r24, 0x02	; 2
-     962:	8d 83       	std	Y+5, r24	; 0x05
-     964:	03 c0       	rjmp	.+6      	; 0x96c <usart_init_spi+0x3a>
+     b92:	8d 81       	ldd	r24, Y+5	; 0x05
+     b94:	82 60       	ori	r24, 0x02	; 2
+     b96:	8d 83       	std	Y+5, r24	; 0x05
+     b98:	03 c0       	rjmp	.+6      	; 0xba0 <usart_init_spi+0x3a>
 	}
 	else {
 		usart->CTRLC &= ~USART_UCPHA_bm;
-     966:	8d 81       	ldd	r24, Y+5	; 0x05
-     968:	8d 7f       	andi	r24, 0xFD	; 253
-     96a:	8d 83       	std	Y+5, r24	; 0x05
+     b9a:	8d 81       	ldd	r24, Y+5	; 0x05
+     b9c:	8d 7f       	andi	r24, 0xFD	; 253
+     b9e:	8d 83       	std	Y+5, r24	; 0x05
 	}
 	
 	if (opt->data_order) {
-     96c:	85 81       	ldd	r24, Z+5	; 0x05
-     96e:	88 23       	and	r24, r24
-     970:	21 f0       	breq	.+8      	; 0x97a <usart_init_spi+0x48>
+     ba0:	85 81       	ldd	r24, Z+5	; 0x05
+     ba2:	88 23       	and	r24, r24
+     ba4:	21 f0       	breq	.+8      	; 0xbae <usart_init_spi+0x48>
 		(usart)->CTRLC |= USART_DORD_bm;
-     972:	8d 81       	ldd	r24, Y+5	; 0x05
-     974:	84 60       	ori	r24, 0x04	; 4
-     976:	8d 83       	std	Y+5, r24	; 0x05
-     978:	03 c0       	rjmp	.+6      	; 0x980 <usart_init_spi+0x4e>
+     ba6:	8d 81       	ldd	r24, Y+5	; 0x05
+     ba8:	84 60       	ori	r24, 0x04	; 4
+     baa:	8d 83       	std	Y+5, r24	; 0x05
+     bac:	03 c0       	rjmp	.+6      	; 0xbb4 <usart_init_spi+0x4e>
 	}
 	else {
 		(usart)->CTRLC &= ~USART_DORD_bm;
-     97a:	8d 81       	ldd	r24, Y+5	; 0x05
-     97c:	8b 7f       	andi	r24, 0xFB	; 251
-     97e:	8d 83       	std	Y+5, r24	; 0x05
+     bae:	8d 81       	ldd	r24, Y+5	; 0x05
+     bb0:	8b 7f       	andi	r24, 0xFB	; 251
+     bb2:	8d 83       	std	Y+5, r24	; 0x05
 	}
 
 
 	uint16_t bsel_value = (32000000UL/ (opt->baudrate*2)) -1 ;
-     980:	80 81       	ld	r24, Z
-     982:	91 81       	ldd	r25, Z+1	; 0x01
-     984:	a2 81       	ldd	r26, Z+2	; 0x02
-     986:	b3 81       	ldd	r27, Z+3	; 0x03
-     988:	9c 01       	movw	r18, r24
-     98a:	ad 01       	movw	r20, r26
-     98c:	22 0f       	add	r18, r18
-     98e:	33 1f       	adc	r19, r19
-     990:	44 1f       	adc	r20, r20
-     992:	55 1f       	adc	r21, r21
-     994:	60 e0       	ldi	r22, 0x00	; 0
-     996:	78 e4       	ldi	r23, 0x48	; 72
-     998:	88 ee       	ldi	r24, 0xE8	; 232
-     99a:	91 e0       	ldi	r25, 0x01	; 1
-     99c:	0e 94 28 09 	call	0x1250	; 0x1250 <__udivmodsi4>
-     9a0:	21 50       	subi	r18, 0x01	; 1
-     9a2:	31 09       	sbc	r19, r1
+     bb4:	80 81       	ld	r24, Z
+     bb6:	91 81       	ldd	r25, Z+1	; 0x01
+     bb8:	a2 81       	ldd	r26, Z+2	; 0x02
+     bba:	b3 81       	ldd	r27, Z+3	; 0x03
+     bbc:	9c 01       	movw	r18, r24
+     bbe:	ad 01       	movw	r20, r26
+     bc0:	22 0f       	add	r18, r18
+     bc2:	33 1f       	adc	r19, r19
+     bc4:	44 1f       	adc	r20, r20
+     bc6:	55 1f       	adc	r21, r21
+     bc8:	60 e0       	ldi	r22, 0x00	; 0
+     bca:	78 e4       	ldi	r23, 0x48	; 72
+     bcc:	88 ee       	ldi	r24, 0xE8	; 232
+     bce:	91 e0       	ldi	r25, 0x01	; 1
+     bd0:	0e 94 81 0a 	call	0x1502	; 0x1502 <__udivmodsi4>
+     bd4:	21 50       	subi	r18, 0x01	; 1
+     bd6:	31 09       	sbc	r19, r1
 	(usart)->BAUDCTRLB = (uint8_t)((~USART_BSCALE_gm) & (bsel_value >> 8));
-     9a4:	83 2f       	mov	r24, r19
-     9a6:	8f 70       	andi	r24, 0x0F	; 15
-     9a8:	8f 83       	std	Y+7, r24	; 0x07
+     bd8:	83 2f       	mov	r24, r19
+     bda:	8f 70       	andi	r24, 0x0F	; 15
+     bdc:	8f 83       	std	Y+7, r24	; 0x07
 	(usart)->BAUDCTRLA = (uint8_t)(bsel_value);
-     9aa:	2e 83       	std	Y+6, r18	; 0x06
+     bde:	2e 83       	std	Y+6, r18	; 0x06
 	
 	(usart)->CTRLB |= USART_TXEN_bm;
-     9ac:	8c 81       	ldd	r24, Y+4	; 0x04
-     9ae:	88 60       	ori	r24, 0x08	; 8
-     9b0:	8c 83       	std	Y+4, r24	; 0x04
+     be0:	8c 81       	ldd	r24, Y+4	; 0x04
+     be2:	88 60       	ori	r24, 0x08	; 8
+     be4:	8c 83       	std	Y+4, r24	; 0x04
 
 }
-     9b2:	df 91       	pop	r29
-     9b4:	cf 91       	pop	r28
-     9b6:	08 95       	ret
+     be6:	df 91       	pop	r29
+     be8:	cf 91       	pop	r28
+     bea:	08 95       	ret
 
-000009b8 <ssd1306_init>:
+00000bec <ssd1306_init>:
 
 
 
 
 void ssd1306_init(void)
 {
-     9b8:	cf 93       	push	r28
-     9ba:	df 93       	push	r29
-     9bc:	00 d0       	rcall	.+0      	; 0x9be <ssd1306_init+0x6>
-     9be:	00 d0       	rcall	.+0      	; 0x9c0 <ssd1306_init+0x8>
-     9c0:	cd b7       	in	r28, 0x3d	; 61
-     9c2:	de b7       	in	r29, 0x3e	; 62
+     bec:	cf 93       	push	r28
+     bee:	df 93       	push	r29
+     bf0:	00 d0       	rcall	.+0      	; 0xbf2 <ssd1306_init+0x6>
+     bf2:	00 d0       	rcall	.+0      	; 0xbf4 <ssd1306_init+0x8>
+     bf4:	cd b7       	in	r28, 0x3d	; 61
+     bf6:	de b7       	in	r29, 0x3e	; 62
 
 	port_direction_set_mask(&PORTF,(1<<3));//ss
-     9c4:	20 ea       	ldi	r18, 0xA0	; 160
-     9c6:	36 e0       	ldi	r19, 0x06	; 6
-     9c8:	88 e0       	ldi	r24, 0x08	; 8
-     9ca:	d9 01       	movw	r26, r18
-     9cc:	11 96       	adiw	r26, 0x01	; 1
-     9ce:	8c 93       	st	X, r24
+     bf8:	20 ea       	ldi	r18, 0xA0	; 160
+     bfa:	36 e0       	ldi	r19, 0x06	; 6
+     bfc:	88 e0       	ldi	r24, 0x08	; 8
+     bfe:	d9 01       	movw	r26, r18
+     c00:	11 96       	adiw	r26, 0x01	; 1
+     c02:	8c 93       	st	X, r24
 	port_direction_set_mask(&PORTD,(1<<0));//data_cmd
-     9d0:	a0 e6       	ldi	r26, 0x60	; 96
-     9d2:	b6 e0       	ldi	r27, 0x06	; 6
-     9d4:	91 e0       	ldi	r25, 0x01	; 1
-     9d6:	11 96       	adiw	r26, 0x01	; 1
-     9d8:	9c 93       	st	X, r25
-     9da:	11 97       	sbiw	r26, 0x01	; 1
+     c04:	a0 e6       	ldi	r26, 0x60	; 96
+     c06:	b6 e0       	ldi	r27, 0x06	; 6
+     c08:	91 e0       	ldi	r25, 0x01	; 1
+     c0a:	11 96       	adiw	r26, 0x01	; 1
+     c0c:	9c 93       	st	X, r25
+     c0e:	11 97       	sbiw	r26, 0x01	; 1
 	port_direction_set_mask(&PORTA,(1<<3));//reset
-     9dc:	e0 e0       	ldi	r30, 0x00	; 0
-     9de:	f6 e0       	ldi	r31, 0x06	; 6
-     9e0:	81 83       	std	Z+1, r24	; 0x01
+     c10:	e0 e0       	ldi	r30, 0x00	; 0
+     c12:	f6 e0       	ldi	r31, 0x06	; 6
+     c14:	81 83       	std	Z+1, r24	; 0x01
 	port_direction_set_mask(&PORTD,(1<<1));//sck
-     9e2:	92 e0       	ldi	r25, 0x02	; 2
-     9e4:	11 96       	adiw	r26, 0x01	; 1
-     9e6:	9c 93       	st	X, r25
-     9e8:	11 97       	sbiw	r26, 0x01	; 1
+     c16:	92 e0       	ldi	r25, 0x02	; 2
+     c18:	11 96       	adiw	r26, 0x01	; 1
+     c1a:	9c 93       	st	X, r25
+     c1c:	11 97       	sbiw	r26, 0x01	; 1
 	port_direction_set_mask(&PORTD,(1<<3));//mosi
-     9ea:	11 96       	adiw	r26, 0x01	; 1
-     9ec:	8c 93       	st	X, r24
+     c1e:	11 96       	adiw	r26, 0x01	; 1
+     c20:	8c 93       	st	X, r24
 // 	
 	port_out_value_set_mask(&PORTF,(1<<3));//ss
-     9ee:	d9 01       	movw	r26, r18
-     9f0:	15 96       	adiw	r26, 0x05	; 5
-     9f2:	8c 93       	st	X, r24
+     c22:	d9 01       	movw	r26, r18
+     c24:	15 96       	adiw	r26, 0x05	; 5
+     c26:	8c 93       	st	X, r24
  * \note this functions should not be confused with the \ref ssd1306_soft_reset()
  * function, this command will control the RST pin.
  */
 static inline void ssd1306_hard_reset(void)
 {
 	PORTA.OUTCLR = (1<<3);
-     9f4:	86 83       	std	Z+6, r24	; 0x06
-     9f6:	ba e6       	ldi	r27, 0x6A	; 106
-     9f8:	ba 95       	dec	r27
-     9fa:	f1 f7       	brne	.-4      	; 0x9f8 <ssd1306_init+0x40>
-     9fc:	00 c0       	rjmp	.+0      	; 0x9fe <ssd1306_init+0x46>
+     c28:	86 83       	std	Z+6, r24	; 0x06
+     c2a:	ba e6       	ldi	r27, 0x6A	; 106
+     c2c:	ba 95       	dec	r27
+     c2e:	f1 f7       	brne	.-4      	; 0xc2c <ssd1306_init+0x40>
+     c30:	00 c0       	rjmp	.+0      	; 0xc32 <ssd1306_init+0x46>
 	delay_us(10); // At least 3us
 	PORTA.OUTSET = (1<<3);
-     9fe:	85 83       	std	Z+5, r24	; 0x05
-     a00:	ea e6       	ldi	r30, 0x6A	; 106
-     a02:	ea 95       	dec	r30
-     a04:	f1 f7       	brne	.-4      	; 0xa02 <ssd1306_init+0x4a>
-     a06:	00 c0       	rjmp	.+0      	; 0xa08 <ssd1306_init+0x50>
+     c32:	85 83       	std	Z+5, r24	; 0x05
+     c34:	ea e6       	ldi	r30, 0x6A	; 106
+     c36:	ea 95       	dec	r30
+     c38:	f1 f7       	brne	.-4      	; 0xc36 <ssd1306_init+0x4a>
+     c3a:	00 c0       	rjmp	.+0      	; 0xc3c <ssd1306_init+0x50>
 	spi_flags_t spi_flags = 0;
 	//board_spi_select_id_t spi_select_id = 0;
 	
 	//irqflags_t flags = cpu_irq_save();
 	//*((uint8_t *)&PR.PRGEN + SYSCLK_PORT_D) &= ~PR_USART0_bm;
 	PR.PRPD &= ~PR_USART0_bm;
-     a08:	e0 e7       	ldi	r30, 0x70	; 112
-     a0a:	f0 e0       	ldi	r31, 0x00	; 0
-     a0c:	84 81       	ldd	r24, Z+4	; 0x04
-     a0e:	8f 7e       	andi	r24, 0xEF	; 239
-     a10:	84 83       	std	Z+4, r24	; 0x04
+     c3c:	e0 e7       	ldi	r30, 0x70	; 112
+     c3e:	f0 e0       	ldi	r31, 0x00	; 0
+     c40:	84 81       	ldd	r24, Z+4	; 0x04
+     c42:	8f 7e       	andi	r24, 0xEF	; 239
+     c44:	84 83       	std	Z+4, r24	; 0x04
 	
 	//cpu_irq_restore(flags);
 	
 	usart_spi_options_emon_t opt;
 	opt.baudrate=12000000;
-     a12:	80 e0       	ldi	r24, 0x00	; 0
-     a14:	9b e1       	ldi	r25, 0x1B	; 27
-     a16:	a7 eb       	ldi	r26, 0xB7	; 183
-     a18:	b0 e0       	ldi	r27, 0x00	; 0
-     a1a:	89 83       	std	Y+1, r24	; 0x01
-     a1c:	9a 83       	std	Y+2, r25	; 0x02
-     a1e:	ab 83       	std	Y+3, r26	; 0x03
-     a20:	bc 83       	std	Y+4, r27	; 0x04
+     c46:	80 e0       	ldi	r24, 0x00	; 0
+     c48:	9b e1       	ldi	r25, 0x1B	; 27
+     c4a:	a7 eb       	ldi	r26, 0xB7	; 183
+     c4c:	b0 e0       	ldi	r27, 0x00	; 0
+     c4e:	89 83       	std	Y+1, r24	; 0x01
+     c50:	9a 83       	std	Y+2, r25	; 0x02
+     c52:	ab 83       	std	Y+3, r26	; 0x03
+     c54:	bc 83       	std	Y+4, r27	; 0x04
 	opt.spimode=spi_flags;
-     a22:	1d 82       	std	Y+5, r1	; 0x05
+     c56:	1d 82       	std	Y+5, r1	; 0x05
 	opt.data_order=0;
-     a24:	1e 82       	std	Y+6, r1	; 0x06
+     c58:	1e 82       	std	Y+6, r1	; 0x06
 	usart_init_spi(&USARTD0, &opt);
-     a26:	be 01       	movw	r22, r28
-     a28:	6f 5f       	subi	r22, 0xFF	; 255
-     a2a:	7f 4f       	sbci	r23, 0xFF	; 255
-     a2c:	80 ea       	ldi	r24, 0xA0	; 160
-     a2e:	99 e0       	ldi	r25, 0x09	; 9
-     a30:	0e 94 99 04 	call	0x932	; 0x932 <usart_init_spi>
+     c5a:	be 01       	movw	r22, r28
+     c5c:	6f 5f       	subi	r22, 0xFF	; 255
+     c5e:	7f 4f       	sbci	r23, 0xFF	; 255
+     c60:	80 ea       	ldi	r24, 0xA0	; 160
+     c62:	99 e0       	ldi	r25, 0x09	; 9
+     c64:	0e 94 b3 05 	call	0xb66	; 0xb66 <usart_init_spi>
 	
 
 	// 1/32 Duty (0x0F~0x3F)
 	ssd1306_write_command(SSD1306_CMD_SET_MULTIPLEX_RATIO);
-     a34:	88 ea       	ldi	r24, 0xA8	; 168
-     a36:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c68:	88 ea       	ldi	r24, 0xA8	; 168
+     c6a:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0x1F);
-     a3a:	8f e1       	ldi	r24, 0x1F	; 31
-     a3c:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c6e:	8f e1       	ldi	r24, 0x1F	; 31
+     c70:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Shift Mapping RAM Counter (0x00~0x3F)
 	ssd1306_write_command(SSD1306_CMD_SET_DISPLAY_OFFSET);
-     a40:	83 ed       	ldi	r24, 0xD3	; 211
-     a42:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c74:	83 ed       	ldi	r24, 0xD3	; 211
+     c76:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0x00);
-     a46:	80 e0       	ldi	r24, 0x00	; 0
-     a48:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c7a:	80 e0       	ldi	r24, 0x00	; 0
+     c7c:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Set Mapping RAM Display Start Line (0x00~0x3F)
 	ssd1306_write_command(SSD1306_CMD_SET_START_LINE(0x00));
-     a4c:	80 e4       	ldi	r24, 0x40	; 64
-     a4e:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c80:	80 e4       	ldi	r24, 0x40	; 64
+     c82:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Set Column Address 0 Mapped to SEG0
 	ssd1306_write_command(SSD1306_CMD_SET_SEGMENT_RE_MAP_COL127_SEG0);
-     a52:	81 ea       	ldi	r24, 0xA1	; 161
-     a54:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c86:	81 ea       	ldi	r24, 0xA1	; 161
+     c88:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Set COM/Row Scan Scan from COM63 to 0
 	ssd1306_write_command(SSD1306_CMD_SET_COM_OUTPUT_SCAN_DOWN);
-     a58:	88 ec       	ldi	r24, 0xC8	; 200
-     a5a:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c8c:	88 ec       	ldi	r24, 0xC8	; 200
+     c8e:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Set COM Pins hardware configuration
 	ssd1306_write_command(SSD1306_CMD_SET_COM_PINS);
-     a5e:	8a ed       	ldi	r24, 0xDA	; 218
-     a60:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c92:	8a ed       	ldi	r24, 0xDA	; 218
+     c94:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0x02);
-     a64:	82 e0       	ldi	r24, 0x02	; 2
-     a66:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c98:	82 e0       	ldi	r24, 0x02	; 2
+     c9a:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	//ssd1306_set_contrast(0x8F);
 	ssd1306_write_command(SSD1306_CMD_SET_CONTRAST_CONTROL_FOR_BANK0);
-     a6a:	81 e8       	ldi	r24, 0x81	; 129
-     a6c:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     c9e:	81 e8       	ldi	r24, 0x81	; 129
+     ca0:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0x8F);
-     a70:	8f e8       	ldi	r24, 0x8F	; 143
-     a72:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     ca4:	8f e8       	ldi	r24, 0x8F	; 143
+     ca6:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 		
 	// Disable Entire display On
 	ssd1306_write_command(SSD1306_CMD_ENTIRE_DISPLAY_AND_GDDRAM_ON);
-     a76:	84 ea       	ldi	r24, 0xA4	; 164
-     a78:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     caa:	84 ea       	ldi	r24, 0xA4	; 164
+     cac:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	//ssd1306_display_invert_disable();
 	ssd1306_write_command(SSD1306_CMD_SET_NORMAL_DISPLAY);
-     a7c:	86 ea       	ldi	r24, 0xA6	; 166
-     a7e:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cb0:	86 ea       	ldi	r24, 0xA6	; 166
+     cb2:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Set Display Clock Divide Ratio / Oscillator Frequency (Default => 0x80)
 	ssd1306_write_command(SSD1306_CMD_SET_DISPLAY_CLOCK_DIVIDE_RATIO);
-     a82:	85 ed       	ldi	r24, 0xD5	; 213
-     a84:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cb6:	85 ed       	ldi	r24, 0xD5	; 213
+     cb8:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0x80);
-     a88:	80 e8       	ldi	r24, 0x80	; 128
-     a8a:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cbc:	80 e8       	ldi	r24, 0x80	; 128
+     cbe:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Enable charge pump regulator
 	ssd1306_write_command(SSD1306_CMD_SET_CHARGE_PUMP_SETTING);
-     a8e:	8d e8       	ldi	r24, 0x8D	; 141
-     a90:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cc2:	8d e8       	ldi	r24, 0x8D	; 141
+     cc4:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0x14);
-     a94:	84 e1       	ldi	r24, 0x14	; 20
-     a96:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cc8:	84 e1       	ldi	r24, 0x14	; 20
+     cca:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Set VCOMH Deselect Level
 	ssd1306_write_command(SSD1306_CMD_SET_VCOMH_DESELECT_LEVEL);
-     a9a:	8b ed       	ldi	r24, 0xDB	; 219
-     a9c:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cce:	8b ed       	ldi	r24, 0xDB	; 219
+     cd0:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0x40); // Default => 0x20 (0.77*VCC)
-     aa0:	80 e4       	ldi	r24, 0x40	; 64
-     aa2:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cd4:	80 e4       	ldi	r24, 0x40	; 64
+     cd6:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	// Set Pre-Charge as 15 Clocks & Discharge as 1 Clock
 	ssd1306_write_command(SSD1306_CMD_SET_PRE_CHARGE_PERIOD);
-     aa6:	89 ed       	ldi	r24, 0xD9	; 217
-     aa8:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     cda:	89 ed       	ldi	r24, 0xD9	; 217
+     cdc:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_write_command(0xF1);
-     aac:	81 ef       	ldi	r24, 0xF1	; 241
-     aae:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     ce0:	81 ef       	ldi	r24, 0xF1	; 241
+     ce2:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 
 	//ssd1306_display_on();
 	ssd1306_write_command(SSD1306_CMD_SET_DISPLAY_ON);
-     ab2:	8f ea       	ldi	r24, 0xAF	; 175
-     ab4:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     ce6:	8f ea       	ldi	r24, 0xAF	; 175
+     ce8:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 }
-     ab8:	26 96       	adiw	r28, 0x06	; 6
-     aba:	cd bf       	out	0x3d, r28	; 61
-     abc:	de bf       	out	0x3e, r29	; 62
-     abe:	df 91       	pop	r29
-     ac0:	cf 91       	pop	r28
-     ac2:	08 95       	ret
+     cec:	26 96       	adiw	r28, 0x06	; 6
+     cee:	cd bf       	out	0x3d, r28	; 61
+     cf0:	de bf       	out	0x3e, r29	; 62
+     cf2:	df 91       	pop	r29
+     cf4:	cf 91       	pop	r28
+     cf6:	08 95       	ret
 
-00000ac4 <ssd1306_write_text>:
+00000cf8 <ssd1306_write_text>:
 /**
  * \brief Display text on OLED screen.
  * \param string String to display.
  */
 void ssd1306_write_text(char *string)
 {
-     ac4:	ef 92       	push	r14
-     ac6:	ff 92       	push	r15
-     ac8:	0f 93       	push	r16
-     aca:	1f 93       	push	r17
-     acc:	cf 93       	push	r28
+     cf8:	ef 92       	push	r14
+     cfa:	ff 92       	push	r15
+     cfc:	0f 93       	push	r16
+     cfe:	1f 93       	push	r17
+     d00:	cf 93       	push	r28
 	uint8_t *char_ptr;
 	uint8_t i;
 
 	while (*string != '\0') {
-     ace:	dc 01       	movw	r26, r24
-     ad0:	ec 91       	ld	r30, X
-     ad2:	ee 23       	and	r30, r30
-     ad4:	29 f1       	breq	.+74     	; 0xb20 <ssd1306_write_text+0x5c>
-     ad6:	7c 01       	movw	r14, r24
-     ad8:	bf ef       	ldi	r27, 0xFF	; 255
-     ada:	eb 1a       	sub	r14, r27
-     adc:	fb 0a       	sbc	r15, r27
+     d02:	dc 01       	movw	r26, r24
+     d04:	ec 91       	ld	r30, X
+     d06:	ee 23       	and	r30, r30
+     d08:	29 f1       	breq	.+74     	; 0xd54 <ssd1306_write_text+0x5c>
+     d0a:	7c 01       	movw	r14, r24
+     d0c:	bf ef       	ldi	r27, 0xFF	; 255
+     d0e:	eb 1a       	sub	r14, r27
+     d10:	fb 0a       	sbc	r15, r27
 		if (*string < 0x7F) {
-     ade:	ef 37       	cpi	r30, 0x7F	; 127
-     ae0:	d0 f4       	brcc	.+52     	; 0xb16 <ssd1306_write_text+0x52>
+     d12:	ef 37       	cpi	r30, 0x7F	; 127
+     d14:	d0 f4       	brcc	.+52     	; 0xd4a <ssd1306_write_text+0x52>
 			char_ptr = font_table[*string - 32];
-     ae2:	f0 e0       	ldi	r31, 0x00	; 0
-     ae4:	ee 0f       	add	r30, r30
-     ae6:	ff 1f       	adc	r31, r31
-     ae8:	ef 56       	subi	r30, 0x6F	; 111
-     aea:	fe 4d       	sbci	r31, 0xDE	; 222
-     aec:	00 81       	ld	r16, Z
-     aee:	11 81       	ldd	r17, Z+1	; 0x01
+     d16:	f0 e0       	ldi	r31, 0x00	; 0
+     d18:	ee 0f       	add	r30, r30
+     d1a:	ff 1f       	adc	r31, r31
+     d1c:	ef 56       	subi	r30, 0x6F	; 111
+     d1e:	fe 4d       	sbci	r31, 0xDE	; 222
+     d20:	00 81       	ld	r16, Z
+     d22:	11 81       	ldd	r17, Z+1	; 0x01
 			for (i = 1; i <= char_ptr[0]; i++) {
-     af0:	f8 01       	movw	r30, r16
-     af2:	80 81       	ld	r24, Z
-     af4:	88 23       	and	r24, r24
-     af6:	61 f0       	breq	.+24     	; 0xb10 <ssd1306_write_text+0x4c>
-     af8:	c1 e0       	ldi	r28, 0x01	; 1
+     d24:	f8 01       	movw	r30, r16
+     d26:	80 81       	ld	r24, Z
+     d28:	88 23       	and	r24, r24
+     d2a:	61 f0       	breq	.+24     	; 0xd44 <ssd1306_write_text+0x4c>
+     d2c:	c1 e0       	ldi	r28, 0x01	; 1
 				ssd1306_write_data(char_ptr[i]);
-     afa:	f8 01       	movw	r30, r16
-     afc:	ec 0f       	add	r30, r28
-     afe:	f1 1d       	adc	r31, r1
-     b00:	80 81       	ld	r24, Z
-     b02:	0e 94 62 04 	call	0x8c4	; 0x8c4 <ssd1306_write_data>
+     d2e:	f8 01       	movw	r30, r16
+     d30:	ec 0f       	add	r30, r28
+     d32:	f1 1d       	adc	r31, r1
+     d34:	80 81       	ld	r24, Z
+     d36:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <ssd1306_write_data>
 	uint8_t i;
 
 	while (*string != '\0') {
 		if (*string < 0x7F) {
 			char_ptr = font_table[*string - 32];
 			for (i = 1; i <= char_ptr[0]; i++) {
-     b06:	cf 5f       	subi	r28, 0xFF	; 255
-     b08:	d8 01       	movw	r26, r16
-     b0a:	9c 91       	ld	r25, X
-     b0c:	9c 17       	cp	r25, r28
-     b0e:	a8 f7       	brcc	.-22     	; 0xafa <ssd1306_write_text+0x36>
+     d3a:	cf 5f       	subi	r28, 0xFF	; 255
+     d3c:	d8 01       	movw	r26, r16
+     d3e:	9c 91       	ld	r25, X
+     d40:	9c 17       	cp	r25, r28
+     d42:	a8 f7       	brcc	.-22     	; 0xd2e <ssd1306_write_text+0x36>
 				ssd1306_write_data(char_ptr[i]);
 			}
 			ssd1306_write_data(0x00);
-     b10:	80 e0       	ldi	r24, 0x00	; 0
-     b12:	0e 94 62 04 	call	0x8c4	; 0x8c4 <ssd1306_write_data>
+     d44:	80 e0       	ldi	r24, 0x00	; 0
+     d46:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <ssd1306_write_data>
 void ssd1306_write_text(char *string)
 {
 	uint8_t *char_ptr;
 	uint8_t i;
 
 	while (*string != '\0') {
-     b16:	d7 01       	movw	r26, r14
-     b18:	ed 91       	ld	r30, X+
-     b1a:	7d 01       	movw	r14, r26
-     b1c:	e1 11       	cpse	r30, r1
-     b1e:	df cf       	rjmp	.-66     	; 0xade <ssd1306_write_text+0x1a>
+     d4a:	d7 01       	movw	r26, r14
+     d4c:	ed 91       	ld	r30, X+
+     d4e:	7d 01       	movw	r14, r26
+     d50:	e1 11       	cpse	r30, r1
+     d52:	df cf       	rjmp	.-66     	; 0xd12 <ssd1306_write_text+0x1a>
 			}
 			ssd1306_write_data(0x00);
 		}
 			string++;
 	}
 }
-     b20:	cf 91       	pop	r28
-     b22:	1f 91       	pop	r17
-     b24:	0f 91       	pop	r16
-     b26:	ff 90       	pop	r15
-     b28:	ef 90       	pop	r14
-     b2a:	08 95       	ret
+     d54:	cf 91       	pop	r28
+     d56:	1f 91       	pop	r17
+     d58:	0f 91       	pop	r16
+     d5a:	ff 90       	pop	r15
+     d5c:	ef 90       	pop	r14
+     d5e:	08 95       	ret
 
-00000b2c <gfx_mono_framebuffer_put_byte>:
+00000d60 <gfx_mono_framebuffer_put_byte>:
 \endcode
  */
 void gfx_mono_framebuffer_put_byte(uint8_t page, uint8_t column,
 		uint8_t data)
 {
 	*(fbpointer + (page * GFX_MONO_LCD_WIDTH) + column) = data;
-     b2c:	20 e8       	ldi	r18, 0x80	; 128
-     b2e:	82 9f       	mul	r24, r18
-     b30:	c0 01       	movw	r24, r0
-     b32:	11 24       	eor	r1, r1
-     b34:	86 0f       	add	r24, r22
-     b36:	91 1d       	adc	r25, r1
-     b38:	e0 91 bc 22 	lds	r30, 0x22BC
-     b3c:	f0 91 bd 22 	lds	r31, 0x22BD
-     b40:	e8 0f       	add	r30, r24
-     b42:	f9 1f       	adc	r31, r25
-     b44:	40 83       	st	Z, r20
-     b46:	08 95       	ret
+     d60:	20 e8       	ldi	r18, 0x80	; 128
+     d62:	82 9f       	mul	r24, r18
+     d64:	c0 01       	movw	r24, r0
+     d66:	11 24       	eor	r1, r1
+     d68:	86 0f       	add	r24, r22
+     d6a:	91 1d       	adc	r25, r1
+     d6c:	e0 91 bc 22 	lds	r30, 0x22BC
+     d70:	f0 91 bd 22 	lds	r31, 0x22BD
+     d74:	e8 0f       	add	r30, r24
+     d76:	f9 1f       	adc	r31, r25
+     d78:	40 83       	st	Z, r20
+     d7a:	08 95       	ret
 
-00000b48 <gfx_mono_framebuffer_get_byte>:
+00000d7c <gfx_mono_framebuffer_get_byte>:
 	data = gfx_mono_framebuffer_get_byte(0, 0);
 \endcode
  */
 uint8_t gfx_mono_framebuffer_get_byte(uint8_t page, uint8_t column)
 {
 	return *(fbpointer + (page * GFX_MONO_LCD_WIDTH) + column);
-     b48:	20 e8       	ldi	r18, 0x80	; 128
-     b4a:	82 9f       	mul	r24, r18
-     b4c:	c0 01       	movw	r24, r0
-     b4e:	11 24       	eor	r1, r1
-     b50:	86 0f       	add	r24, r22
-     b52:	91 1d       	adc	r25, r1
-     b54:	e0 91 bc 22 	lds	r30, 0x22BC
-     b58:	f0 91 bd 22 	lds	r31, 0x22BD
-     b5c:	e8 0f       	add	r30, r24
-     b5e:	f9 1f       	adc	r31, r25
+     d7c:	20 e8       	ldi	r18, 0x80	; 128
+     d7e:	82 9f       	mul	r24, r18
+     d80:	c0 01       	movw	r24, r0
+     d82:	11 24       	eor	r1, r1
+     d84:	86 0f       	add	r24, r22
+     d86:	91 1d       	adc	r25, r1
+     d88:	e0 91 bc 22 	lds	r30, 0x22BC
+     d8c:	f0 91 bd 22 	lds	r31, 0x22BD
+     d90:	e8 0f       	add	r30, r24
+     d92:	f9 1f       	adc	r31, r25
 }
-     b60:	80 81       	ld	r24, Z
-     b62:	08 95       	ret
+     d94:	80 81       	ld	r24, Z
+     d96:	08 95       	ret
 
-00000b64 <gfx_mono_ssd1306_put_byte>:
+00000d98 <gfx_mono_ssd1306_put_byte>:
 	gfx_mono_ssd1306_put_byte(0, 0, 0xFF, false);
 \endcode
  */
 void gfx_mono_ssd1306_put_byte(uint8_t page, uint8_t column,
 		uint8_t data, uint8_t force)
 {
-     b64:	1f 93       	push	r17
-     b66:	cf 93       	push	r28
-     b68:	df 93       	push	r29
-     b6a:	18 2f       	mov	r17, r24
-     b6c:	d6 2f       	mov	r29, r22
-     b6e:	c4 2f       	mov	r28, r20
+     d98:	1f 93       	push	r17
+     d9a:	cf 93       	push	r28
+     d9c:	df 93       	push	r29
+     d9e:	18 2f       	mov	r17, r24
+     da0:	d6 2f       	mov	r29, r22
+     da2:	c4 2f       	mov	r28, r20
 //#ifdef CONFIG_SSD1306_FRAMEBUFFER
 	if (!force && data == gfx_mono_framebuffer_get_byte(page, column)) {
-     b70:	21 11       	cpse	r18, r1
-     b72:	04 c0       	rjmp	.+8      	; 0xb7c <gfx_mono_ssd1306_put_byte+0x18>
-     b74:	0e 94 a4 05 	call	0xb48	; 0xb48 <gfx_mono_framebuffer_get_byte>
-     b78:	8c 17       	cp	r24, r28
-     b7a:	71 f0       	breq	.+28     	; 0xb98 <gfx_mono_ssd1306_put_byte+0x34>
+     da4:	21 11       	cpse	r18, r1
+     da6:	04 c0       	rjmp	.+8      	; 0xdb0 <gfx_mono_ssd1306_put_byte+0x18>
+     da8:	0e 94 be 06 	call	0xd7c	; 0xd7c <gfx_mono_framebuffer_get_byte>
+     dac:	8c 17       	cp	r24, r28
+     dae:	71 f0       	breq	.+28     	; 0xdcc <gfx_mono_ssd1306_put_byte+0x34>
 		return;
 	}
 	gfx_mono_framebuffer_put_byte(page, column, data);
-     b7c:	4c 2f       	mov	r20, r28
-     b7e:	6d 2f       	mov	r22, r29
-     b80:	81 2f       	mov	r24, r17
-     b82:	0e 94 96 05 	call	0xb2c	; 0xb2c <gfx_mono_framebuffer_put_byte>
+     db0:	4c 2f       	mov	r20, r28
+     db2:	6d 2f       	mov	r22, r29
+     db4:	81 2f       	mov	r24, r17
+     db6:	0e 94 b0 06 	call	0xd60	; 0xd60 <gfx_mono_framebuffer_put_byte>
 //#endif
 
 	ssd1306_set_page_address(page);
-     b86:	81 2f       	mov	r24, r17
-     b88:	0e 94 84 04 	call	0x908	; 0x908 <ssd1306_set_page_address>
+     dba:	81 2f       	mov	r24, r17
+     dbc:	0e 94 9e 05 	call	0xb3c	; 0xb3c <ssd1306_set_page_address>
 	ssd1306_set_column_address(column);
-     b8c:	8d 2f       	mov	r24, r29
-     b8e:	0e 94 89 04 	call	0x912	; 0x912 <ssd1306_set_column_address>
+     dc0:	8d 2f       	mov	r24, r29
+     dc2:	0e 94 a3 05 	call	0xb46	; 0xb46 <ssd1306_set_column_address>
 
 	ssd1306_write_data(data);
-     b92:	8c 2f       	mov	r24, r28
-     b94:	0e 94 62 04 	call	0x8c4	; 0x8c4 <ssd1306_write_data>
+     dc6:	8c 2f       	mov	r24, r28
+     dc8:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <ssd1306_write_data>
 }
-     b98:	df 91       	pop	r29
-     b9a:	cf 91       	pop	r28
-     b9c:	1f 91       	pop	r17
-     b9e:	08 95       	ret
+     dcc:	df 91       	pop	r29
+     dce:	cf 91       	pop	r28
+     dd0:	1f 91       	pop	r17
+     dd2:	08 95       	ret
 
-00000ba0 <main>:
+00000dd4 <main>:
 
 /** Main program entry point. This routine contains the overall program flow, including initial
  *  setup of all components and the main program loop.
  */
 int main(void)
 {
-     ba0:	cf 93       	push	r28
-     ba2:	df 93       	push	r29
-     ba4:	cd b7       	in	r28, 0x3d	; 61
-     ba6:	de b7       	in	r29, 0x3e	; 62
-     ba8:	c7 56       	subi	r28, 0x67	; 103
-     baa:	d1 09       	sbc	r29, r1
-     bac:	cd bf       	out	0x3d, r28	; 61
-     bae:	de bf       	out	0x3e, r29	; 62
+     dd4:	cf 93       	push	r28
+     dd6:	df 93       	push	r29
+     dd8:	cd b7       	in	r28, 0x3d	; 61
+     dda:	de b7       	in	r29, 0x3e	; 62
+     ddc:	cf 56       	subi	r28, 0x6F	; 111
+     dde:	d1 09       	sbc	r29, r1
+     de0:	cd bf       	out	0x3d, r28	; 61
+     de2:	de bf       	out	0x3e, r29	; 62
 	
 	//set_system_time (1463064367);
 	rtc_initialize();
-     bb0:	0e 94 b7 08 	call	0x116e	; 0x116e <rtc_initialize>
+     de4:	0e 94 10 0a 	call	0x1420	; 0x1420 <rtc_initialize>
 	
 	DigitalPin_t led = {&PORTR, 0};
-     bb4:	80 ee       	ldi	r24, 0xE0	; 224
-     bb6:	97 e0       	ldi	r25, 0x07	; 7
-     bb8:	89 83       	std	Y+1, r24	; 0x01
-     bba:	9a 83       	std	Y+2, r25	; 0x02
-     bbc:	1b 82       	std	Y+3, r1	; 0x03
+     de8:	80 ee       	ldi	r24, 0xE0	; 224
+     dea:	97 e0       	ldi	r25, 0x07	; 7
+     dec:	89 83       	std	Y+1, r24	; 0x01
+     dee:	9a 83       	std	Y+2, r25	; 0x02
+     df0:	1b 82       	std	Y+3, r1	; 0x03
 	
 
 	
 	_nrf24l01p_init();
-     bbe:	0e 94 bb 03 	call	0x776	; 0x776 <_nrf24l01p_init>
+     df2:	0e 94 cf 04 	call	0x99e	; 0x99e <_nrf24l01p_init>
 	_nrf24l01p_enable_dynamic_payload();
-     bc2:	0e 94 50 03 	call	0x6a0	; 0x6a0 <_nrf24l01p_enable_dynamic_payload>
+     df6:	0e 94 64 04 	call	0x8c8	; 0x8c8 <_nrf24l01p_enable_dynamic_payload>
 	_nrf24l01p_enable_payload_with_ack();
-     bc6:	0e 94 6c 03 	call	0x6d8	; 0x6d8 <_nrf24l01p_enable_payload_with_ack>
-	
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P0);
-     bca:	80 e0       	ldi	r24, 0x00	; 0
-     bcc:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P1);
-     bd0:	81 e0       	ldi	r24, 0x01	; 1
-     bd2:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P2);
-     bd6:	82 e0       	ldi	r24, 0x02	; 2
-     bd8:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P3);
-     bdc:	83 e0       	ldi	r24, 0x03	; 3
-     bde:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P4);
-     be2:	84 e0       	ldi	r24, 0x04	; 4
-     be4:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
-	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P5);
-     be8:	85 e0       	ldi	r24, 0x05	; 5
-     bea:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
+     dfa:	0e 94 80 04 	call	0x900	; 0x900 <_nrf24l01p_enable_payload_with_ack>
+
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P0);
+     dfe:	80 e0       	ldi	r24, 0x00	; 0
+     e00:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P1);
+     e04:	81 e0       	ldi	r24, 0x01	; 1
+     e06:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P2);
+     e0a:	82 e0       	ldi	r24, 0x02	; 2
+     e0c:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P3);
+     e10:	83 e0       	ldi	r24, 0x03	; 3
+     e12:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P4);
+     e16:	84 e0       	ldi	r24, 0x04	; 4
+     e18:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P5);
+     e1c:	85 e0       	ldi	r24, 0x05	; 5
+     e1e:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
 	
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P0);
-     bee:	80 e0       	ldi	r24, 0x00	; 0
-     bf0:	0e 94 17 03 	call	0x62e	; 0x62e <_nrf24l01p_enable_dynamic_payload_pipe>
+     e22:	80 e0       	ldi	r24, 0x00	; 0
+     e24:	0e 94 2b 04 	call	0x856	; 0x856 <_nrf24l01p_enable_dynamic_payload_pipe>
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P1);
-     bf4:	81 e0       	ldi	r24, 0x01	; 1
-     bf6:	0e 94 17 03 	call	0x62e	; 0x62e <_nrf24l01p_enable_dynamic_payload_pipe>
+     e28:	81 e0       	ldi	r24, 0x01	; 1
+     e2a:	0e 94 2b 04 	call	0x856	; 0x856 <_nrf24l01p_enable_dynamic_payload_pipe>
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P2);
-     bfa:	82 e0       	ldi	r24, 0x02	; 2
-     bfc:	0e 94 17 03 	call	0x62e	; 0x62e <_nrf24l01p_enable_dynamic_payload_pipe>
+     e2e:	82 e0       	ldi	r24, 0x02	; 2
+     e30:	0e 94 2b 04 	call	0x856	; 0x856 <_nrf24l01p_enable_dynamic_payload_pipe>
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P3);
-     c00:	83 e0       	ldi	r24, 0x03	; 3
-     c02:	0e 94 17 03 	call	0x62e	; 0x62e <_nrf24l01p_enable_dynamic_payload_pipe>
+     e34:	83 e0       	ldi	r24, 0x03	; 3
+     e36:	0e 94 2b 04 	call	0x856	; 0x856 <_nrf24l01p_enable_dynamic_payload_pipe>
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P4);
-     c06:	84 e0       	ldi	r24, 0x04	; 4
-     c08:	0e 94 17 03 	call	0x62e	; 0x62e <_nrf24l01p_enable_dynamic_payload_pipe>
+     e3a:	84 e0       	ldi	r24, 0x04	; 4
+     e3c:	0e 94 2b 04 	call	0x856	; 0x856 <_nrf24l01p_enable_dynamic_payload_pipe>
 	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P5);
-     c0c:	85 e0       	ldi	r24, 0x05	; 5
-     c0e:	0e 94 17 03 	call	0x62e	; 0x62e <_nrf24l01p_enable_dynamic_payload_pipe>
+     e40:	85 e0       	ldi	r24, 0x05	; 5
+     e42:	0e 94 2b 04 	call	0x856	; 0x856 <_nrf24l01p_enable_dynamic_payload_pipe>
 	
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P0);
-     c12:	80 e0       	ldi	r24, 0x00	; 0
-     c14:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P1);
-     c18:	81 e0       	ldi	r24, 0x01	; 1
-     c1a:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P2);
-     c1e:	82 e0       	ldi	r24, 0x02	; 2
-     c20:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P3);
-     c24:	83 e0       	ldi	r24, 0x03	; 3
-     c26:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P4);
-     c2a:	84 e0       	ldi	r24, 0x04	; 4
-     c2c:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
-	 _nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P5);
-     c30:	85 e0       	ldi	r24, 0x05	; 5
-     c32:	0e 94 6b 02 	call	0x4d6	; 0x4d6 <_nrf24l01p_enable_auto_ack>
-	 
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P0);
+     e46:	80 e0       	ldi	r24, 0x00	; 0
+     e48:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P1);
+     e4c:	81 e0       	ldi	r24, 0x01	; 1
+     e4e:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P2);
+     e52:	82 e0       	ldi	r24, 0x02	; 2
+     e54:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P3);
+     e58:	83 e0       	ldi	r24, 0x03	; 3
+     e5a:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P4);
+     e5e:	84 e0       	ldi	r24, 0x04	; 4
+     e60:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P5);
+     e64:	85 e0       	ldi	r24, 0x05	; 5
+     e66:	0e 94 a4 02 	call	0x548	; 0x548 <_nrf24l01p_enable_rx_on_pipe>
+
+
 	_nrf24l01p_set_auto_retransmission_delay(15);
-     c36:	8f e0       	ldi	r24, 0x0F	; 15
-     c38:	0e 94 cb 02 	call	0x596	; 0x596 <_nrf24l01p_set_auto_retransmission_delay>
+     e6a:	8f e0       	ldi	r24, 0x0F	; 15
+     e6c:	0e 94 cb 02 	call	0x596	; 0x596 <_nrf24l01p_set_auto_retransmission_delay>
 	gfx_mono_set_framebuffer(framebuffer);
 \endcode
  */
 void gfx_mono_set_framebuffer(uint8_t *framebuffer)
 {
 	fbpointer = framebuffer;
-     c3c:	8e eb       	ldi	r24, 0xBE	; 190
-     c3e:	92 e2       	ldi	r25, 0x22	; 34
-     c40:	80 93 bc 22 	sts	0x22BC, r24
-     c44:	90 93 bd 22 	sts	0x22BD, r25
+     e70:	8e eb       	ldi	r24, 0xBE	; 190
+     e72:	92 e2       	ldi	r25, 0x22	; 34
+     e74:	80 93 bc 22 	sts	0x22BC, r24
+     e78:	90 93 bd 22 	sts	0x22BD, r25
 	uint8_t page;
 	uint8_t column;
 
 	gfx_mono_set_framebuffer(framebuffer);
 
 	ssd1306_init();
-     c48:	0e 94 dc 04 	call	0x9b8	; 0x9b8 <ssd1306_init>
+     e7c:	0e 94 f6 05 	call	0xbec	; 0xbec <ssd1306_init>
 	asm("nop");
-     c4c:	00 00       	nop
+     e80:	00 00       	nop
 static inline void ssd1306_clear(void)
 {
 	uint8_t page = 0;
 	uint8_t col = 0;
 
 	for (page = 0; page < 4; ++page)
-     c4e:	00 e0       	ldi	r16, 0x00	; 0
-     c50:	0f c0       	rjmp	.+30     	; 0xc70 <main+0xd0>
+     e82:	10 e0       	ldi	r17, 0x00	; 0
+     e84:	0f c0       	rjmp	.+30     	; 0xea4 <main+0xd0>
 	{
 		for (col = 0; col < 128; ++col)
 		{
 			ssd1306_set_page_address(page);
-     c52:	80 2f       	mov	r24, r16
-     c54:	0e 94 84 04 	call	0x908	; 0x908 <ssd1306_set_page_address>
+     e86:	81 2f       	mov	r24, r17
+     e88:	0e 94 9e 05 	call	0xb3c	; 0xb3c <ssd1306_set_page_address>
 			ssd1306_set_column_address(col);
-     c58:	81 2f       	mov	r24, r17
-     c5a:	0e 94 89 04 	call	0x912	; 0x912 <ssd1306_set_column_address>
+     e8c:	80 2f       	mov	r24, r16
+     e8e:	0e 94 a3 05 	call	0xb46	; 0xb46 <ssd1306_set_column_address>
 			ssd1306_write_data(0x00);
-     c5e:	80 e0       	ldi	r24, 0x00	; 0
-     c60:	0e 94 62 04 	call	0x8c4	; 0x8c4 <ssd1306_write_data>
+     e92:	80 e0       	ldi	r24, 0x00	; 0
+     e94:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <ssd1306_write_data>
 	uint8_t page = 0;
 	uint8_t col = 0;
 
 	for (page = 0; page < 4; ++page)
 	{
 		for (col = 0; col < 128; ++col)
-     c64:	1f 5f       	subi	r17, 0xFF	; 255
-     c66:	10 38       	cpi	r17, 0x80	; 128
-     c68:	a1 f7       	brne	.-24     	; 0xc52 <main+0xb2>
+     e98:	0f 5f       	subi	r16, 0xFF	; 255
+     e9a:	00 38       	cpi	r16, 0x80	; 128
+     e9c:	a1 f7       	brne	.-24     	; 0xe86 <main+0xb2>
 static inline void ssd1306_clear(void)
 {
 	uint8_t page = 0;
 	uint8_t col = 0;
 
 	for (page = 0; page < 4; ++page)
-     c6a:	0f 5f       	subi	r16, 0xFF	; 255
-     c6c:	04 30       	cpi	r16, 0x04	; 4
-     c6e:	11 f0       	breq	.+4      	; 0xc74 <main+0xd4>
+     e9e:	1f 5f       	subi	r17, 0xFF	; 255
+     ea0:	14 30       	cpi	r17, 0x04	; 4
+     ea2:	11 f0       	breq	.+4      	; 0xea8 <main+0xd4>
 
 /** Main program entry point. This routine contains the overall program flow, including initial
  *  setup of all components and the main program loop.
  */
 int main(void)
 {
-     c70:	10 e0       	ldi	r17, 0x00	; 0
-     c72:	ef cf       	rjmp	.-34     	; 0xc52 <main+0xb2>
+     ea4:	00 e0       	ldi	r16, 0x00	; 0
+     ea6:	ef cf       	rjmp	.-34     	; 0xe86 <main+0xb2>
  */
 static inline void ssd1306_set_display_start_line_address(uint8_t address)
 {
 	// Make sure address is 6 bits
 	address &= 0x3F;
 	ssd1306_write_command(SSD1306_CMD_SET_START_LINE(address));
-     c74:	80 e4       	ldi	r24, 0x40	; 64
-     c76:	0e 94 4c 04 	call	0x898	; 0x898 <ssd1306_write_command>
+     ea8:	80 e4       	ldi	r24, 0x40	; 64
+     eaa:	0e 94 66 05 	call	0xacc	; 0xacc <ssd1306_write_command>
 	ssd1306_clear();
 
 	ssd1306_set_display_start_line_address(0);
 
 
 	for (page = 0; page < GFX_MONO_LCD_PAGES; page++) {
-     c7a:	00 e0       	ldi	r16, 0x00	; 0
-     c7c:	0c c0       	rjmp	.+24     	; 0xc96 <main+0xf6>
+     eae:	10 e0       	ldi	r17, 0x00	; 0
+     eb0:	0c c0       	rjmp	.+24     	; 0xeca <main+0xf6>
 		for (column = 0; column < GFX_MONO_LCD_WIDTH; column++) {
 			gfx_mono_ssd1306_put_byte(page, column, 0x00, 1);
-     c7e:	21 e0       	ldi	r18, 0x01	; 1
-     c80:	40 e0       	ldi	r20, 0x00	; 0
-     c82:	61 2f       	mov	r22, r17
-     c84:	80 2f       	mov	r24, r16
-     c86:	0e 94 b2 05 	call	0xb64	; 0xb64 <gfx_mono_ssd1306_put_byte>
+     eb2:	21 e0       	ldi	r18, 0x01	; 1
+     eb4:	40 e0       	ldi	r20, 0x00	; 0
+     eb6:	60 2f       	mov	r22, r16
+     eb8:	81 2f       	mov	r24, r17
+     eba:	0e 94 cc 06 	call	0xd98	; 0xd98 <gfx_mono_ssd1306_put_byte>
 
 	ssd1306_set_display_start_line_address(0);
 
 
 	for (page = 0; page < GFX_MONO_LCD_PAGES; page++) {
 		for (column = 0; column < GFX_MONO_LCD_WIDTH; column++) {
-     c8a:	1f 5f       	subi	r17, 0xFF	; 255
-     c8c:	10 38       	cpi	r17, 0x80	; 128
-     c8e:	b9 f7       	brne	.-18     	; 0xc7e <main+0xde>
+     ebe:	0f 5f       	subi	r16, 0xFF	; 255
+     ec0:	00 38       	cpi	r16, 0x80	; 128
+     ec2:	b9 f7       	brne	.-18     	; 0xeb2 <main+0xde>
 	ssd1306_clear();
 
 	ssd1306_set_display_start_line_address(0);
 
 
 	for (page = 0; page < GFX_MONO_LCD_PAGES; page++) {
-     c90:	0f 5f       	subi	r16, 0xFF	; 255
-     c92:	04 30       	cpi	r16, 0x04	; 4
-     c94:	11 f0       	breq	.+4      	; 0xc9a <main+0xfa>
+     ec4:	1f 5f       	subi	r17, 0xFF	; 255
+     ec6:	14 30       	cpi	r17, 0x04	; 4
+     ec8:	11 f0       	breq	.+4      	; 0xece <main+0xfa>
 static inline void ssd1306_clear(void)
 {
 	uint8_t page = 0;
 	uint8_t col = 0;
 
 	for (page = 0; page < 4; ++page)
-     c96:	10 e0       	ldi	r17, 0x00	; 0
-     c98:	f2 cf       	rjmp	.-28     	; 0xc7e <main+0xde>
+     eca:	00 e0       	ldi	r16, 0x00	; 0
+     ecc:	f2 cf       	rjmp	.-28     	; 0xeb2 <main+0xde>
 		for (column = 0; column < GFX_MONO_LCD_WIDTH; column++) {
 			gfx_mono_ssd1306_put_byte(page, column, 0x00, 1);
 		}
 	}
 
 	asm("nop");
-     c9a:	00 00       	nop
+     ece:	00 00       	nop
 	ssd1306_set_page_address(0);
-     c9c:	80 e0       	ldi	r24, 0x00	; 0
-     c9e:	0e 94 84 04 	call	0x908	; 0x908 <ssd1306_set_page_address>
+     ed0:	80 e0       	ldi	r24, 0x00	; 0
+     ed2:	0e 94 9e 05 	call	0xb3c	; 0xb3c <ssd1306_set_page_address>
 	ssd1306_write_text("EMON");
-     ca2:	8f e9       	ldi	r24, 0x9F	; 159
-     ca4:	92 e2       	ldi	r25, 0x22	; 34
-     ca6:	0e 94 62 05 	call	0xac4	; 0xac4 <ssd1306_write_text>
+     ed6:	8f e9       	ldi	r24, 0x9F	; 159
+     ed8:	92 e2       	ldi	r25, 0x22	; 34
+     eda:	0e 94 7c 06 	call	0xcf8	; 0xcf8 <ssd1306_write_text>
 				PORTD_OUTCLR = LEDMask & LEDS_PORTD_LEDS;
 			}
 
 			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
 			{
 				PORTR_OUTCLR = LEDS_PORTR_LEDS;
-     caa:	83 e0       	ldi	r24, 0x03	; 3
-     cac:	80 93 e6 07 	sts	0x07E6, r24
+     ede:	83 e0       	ldi	r24, 0x03	; 3
+     ee0:	80 93 e6 07 	sts	0x07E6, r24
 				PORTD_OUTCLR = LEDS_PORTD_LEDS;
-     cb0:	80 e3       	ldi	r24, 0x30	; 48
-     cb2:	80 93 66 06 	sts	0x0666, r24
+     ee4:	80 e3       	ldi	r24, 0x30	; 48
+     ee6:	80 93 66 06 	sts	0x0666, r24
 
 				PORTR_OUTSET = (LEDMask & LEDS_PORTR_LEDS);
-     cb6:	81 e0       	ldi	r24, 0x01	; 1
-     cb8:	80 93 e5 07 	sts	0x07E5, r24
+     eea:	81 e0       	ldi	r24, 0x01	; 1
+     eec:	80 93 e5 07 	sts	0x07E5, r24
 				PORTD_OUTSET = (LEDMask & LEDS_PORTD_LEDS);
-     cbc:	10 92 65 06 	sts	0x0665, r1
+     ef0:	10 92 65 06 	sts	0x0665, r1
 				#if (ARCH == ARCH_AVR8)
 				sei();
 				#elif (ARCH == ARCH_UC3)
 				__builtin_csrf(AVR32_SR_GM_OFFSET);
 				#elif (ARCH == ARCH_XMEGA)
 				sei();
-     cc0:	78 94       	sei
+     ef4:	78 94       	sei
  	//SetupHardware();
 // 
  	LEDs_SetAllLEDs(LEDMASK_USB_NOTREADY);
  	GlobalInterruptEnable();
 
 	DigitalPin_SetDIr(&led,1);
-     cc2:	61 e0       	ldi	r22, 0x01	; 1
-     cc4:	ce 01       	movw	r24, r28
-     cc6:	01 96       	adiw	r24, 0x01	; 1
-     cc8:	0e 94 be 06 	call	0xd7c	; 0xd7c <DigitalPin_SetDIr>
+     ef6:	61 e0       	ldi	r22, 0x01	; 1
+     ef8:	ce 01       	movw	r24, r28
+     efa:	01 96       	adiw	r24, 0x01	; 1
+     efc:	0e 94 17 08 	call	0x102e	; 0x102e <DigitalPin_SetDIr>
 	//PORT_SetDirection(&PORTR,(1<<0));
 
 	CLKSYS_Enable( OSC_RC32MEN_bm );
-     ccc:	e0 e5       	ldi	r30, 0x50	; 80
-     cce:	f0 e0       	ldi	r31, 0x00	; 0
-     cd0:	80 81       	ld	r24, Z
-     cd2:	82 60       	ori	r24, 0x02	; 2
-     cd4:	80 83       	st	Z, r24
+     f00:	e0 e5       	ldi	r30, 0x50	; 80
+     f02:	f0 e0       	ldi	r31, 0x00	; 0
+     f04:	80 81       	ld	r24, Z
+     f06:	82 60       	ori	r24, 0x02	; 2
+     f08:	80 83       	st	Z, r24
 	do {} while ( CLKSYS_IsReady( OSC_RC32MRDY_bm ) == 0 );
-     cd6:	81 81       	ldd	r24, Z+1	; 0x01
-     cd8:	81 ff       	sbrs	r24, 1
-     cda:	fd cf       	rjmp	.-6      	; 0xcd6 <main+0x136>
+     f0a:	81 81       	ldd	r24, Z+1	; 0x01
+     f0c:	81 ff       	sbrs	r24, 1
+     f0e:	fd cf       	rjmp	.-6      	; 0xf0a <main+0x136>
 	CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_RC32M_gc );
-     cdc:	81 e0       	ldi	r24, 0x01	; 1
-     cde:	0e 94 87 07 	call	0xf0e	; 0xf0e <CLKSYS_Main_ClockSource_Select>
+     f10:	81 e0       	ldi	r24, 0x01	; 1
+     f12:	0e 94 e0 08 	call	0x11c0	; 0x11c0 <CLKSYS_Main_ClockSource_Select>
 	CLKSYS_Disable( OSC_RC2MEN_bm );
-     ce2:	81 e0       	ldi	r24, 0x01	; 1
-     ce4:	0e 94 7d 07 	call	0xefa	; 0xefa <CLKSYS_Disable>
+     f16:	81 e0       	ldi	r24, 0x01	; 1
+     f18:	0e 94 d6 08 	call	0x11ac	; 0x11ac <CLKSYS_Disable>
 	
 	_nrf24l01p_flush_rx();
-     ce8:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
+     f1c:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
+		
+	_nrf24l01p_set_TX_pipe_address(0x1918171615);	
+     f20:	25 e1       	ldi	r18, 0x15	; 21
+     f22:	36 e1       	ldi	r19, 0x16	; 22
+     f24:	47 e1       	ldi	r20, 0x17	; 23
+     f26:	58 e1       	ldi	r21, 0x18	; 24
+     f28:	69 e1       	ldi	r22, 0x19	; 25
+     f2a:	70 e0       	ldi	r23, 0x00	; 0
+     f2c:	80 e0       	ldi	r24, 0x00	; 0
+     f2e:	90 e0       	ldi	r25, 0x00	; 0
+     f30:	0e 94 d5 03 	call	0x7aa	; 0x7aa <_nrf24l01p_set_TX_pipe_address>
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, 0x1918171615);
+     f34:	05 e1       	ldi	r16, 0x15	; 21
+     f36:	16 e1       	ldi	r17, 0x16	; 22
+     f38:	27 e1       	ldi	r18, 0x17	; 23
+     f3a:	38 e1       	ldi	r19, 0x18	; 24
+     f3c:	49 e1       	ldi	r20, 0x19	; 25
+     f3e:	50 e0       	ldi	r21, 0x00	; 0
+     f40:	60 e0       	ldi	r22, 0x00	; 0
+     f42:	70 e0       	ldi	r23, 0x00	; 0
+     f44:	80 e0       	ldi	r24, 0x00	; 0
+     f46:	0e 94 04 03 	call	0x608	; 0x608 <_nrf24l01p_set_RX_pipe_address>
+	
+	//volatile uint64_t bladdress = _nrf24l01p_get_TX_pipe_address();
+	volatile uint64_t bladdress = _nrf24l01p_get_RX_pipe_address(_NRF24L01P_PIPE_P0);
+     f4a:	80 e0       	ldi	r24, 0x00	; 0
+     f4c:	0e 94 79 03 	call	0x6f2	; 0x6f2 <_nrf24l01p_get_RX_pipe_address>
+     f50:	2c 83       	std	Y+4, r18	; 0x04
+     f52:	3d 83       	std	Y+5, r19	; 0x05
+     f54:	4e 83       	std	Y+6, r20	; 0x06
+     f56:	5f 83       	std	Y+7, r21	; 0x07
+     f58:	68 87       	std	Y+8, r22	; 0x08
+     f5a:	79 87       	std	Y+9, r23	; 0x09
+     f5c:	8a 87       	std	Y+10, r24	; 0x0a
+     f5e:	9b 87       	std	Y+11, r25	; 0x0b
+	//volatile uint64_t bladdress;
+	//_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P1,&bladdress,5);
+	asm("nop");
+     f60:	00 00       	nop
 // 			_nrf24l01p_write(msg,strlen(msg));
 			 //_nrf24l01p_write_ack(_NRF24L01P_PIPE_P0,msg,strlen(msg));
 		
 			
-			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P4))){
+			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P0))){
 				PORTR.OUTTGL = (1<<0);
-     cec:	0f 2e       	mov	r0, r31
-     cee:	f0 ee       	ldi	r31, 0xE0	; 224
-     cf0:	ef 2e       	mov	r14, r31
-     cf2:	f7 e0       	ldi	r31, 0x07	; 7
-     cf4:	ff 2e       	mov	r15, r31
-     cf6:	f0 2d       	mov	r31, r0
-     cf8:	11 e0       	ldi	r17, 0x01	; 1
+     f62:	0f 2e       	mov	r0, r31
+     f64:	f0 ee       	ldi	r31, 0xE0	; 224
+     f66:	cf 2e       	mov	r12, r31
+     f68:	f7 e0       	ldi	r31, 0x07	; 7
+     f6a:	df 2e       	mov	r13, r31
+     f6c:	f0 2d       	mov	r31, r0
+     f6e:	ff 24       	eor	r15, r15
+     f70:	f3 94       	inc	r15
 // 			char msg[] = "get time";
 // 			_nrf24l01p_write(msg,strlen(msg));
 			 //_nrf24l01p_write_ack(_NRF24L01P_PIPE_P0,msg,strlen(msg));
 		
 			
-			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P4))){
-     cfa:	84 e0       	ldi	r24, 0x04	; 4
-     cfc:	0e 94 f5 03 	call	0x7ea	; 0x7ea <_nrf24l01p_readable>
-     d00:	88 23       	and	r24, r24
-     d02:	d9 f3       	breq	.-10     	; 0xcfa <main+0x15a>
+			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P0))){
+     f72:	80 e0       	ldi	r24, 0x00	; 0
+     f74:	0e 94 09 05 	call	0xa12	; 0xa12 <_nrf24l01p_readable>
+     f78:	88 23       	and	r24, r24
+     f7a:	d9 f3       	breq	.-10     	; 0xf72 <main+0x19e>
 				PORTR.OUTTGL = (1<<0);
-     d04:	f7 01       	movw	r30, r14
-     d06:	17 83       	std	Z+7, r17	; 0x07
+     f7c:	f6 01       	movw	r30, r12
+     f7e:	f7 82       	std	Z+7, r15	; 0x07
 				//printf("status %x\r\n",_nrf24l01p_get_status());
 				//printf("pipe : %d\r\n", _nrf24l01p_get_rx_payload_pipe());
 				//led1 = !led1;
 				
-				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P4, (uint8_t*) emon_rxData);
-     d08:	be 01       	movw	r22, r28
-     d0a:	6c 5f       	subi	r22, 0xFC	; 252
-     d0c:	7f 4f       	sbci	r23, 0xFF	; 255
-     d0e:	84 e0       	ldi	r24, 0x04	; 4
-     d10:	0e 94 0f 04 	call	0x81e	; 0x81e <_nrf24l01p_read_dyn_pld>
+				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P0, (uint8_t*) emon_rxData);
+     f80:	be 01       	movw	r22, r28
+     f82:	64 5f       	subi	r22, 0xF4	; 244
+     f84:	7f 4f       	sbci	r23, 0xFF	; 255
+     f86:	80 e0       	ldi	r24, 0x00	; 0
+     f88:	0e 94 29 05 	call	0xa52	; 0xa52 <_nrf24l01p_read_dyn_pld>
 				emon_rxData[width] = '\0';
-     d14:	24 e0       	ldi	r18, 0x04	; 4
-     d16:	30 e0       	ldi	r19, 0x00	; 0
-     d18:	2c 0f       	add	r18, r28
-     d1a:	3d 1f       	adc	r19, r29
-     d1c:	82 0f       	add	r24, r18
-     d1e:	93 1f       	adc	r25, r19
-     d20:	fc 01       	movw	r30, r24
-     d22:	10 82       	st	Z, r1
+     f8c:	2c e0       	ldi	r18, 0x0C	; 12
+     f8e:	30 e0       	ldi	r19, 0x00	; 0
+     f90:	2c 0f       	add	r18, r28
+     f92:	3d 1f       	adc	r19, r29
+     f94:	82 0f       	add	r24, r18
+     f96:	93 1f       	adc	r25, r19
+     f98:	fc 01       	movw	r30, r24
+     f9a:	10 82       	st	Z, r1
 				_nrf24l01p_flush_rx();
-     d24:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
+     f9c:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
 				_nrf24l01p_clear_data_ready_flag();
-     d28:	0e 94 ef 02 	call	0x5de	; 0x5de <_nrf24l01p_clear_data_ready_flag>
-// 	  			ssd1306_clear();
-// 	  			ssd1306_set_column_address(0);
-// 				ssd1306_set_page_address(0);
-// 	  			ssd1306_write_text(emon_rxData);
+     fa0:	0e 94 ef 02 	call	0x5de	; 0x5de <_nrf24l01p_clear_data_ready_flag>
+     fa4:	00 e0       	ldi	r16, 0x00	; 0
+     fa6:	0f c0       	rjmp	.+30     	; 0xfc6 <main+0x1f2>
+	{
+		for (col = 0; col < 128; ++col)
+		{
+			ssd1306_set_page_address(page);
+     fa8:	80 2f       	mov	r24, r16
+     faa:	0e 94 9e 05 	call	0xb3c	; 0xb3c <ssd1306_set_page_address>
+			ssd1306_set_column_address(col);
+     fae:	81 2f       	mov	r24, r17
+     fb0:	0e 94 a3 05 	call	0xb46	; 0xb46 <ssd1306_set_column_address>
+			ssd1306_write_data(0x00);
+     fb4:	80 e0       	ldi	r24, 0x00	; 0
+     fb6:	0e 94 7c 05 	call	0xaf8	; 0xaf8 <ssd1306_write_data>
+	uint8_t page = 0;
+	uint8_t col = 0;
+
+	for (page = 0; page < 4; ++page)
+	{
+		for (col = 0; col < 128; ++col)
+     fba:	1f 5f       	subi	r17, 0xFF	; 255
+     fbc:	10 38       	cpi	r17, 0x80	; 128
+     fbe:	a1 f7       	brne	.-24     	; 0xfa8 <main+0x1d4>
+static inline void ssd1306_clear(void)
+{
+	uint8_t page = 0;
+	uint8_t col = 0;
+
+	for (page = 0; page < 4; ++page)
+     fc0:	0f 5f       	subi	r16, 0xFF	; 255
+     fc2:	04 30       	cpi	r16, 0x04	; 4
+     fc4:	11 f0       	breq	.+4      	; 0xfca <main+0x1f6>
+	ssd1306_clear();
+
+	ssd1306_set_display_start_line_address(0);
+
+
+	for (page = 0; page < GFX_MONO_LCD_PAGES; page++) {
+     fc6:	10 e0       	ldi	r17, 0x00	; 0
+     fc8:	ef cf       	rjmp	.-34     	; 0xfa8 <main+0x1d4>
+// 					if(arg_index >=10) break;
+// 					pch = strtok (NULL, "\"{},\r");
+// 				}
+		  
+	  			ssd1306_clear();
+	  			ssd1306_set_column_address(0);
+     fca:	80 e0       	ldi	r24, 0x00	; 0
+     fcc:	0e 94 a3 05 	call	0xb46	; 0xb46 <ssd1306_set_column_address>
+				ssd1306_set_page_address(0);
+     fd0:	80 e0       	ldi	r24, 0x00	; 0
+     fd2:	0e 94 9e 05 	call	0xb3c	; 0xb3c <ssd1306_set_page_address>
+	  			ssd1306_write_text(emon_rxData);
+     fd6:	ce 01       	movw	r24, r28
+     fd8:	0c 96       	adiw	r24, 0x0c	; 12
+     fda:	0e 94 7c 06 	call	0xcf8	; 0xcf8 <ssd1306_write_text>
 				  
 				_nrf24l01p_flush_rx();
-     d2c:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
+     fde:	0e 94 dd 01 	call	0x3ba	; 0x3ba <_nrf24l01p_flush_rx>
 
 
 		
  			//HID_Device_USBTask(&Generic_HID_Interface);
  			//USB_USBTask();
 	}
-     d30:	e4 cf       	rjmp	.-56     	; 0xcfa <main+0x15a>
+     fe2:	c7 cf       	rjmp	.-114    	; 0xf72 <main+0x19e>
 
-00000d32 <EVENT_USB_Device_Connect>:
+00000fe4 <EVENT_USB_Device_Connect>:
 				PORTD_OUTCLR = LEDMask & LEDS_PORTD_LEDS;
 			}
 
 			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
 			{
 				PORTR_OUTCLR = LEDS_PORTR_LEDS;
-     d32:	83 e0       	ldi	r24, 0x03	; 3
-     d34:	80 93 e6 07 	sts	0x07E6, r24
+     fe4:	83 e0       	ldi	r24, 0x03	; 3
+     fe6:	80 93 e6 07 	sts	0x07E6, r24
 				PORTD_OUTCLR = LEDS_PORTD_LEDS;
-     d38:	80 e3       	ldi	r24, 0x30	; 48
-     d3a:	80 93 66 06 	sts	0x0666, r24
+     fea:	80 e3       	ldi	r24, 0x30	; 48
+     fec:	80 93 66 06 	sts	0x0666, r24
 
 				PORTR_OUTSET = (LEDMask & LEDS_PORTR_LEDS);
-     d3e:	82 e0       	ldi	r24, 0x02	; 2
-     d40:	80 93 e5 07 	sts	0x07E5, r24
+     ff0:	82 e0       	ldi	r24, 0x02	; 2
+     ff2:	80 93 e5 07 	sts	0x07E5, r24
 				PORTD_OUTSET = (LEDMask & LEDS_PORTD_LEDS);
-     d44:	80 e1       	ldi	r24, 0x10	; 16
-     d46:	80 93 65 06 	sts	0x0665, r24
-     d4a:	08 95       	ret
+     ff6:	80 e1       	ldi	r24, 0x10	; 16
+     ff8:	80 93 65 06 	sts	0x0665, r24
+     ffc:	08 95       	ret
 
-00000d4c <EVENT_USB_Device_Disconnect>:
+00000ffe <EVENT_USB_Device_Disconnect>:
 				PORTD_OUTCLR = LEDMask & LEDS_PORTD_LEDS;
 			}
 
 			static inline void LEDs_SetAllLEDs(const uint8_t LEDMask)
 			{
 				PORTR_OUTCLR = LEDS_PORTR_LEDS;
-     d4c:	83 e0       	ldi	r24, 0x03	; 3
-     d4e:	80 93 e6 07 	sts	0x07E6, r24
+     ffe:	83 e0       	ldi	r24, 0x03	; 3
+    1000:	80 93 e6 07 	sts	0x07E6, r24
 				PORTD_OUTCLR = LEDS_PORTD_LEDS;
-     d52:	80 e3       	ldi	r24, 0x30	; 48
-     d54:	80 93 66 06 	sts	0x0666, r24
+    1004:	80 e3       	ldi	r24, 0x30	; 48
+    1006:	80 93 66 06 	sts	0x0666, r24
 
 				PORTR_OUTSET = (LEDMask & LEDS_PORTR_LEDS);
-     d58:	81 e0       	ldi	r24, 0x01	; 1
-     d5a:	80 93 e5 07 	sts	0x07E5, r24
+    100a:	81 e0       	ldi	r24, 0x01	; 1
+    100c:	80 93 e5 07 	sts	0x07E5, r24
 				PORTD_OUTSET = (LEDMask & LEDS_PORTD_LEDS);
-     d5e:	10 92 65 06 	sts	0x0665, r1
-     d62:	08 95       	ret
+    1010:	10 92 65 06 	sts	0x0665, r1
+    1014:	08 95       	ret
 
-00000d64 <EVENT_USB_Device_StartOfFrame>:
+00001016 <EVENT_USB_Device_StartOfFrame>:
 			 *  \param[in,out] HIDInterfaceInfo  Pointer to a structure containing a HID Class configuration and state.
 			 */
 			static inline void HID_Device_MillisecondElapsed(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo) ATTR_ALWAYS_INLINE ATTR_NON_NULL_PTR_ARG(1);
 			static inline void HID_Device_MillisecondElapsed(USB_ClassInfo_HID_Device_t* const HIDInterfaceInfo)
 			{
 				if (HIDInterfaceInfo->State.IdleMSRemaining)
-     d64:	80 91 9d 22 	lds	r24, 0x229D
-     d68:	90 91 9e 22 	lds	r25, 0x229E
-     d6c:	00 97       	sbiw	r24, 0x00	; 0
-     d6e:	29 f0       	breq	.+10     	; 0xd7a <EVENT_USB_Device_StartOfFrame+0x16>
+    1016:	80 91 9d 22 	lds	r24, 0x229D
+    101a:	90 91 9e 22 	lds	r25, 0x229E
+    101e:	00 97       	sbiw	r24, 0x00	; 0
+    1020:	29 f0       	breq	.+10     	; 0x102c <EVENT_USB_Device_StartOfFrame+0x16>
 				  HIDInterfaceInfo->State.IdleMSRemaining--;
-     d70:	01 97       	sbiw	r24, 0x01	; 1
-     d72:	80 93 9d 22 	sts	0x229D, r24
-     d76:	90 93 9e 22 	sts	0x229E, r25
-     d7a:	08 95       	ret
+    1022:	01 97       	sbiw	r24, 0x01	; 1
+    1024:	80 93 9d 22 	sts	0x229D, r24
+    1028:	90 93 9e 22 	sts	0x229E, r25
+    102c:	08 95       	ret
 
-00000d7c <DigitalPin_SetDIr>:
+0000102e <DigitalPin_SetDIr>:
 	SREG = sreg;	
 }
 
 
 void DigitalPin_SetDIr(DigitalPin_t *pin , bool dir){
 	if(dir) pin->_port->DIRSET = (1<< pin->_pin);
-     d7c:	66 23       	and	r22, r22
-     d7e:	79 f0       	breq	.+30     	; 0xd9e <DigitalPin_SetDIr+0x22>
-     d80:	dc 01       	movw	r26, r24
-     d82:	ed 91       	ld	r30, X+
-     d84:	fc 91       	ld	r31, X
-     d86:	11 97       	sbiw	r26, 0x01	; 1
-     d88:	21 e0       	ldi	r18, 0x01	; 1
-     d8a:	30 e0       	ldi	r19, 0x00	; 0
-     d8c:	a9 01       	movw	r20, r18
-     d8e:	12 96       	adiw	r26, 0x02	; 2
-     d90:	0c 90       	ld	r0, X
-     d92:	02 c0       	rjmp	.+4      	; 0xd98 <DigitalPin_SetDIr+0x1c>
-     d94:	44 0f       	add	r20, r20
-     d96:	55 1f       	adc	r21, r21
-     d98:	0a 94       	dec	r0
-     d9a:	e2 f7       	brpl	.-8      	; 0xd94 <DigitalPin_SetDIr+0x18>
-     d9c:	41 83       	std	Z+1, r20	; 0x01
-     d9e:	08 95       	ret
+    102e:	66 23       	and	r22, r22
+    1030:	79 f0       	breq	.+30     	; 0x1050 <DigitalPin_SetDIr+0x22>
+    1032:	dc 01       	movw	r26, r24
+    1034:	ed 91       	ld	r30, X+
+    1036:	fc 91       	ld	r31, X
+    1038:	11 97       	sbiw	r26, 0x01	; 1
+    103a:	21 e0       	ldi	r18, 0x01	; 1
+    103c:	30 e0       	ldi	r19, 0x00	; 0
+    103e:	a9 01       	movw	r20, r18
+    1040:	12 96       	adiw	r26, 0x02	; 2
+    1042:	0c 90       	ld	r0, X
+    1044:	02 c0       	rjmp	.+4      	; 0x104a <DigitalPin_SetDIr+0x1c>
+    1046:	44 0f       	add	r20, r20
+    1048:	55 1f       	adc	r21, r21
+    104a:	0a 94       	dec	r0
+    104c:	e2 f7       	brpl	.-8      	; 0x1046 <DigitalPin_SetDIr+0x18>
+    104e:	41 83       	std	Z+1, r20	; 0x01
+    1050:	08 95       	ret
 
-00000da0 <DigitalPin_SetValue>:
+00001052 <DigitalPin_SetValue>:
 }
 
 void DigitalPin_SetValue(DigitalPin_t *pin){
 	pin->_port->OUTSET = (1<< pin->_pin);
-     da0:	dc 01       	movw	r26, r24
-     da2:	ed 91       	ld	r30, X+
-     da4:	fc 91       	ld	r31, X
-     da6:	11 97       	sbiw	r26, 0x01	; 1
-     da8:	21 e0       	ldi	r18, 0x01	; 1
-     daa:	30 e0       	ldi	r19, 0x00	; 0
-     dac:	a9 01       	movw	r20, r18
-     dae:	12 96       	adiw	r26, 0x02	; 2
-     db0:	0c 90       	ld	r0, X
-     db2:	02 c0       	rjmp	.+4      	; 0xdb8 <DigitalPin_SetValue+0x18>
-     db4:	44 0f       	add	r20, r20
-     db6:	55 1f       	adc	r21, r21
-     db8:	0a 94       	dec	r0
-     dba:	e2 f7       	brpl	.-8      	; 0xdb4 <DigitalPin_SetValue+0x14>
-     dbc:	45 83       	std	Z+5, r20	; 0x05
-     dbe:	08 95       	ret
+    1052:	dc 01       	movw	r26, r24
+    1054:	ed 91       	ld	r30, X+
+    1056:	fc 91       	ld	r31, X
+    1058:	11 97       	sbiw	r26, 0x01	; 1
+    105a:	21 e0       	ldi	r18, 0x01	; 1
+    105c:	30 e0       	ldi	r19, 0x00	; 0
+    105e:	a9 01       	movw	r20, r18
+    1060:	12 96       	adiw	r26, 0x02	; 2
+    1062:	0c 90       	ld	r0, X
+    1064:	02 c0       	rjmp	.+4      	; 0x106a <DigitalPin_SetValue+0x18>
+    1066:	44 0f       	add	r20, r20
+    1068:	55 1f       	adc	r21, r21
+    106a:	0a 94       	dec	r0
+    106c:	e2 f7       	brpl	.-8      	; 0x1066 <DigitalPin_SetValue+0x14>
+    106e:	45 83       	std	Z+5, r20	; 0x05
+    1070:	08 95       	ret
 
-00000dc0 <DigitalPin_ClearValue>:
+00001072 <DigitalPin_ClearValue>:
 }
 
 void DigitalPin_ClearValue(DigitalPin_t *pin){
 	pin->_port->OUTCLR = (1<< pin->_pin);
-     dc0:	dc 01       	movw	r26, r24
-     dc2:	ed 91       	ld	r30, X+
-     dc4:	fc 91       	ld	r31, X
-     dc6:	11 97       	sbiw	r26, 0x01	; 1
-     dc8:	21 e0       	ldi	r18, 0x01	; 1
-     dca:	30 e0       	ldi	r19, 0x00	; 0
-     dcc:	a9 01       	movw	r20, r18
-     dce:	12 96       	adiw	r26, 0x02	; 2
-     dd0:	0c 90       	ld	r0, X
-     dd2:	02 c0       	rjmp	.+4      	; 0xdd8 <DigitalPin_ClearValue+0x18>
-     dd4:	44 0f       	add	r20, r20
-     dd6:	55 1f       	adc	r21, r21
-     dd8:	0a 94       	dec	r0
-     dda:	e2 f7       	brpl	.-8      	; 0xdd4 <DigitalPin_ClearValue+0x14>
-     ddc:	46 83       	std	Z+6, r20	; 0x06
-     dde:	08 95       	ret
+    1072:	dc 01       	movw	r26, r24
+    1074:	ed 91       	ld	r30, X+
+    1076:	fc 91       	ld	r31, X
+    1078:	11 97       	sbiw	r26, 0x01	; 1
+    107a:	21 e0       	ldi	r18, 0x01	; 1
+    107c:	30 e0       	ldi	r19, 0x00	; 0
+    107e:	a9 01       	movw	r20, r18
+    1080:	12 96       	adiw	r26, 0x02	; 2
+    1082:	0c 90       	ld	r0, X
+    1084:	02 c0       	rjmp	.+4      	; 0x108a <DigitalPin_ClearValue+0x18>
+    1086:	44 0f       	add	r20, r20
+    1088:	55 1f       	adc	r21, r21
+    108a:	0a 94       	dec	r0
+    108c:	e2 f7       	brpl	.-8      	; 0x1086 <DigitalPin_ClearValue+0x14>
+    108e:	46 83       	std	Z+6, r20	; 0x06
+    1090:	08 95       	ret
 
-00000de0 <__vector_25>:
+00001092 <__vector_25>:
 
 
 }
 
 #if defined(USARTC0)
 ISR(USARTC0_RXC_vect){
-     de0:	1f 92       	push	r1
-     de2:	0f 92       	push	r0
-     de4:	0f b6       	in	r0, 0x3f	; 63
-     de6:	0f 92       	push	r0
-     de8:	11 24       	eor	r1, r1
+    1092:	1f 92       	push	r1
+    1094:	0f 92       	push	r0
+    1096:	0f b6       	in	r0, 0x3f	; 63
+    1098:	0f 92       	push	r0
+    109a:	11 24       	eor	r1, r1
 
 }
-     dea:	0f 90       	pop	r0
-     dec:	0f be       	out	0x3f, r0	; 63
-     dee:	0f 90       	pop	r0
-     df0:	1f 90       	pop	r1
-     df2:	18 95       	reti
+    109c:	0f 90       	pop	r0
+    109e:	0f be       	out	0x3f, r0	; 63
+    10a0:	0f 90       	pop	r0
+    10a2:	1f 90       	pop	r1
+    10a4:	18 95       	reti
 
-00000df4 <__vector_27>:
+000010a6 <__vector_27>:
 
 ISR(USARTC0_TXC_vect){
-     df4:	1f 92       	push	r1
-     df6:	0f 92       	push	r0
-     df8:	0f b6       	in	r0, 0x3f	; 63
-     dfa:	0f 92       	push	r0
-     dfc:	11 24       	eor	r1, r1
+    10a6:	1f 92       	push	r1
+    10a8:	0f 92       	push	r0
+    10aa:	0f b6       	in	r0, 0x3f	; 63
+    10ac:	0f 92       	push	r0
+    10ae:	11 24       	eor	r1, r1
 	
 }
-     dfe:	0f 90       	pop	r0
-     e00:	0f be       	out	0x3f, r0	; 63
-     e02:	0f 90       	pop	r0
-     e04:	1f 90       	pop	r1
-     e06:	18 95       	reti
+    10b0:	0f 90       	pop	r0
+    10b2:	0f be       	out	0x3f, r0	; 63
+    10b4:	0f 90       	pop	r0
+    10b6:	1f 90       	pop	r1
+    10b8:	18 95       	reti
 
-00000e08 <__vector_26>:
+000010ba <__vector_26>:
 
 ISR(USARTC0_DRE_vect){
-     e08:	1f 92       	push	r1
-     e0a:	0f 92       	push	r0
-     e0c:	0f b6       	in	r0, 0x3f	; 63
-     e0e:	0f 92       	push	r0
-     e10:	11 24       	eor	r1, r1
+    10ba:	1f 92       	push	r1
+    10bc:	0f 92       	push	r0
+    10be:	0f b6       	in	r0, 0x3f	; 63
+    10c0:	0f 92       	push	r0
+    10c2:	11 24       	eor	r1, r1
 	
 }
-     e12:	0f 90       	pop	r0
-     e14:	0f be       	out	0x3f, r0	; 63
-     e16:	0f 90       	pop	r0
-     e18:	1f 90       	pop	r1
-     e1a:	18 95       	reti
+    10c4:	0f 90       	pop	r0
+    10c6:	0f be       	out	0x3f, r0	; 63
+    10c8:	0f 90       	pop	r0
+    10ca:	1f 90       	pop	r1
+    10cc:	18 95       	reti
 
-00000e1c <__vector_28>:
+000010ce <__vector_28>:
 #endif
 
 
 #if defined(USARTC1)
 ISR(USARTC1_RXC_vect){
-     e1c:	1f 92       	push	r1
-     e1e:	0f 92       	push	r0
-     e20:	0f b6       	in	r0, 0x3f	; 63
-     e22:	0f 92       	push	r0
-     e24:	11 24       	eor	r1, r1
+    10ce:	1f 92       	push	r1
+    10d0:	0f 92       	push	r0
+    10d2:	0f b6       	in	r0, 0x3f	; 63
+    10d4:	0f 92       	push	r0
+    10d6:	11 24       	eor	r1, r1
 	
 }
-     e26:	0f 90       	pop	r0
-     e28:	0f be       	out	0x3f, r0	; 63
-     e2a:	0f 90       	pop	r0
-     e2c:	1f 90       	pop	r1
-     e2e:	18 95       	reti
+    10d8:	0f 90       	pop	r0
+    10da:	0f be       	out	0x3f, r0	; 63
+    10dc:	0f 90       	pop	r0
+    10de:	1f 90       	pop	r1
+    10e0:	18 95       	reti
 
-00000e30 <__vector_30>:
+000010e2 <__vector_30>:
 
 ISR(USARTC1_TXC_vect){
-     e30:	1f 92       	push	r1
-     e32:	0f 92       	push	r0
-     e34:	0f b6       	in	r0, 0x3f	; 63
-     e36:	0f 92       	push	r0
-     e38:	11 24       	eor	r1, r1
+    10e2:	1f 92       	push	r1
+    10e4:	0f 92       	push	r0
+    10e6:	0f b6       	in	r0, 0x3f	; 63
+    10e8:	0f 92       	push	r0
+    10ea:	11 24       	eor	r1, r1
 	
 }
-     e3a:	0f 90       	pop	r0
-     e3c:	0f be       	out	0x3f, r0	; 63
-     e3e:	0f 90       	pop	r0
-     e40:	1f 90       	pop	r1
-     e42:	18 95       	reti
+    10ec:	0f 90       	pop	r0
+    10ee:	0f be       	out	0x3f, r0	; 63
+    10f0:	0f 90       	pop	r0
+    10f2:	1f 90       	pop	r1
+    10f4:	18 95       	reti
 
-00000e44 <__vector_29>:
+000010f6 <__vector_29>:
 
 ISR(USARTC1_DRE_vect){
-     e44:	1f 92       	push	r1
-     e46:	0f 92       	push	r0
-     e48:	0f b6       	in	r0, 0x3f	; 63
-     e4a:	0f 92       	push	r0
-     e4c:	11 24       	eor	r1, r1
+    10f6:	1f 92       	push	r1
+    10f8:	0f 92       	push	r0
+    10fa:	0f b6       	in	r0, 0x3f	; 63
+    10fc:	0f 92       	push	r0
+    10fe:	11 24       	eor	r1, r1
 	
 }
-     e4e:	0f 90       	pop	r0
-     e50:	0f be       	out	0x3f, r0	; 63
-     e52:	0f 90       	pop	r0
-     e54:	1f 90       	pop	r1
-     e56:	18 95       	reti
+    1100:	0f 90       	pop	r0
+    1102:	0f be       	out	0x3f, r0	; 63
+    1104:	0f 90       	pop	r0
+    1106:	1f 90       	pop	r1
+    1108:	18 95       	reti
 
-00000e58 <__vector_88>:
+0000110a <__vector_88>:
 #endif
 
 
 #if defined(USARTD0)
 ISR(USARTD0_RXC_vect){
-     e58:	1f 92       	push	r1
-     e5a:	0f 92       	push	r0
-     e5c:	0f b6       	in	r0, 0x3f	; 63
-     e5e:	0f 92       	push	r0
-     e60:	11 24       	eor	r1, r1
+    110a:	1f 92       	push	r1
+    110c:	0f 92       	push	r0
+    110e:	0f b6       	in	r0, 0x3f	; 63
+    1110:	0f 92       	push	r0
+    1112:	11 24       	eor	r1, r1
 	
 }
-     e62:	0f 90       	pop	r0
-     e64:	0f be       	out	0x3f, r0	; 63
-     e66:	0f 90       	pop	r0
-     e68:	1f 90       	pop	r1
-     e6a:	18 95       	reti
+    1114:	0f 90       	pop	r0
+    1116:	0f be       	out	0x3f, r0	; 63
+    1118:	0f 90       	pop	r0
+    111a:	1f 90       	pop	r1
+    111c:	18 95       	reti
 
-00000e6c <__vector_90>:
+0000111e <__vector_90>:
 
 ISR(USARTD0_TXC_vect){
-     e6c:	1f 92       	push	r1
-     e6e:	0f 92       	push	r0
-     e70:	0f b6       	in	r0, 0x3f	; 63
-     e72:	0f 92       	push	r0
-     e74:	11 24       	eor	r1, r1
+    111e:	1f 92       	push	r1
+    1120:	0f 92       	push	r0
+    1122:	0f b6       	in	r0, 0x3f	; 63
+    1124:	0f 92       	push	r0
+    1126:	11 24       	eor	r1, r1
 	
 }
-     e76:	0f 90       	pop	r0
-     e78:	0f be       	out	0x3f, r0	; 63
-     e7a:	0f 90       	pop	r0
-     e7c:	1f 90       	pop	r1
-     e7e:	18 95       	reti
+    1128:	0f 90       	pop	r0
+    112a:	0f be       	out	0x3f, r0	; 63
+    112c:	0f 90       	pop	r0
+    112e:	1f 90       	pop	r1
+    1130:	18 95       	reti
 
-00000e80 <__vector_89>:
+00001132 <__vector_89>:
 
 ISR(USARTD0_DRE_vect){
-     e80:	1f 92       	push	r1
-     e82:	0f 92       	push	r0
-     e84:	0f b6       	in	r0, 0x3f	; 63
-     e86:	0f 92       	push	r0
-     e88:	11 24       	eor	r1, r1
+    1132:	1f 92       	push	r1
+    1134:	0f 92       	push	r0
+    1136:	0f b6       	in	r0, 0x3f	; 63
+    1138:	0f 92       	push	r0
+    113a:	11 24       	eor	r1, r1
 	
 }
-     e8a:	0f 90       	pop	r0
-     e8c:	0f be       	out	0x3f, r0	; 63
-     e8e:	0f 90       	pop	r0
-     e90:	1f 90       	pop	r1
-     e92:	18 95       	reti
+    113c:	0f 90       	pop	r0
+    113e:	0f be       	out	0x3f, r0	; 63
+    1140:	0f 90       	pop	r0
+    1142:	1f 90       	pop	r1
+    1144:	18 95       	reti
 
-00000e94 <__vector_58>:
+00001146 <__vector_58>:
 	
 }
 #endif
 
 #if defined(USARTE0)
 ISR(USARTE0_RXC_vect){
-     e94:	1f 92       	push	r1
-     e96:	0f 92       	push	r0
-     e98:	0f b6       	in	r0, 0x3f	; 63
-     e9a:	0f 92       	push	r0
-     e9c:	11 24       	eor	r1, r1
+    1146:	1f 92       	push	r1
+    1148:	0f 92       	push	r0
+    114a:	0f b6       	in	r0, 0x3f	; 63
+    114c:	0f 92       	push	r0
+    114e:	11 24       	eor	r1, r1
 	
 }
-     e9e:	0f 90       	pop	r0
-     ea0:	0f be       	out	0x3f, r0	; 63
-     ea2:	0f 90       	pop	r0
-     ea4:	1f 90       	pop	r1
-     ea6:	18 95       	reti
+    1150:	0f 90       	pop	r0
+    1152:	0f be       	out	0x3f, r0	; 63
+    1154:	0f 90       	pop	r0
+    1156:	1f 90       	pop	r1
+    1158:	18 95       	reti
 
-00000ea8 <__vector_60>:
+0000115a <__vector_60>:
 
 ISR(USARTE0_TXC_vect){
-     ea8:	1f 92       	push	r1
-     eaa:	0f 92       	push	r0
-     eac:	0f b6       	in	r0, 0x3f	; 63
-     eae:	0f 92       	push	r0
-     eb0:	11 24       	eor	r1, r1
+    115a:	1f 92       	push	r1
+    115c:	0f 92       	push	r0
+    115e:	0f b6       	in	r0, 0x3f	; 63
+    1160:	0f 92       	push	r0
+    1162:	11 24       	eor	r1, r1
 	
 }
-     eb2:	0f 90       	pop	r0
-     eb4:	0f be       	out	0x3f, r0	; 63
-     eb6:	0f 90       	pop	r0
-     eb8:	1f 90       	pop	r1
-     eba:	18 95       	reti
-
-00000ebc <__vector_59>:
-
-ISR(USARTE0_DRE_vect){
-     ebc:	1f 92       	push	r1
-     ebe:	0f 92       	push	r0
-     ec0:	0f b6       	in	r0, 0x3f	; 63
-     ec2:	0f 92       	push	r0
-     ec4:	11 24       	eor	r1, r1
-	
-}
-     ec6:	0f 90       	pop	r0
-     ec8:	0f be       	out	0x3f, r0	; 63
-     eca:	0f 90       	pop	r0
-     ecc:	1f 90       	pop	r1
-     ece:	18 95       	reti
-
-00000ed0 <CCPWrite>:
- *
- *  \param address A pointer to the address to write to.
- *  \param value   The value to put in to the register.
- */
-void CCPWrite( volatile uint8_t * address, uint8_t value )
-{
-     ed0:	0f 93       	push	r16
-     ed2:	cf 93       	push	r28
-     ed4:	df 93       	push	r29
-     ed6:	1f 92       	push	r1
-     ed8:	cd b7       	in	r28, 0x3d	; 61
-     eda:	de b7       	in	r29, 0x3e	; 62
-
-	// Restore global interrupt setting from scratch register.
-        asm("out  0x3F, R1");
-
-#elif defined __GNUC__
-	AVR_ENTER_CRITICAL_REGION( );
-     edc:	2f b7       	in	r18, 0x3f	; 63
-     ede:	29 83       	std	Y+1, r18	; 0x01
-     ee0:	f8 94       	cli
-	volatile uint8_t * tmpAddr = address;
-#ifdef RAMPZ
-	RAMPZ = 0;
-     ee2:	1b be       	out	0x3b, r1	; 59
-#endif
-	asm volatile(
-     ee4:	fc 01       	movw	r30, r24
-     ee6:	08 ed       	ldi	r16, 0xD8	; 216
-     ee8:	04 bf       	out	0x34, r16	; 52
-     eea:	60 83       	st	Z, r22
-		:
-		: "r" (tmpAddr), "r" (value), "M" (CCP_IOREG_gc), "i" (&CCP)
-		: "r16", "r30", "r31"
-		);
-
-	AVR_LEAVE_CRITICAL_REGION( );
-     eec:	89 81       	ldd	r24, Y+1	; 0x01
-     eee:	8f bf       	out	0x3f, r24	; 63
-#endif
-}
-     ef0:	0f 90       	pop	r0
-     ef2:	df 91       	pop	r29
-     ef4:	cf 91       	pop	r28
-     ef6:	0f 91       	pop	r16
-     ef8:	08 95       	ret
-
-00000efa <CLKSYS_Disable>:
- *
- *  \return  Non-zero if oscillator was disabled successfully.
- */
-uint8_t CLKSYS_Disable( uint8_t oscSel )
-{
-	OSC.CTRL &= ~oscSel;
-     efa:	e0 e5       	ldi	r30, 0x50	; 80
-     efc:	f0 e0       	ldi	r31, 0x00	; 0
-     efe:	90 81       	ld	r25, Z
-     f00:	28 2f       	mov	r18, r24
-     f02:	20 95       	com	r18
-     f04:	92 23       	and	r25, r18
-     f06:	90 83       	st	Z, r25
-	uint8_t clkEnabled = OSC.CTRL & oscSel;
-     f08:	90 81       	ld	r25, Z
-	return clkEnabled;
-}
-     f0a:	89 23       	and	r24, r25
-     f0c:	08 95       	ret
-
-00000f0e <CLKSYS_Main_ClockSource_Select>:
- *                       prescaler block.
- *
- *  \return  Non-zero if change was successful.
- */
-uint8_t CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_t clockSource )
-{
-     f0e:	0f 93       	push	r16
-     f10:	1f 93       	push	r17
-     f12:	cf 93       	push	r28
-     f14:	c8 2f       	mov	r28, r24
-	uint8_t clkCtrl = ( CLK.CTRL & ~CLK_SCLKSEL_gm ) | clockSource;
-     f16:	00 e4       	ldi	r16, 0x40	; 64
-     f18:	10 e0       	ldi	r17, 0x00	; 0
-     f1a:	f8 01       	movw	r30, r16
-     f1c:	60 81       	ld	r22, Z
-     f1e:	68 7f       	andi	r22, 0xF8	; 248
-     f20:	68 2b       	or	r22, r24
-	CCPWrite( &CLK.CTRL, clkCtrl );
-     f22:	80 e4       	ldi	r24, 0x40	; 64
-     f24:	90 e0       	ldi	r25, 0x00	; 0
-     f26:	0e 94 68 07 	call	0xed0	; 0xed0 <CCPWrite>
-	clkCtrl = ( CLK.CTRL & clockSource );
-     f2a:	f8 01       	movw	r30, r16
-     f2c:	80 81       	ld	r24, Z
-	return clkCtrl;
-}
-     f2e:	8c 23       	and	r24, r28
-     f30:	cf 91       	pop	r28
-     f32:	1f 91       	pop	r17
-     f34:	0f 91       	pop	r16
-     f36:	08 95       	ret
-
-00000f38 <USB_Event_Stub>:
-#define  __INCLUDE_FROM_EVENTS_C
-#define  __INCLUDE_FROM_USB_DRIVER
-#include "Events.h"
-
-void USB_Event_Stub(void)
-{
-     f38:	08 95       	ret
-
-00000f3a <Endpoint_SelectEndpoint>:
-
-void Endpoint_SelectEndpoint(const uint8_t Address)
-{
-	uint8_t EndpointNumber = (Address & ENDPOINT_EPNUM_MASK);
-
-	USB_Endpoint_SelectedEndpoint = Address;
-     f3a:	80 93 dc 24 	sts	0x24DC, r24
-	USB_Endpoint_SelectedFIFO->Data[USB_Endpoint_SelectedFIFO->Position++] = Data;
-}
-
-void Endpoint_SelectEndpoint(const uint8_t Address)
-{
-	uint8_t EndpointNumber = (Address & ENDPOINT_EPNUM_MASK);
-     f3e:	28 2f       	mov	r18, r24
-     f40:	2f 70       	andi	r18, 0x0F	; 15
-
-	USB_Endpoint_SelectedEndpoint = Address;
-
-	Endpoint_FIFOPair_t* EndpointFIFOPair = &USB_Endpoint_FIFOs[EndpointNumber];
-     f42:	30 e0       	ldi	r19, 0x00	; 0
-	USB_EndpointTable_t* EndpointTable    = (USB_EndpointTable_t*)USB.EPPTR;
-     f44:	40 91 c6 04 	lds	r20, 0x04C6
-     f48:	50 91 c7 04 	lds	r21, 0x04C7
-
-	if (Address & ENDPOINT_DIR_IN)
-     f4c:	88 23       	and	r24, r24
-     f4e:	e4 f4       	brge	.+56     	; 0xf88 <Endpoint_SelectEndpoint+0x4e>
-	{
-		USB_Endpoint_SelectedFIFO   = &EndpointFIFOPair->IN;
-     f50:	64 e8       	ldi	r22, 0x84	; 132
-     f52:	62 9f       	mul	r22, r18
-     f54:	c0 01       	movw	r24, r0
-     f56:	63 9f       	mul	r22, r19
-     f58:	90 0d       	add	r25, r0
-     f5a:	11 24       	eor	r1, r1
-     f5c:	81 5e       	subi	r24, 0xE1	; 225
-     f5e:	9a 4d       	sbci	r25, 0xDA	; 218
-     f60:	80 93 d8 24 	sts	0x24D8, r24
-     f64:	90 93 d9 24 	sts	0x24D9, r25
-		USB_Endpoint_SelectedHandle = &EndpointTable->Endpoints[EndpointNumber].IN;
-     f68:	c9 01       	movw	r24, r18
-     f6a:	82 95       	swap	r24
-     f6c:	92 95       	swap	r25
-     f6e:	90 7f       	andi	r25, 0xF0	; 240
-     f70:	98 27       	eor	r25, r24
-     f72:	80 7f       	andi	r24, 0xF0	; 240
-     f74:	98 27       	eor	r25, r24
-     f76:	08 96       	adiw	r24, 0x08	; 8
-     f78:	9a 01       	movw	r18, r20
-     f7a:	28 0f       	add	r18, r24
-     f7c:	39 1f       	adc	r19, r25
-     f7e:	20 93 da 24 	sts	0x24DA, r18
-     f82:	30 93 db 24 	sts	0x24DB, r19
-     f86:	08 95       	ret
-	}
-	else
-	{
-		USB_Endpoint_SelectedFIFO   = &EndpointFIFOPair->OUT;
-     f88:	64 e8       	ldi	r22, 0x84	; 132
-     f8a:	62 9f       	mul	r22, r18
-     f8c:	c0 01       	movw	r24, r0
-     f8e:	63 9f       	mul	r22, r19
-     f90:	90 0d       	add	r25, r0
-     f92:	11 24       	eor	r1, r1
-     f94:	83 52       	subi	r24, 0x23	; 35
-     f96:	9b 4d       	sbci	r25, 0xDB	; 219
-     f98:	80 93 d8 24 	sts	0x24D8, r24
-     f9c:	90 93 d9 24 	sts	0x24D9, r25
-		USB_Endpoint_SelectedHandle = &EndpointTable->Endpoints[EndpointNumber].OUT;
-     fa0:	22 95       	swap	r18
-     fa2:	32 95       	swap	r19
-     fa4:	30 7f       	andi	r19, 0xF0	; 240
-     fa6:	32 27       	eor	r19, r18
-     fa8:	20 7f       	andi	r18, 0xF0	; 240
-     faa:	32 27       	eor	r19, r18
-     fac:	24 0f       	add	r18, r20
-     fae:	35 1f       	adc	r19, r21
-     fb0:	20 93 da 24 	sts	0x24DA, r18
-     fb4:	30 93 db 24 	sts	0x24DB, r19
-     fb8:	08 95       	ret
-
-00000fba <Endpoint_ConfigureEndpoint_PRV>:
-}
-
-bool Endpoint_ConfigureEndpoint_PRV(const uint8_t Address,
-                                    const uint8_t Config,
-                                    const uint8_t Size)
-{
-     fba:	1f 93       	push	r17
-     fbc:	cf 93       	push	r28
-     fbe:	df 93       	push	r29
-     fc0:	d8 2f       	mov	r29, r24
-     fc2:	16 2f       	mov	r17, r22
-     fc4:	c4 2f       	mov	r28, r20
-	Endpoint_SelectEndpoint(Address);
-     fc6:	0e 94 9d 07 	call	0xf3a	; 0xf3a <Endpoint_SelectEndpoint>
-
-	USB_Endpoint_SelectedHandle->CTRL    = 0;
-     fca:	e0 91 da 24 	lds	r30, 0x24DA
-     fce:	f0 91 db 24 	lds	r31, 0x24DB
-     fd2:	11 82       	std	Z+1, r1	; 0x01
-	USB_Endpoint_SelectedHandle->STATUS  = (Address & ENDPOINT_DIR_IN) ? USB_EP_BUSNACK0_bm : 0;
-     fd4:	e0 91 da 24 	lds	r30, 0x24DA
-     fd8:	f0 91 db 24 	lds	r31, 0x24DB
-     fdc:	dd 23       	and	r29, r29
-     fde:	a4 f0       	brlt	.+40     	; 0x1008 <Endpoint_ConfigureEndpoint_PRV+0x4e>
-     fe0:	10 82       	st	Z, r1
-	USB_Endpoint_SelectedHandle->CTRL    = Config;
-     fe2:	e0 91 da 24 	lds	r30, 0x24DA
-     fe6:	f0 91 db 24 	lds	r31, 0x24DB
-     fea:	11 83       	std	Z+1, r17	; 0x01
-	USB_Endpoint_SelectedHandle->CNT     = 0;
-     fec:	e0 91 da 24 	lds	r30, 0x24DA
-     ff0:	f0 91 db 24 	lds	r31, 0x24DB
-     ff4:	12 82       	std	Z+2, r1	; 0x02
-     ff6:	13 82       	std	Z+3, r1	; 0x03
-	USB_Endpoint_SelectedHandle->DATAPTR = (intptr_t)USB_Endpoint_SelectedFIFO->Data;
-     ff8:	80 91 d8 24 	lds	r24, 0x24D8
-     ffc:	90 91 d9 24 	lds	r25, 0x24D9
-    1000:	84 83       	std	Z+4, r24	; 0x04
-    1002:	95 83       	std	Z+5, r25	; 0x05
-
-	USB_Endpoint_SelectedFIFO->Length    = (Address & ENDPOINT_DIR_IN) ? Size : 0;
-    1004:	40 e0       	ldi	r20, 0x00	; 0
-    1006:	14 c0       	rjmp	.+40     	; 0x1030 <Endpoint_ConfigureEndpoint_PRV+0x76>
-                                    const uint8_t Size)
-{
-	Endpoint_SelectEndpoint(Address);
-
-	USB_Endpoint_SelectedHandle->CTRL    = 0;
-	USB_Endpoint_SelectedHandle->STATUS  = (Address & ENDPOINT_DIR_IN) ? USB_EP_BUSNACK0_bm : 0;
-    1008:	82 e0       	ldi	r24, 0x02	; 2
-    100a:	80 83       	st	Z, r24
-	USB_Endpoint_SelectedHandle->CTRL    = Config;
-    100c:	e0 91 da 24 	lds	r30, 0x24DA
-    1010:	f0 91 db 24 	lds	r31, 0x24DB
-    1014:	11 83       	std	Z+1, r17	; 0x01
-	USB_Endpoint_SelectedHandle->CNT     = 0;
-    1016:	e0 91 da 24 	lds	r30, 0x24DA
-    101a:	f0 91 db 24 	lds	r31, 0x24DB
-    101e:	12 82       	std	Z+2, r1	; 0x02
-    1020:	13 82       	std	Z+3, r1	; 0x03
-	USB_Endpoint_SelectedHandle->DATAPTR = (intptr_t)USB_Endpoint_SelectedFIFO->Data;
-    1022:	80 91 d8 24 	lds	r24, 0x24D8
-    1026:	90 91 d9 24 	lds	r25, 0x24D9
-    102a:	84 83       	std	Z+4, r24	; 0x04
-    102c:	95 83       	std	Z+5, r25	; 0x05
-
-	USB_Endpoint_SelectedFIFO->Length    = (Address & ENDPOINT_DIR_IN) ? Size : 0;
-    102e:	4c 2f       	mov	r20, r28
-    1030:	fc 01       	movw	r30, r24
-    1032:	e0 5c       	subi	r30, 0xC0	; 192
-    1034:	ff 4f       	sbci	r31, 0xFF	; 255
-    1036:	40 83       	st	Z, r20
-	USB_Endpoint_SelectedFIFO->Position  = 0;
-    1038:	31 96       	adiw	r30, 0x01	; 1
-    103a:	10 82       	st	Z, r1
-
-	return true;
-}
-    103c:	81 e0       	ldi	r24, 0x01	; 1
-    103e:	df 91       	pop	r29
-    1040:	cf 91       	pop	r28
-    1042:	1f 91       	pop	r17
-    1044:	08 95       	ret
-
-00001046 <Endpoint_ClearEndpoints>:
-
-void Endpoint_ClearEndpoints(void)
-{
-    1046:	20 e0       	ldi	r18, 0x00	; 0
-    1048:	30 e0       	ldi	r19, 0x00	; 0
-	for (uint8_t EPNum = 0; EPNum < ENDPOINT_TOTAL_ENDPOINTS; EPNum++)
-	{
-		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].IN.CTRL  = 0;
-    104a:	a0 ec       	ldi	r26, 0xC0	; 192
-    104c:	b4 e0       	ldi	r27, 0x04	; 4
-    104e:	16 96       	adiw	r26, 0x06	; 6
-    1050:	ed 91       	ld	r30, X+
-    1052:	fc 91       	ld	r31, X
-    1054:	17 97       	sbiw	r26, 0x07	; 7
-    1056:	c9 01       	movw	r24, r18
-    1058:	82 95       	swap	r24
-    105a:	92 95       	swap	r25
-    105c:	90 7f       	andi	r25, 0xF0	; 240
-    105e:	98 27       	eor	r25, r24
-    1060:	80 7f       	andi	r24, 0xF0	; 240
-    1062:	98 27       	eor	r25, r24
-    1064:	e8 0f       	add	r30, r24
-    1066:	f9 1f       	adc	r31, r25
-    1068:	11 86       	std	Z+9, r1	; 0x09
-		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].OUT.CTRL = 0;
-    106a:	16 96       	adiw	r26, 0x06	; 6
-    106c:	4d 91       	ld	r20, X+
-    106e:	5c 91       	ld	r21, X
-    1070:	17 97       	sbiw	r26, 0x07	; 7
-    1072:	fa 01       	movw	r30, r20
-    1074:	e8 0f       	add	r30, r24
-    1076:	f9 1f       	adc	r31, r25
-    1078:	11 82       	std	Z+1, r1	; 0x01
-    107a:	2f 5f       	subi	r18, 0xFF	; 255
-    107c:	3f 4f       	sbci	r19, 0xFF	; 255
-	return true;
-}
-
-void Endpoint_ClearEndpoints(void)
-{
-	for (uint8_t EPNum = 0; EPNum < ENDPOINT_TOTAL_ENDPOINTS; EPNum++)
-    107e:	25 30       	cpi	r18, 0x05	; 5
-    1080:	31 05       	cpc	r19, r1
-    1082:	29 f7       	brne	.-54     	; 0x104e <Endpoint_ClearEndpoints+0x8>
-	{
-		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].IN.CTRL  = 0;
-		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].OUT.CTRL = 0;
-	}
-}
-    1084:	08 95       	ret
-
-00001086 <__vector_125>:
-	USB.INTFLAGSACLR = 0xFF;
-	USB.INTFLAGSBCLR = 0xFF;
-}
-
-ISR(USB_BUSEVENT_vect)
-{
-    1086:	1f 92       	push	r1
-    1088:	0f 92       	push	r0
-    108a:	0f b6       	in	r0, 0x3f	; 63
-    108c:	0f 92       	push	r0
-    108e:	11 24       	eor	r1, r1
-    1090:	0b b6       	in	r0, 0x3b	; 59
-    1092:	0f 92       	push	r0
-    1094:	2f 93       	push	r18
-    1096:	3f 93       	push	r19
-    1098:	4f 93       	push	r20
-    109a:	5f 93       	push	r21
-    109c:	6f 93       	push	r22
-    109e:	7f 93       	push	r23
-    10a0:	8f 93       	push	r24
-    10a2:	9f 93       	push	r25
-    10a4:	af 93       	push	r26
-    10a6:	bf 93       	push	r27
-    10a8:	ef 93       	push	r30
-    10aa:	ff 93       	push	r31
-					case USB_INT_BUSEVENTI_Resume:
-						return ((USB.INTFLAGSACLR & USB_RESUMEIF_bm) ? true : false);
-					case USB_INT_BUSEVENTI_Reset:
-						return ((USB.INTFLAGSACLR & USB_RSTIF_bm) ? true : false);
-					case USB_INT_SOFI:
-						return ((USB.INTFLAGSACLR & USB_SOFIF_bm) ? true : false);
-    10ac:	80 91 ca 04 	lds	r24, 0x04CA
-	#if !defined(NO_SOF_EVENTS)
-	if (USB_INT_HasOccurred(USB_INT_SOFI) && USB_INT_IsEnabled(USB_INT_SOFI))
-    10b0:	88 23       	and	r24, r24
-    10b2:	4c f4       	brge	.+18     	; 0x10c6 <__vector_125+0x40>
-				switch (Interrupt)
-				{
-					case USB_INT_BUSEVENTI:
-						return ((USB.INTCTRLA & USB_BUSEVIE_bm) ? true : false);
-					case USB_INT_SOFI:
-						return ((USB.INTCTRLA & USB_SOFIE_bm) ? true : false);
-    10b4:	80 91 c8 04 	lds	r24, 0x04C8
-    10b8:	88 23       	and	r24, r24
-    10ba:	2c f4       	brge	.+10     	; 0x10c6 <__vector_125+0x40>
-						break;
-					case USB_INT_BUSEVENTI_Reset:
-						USB.INTFLAGSACLR = USB_RSTIF_bm;
-						break;
-					case USB_INT_SOFI:
-						USB.INTFLAGSACLR = USB_SOFIF_bm;
-    10bc:	80 e8       	ldi	r24, 0x80	; 128
-    10be:	80 93 ca 04 	sts	0x04CA, r24
-	{
-		USB_INT_Clear(USB_INT_SOFI);
-
-		EVENT_USB_Device_StartOfFrame();
-    10c2:	0e 94 b2 06 	call	0xd64	; 0xd64 <EVENT_USB_Device_StartOfFrame>
-			static inline bool USB_INT_HasOccurred(const uint8_t Interrupt)
-			{
-				switch (Interrupt)
-				{
-					case USB_INT_BUSEVENTI_Suspend:
-						return ((USB.INTFLAGSACLR & USB_SUSPENDIF_bm) ? true : false);
-    10c6:	80 91 ca 04 	lds	r24, 0x04CA
-	}
-	#endif
-
-	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Suspend))
-    10ca:	86 ff       	sbrs	r24, 6
-    10cc:	07 c0       	rjmp	.+14     	; 0x10dc <__vector_125+0x56>
-			static inline void USB_INT_Clear(const uint8_t Interrupt)
-			{
-				switch (Interrupt)
-				{
-					case USB_INT_BUSEVENTI_Suspend:
-						USB.INTFLAGSACLR = USB_SUSPENDIF_bm;
-    10ce:	80 e4       	ldi	r24, 0x40	; 64
-    10d0:	80 93 ca 04 	sts	0x04CA, r24
-	{
-		USB_INT_Clear(USB_INT_BUSEVENTI_Suspend);
-
-		#if !defined(NO_LIMITED_CONTROLLER_CONNECT)
-		USB_DeviceState = DEVICE_STATE_Unattached;
-    10d4:	10 92 cf 24 	sts	0x24CF, r1
-		EVENT_USB_Device_Disconnect();
-    10d8:	0e 94 a6 06 	call	0xd4c	; 0xd4c <EVENT_USB_Device_Disconnect>
-				switch (Interrupt)
-				{
-					case USB_INT_BUSEVENTI_Suspend:
-						return ((USB.INTFLAGSACLR & USB_SUSPENDIF_bm) ? true : false);
-					case USB_INT_BUSEVENTI_Resume:
-						return ((USB.INTFLAGSACLR & USB_RESUMEIF_bm) ? true : false);
-    10dc:	80 91 ca 04 	lds	r24, 0x04CA
-		USB_DeviceState = DEVICE_STATE_Suspended;
-		EVENT_USB_Device_Suspend();
-		#endif
-	}
-
-	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Resume))
-    10e0:	85 ff       	sbrs	r24, 5
-    10e2:	16 c0       	rjmp	.+44     	; 0x1110 <__vector_125+0x8a>
-				{
-					case USB_INT_BUSEVENTI_Suspend:
-						USB.INTFLAGSACLR = USB_SUSPENDIF_bm;
-						break;
-					case USB_INT_BUSEVENTI_Resume:
-						USB.INTFLAGSACLR = USB_RESUMEIF_bm;
-    10e4:	80 e2       	ldi	r24, 0x20	; 32
-    10e6:	80 93 ca 04 	sts	0x04CA, r24
-	{
-		USB_INT_Clear(USB_INT_BUSEVENTI_Resume);
-
-		if (USB_Device_ConfigurationNumber)
-    10ea:	80 91 cb 24 	lds	r24, 0x24CB
-    10ee:	88 23       	and	r24, r24
-    10f0:	21 f0       	breq	.+8      	; 0x10fa <__vector_125+0x74>
-		  USB_DeviceState = DEVICE_STATE_Configured;
-    10f2:	84 e0       	ldi	r24, 0x04	; 4
-    10f4:	80 93 cf 24 	sts	0x24CF, r24
-    10f8:	09 c0       	rjmp	.+18     	; 0x110c <__vector_125+0x86>
-			}
-
-			static inline bool USB_Device_IsAddressSet(void) ATTR_ALWAYS_INLINE ATTR_WARN_UNUSED_RESULT;
-			static inline bool USB_Device_IsAddressSet(void)
-			{
-				return ((USB.ADDR != 0) ? true : false);
-    10fa:	80 91 c3 04 	lds	r24, 0x04C3
-		else
-		  USB_DeviceState = (USB_Device_IsAddressSet()) ? DEVICE_STATE_Addressed : DEVICE_STATE_Powered;
-    10fe:	81 11       	cpse	r24, r1
-    1100:	02 c0       	rjmp	.+4      	; 0x1106 <__vector_125+0x80>
-    1102:	81 e0       	ldi	r24, 0x01	; 1
-    1104:	01 c0       	rjmp	.+2      	; 0x1108 <__vector_125+0x82>
-    1106:	83 e0       	ldi	r24, 0x03	; 3
-    1108:	80 93 cf 24 	sts	0x24CF, r24
-
-		#if !defined(NO_LIMITED_CONTROLLER_CONNECT)
-		EVENT_USB_Device_Connect();
-    110c:	0e 94 99 06 	call	0xd32	; 0xd32 <EVENT_USB_Device_Connect>
-					case USB_INT_BUSEVENTI_Suspend:
-						return ((USB.INTFLAGSACLR & USB_SUSPENDIF_bm) ? true : false);
-					case USB_INT_BUSEVENTI_Resume:
-						return ((USB.INTFLAGSACLR & USB_RESUMEIF_bm) ? true : false);
-					case USB_INT_BUSEVENTI_Reset:
-						return ((USB.INTFLAGSACLR & USB_RSTIF_bm) ? true : false);
-    1110:	80 91 ca 04 	lds	r24, 0x04CA
-		#else
-		EVENT_USB_Device_WakeUp();
-		#endif
-	}
-
-	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Reset))
-    1114:	84 ff       	sbrs	r24, 4
-    1116:	18 c0       	rjmp	.+48     	; 0x1148 <__vector_125+0xc2>
-						break;
-					case USB_INT_BUSEVENTI_Resume:
-						USB.INTFLAGSACLR = USB_RESUMEIF_bm;
-						break;
-					case USB_INT_BUSEVENTI_Reset:
-						USB.INTFLAGSACLR = USB_RSTIF_bm;
-    1118:	e0 ec       	ldi	r30, 0xC0	; 192
-    111a:	f4 e0       	ldi	r31, 0x04	; 4
-    111c:	80 e1       	ldi	r24, 0x10	; 16
-    111e:	82 87       	std	Z+10, r24	; 0x0a
-	{
-		USB_INT_Clear(USB_INT_BUSEVENTI_Reset);
-
-		USB_DeviceState                = DEVICE_STATE_Default;
-    1120:	82 e0       	ldi	r24, 0x02	; 2
-    1122:	80 93 cf 24 	sts	0x24CF, r24
-		USB_Device_ConfigurationNumber = 0;
-    1126:	10 92 cb 24 	sts	0x24CB, r1
-			}
-
-			static inline void USB_Device_EnableDeviceAddress(const uint8_t Address) ATTR_ALWAYS_INLINE;
-			static inline void USB_Device_EnableDeviceAddress(const uint8_t Address)
-			{
-				USB.ADDR = Address;
-    112a:	13 82       	std	Z+3, r1	; 0x03
-
-		USB_Device_EnableDeviceAddress(0);
-
-		Endpoint_ClearEndpoints();
-    112c:	0e 94 23 08 	call	0x1046	; 0x1046 <Endpoint_ClearEndpoints>
-						EPConfigMask |= USB_EP_TYPE_BULK_gc;
-						break;
-				}
-
-				if (Type == EP_TYPE_CONTROL)
-				  Endpoint_ConfigureEndpoint_PRV(Address ^ ENDPOINT_DIR_IN, EPConfigMask, Size);
-    1130:	48 e0       	ldi	r20, 0x08	; 8
-    1132:	68 e4       	ldi	r22, 0x48	; 72
-    1134:	80 e8       	ldi	r24, 0x80	; 128
-    1136:	0e 94 dd 07 	call	0xfba	; 0xfba <Endpoint_ConfigureEndpoint_PRV>
-
-				return Endpoint_ConfigureEndpoint_PRV(Address, EPConfigMask, Size);
-    113a:	48 e0       	ldi	r20, 0x08	; 8
-    113c:	68 e4       	ldi	r22, 0x48	; 72
-    113e:	80 e0       	ldi	r24, 0x00	; 0
-    1140:	0e 94 dd 07 	call	0xfba	; 0xfba <Endpoint_ConfigureEndpoint_PRV>
-		Endpoint_ConfigureEndpoint(ENDPOINT_CONTROLEP, EP_TYPE_CONTROL,
-		                           USB_Device_ControlEndpointSize, 1);
-
-		EVENT_USB_Device_Reset();
-    1144:	0e 94 9c 07 	call	0xf38	; 0xf38 <USB_Event_Stub>
-	}
-}
-    1148:	ff 91       	pop	r31
-    114a:	ef 91       	pop	r30
-    114c:	bf 91       	pop	r27
-    114e:	af 91       	pop	r26
-    1150:	9f 91       	pop	r25
-    1152:	8f 91       	pop	r24
-    1154:	7f 91       	pop	r23
-    1156:	6f 91       	pop	r22
-    1158:	5f 91       	pop	r21
-    115a:	4f 91       	pop	r20
-    115c:	3f 91       	pop	r19
-    115e:	2f 91       	pop	r18
-    1160:	0f 90       	pop	r0
-    1162:	0b be       	out	0x3b, r0	; 59
     1164:	0f 90       	pop	r0
     1166:	0f be       	out	0x3f, r0	; 63
     1168:	0f 90       	pop	r0
     116a:	1f 90       	pop	r1
     116c:	18 95       	reti
 
-0000116e <rtc_initialize>:
+0000116e <__vector_59>:
+
+ISR(USARTE0_DRE_vect){
+    116e:	1f 92       	push	r1
+    1170:	0f 92       	push	r0
+    1172:	0f b6       	in	r0, 0x3f	; 63
+    1174:	0f 92       	push	r0
+    1176:	11 24       	eor	r1, r1
+	
+}
+    1178:	0f 90       	pop	r0
+    117a:	0f be       	out	0x3f, r0	; 63
+    117c:	0f 90       	pop	r0
+    117e:	1f 90       	pop	r1
+    1180:	18 95       	reti
+
+00001182 <CCPWrite>:
+ *
+ *  \param address A pointer to the address to write to.
+ *  \param value   The value to put in to the register.
+ */
+void CCPWrite( volatile uint8_t * address, uint8_t value )
+{
+    1182:	0f 93       	push	r16
+    1184:	cf 93       	push	r28
+    1186:	df 93       	push	r29
+    1188:	1f 92       	push	r1
+    118a:	cd b7       	in	r28, 0x3d	; 61
+    118c:	de b7       	in	r29, 0x3e	; 62
+
+	// Restore global interrupt setting from scratch register.
+        asm("out  0x3F, R1");
+
+#elif defined __GNUC__
+	AVR_ENTER_CRITICAL_REGION( );
+    118e:	2f b7       	in	r18, 0x3f	; 63
+    1190:	29 83       	std	Y+1, r18	; 0x01
+    1192:	f8 94       	cli
+	volatile uint8_t * tmpAddr = address;
+#ifdef RAMPZ
+	RAMPZ = 0;
+    1194:	1b be       	out	0x3b, r1	; 59
+#endif
+	asm volatile(
+    1196:	fc 01       	movw	r30, r24
+    1198:	08 ed       	ldi	r16, 0xD8	; 216
+    119a:	04 bf       	out	0x34, r16	; 52
+    119c:	60 83       	st	Z, r22
+		:
+		: "r" (tmpAddr), "r" (value), "M" (CCP_IOREG_gc), "i" (&CCP)
+		: "r16", "r30", "r31"
+		);
+
+	AVR_LEAVE_CRITICAL_REGION( );
+    119e:	89 81       	ldd	r24, Y+1	; 0x01
+    11a0:	8f bf       	out	0x3f, r24	; 63
+#endif
+}
+    11a2:	0f 90       	pop	r0
+    11a4:	df 91       	pop	r29
+    11a6:	cf 91       	pop	r28
+    11a8:	0f 91       	pop	r16
+    11aa:	08 95       	ret
+
+000011ac <CLKSYS_Disable>:
+ *
+ *  \return  Non-zero if oscillator was disabled successfully.
+ */
+uint8_t CLKSYS_Disable( uint8_t oscSel )
+{
+	OSC.CTRL &= ~oscSel;
+    11ac:	e0 e5       	ldi	r30, 0x50	; 80
+    11ae:	f0 e0       	ldi	r31, 0x00	; 0
+    11b0:	90 81       	ld	r25, Z
+    11b2:	28 2f       	mov	r18, r24
+    11b4:	20 95       	com	r18
+    11b6:	92 23       	and	r25, r18
+    11b8:	90 83       	st	Z, r25
+	uint8_t clkEnabled = OSC.CTRL & oscSel;
+    11ba:	90 81       	ld	r25, Z
+	return clkEnabled;
+}
+    11bc:	89 23       	and	r24, r25
+    11be:	08 95       	ret
+
+000011c0 <CLKSYS_Main_ClockSource_Select>:
+ *                       prescaler block.
+ *
+ *  \return  Non-zero if change was successful.
+ */
+uint8_t CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_t clockSource )
+{
+    11c0:	0f 93       	push	r16
+    11c2:	1f 93       	push	r17
+    11c4:	cf 93       	push	r28
+    11c6:	c8 2f       	mov	r28, r24
+	uint8_t clkCtrl = ( CLK.CTRL & ~CLK_SCLKSEL_gm ) | clockSource;
+    11c8:	00 e4       	ldi	r16, 0x40	; 64
+    11ca:	10 e0       	ldi	r17, 0x00	; 0
+    11cc:	f8 01       	movw	r30, r16
+    11ce:	60 81       	ld	r22, Z
+    11d0:	68 7f       	andi	r22, 0xF8	; 248
+    11d2:	68 2b       	or	r22, r24
+	CCPWrite( &CLK.CTRL, clkCtrl );
+    11d4:	80 e4       	ldi	r24, 0x40	; 64
+    11d6:	90 e0       	ldi	r25, 0x00	; 0
+    11d8:	0e 94 c1 08 	call	0x1182	; 0x1182 <CCPWrite>
+	clkCtrl = ( CLK.CTRL & clockSource );
+    11dc:	f8 01       	movw	r30, r16
+    11de:	80 81       	ld	r24, Z
+	return clkCtrl;
+}
+    11e0:	8c 23       	and	r24, r28
+    11e2:	cf 91       	pop	r28
+    11e4:	1f 91       	pop	r17
+    11e6:	0f 91       	pop	r16
+    11e8:	08 95       	ret
+
+000011ea <USB_Event_Stub>:
+#define  __INCLUDE_FROM_EVENTS_C
+#define  __INCLUDE_FROM_USB_DRIVER
+#include "Events.h"
+
+void USB_Event_Stub(void)
+{
+    11ea:	08 95       	ret
+
+000011ec <Endpoint_SelectEndpoint>:
+
+void Endpoint_SelectEndpoint(const uint8_t Address)
+{
+	uint8_t EndpointNumber = (Address & ENDPOINT_EPNUM_MASK);
+
+	USB_Endpoint_SelectedEndpoint = Address;
+    11ec:	80 93 dc 24 	sts	0x24DC, r24
+	USB_Endpoint_SelectedFIFO->Data[USB_Endpoint_SelectedFIFO->Position++] = Data;
+}
+
+void Endpoint_SelectEndpoint(const uint8_t Address)
+{
+	uint8_t EndpointNumber = (Address & ENDPOINT_EPNUM_MASK);
+    11f0:	28 2f       	mov	r18, r24
+    11f2:	2f 70       	andi	r18, 0x0F	; 15
+
+	USB_Endpoint_SelectedEndpoint = Address;
+
+	Endpoint_FIFOPair_t* EndpointFIFOPair = &USB_Endpoint_FIFOs[EndpointNumber];
+    11f4:	30 e0       	ldi	r19, 0x00	; 0
+	USB_EndpointTable_t* EndpointTable    = (USB_EndpointTable_t*)USB.EPPTR;
+    11f6:	40 91 c6 04 	lds	r20, 0x04C6
+    11fa:	50 91 c7 04 	lds	r21, 0x04C7
+
+	if (Address & ENDPOINT_DIR_IN)
+    11fe:	88 23       	and	r24, r24
+    1200:	e4 f4       	brge	.+56     	; 0x123a <Endpoint_SelectEndpoint+0x4e>
+	{
+		USB_Endpoint_SelectedFIFO   = &EndpointFIFOPair->IN;
+    1202:	64 e8       	ldi	r22, 0x84	; 132
+    1204:	62 9f       	mul	r22, r18
+    1206:	c0 01       	movw	r24, r0
+    1208:	63 9f       	mul	r22, r19
+    120a:	90 0d       	add	r25, r0
+    120c:	11 24       	eor	r1, r1
+    120e:	81 5e       	subi	r24, 0xE1	; 225
+    1210:	9a 4d       	sbci	r25, 0xDA	; 218
+    1212:	80 93 d8 24 	sts	0x24D8, r24
+    1216:	90 93 d9 24 	sts	0x24D9, r25
+		USB_Endpoint_SelectedHandle = &EndpointTable->Endpoints[EndpointNumber].IN;
+    121a:	c9 01       	movw	r24, r18
+    121c:	82 95       	swap	r24
+    121e:	92 95       	swap	r25
+    1220:	90 7f       	andi	r25, 0xF0	; 240
+    1222:	98 27       	eor	r25, r24
+    1224:	80 7f       	andi	r24, 0xF0	; 240
+    1226:	98 27       	eor	r25, r24
+    1228:	08 96       	adiw	r24, 0x08	; 8
+    122a:	9a 01       	movw	r18, r20
+    122c:	28 0f       	add	r18, r24
+    122e:	39 1f       	adc	r19, r25
+    1230:	20 93 da 24 	sts	0x24DA, r18
+    1234:	30 93 db 24 	sts	0x24DB, r19
+    1238:	08 95       	ret
+	}
+	else
+	{
+		USB_Endpoint_SelectedFIFO   = &EndpointFIFOPair->OUT;
+    123a:	64 e8       	ldi	r22, 0x84	; 132
+    123c:	62 9f       	mul	r22, r18
+    123e:	c0 01       	movw	r24, r0
+    1240:	63 9f       	mul	r22, r19
+    1242:	90 0d       	add	r25, r0
+    1244:	11 24       	eor	r1, r1
+    1246:	83 52       	subi	r24, 0x23	; 35
+    1248:	9b 4d       	sbci	r25, 0xDB	; 219
+    124a:	80 93 d8 24 	sts	0x24D8, r24
+    124e:	90 93 d9 24 	sts	0x24D9, r25
+		USB_Endpoint_SelectedHandle = &EndpointTable->Endpoints[EndpointNumber].OUT;
+    1252:	22 95       	swap	r18
+    1254:	32 95       	swap	r19
+    1256:	30 7f       	andi	r19, 0xF0	; 240
+    1258:	32 27       	eor	r19, r18
+    125a:	20 7f       	andi	r18, 0xF0	; 240
+    125c:	32 27       	eor	r19, r18
+    125e:	24 0f       	add	r18, r20
+    1260:	35 1f       	adc	r19, r21
+    1262:	20 93 da 24 	sts	0x24DA, r18
+    1266:	30 93 db 24 	sts	0x24DB, r19
+    126a:	08 95       	ret
+
+0000126c <Endpoint_ConfigureEndpoint_PRV>:
+}
+
+bool Endpoint_ConfigureEndpoint_PRV(const uint8_t Address,
+                                    const uint8_t Config,
+                                    const uint8_t Size)
+{
+    126c:	1f 93       	push	r17
+    126e:	cf 93       	push	r28
+    1270:	df 93       	push	r29
+    1272:	d8 2f       	mov	r29, r24
+    1274:	16 2f       	mov	r17, r22
+    1276:	c4 2f       	mov	r28, r20
+	Endpoint_SelectEndpoint(Address);
+    1278:	0e 94 f6 08 	call	0x11ec	; 0x11ec <Endpoint_SelectEndpoint>
+
+	USB_Endpoint_SelectedHandle->CTRL    = 0;
+    127c:	e0 91 da 24 	lds	r30, 0x24DA
+    1280:	f0 91 db 24 	lds	r31, 0x24DB
+    1284:	11 82       	std	Z+1, r1	; 0x01
+	USB_Endpoint_SelectedHandle->STATUS  = (Address & ENDPOINT_DIR_IN) ? USB_EP_BUSNACK0_bm : 0;
+    1286:	e0 91 da 24 	lds	r30, 0x24DA
+    128a:	f0 91 db 24 	lds	r31, 0x24DB
+    128e:	dd 23       	and	r29, r29
+    1290:	a4 f0       	brlt	.+40     	; 0x12ba <Endpoint_ConfigureEndpoint_PRV+0x4e>
+    1292:	10 82       	st	Z, r1
+	USB_Endpoint_SelectedHandle->CTRL    = Config;
+    1294:	e0 91 da 24 	lds	r30, 0x24DA
+    1298:	f0 91 db 24 	lds	r31, 0x24DB
+    129c:	11 83       	std	Z+1, r17	; 0x01
+	USB_Endpoint_SelectedHandle->CNT     = 0;
+    129e:	e0 91 da 24 	lds	r30, 0x24DA
+    12a2:	f0 91 db 24 	lds	r31, 0x24DB
+    12a6:	12 82       	std	Z+2, r1	; 0x02
+    12a8:	13 82       	std	Z+3, r1	; 0x03
+	USB_Endpoint_SelectedHandle->DATAPTR = (intptr_t)USB_Endpoint_SelectedFIFO->Data;
+    12aa:	80 91 d8 24 	lds	r24, 0x24D8
+    12ae:	90 91 d9 24 	lds	r25, 0x24D9
+    12b2:	84 83       	std	Z+4, r24	; 0x04
+    12b4:	95 83       	std	Z+5, r25	; 0x05
+
+	USB_Endpoint_SelectedFIFO->Length    = (Address & ENDPOINT_DIR_IN) ? Size : 0;
+    12b6:	40 e0       	ldi	r20, 0x00	; 0
+    12b8:	14 c0       	rjmp	.+40     	; 0x12e2 <Endpoint_ConfigureEndpoint_PRV+0x76>
+                                    const uint8_t Size)
+{
+	Endpoint_SelectEndpoint(Address);
+
+	USB_Endpoint_SelectedHandle->CTRL    = 0;
+	USB_Endpoint_SelectedHandle->STATUS  = (Address & ENDPOINT_DIR_IN) ? USB_EP_BUSNACK0_bm : 0;
+    12ba:	82 e0       	ldi	r24, 0x02	; 2
+    12bc:	80 83       	st	Z, r24
+	USB_Endpoint_SelectedHandle->CTRL    = Config;
+    12be:	e0 91 da 24 	lds	r30, 0x24DA
+    12c2:	f0 91 db 24 	lds	r31, 0x24DB
+    12c6:	11 83       	std	Z+1, r17	; 0x01
+	USB_Endpoint_SelectedHandle->CNT     = 0;
+    12c8:	e0 91 da 24 	lds	r30, 0x24DA
+    12cc:	f0 91 db 24 	lds	r31, 0x24DB
+    12d0:	12 82       	std	Z+2, r1	; 0x02
+    12d2:	13 82       	std	Z+3, r1	; 0x03
+	USB_Endpoint_SelectedHandle->DATAPTR = (intptr_t)USB_Endpoint_SelectedFIFO->Data;
+    12d4:	80 91 d8 24 	lds	r24, 0x24D8
+    12d8:	90 91 d9 24 	lds	r25, 0x24D9
+    12dc:	84 83       	std	Z+4, r24	; 0x04
+    12de:	95 83       	std	Z+5, r25	; 0x05
+
+	USB_Endpoint_SelectedFIFO->Length    = (Address & ENDPOINT_DIR_IN) ? Size : 0;
+    12e0:	4c 2f       	mov	r20, r28
+    12e2:	fc 01       	movw	r30, r24
+    12e4:	e0 5c       	subi	r30, 0xC0	; 192
+    12e6:	ff 4f       	sbci	r31, 0xFF	; 255
+    12e8:	40 83       	st	Z, r20
+	USB_Endpoint_SelectedFIFO->Position  = 0;
+    12ea:	31 96       	adiw	r30, 0x01	; 1
+    12ec:	10 82       	st	Z, r1
+
+	return true;
+}
+    12ee:	81 e0       	ldi	r24, 0x01	; 1
+    12f0:	df 91       	pop	r29
+    12f2:	cf 91       	pop	r28
+    12f4:	1f 91       	pop	r17
+    12f6:	08 95       	ret
+
+000012f8 <Endpoint_ClearEndpoints>:
+
+void Endpoint_ClearEndpoints(void)
+{
+    12f8:	20 e0       	ldi	r18, 0x00	; 0
+    12fa:	30 e0       	ldi	r19, 0x00	; 0
+	for (uint8_t EPNum = 0; EPNum < ENDPOINT_TOTAL_ENDPOINTS; EPNum++)
+	{
+		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].IN.CTRL  = 0;
+    12fc:	a0 ec       	ldi	r26, 0xC0	; 192
+    12fe:	b4 e0       	ldi	r27, 0x04	; 4
+    1300:	16 96       	adiw	r26, 0x06	; 6
+    1302:	ed 91       	ld	r30, X+
+    1304:	fc 91       	ld	r31, X
+    1306:	17 97       	sbiw	r26, 0x07	; 7
+    1308:	c9 01       	movw	r24, r18
+    130a:	82 95       	swap	r24
+    130c:	92 95       	swap	r25
+    130e:	90 7f       	andi	r25, 0xF0	; 240
+    1310:	98 27       	eor	r25, r24
+    1312:	80 7f       	andi	r24, 0xF0	; 240
+    1314:	98 27       	eor	r25, r24
+    1316:	e8 0f       	add	r30, r24
+    1318:	f9 1f       	adc	r31, r25
+    131a:	11 86       	std	Z+9, r1	; 0x09
+		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].OUT.CTRL = 0;
+    131c:	16 96       	adiw	r26, 0x06	; 6
+    131e:	4d 91       	ld	r20, X+
+    1320:	5c 91       	ld	r21, X
+    1322:	17 97       	sbiw	r26, 0x07	; 7
+    1324:	fa 01       	movw	r30, r20
+    1326:	e8 0f       	add	r30, r24
+    1328:	f9 1f       	adc	r31, r25
+    132a:	11 82       	std	Z+1, r1	; 0x01
+    132c:	2f 5f       	subi	r18, 0xFF	; 255
+    132e:	3f 4f       	sbci	r19, 0xFF	; 255
+	return true;
+}
+
+void Endpoint_ClearEndpoints(void)
+{
+	for (uint8_t EPNum = 0; EPNum < ENDPOINT_TOTAL_ENDPOINTS; EPNum++)
+    1330:	25 30       	cpi	r18, 0x05	; 5
+    1332:	31 05       	cpc	r19, r1
+    1334:	29 f7       	brne	.-54     	; 0x1300 <Endpoint_ClearEndpoints+0x8>
+	{
+		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].IN.CTRL  = 0;
+		((USB_EndpointTable_t*)USB.EPPTR)->Endpoints[EPNum].OUT.CTRL = 0;
+	}
+}
+    1336:	08 95       	ret
+
+00001338 <__vector_125>:
+	USB.INTFLAGSACLR = 0xFF;
+	USB.INTFLAGSBCLR = 0xFF;
+}
+
+ISR(USB_BUSEVENT_vect)
+{
+    1338:	1f 92       	push	r1
+    133a:	0f 92       	push	r0
+    133c:	0f b6       	in	r0, 0x3f	; 63
+    133e:	0f 92       	push	r0
+    1340:	11 24       	eor	r1, r1
+    1342:	0b b6       	in	r0, 0x3b	; 59
+    1344:	0f 92       	push	r0
+    1346:	2f 93       	push	r18
+    1348:	3f 93       	push	r19
+    134a:	4f 93       	push	r20
+    134c:	5f 93       	push	r21
+    134e:	6f 93       	push	r22
+    1350:	7f 93       	push	r23
+    1352:	8f 93       	push	r24
+    1354:	9f 93       	push	r25
+    1356:	af 93       	push	r26
+    1358:	bf 93       	push	r27
+    135a:	ef 93       	push	r30
+    135c:	ff 93       	push	r31
+					case USB_INT_BUSEVENTI_Resume:
+						return ((USB.INTFLAGSACLR & USB_RESUMEIF_bm) ? true : false);
+					case USB_INT_BUSEVENTI_Reset:
+						return ((USB.INTFLAGSACLR & USB_RSTIF_bm) ? true : false);
+					case USB_INT_SOFI:
+						return ((USB.INTFLAGSACLR & USB_SOFIF_bm) ? true : false);
+    135e:	80 91 ca 04 	lds	r24, 0x04CA
+	#if !defined(NO_SOF_EVENTS)
+	if (USB_INT_HasOccurred(USB_INT_SOFI) && USB_INT_IsEnabled(USB_INT_SOFI))
+    1362:	88 23       	and	r24, r24
+    1364:	4c f4       	brge	.+18     	; 0x1378 <__vector_125+0x40>
+				switch (Interrupt)
+				{
+					case USB_INT_BUSEVENTI:
+						return ((USB.INTCTRLA & USB_BUSEVIE_bm) ? true : false);
+					case USB_INT_SOFI:
+						return ((USB.INTCTRLA & USB_SOFIE_bm) ? true : false);
+    1366:	80 91 c8 04 	lds	r24, 0x04C8
+    136a:	88 23       	and	r24, r24
+    136c:	2c f4       	brge	.+10     	; 0x1378 <__vector_125+0x40>
+						break;
+					case USB_INT_BUSEVENTI_Reset:
+						USB.INTFLAGSACLR = USB_RSTIF_bm;
+						break;
+					case USB_INT_SOFI:
+						USB.INTFLAGSACLR = USB_SOFIF_bm;
+    136e:	80 e8       	ldi	r24, 0x80	; 128
+    1370:	80 93 ca 04 	sts	0x04CA, r24
+	{
+		USB_INT_Clear(USB_INT_SOFI);
+
+		EVENT_USB_Device_StartOfFrame();
+    1374:	0e 94 0b 08 	call	0x1016	; 0x1016 <EVENT_USB_Device_StartOfFrame>
+			static inline bool USB_INT_HasOccurred(const uint8_t Interrupt)
+			{
+				switch (Interrupt)
+				{
+					case USB_INT_BUSEVENTI_Suspend:
+						return ((USB.INTFLAGSACLR & USB_SUSPENDIF_bm) ? true : false);
+    1378:	80 91 ca 04 	lds	r24, 0x04CA
+	}
+	#endif
+
+	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Suspend))
+    137c:	86 ff       	sbrs	r24, 6
+    137e:	07 c0       	rjmp	.+14     	; 0x138e <__vector_125+0x56>
+			static inline void USB_INT_Clear(const uint8_t Interrupt)
+			{
+				switch (Interrupt)
+				{
+					case USB_INT_BUSEVENTI_Suspend:
+						USB.INTFLAGSACLR = USB_SUSPENDIF_bm;
+    1380:	80 e4       	ldi	r24, 0x40	; 64
+    1382:	80 93 ca 04 	sts	0x04CA, r24
+	{
+		USB_INT_Clear(USB_INT_BUSEVENTI_Suspend);
+
+		#if !defined(NO_LIMITED_CONTROLLER_CONNECT)
+		USB_DeviceState = DEVICE_STATE_Unattached;
+    1386:	10 92 cf 24 	sts	0x24CF, r1
+		EVENT_USB_Device_Disconnect();
+    138a:	0e 94 ff 07 	call	0xffe	; 0xffe <EVENT_USB_Device_Disconnect>
+				switch (Interrupt)
+				{
+					case USB_INT_BUSEVENTI_Suspend:
+						return ((USB.INTFLAGSACLR & USB_SUSPENDIF_bm) ? true : false);
+					case USB_INT_BUSEVENTI_Resume:
+						return ((USB.INTFLAGSACLR & USB_RESUMEIF_bm) ? true : false);
+    138e:	80 91 ca 04 	lds	r24, 0x04CA
+		USB_DeviceState = DEVICE_STATE_Suspended;
+		EVENT_USB_Device_Suspend();
+		#endif
+	}
+
+	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Resume))
+    1392:	85 ff       	sbrs	r24, 5
+    1394:	16 c0       	rjmp	.+44     	; 0x13c2 <__vector_125+0x8a>
+				{
+					case USB_INT_BUSEVENTI_Suspend:
+						USB.INTFLAGSACLR = USB_SUSPENDIF_bm;
+						break;
+					case USB_INT_BUSEVENTI_Resume:
+						USB.INTFLAGSACLR = USB_RESUMEIF_bm;
+    1396:	80 e2       	ldi	r24, 0x20	; 32
+    1398:	80 93 ca 04 	sts	0x04CA, r24
+	{
+		USB_INT_Clear(USB_INT_BUSEVENTI_Resume);
+
+		if (USB_Device_ConfigurationNumber)
+    139c:	80 91 cb 24 	lds	r24, 0x24CB
+    13a0:	88 23       	and	r24, r24
+    13a2:	21 f0       	breq	.+8      	; 0x13ac <__vector_125+0x74>
+		  USB_DeviceState = DEVICE_STATE_Configured;
+    13a4:	84 e0       	ldi	r24, 0x04	; 4
+    13a6:	80 93 cf 24 	sts	0x24CF, r24
+    13aa:	09 c0       	rjmp	.+18     	; 0x13be <__vector_125+0x86>
+			}
+
+			static inline bool USB_Device_IsAddressSet(void) ATTR_ALWAYS_INLINE ATTR_WARN_UNUSED_RESULT;
+			static inline bool USB_Device_IsAddressSet(void)
+			{
+				return ((USB.ADDR != 0) ? true : false);
+    13ac:	80 91 c3 04 	lds	r24, 0x04C3
+		else
+		  USB_DeviceState = (USB_Device_IsAddressSet()) ? DEVICE_STATE_Addressed : DEVICE_STATE_Powered;
+    13b0:	81 11       	cpse	r24, r1
+    13b2:	02 c0       	rjmp	.+4      	; 0x13b8 <__vector_125+0x80>
+    13b4:	81 e0       	ldi	r24, 0x01	; 1
+    13b6:	01 c0       	rjmp	.+2      	; 0x13ba <__vector_125+0x82>
+    13b8:	83 e0       	ldi	r24, 0x03	; 3
+    13ba:	80 93 cf 24 	sts	0x24CF, r24
+
+		#if !defined(NO_LIMITED_CONTROLLER_CONNECT)
+		EVENT_USB_Device_Connect();
+    13be:	0e 94 f2 07 	call	0xfe4	; 0xfe4 <EVENT_USB_Device_Connect>
+					case USB_INT_BUSEVENTI_Suspend:
+						return ((USB.INTFLAGSACLR & USB_SUSPENDIF_bm) ? true : false);
+					case USB_INT_BUSEVENTI_Resume:
+						return ((USB.INTFLAGSACLR & USB_RESUMEIF_bm) ? true : false);
+					case USB_INT_BUSEVENTI_Reset:
+						return ((USB.INTFLAGSACLR & USB_RSTIF_bm) ? true : false);
+    13c2:	80 91 ca 04 	lds	r24, 0x04CA
+		#else
+		EVENT_USB_Device_WakeUp();
+		#endif
+	}
+
+	if (USB_INT_HasOccurred(USB_INT_BUSEVENTI_Reset))
+    13c6:	84 ff       	sbrs	r24, 4
+    13c8:	18 c0       	rjmp	.+48     	; 0x13fa <__vector_125+0xc2>
+						break;
+					case USB_INT_BUSEVENTI_Resume:
+						USB.INTFLAGSACLR = USB_RESUMEIF_bm;
+						break;
+					case USB_INT_BUSEVENTI_Reset:
+						USB.INTFLAGSACLR = USB_RSTIF_bm;
+    13ca:	e0 ec       	ldi	r30, 0xC0	; 192
+    13cc:	f4 e0       	ldi	r31, 0x04	; 4
+    13ce:	80 e1       	ldi	r24, 0x10	; 16
+    13d0:	82 87       	std	Z+10, r24	; 0x0a
+	{
+		USB_INT_Clear(USB_INT_BUSEVENTI_Reset);
+
+		USB_DeviceState                = DEVICE_STATE_Default;
+    13d2:	82 e0       	ldi	r24, 0x02	; 2
+    13d4:	80 93 cf 24 	sts	0x24CF, r24
+		USB_Device_ConfigurationNumber = 0;
+    13d8:	10 92 cb 24 	sts	0x24CB, r1
+			}
+
+			static inline void USB_Device_EnableDeviceAddress(const uint8_t Address) ATTR_ALWAYS_INLINE;
+			static inline void USB_Device_EnableDeviceAddress(const uint8_t Address)
+			{
+				USB.ADDR = Address;
+    13dc:	13 82       	std	Z+3, r1	; 0x03
+
+		USB_Device_EnableDeviceAddress(0);
+
+		Endpoint_ClearEndpoints();
+    13de:	0e 94 7c 09 	call	0x12f8	; 0x12f8 <Endpoint_ClearEndpoints>
+						EPConfigMask |= USB_EP_TYPE_BULK_gc;
+						break;
+				}
+
+				if (Type == EP_TYPE_CONTROL)
+				  Endpoint_ConfigureEndpoint_PRV(Address ^ ENDPOINT_DIR_IN, EPConfigMask, Size);
+    13e2:	48 e0       	ldi	r20, 0x08	; 8
+    13e4:	68 e4       	ldi	r22, 0x48	; 72
+    13e6:	80 e8       	ldi	r24, 0x80	; 128
+    13e8:	0e 94 36 09 	call	0x126c	; 0x126c <Endpoint_ConfigureEndpoint_PRV>
+
+				return Endpoint_ConfigureEndpoint_PRV(Address, EPConfigMask, Size);
+    13ec:	48 e0       	ldi	r20, 0x08	; 8
+    13ee:	68 e4       	ldi	r22, 0x48	; 72
+    13f0:	80 e0       	ldi	r24, 0x00	; 0
+    13f2:	0e 94 36 09 	call	0x126c	; 0x126c <Endpoint_ConfigureEndpoint_PRV>
+		Endpoint_ConfigureEndpoint(ENDPOINT_CONTROLEP, EP_TYPE_CONTROL,
+		                           USB_Device_ControlEndpointSize, 1);
+
+		EVENT_USB_Device_Reset();
+    13f6:	0e 94 f5 08 	call	0x11ea	; 0x11ea <USB_Event_Stub>
+	}
+}
+    13fa:	ff 91       	pop	r31
+    13fc:	ef 91       	pop	r30
+    13fe:	bf 91       	pop	r27
+    1400:	af 91       	pop	r26
+    1402:	9f 91       	pop	r25
+    1404:	8f 91       	pop	r24
+    1406:	7f 91       	pop	r23
+    1408:	6f 91       	pop	r22
+    140a:	5f 91       	pop	r21
+    140c:	4f 91       	pop	r20
+    140e:	3f 91       	pop	r19
+    1410:	2f 91       	pop	r18
+    1412:	0f 90       	pop	r0
+    1414:	0b be       	out	0x3b, r0	; 59
+    1416:	0f 90       	pop	r0
+    1418:	0f be       	out	0x3f, r0	; 63
+    141a:	0f 90       	pop	r0
+    141c:	1f 90       	pop	r1
+    141e:	18 95       	reti
+
+00001420 <rtc_initialize>:
 /*
  *	initialize the rtc
  */
 void rtc_initialize(){
 	//enabling interrupt all three level, high, mid, and low
 	PMIC_CTRL |= (7<<0);
-    116e:	e2 ea       	ldi	r30, 0xA2	; 162
-    1170:	f0 e0       	ldi	r31, 0x00	; 0
-    1172:	80 81       	ld	r24, Z
-    1174:	87 60       	ori	r24, 0x07	; 7
-    1176:	80 83       	st	Z, r24
+    1420:	e2 ea       	ldi	r30, 0xA2	; 162
+    1422:	f0 e0       	ldi	r31, 0x00	; 0
+    1424:	80 81       	ld	r24, Z
+    1426:	87 60       	ori	r24, 0x07	; 7
+    1428:	80 83       	st	Z, r24
 	//selecting clock source 32.768kHz from 32.768kHz crystal oscillator on TOSC, enabling RTC clock source
 	CLK_RTCCTRL = (5<<1) | (1<<0);//crystal oscillator on TOSC| enabling clock
-    1178:	8b e0       	ldi	r24, 0x0B	; 11
-    117a:	80 93 43 00 	sts	0x0043, r24
+    142a:	8b e0       	ldi	r24, 0x0B	; 11
+    142c:	80 93 43 00 	sts	0x0043, r24
 	//enabling interrupts for overflow
 	RTC_INTCTRL	|= (0b00000001);
-    117e:	e2 e0       	ldi	r30, 0x02	; 2
-    1180:	f4 e0       	ldi	r31, 0x04	; 4
-    1182:	80 81       	ld	r24, Z
-    1184:	81 60       	ori	r24, 0x01	; 1
-    1186:	80 83       	st	Z, r24
+    1430:	e2 e0       	ldi	r30, 0x02	; 2
+    1432:	f4 e0       	ldi	r31, 0x04	; 4
+    1434:	80 81       	ld	r24, Z
+    1436:	81 60       	ori	r24, 0x01	; 1
+    1438:	80 83       	st	Z, r24
 	RTC_PER = RTC_PER_VAL; //period_val  = 2
-    1188:	80 e2       	ldi	r24, 0x20	; 32
-    118a:	90 e0       	ldi	r25, 0x00	; 0
-    118c:	80 93 0a 04 	sts	0x040A, r24
-    1190:	90 93 0b 04 	sts	0x040B, r25
+    143a:	80 e2       	ldi	r24, 0x20	; 32
+    143c:	90 e0       	ldi	r25, 0x00	; 0
+    143e:	80 93 0a 04 	sts	0x040A, r24
+    1442:	90 93 0b 04 	sts	0x040B, r25
 	//selecting clock prescaling
 	RTC_CTRL = (1<<0);//no prescaling
-    1194:	81 e0       	ldi	r24, 0x01	; 1
-    1196:	80 93 00 04 	sts	0x0400, r24
+    1446:	81 e0       	ldi	r24, 0x01	; 1
+    1448:	80 93 00 04 	sts	0x0400, r24
 	sei();
-    119a:	78 94       	sei
-    119c:	08 95       	ret
+    144c:	78 94       	sei
+    144e:	08 95       	ret
 
-0000119e <__vector_10>:
+00001450 <__vector_10>:
 
 /*
  *	interrupt service routine for overflow interrupt event
  */
 ISR(RTC_OVF_vect)
 {
-    119e:	1f 92       	push	r1
-    11a0:	0f 92       	push	r0
-    11a2:	0f b6       	in	r0, 0x3f	; 63
-    11a4:	0f 92       	push	r0
-    11a6:	11 24       	eor	r1, r1
-    11a8:	0b b6       	in	r0, 0x3b	; 59
-    11aa:	0f 92       	push	r0
-    11ac:	2f 93       	push	r18
-    11ae:	3f 93       	push	r19
-    11b0:	4f 93       	push	r20
-    11b2:	5f 93       	push	r21
-    11b4:	6f 93       	push	r22
-    11b6:	7f 93       	push	r23
-    11b8:	8f 93       	push	r24
-    11ba:	9f 93       	push	r25
-    11bc:	af 93       	push	r26
-    11be:	bf 93       	push	r27
-    11c0:	ef 93       	push	r30
-    11c2:	ff 93       	push	r31
+    1450:	1f 92       	push	r1
+    1452:	0f 92       	push	r0
+    1454:	0f b6       	in	r0, 0x3f	; 63
+    1456:	0f 92       	push	r0
+    1458:	11 24       	eor	r1, r1
+    145a:	0b b6       	in	r0, 0x3b	; 59
+    145c:	0f 92       	push	r0
+    145e:	2f 93       	push	r18
+    1460:	3f 93       	push	r19
+    1462:	4f 93       	push	r20
+    1464:	5f 93       	push	r21
+    1466:	6f 93       	push	r22
+    1468:	7f 93       	push	r23
+    146a:	8f 93       	push	r24
+    146c:	9f 93       	push	r25
+    146e:	af 93       	push	r26
+    1470:	bf 93       	push	r27
+    1472:	ef 93       	push	r30
+    1474:	ff 93       	push	r31
 	#if (USE_RTC_TICK == 1)
 	rtc_tick_global++;	
-    11c4:	80 91 be 24 	lds	r24, 0x24BE
-    11c8:	90 91 bf 24 	lds	r25, 0x24BF
-    11cc:	a0 91 c0 24 	lds	r26, 0x24C0
-    11d0:	b0 91 c1 24 	lds	r27, 0x24C1
-    11d4:	01 96       	adiw	r24, 0x01	; 1
-    11d6:	a1 1d       	adc	r26, r1
-    11d8:	b1 1d       	adc	r27, r1
-    11da:	80 93 be 24 	sts	0x24BE, r24
-    11de:	90 93 bf 24 	sts	0x24BF, r25
-    11e2:	a0 93 c0 24 	sts	0x24C0, r26
-    11e6:	b0 93 c1 24 	sts	0x24C1, r27
+    1476:	80 91 be 24 	lds	r24, 0x24BE
+    147a:	90 91 bf 24 	lds	r25, 0x24BF
+    147e:	a0 91 c0 24 	lds	r26, 0x24C0
+    1482:	b0 91 c1 24 	lds	r27, 0x24C1
+    1486:	01 96       	adiw	r24, 0x01	; 1
+    1488:	a1 1d       	adc	r26, r1
+    148a:	b1 1d       	adc	r27, r1
+    148c:	80 93 be 24 	sts	0x24BE, r24
+    1490:	90 93 bf 24 	sts	0x24BF, r25
+    1494:	a0 93 c0 24 	sts	0x24C0, r26
+    1498:	b0 93 c1 24 	sts	0x24C1, r27
 	#endif
 	
 	system_tick();
-    11ea:	0e 94 14 09 	call	0x1228	; 0x1228 <system_tick>
+    149c:	0e 94 6d 0a 	call	0x14da	; 0x14da <system_tick>
 
 	
 }
-    11ee:	ff 91       	pop	r31
-    11f0:	ef 91       	pop	r30
-    11f2:	bf 91       	pop	r27
-    11f4:	af 91       	pop	r26
-    11f6:	9f 91       	pop	r25
-    11f8:	8f 91       	pop	r24
-    11fa:	7f 91       	pop	r23
-    11fc:	6f 91       	pop	r22
-    11fe:	5f 91       	pop	r21
-    1200:	4f 91       	pop	r20
-    1202:	3f 91       	pop	r19
-    1204:	2f 91       	pop	r18
-    1206:	0f 90       	pop	r0
-    1208:	0b be       	out	0x3b, r0	; 59
-    120a:	0f 90       	pop	r0
-    120c:	0f be       	out	0x3f, r0	; 63
-    120e:	0f 90       	pop	r0
-    1210:	1f 90       	pop	r1
-    1212:	18 95       	reti
+    14a0:	ff 91       	pop	r31
+    14a2:	ef 91       	pop	r30
+    14a4:	bf 91       	pop	r27
+    14a6:	af 91       	pop	r26
+    14a8:	9f 91       	pop	r25
+    14aa:	8f 91       	pop	r24
+    14ac:	7f 91       	pop	r23
+    14ae:	6f 91       	pop	r22
+    14b0:	5f 91       	pop	r21
+    14b2:	4f 91       	pop	r20
+    14b4:	3f 91       	pop	r19
+    14b6:	2f 91       	pop	r18
+    14b8:	0f 90       	pop	r0
+    14ba:	0b be       	out	0x3b, r0	; 59
+    14bc:	0f 90       	pop	r0
+    14be:	0f be       	out	0x3f, r0	; 63
+    14c0:	0f 90       	pop	r0
+    14c2:	1f 90       	pop	r1
+    14c4:	18 95       	reti
 
-00001214 <__vector_11>:
+000014c6 <__vector_11>:
 
 /*
  *	interrupt service routine for compare interrupt event
  */
 ISR(RTC_COMP_vect)
 {
-    1214:	1f 92       	push	r1
-    1216:	0f 92       	push	r0
-    1218:	0f b6       	in	r0, 0x3f	; 63
-    121a:	0f 92       	push	r0
-    121c:	11 24       	eor	r1, r1
+    14c6:	1f 92       	push	r1
+    14c8:	0f 92       	push	r0
+    14ca:	0f b6       	in	r0, 0x3f	; 63
+    14cc:	0f 92       	push	r0
+    14ce:	11 24       	eor	r1, r1
 
 
 }
-    121e:	0f 90       	pop	r0
-    1220:	0f be       	out	0x3f, r0	; 63
-    1222:	0f 90       	pop	r0
-    1224:	1f 90       	pop	r1
-    1226:	18 95       	reti
+    14d0:	0f 90       	pop	r0
+    14d2:	0f be       	out	0x3f, r0	; 63
+    14d4:	0f 90       	pop	r0
+    14d6:	1f 90       	pop	r1
+    14d8:	18 95       	reti
 
-00001228 <system_tick>:
+000014da <system_tick>:
 
 
 
 void            system_tick(void){
 	
 	__system_time++;
-    1228:	80 91 c7 24 	lds	r24, 0x24C7
-    122c:	90 91 c8 24 	lds	r25, 0x24C8
-    1230:	a0 91 c9 24 	lds	r26, 0x24C9
-    1234:	b0 91 ca 24 	lds	r27, 0x24CA
-    1238:	01 96       	adiw	r24, 0x01	; 1
-    123a:	a1 1d       	adc	r26, r1
-    123c:	b1 1d       	adc	r27, r1
-    123e:	80 93 c7 24 	sts	0x24C7, r24
-    1242:	90 93 c8 24 	sts	0x24C8, r25
-    1246:	a0 93 c9 24 	sts	0x24C9, r26
-    124a:	b0 93 ca 24 	sts	0x24CA, r27
-    124e:	08 95       	ret
+    14da:	80 91 c7 24 	lds	r24, 0x24C7
+    14de:	90 91 c8 24 	lds	r25, 0x24C8
+    14e2:	a0 91 c9 24 	lds	r26, 0x24C9
+    14e6:	b0 91 ca 24 	lds	r27, 0x24CA
+    14ea:	01 96       	adiw	r24, 0x01	; 1
+    14ec:	a1 1d       	adc	r26, r1
+    14ee:	b1 1d       	adc	r27, r1
+    14f0:	80 93 c7 24 	sts	0x24C7, r24
+    14f4:	90 93 c8 24 	sts	0x24C8, r25
+    14f8:	a0 93 c9 24 	sts	0x24C9, r26
+    14fc:	b0 93 ca 24 	sts	0x24CA, r27
+    1500:	08 95       	ret
 
-00001250 <__udivmodsi4>:
-    1250:	a1 e2       	ldi	r26, 0x21	; 33
-    1252:	1a 2e       	mov	r1, r26
-    1254:	aa 1b       	sub	r26, r26
-    1256:	bb 1b       	sub	r27, r27
-    1258:	fd 01       	movw	r30, r26
-    125a:	0d c0       	rjmp	.+26     	; 0x1276 <__udivmodsi4_ep>
+00001502 <__udivmodsi4>:
+    1502:	a1 e2       	ldi	r26, 0x21	; 33
+    1504:	1a 2e       	mov	r1, r26
+    1506:	aa 1b       	sub	r26, r26
+    1508:	bb 1b       	sub	r27, r27
+    150a:	fd 01       	movw	r30, r26
+    150c:	0d c0       	rjmp	.+26     	; 0x1528 <__udivmodsi4_ep>
 
-0000125c <__udivmodsi4_loop>:
-    125c:	aa 1f       	adc	r26, r26
-    125e:	bb 1f       	adc	r27, r27
-    1260:	ee 1f       	adc	r30, r30
-    1262:	ff 1f       	adc	r31, r31
-    1264:	a2 17       	cp	r26, r18
-    1266:	b3 07       	cpc	r27, r19
-    1268:	e4 07       	cpc	r30, r20
-    126a:	f5 07       	cpc	r31, r21
-    126c:	20 f0       	brcs	.+8      	; 0x1276 <__udivmodsi4_ep>
-    126e:	a2 1b       	sub	r26, r18
-    1270:	b3 0b       	sbc	r27, r19
-    1272:	e4 0b       	sbc	r30, r20
-    1274:	f5 0b       	sbc	r31, r21
+0000150e <__udivmodsi4_loop>:
+    150e:	aa 1f       	adc	r26, r26
+    1510:	bb 1f       	adc	r27, r27
+    1512:	ee 1f       	adc	r30, r30
+    1514:	ff 1f       	adc	r31, r31
+    1516:	a2 17       	cp	r26, r18
+    1518:	b3 07       	cpc	r27, r19
+    151a:	e4 07       	cpc	r30, r20
+    151c:	f5 07       	cpc	r31, r21
+    151e:	20 f0       	brcs	.+8      	; 0x1528 <__udivmodsi4_ep>
+    1520:	a2 1b       	sub	r26, r18
+    1522:	b3 0b       	sbc	r27, r19
+    1524:	e4 0b       	sbc	r30, r20
+    1526:	f5 0b       	sbc	r31, r21
 
-00001276 <__udivmodsi4_ep>:
-    1276:	66 1f       	adc	r22, r22
-    1278:	77 1f       	adc	r23, r23
-    127a:	88 1f       	adc	r24, r24
-    127c:	99 1f       	adc	r25, r25
-    127e:	1a 94       	dec	r1
-    1280:	69 f7       	brne	.-38     	; 0x125c <__udivmodsi4_loop>
-    1282:	60 95       	com	r22
-    1284:	70 95       	com	r23
-    1286:	80 95       	com	r24
-    1288:	90 95       	com	r25
-    128a:	9b 01       	movw	r18, r22
-    128c:	ac 01       	movw	r20, r24
-    128e:	bd 01       	movw	r22, r26
-    1290:	cf 01       	movw	r24, r30
-    1292:	08 95       	ret
+00001528 <__udivmodsi4_ep>:
+    1528:	66 1f       	adc	r22, r22
+    152a:	77 1f       	adc	r23, r23
+    152c:	88 1f       	adc	r24, r24
+    152e:	99 1f       	adc	r25, r25
+    1530:	1a 94       	dec	r1
+    1532:	69 f7       	brne	.-38     	; 0x150e <__udivmodsi4_loop>
+    1534:	60 95       	com	r22
+    1536:	70 95       	com	r23
+    1538:	80 95       	com	r24
+    153a:	90 95       	com	r25
+    153c:	9b 01       	movw	r18, r22
+    153e:	ac 01       	movw	r20, r24
+    1540:	bd 01       	movw	r22, r26
+    1542:	cf 01       	movw	r24, r30
+    1544:	08 95       	ret
 
-00001294 <_exit>:
-    1294:	f8 94       	cli
+00001546 <__ashrdi3>:
+    1546:	97 fb       	bst	r25, 7
+    1548:	10 f8       	bld	r1, 0
 
-00001296 <__stop_program>:
-    1296:	ff cf       	rjmp	.-2      	; 0x1296 <__stop_program>
+0000154a <__lshrdi3>:
+    154a:	16 94       	lsr	r1
+    154c:	00 08       	sbc	r0, r0
+    154e:	0f 93       	push	r16
+    1550:	08 30       	cpi	r16, 0x08	; 8
+    1552:	98 f0       	brcs	.+38     	; 0x157a <__lshrdi3+0x30>
+    1554:	08 50       	subi	r16, 0x08	; 8
+    1556:	23 2f       	mov	r18, r19
+    1558:	34 2f       	mov	r19, r20
+    155a:	45 2f       	mov	r20, r21
+    155c:	56 2f       	mov	r21, r22
+    155e:	67 2f       	mov	r22, r23
+    1560:	78 2f       	mov	r23, r24
+    1562:	89 2f       	mov	r24, r25
+    1564:	90 2d       	mov	r25, r0
+    1566:	f4 cf       	rjmp	.-24     	; 0x1550 <__lshrdi3+0x6>
+    1568:	05 94       	asr	r0
+    156a:	97 95       	ror	r25
+    156c:	87 95       	ror	r24
+    156e:	77 95       	ror	r23
+    1570:	67 95       	ror	r22
+    1572:	57 95       	ror	r21
+    1574:	47 95       	ror	r20
+    1576:	37 95       	ror	r19
+    1578:	27 95       	ror	r18
+    157a:	0a 95       	dec	r16
+    157c:	aa f7       	brpl	.-22     	; 0x1568 <__lshrdi3+0x1e>
+    157e:	0f 91       	pop	r16
+    1580:	08 95       	ret
+
+00001582 <_exit>:
+    1582:	f8 94       	cli
+
+00001584 <__stop_program>:
+    1584:	ff cf       	rjmp	.-2      	; 0x1584 <__stop_program>
