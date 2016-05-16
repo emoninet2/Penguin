@@ -147,7 +147,7 @@ int main(void)
 	
 	_nrf24l01p_flush_rx();
 		
-	_nrf24l01p_set_TX_pipe_address(0x1918171615);	
+	//_nrf24l01p_set_TX_pipe_address(0x1918171615);	
 	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, 0x1918171615);
 	
 	//volatile uint64_t bladdress = _nrf24l01p_get_TX_pipe_address();
@@ -156,8 +156,25 @@ int main(void)
 	//_nrf24l01p_read_register(_NRF24L01P_REG_RX_ADDR_P1,&bladdress,5);
 	asm("nop");
 	
+	//below is the code for the TX counterpart
+	//_nrf24l01p_set_TX_pipe_address(0xc2c2c2c2c4);
+	//_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, 0xc2c2c2c2c4);
+	
+	
 	while(1)
 	{
+		
+			//below is the code for the TX counterpart
+			
+		
+		
+		
+		
+		
+		
+		
+		
+		
 			uint8_t emon_rxData[100];
 			
 			//_delay_ms(1000);
@@ -168,13 +185,13 @@ int main(void)
 			 //_nrf24l01p_write_ack(_NRF24L01P_PIPE_P0,msg,strlen(msg));
 		
 			
-			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P0))){
+			if((_nrf24l01p_readable(_NRF24L01P_PIPE_P3))){
 				PORTR.OUTTGL = (1<<0);
 				//printf("status %x\r\n",_nrf24l01p_get_status());
 				//printf("pipe : %d\r\n", _nrf24l01p_get_rx_payload_pipe());
 				//led1 = !led1;
 				
-				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P0, (uint8_t*) emon_rxData);
+				int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P3, (uint8_t*) emon_rxData);
 				emon_rxData[width] = '\0';
 				_nrf24l01p_flush_rx();
 				_nrf24l01p_clear_data_ready_flag();
