@@ -13,9 +13,15 @@
 
 
 #if (USE_RTC_TICK == 1)
-typedef volatile unsigned long rtctick_t;
+typedef volatile int rtctick_t;
 volatile rtctick_t rtc_tick_global = 0;
+volatile int rtc_global_ms = 0 ;
+
+
 #endif
+
+
+
 
 
 /*
@@ -23,6 +29,7 @@ volatile rtctick_t rtc_tick_global = 0;
  */
 void rtc_initialize(){
 	//enabling interrupt all three level, high, mid, and low
+	OSC.RC32KCAL = 0x10;//smaller, the faster the clock
 	PMIC_CTRL |= (7<<0);
 	//selecting clock source 32.768kHz from 32.768kHz crystal oscillator on TOSC, enabling RTC clock source
 	CLK_RTCCTRL = (5<<1) | (1<<0);//crystal oscillator on TOSC| enabling clock
@@ -37,28 +44,21 @@ void rtc_initialize(){
 }
 
 
-
-
-/*
- *	ms wait until
- */
-void rtc_ms_delay(int ms){
-	rtctick_t tempsnap = rtc_tick_global;
-	while(rtc_tick_global-tempsnap < rtc_ms_ticks(ms));
-}
-
-
 /*
  *	interrupt service routine for overflow interrupt event
  */
 ISR(RTC_OVF_vect)
 {
 	#if (USE_RTC_TICK == 1)
-	rtc_tick_global++;	
+	rtc_tick_global++;
+	if(rtc_tick_global>=256){
+		rtc_tick_global = 0;
+		system_tick();
+	}	
 	#endif
 	
-	system_tick();
-
+	
+	
 	
 }
 

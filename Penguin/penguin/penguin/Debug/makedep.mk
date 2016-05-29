@@ -6,7 +6,21 @@ Component_Drivers\nrf24l01p\nrf24l01p.c
 
 Component_Drivers\ssd1306\font.c
 
-Descriptors.c
+FreeRTOS\croutine.c
+
+FreeRTOS\event_groups.c
+
+FreeRTOS\include\portable\GCC\ATMega323\port.c
+
+FreeRTOS\include\portable\MemMang\heap_1.c
+
+FreeRTOS\list.c
+
+FreeRTOS\queue.c
+
+FreeRTOS\tasks.c
+
+FreeRTOS\timers.c
 
 JSON\jsmn.c
 

@@ -216,15 +216,11 @@ typedef enum {
 
 
 void _nrf24l01p_print_info();
-
-
 void _nrf24l01p_ce_pin(bool state);
 void _nrf24l01p_csn_pin(bool state);
 void _nrf24l01p_init();
 void _nrf24l01p_read_register(uint8_t address, uint8_t *dataout, int len);
-//uint8_t _nrf24l01p_read_register(uint8_t address);
 void _nrf24l01p_write_register(uint8_t address, uint8_t *datain, int len);
-//void _nrf24l01p_write_register(uint8_t address, uint8_t datain);
 void _nrf24l01p_read_rx_payload(uint8_t *dataout, int pay_len);
 void _nrf24l01p_write_tx_payload(uint8_t *datain, int pay_len);
 void _nrf24l01p_flush_tx();
@@ -240,7 +236,6 @@ void _nrf24l01p_power_down();
 void _nrf24l01p_rx_mode();
 void _nrf24l01p_tx_mode();
 void _nrf24l01p_set_CRC(_nrf24l01p_crc_t opt);
-
 
 void _nrf24l01p_enable_auto_ack(_nrf24l01p_pipe_t pipe);
 void _nrf24l01p_disable_auto_ack(_nrf24l01p_pipe_t pipe);
@@ -314,10 +309,6 @@ int _nrf24l01p_write_to_address_ack(uint64_t address, uint8_t *data, int datalen
 int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen);
 int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data);
 int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen);
-
-
-
-
 
 
 #endif /* NRF24L01P_H_ */

@@ -17,7 +17,7 @@
 
 
 #define RTC_PRESCALER_VAL RTC_PRESCALER_DIV1_gc
-#define RTC_PER_VAL 32
+#define RTC_PER_VAL 128
 #define RTC_TICK_FREQ 32768/RTC_PER_VAL/(1<<(RTC_PRESCALER_VAL-1))
 #define RTC_TICK_TIME 1/RTC_TICK_FREQ
 
@@ -34,13 +34,6 @@
  *	initialize the rtc
  */
 void rtc_initialize();
-
-
-
-/*
- *	ms wait until
- */
-void rtc_ms_delay(int ms);
 
 
 

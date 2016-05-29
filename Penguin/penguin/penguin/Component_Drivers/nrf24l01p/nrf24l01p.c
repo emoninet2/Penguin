@@ -682,12 +682,6 @@ int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
 }
 
 
-
-
-
-
-
-
 int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
 
 	if ( datalen <= 0 ) return 0;
