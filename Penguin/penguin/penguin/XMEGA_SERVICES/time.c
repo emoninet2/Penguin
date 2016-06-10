@@ -71,7 +71,7 @@ static char ascTimeBuffer[32];
 
 void  system_tick(void){
 	
-	__system_time++;
+	//__system_time++;
 	
 }
 

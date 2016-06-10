@@ -10,8 +10,6 @@
 #define NRF24L01P_H_
 
 
-
-
 #include "nrf24l01p_arch_driver.h"
 
 
@@ -216,9 +214,11 @@ typedef enum {
 
 
 void _nrf24l01p_print_info();
+
 void _nrf24l01p_ce_pin(bool state);
 void _nrf24l01p_csn_pin(bool state);
 void _nrf24l01p_init();
+void _nrf24l01p_reinit_loop();
 void _nrf24l01p_read_register(uint8_t address, uint8_t *dataout, int len);
 void _nrf24l01p_write_register(uint8_t address, uint8_t *datain, int len);
 void _nrf24l01p_read_rx_payload(uint8_t *dataout, int pay_len);
@@ -303,12 +303,14 @@ void _nrf24l01p_disable_dynamic_payload_with_ack();
 
 void _nrf24l01p_startup();
 bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe);
-int _nrf24l01p_write(uint8_t *data, int datalen);
-int _nrf24l01p_write_to_address(uint64_t address, uint8_t *data, int datalen);
-int _nrf24l01p_write_to_address_ack(uint64_t address, uint8_t *data, int datalen);
+int _nrf24l01p_send(uint8_t *data, int datalen);
+int _nrf24l01p_resend();
+int _nrf24l01p_send_to_address(uint64_t address, uint8_t *data, int datalen);
+int _nrf24l01p_send_to_address_ack(uint64_t address, uint8_t *data, int datalen);
+void _nrf24l01p_send_until_ack(uint64_t address, uint8_t *data, int datalen);
 int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen);
 int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data);
-int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen);
+void _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen);
 
 
 #endif /* NRF24L01P_H_ */

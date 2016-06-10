@@ -33,6 +33,9 @@ void DigitalPin_ClearValue(DigitalPin_t *pin){
 	pin->_port->OUTCLR = (1<< pin->_pin);
 }
 
+void DigitalPin_ToggleValue(DigitalPin_t *pin){
+	pin->_port->OUTTGL = (1<< pin->_pin);
+}
 bool DigitalPin_GetValue(DigitalPin_t *pin){
 	bool pinValue;
 	if((pin->_port->IN)&(1<<pin->_pin)) pinValue = 0 ;

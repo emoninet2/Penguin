@@ -123,6 +123,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../Component_Drivers/nrf24l01p/nrf24l01p.c \
 ../Component_Drivers/ssd1306/font.c \
+../Descriptors.c \
 ../FreeRTOS/croutine.c \
 ../FreeRTOS/event_groups.c \
 ../FreeRTOS/include/portable/GCC/ATMega323/port.c \
@@ -212,7 +213,7 @@ C_SRCS +=  \
 ../XMEGA_DRIVERS/twi_slave_driver.c \
 ../XMEGA_DRIVERS/usart_driver.c \
 ../XMEGA_DRIVERS/wdt_driver.c \
-../XMEGA_SERVICES/RTCServices.c \
+../XMEGA_SERVICES/rtcServices.c \
 ../XMEGA_SERVICES/time.c
 
 
@@ -226,6 +227,7 @@ ASM_SRCS +=
 OBJS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
+Descriptors.o \
 FreeRTOS/croutine.o \
 FreeRTOS/event_groups.o \
 FreeRTOS/include/portable/GCC/ATMega323/port.o \
@@ -316,12 +318,13 @@ XMEGA_DRIVERS/twi_master_driver.o \
 XMEGA_DRIVERS/twi_slave_driver.o \
 XMEGA_DRIVERS/usart_driver.o \
 XMEGA_DRIVERS/wdt_driver.o \
-XMEGA_SERVICES/RTCServices.o \
+XMEGA_SERVICES/rtcServices.o \
 XMEGA_SERVICES/time.o
 
 OBJS_AS_ARGS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
+Descriptors.o \
 FreeRTOS/croutine.o \
 FreeRTOS/event_groups.o \
 FreeRTOS/include/portable/GCC/ATMega323/port.o \
@@ -412,12 +415,13 @@ XMEGA_DRIVERS/twi_master_driver.o \
 XMEGA_DRIVERS/twi_slave_driver.o \
 XMEGA_DRIVERS/usart_driver.o \
 XMEGA_DRIVERS/wdt_driver.o \
-XMEGA_SERVICES/RTCServices.o \
+XMEGA_SERVICES/rtcServices.o \
 XMEGA_SERVICES/time.o
 
 C_DEPS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
+Descriptors.d \
 FreeRTOS/croutine.d \
 FreeRTOS/event_groups.d \
 FreeRTOS/include/portable/GCC/ATMega323/port.d \
@@ -508,12 +512,13 @@ XMEGA_DRIVERS/twi_master_driver.d \
 XMEGA_DRIVERS/twi_slave_driver.d \
 XMEGA_DRIVERS/usart_driver.d \
 XMEGA_DRIVERS/wdt_driver.d \
-XMEGA_SERVICES/RTCServices.d \
+XMEGA_SERVICES/rtcServices.d \
 XMEGA_SERVICES/time.d
 
 C_DEPS_AS_ARGS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
+Descriptors.d \
 FreeRTOS/croutine.d \
 FreeRTOS/event_groups.d \
 FreeRTOS/include/portable/GCC/ATMega323/port.d \
@@ -604,7 +609,7 @@ XMEGA_DRIVERS/twi_master_driver.d \
 XMEGA_DRIVERS/twi_slave_driver.d \
 XMEGA_DRIVERS/usart_driver.d \
 XMEGA_DRIVERS/wdt_driver.d \
-XMEGA_SERVICES/RTCServices.d \
+XMEGA_SERVICES/rtcServices.d \
 XMEGA_SERVICES/time.d
 
 OUTPUT_FILE_PATH +=penguin.elf
@@ -808,6 +813,8 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
 Component_Drivers/nrf24l01p/%.o: ../Component_Drivers/nrf24l01p/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
@@ -816,6 +823,13 @@ Component_Drivers/nrf24l01p/%.o: ../Component_Drivers/nrf24l01p/%.c
 	
 
 Component_Drivers/ssd1306/%.o: ../Component_Drivers/ssd1306/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -844,13 +858,6 @@ FreeRTOS/include/portable/MemMang/%.o: ../FreeRTOS/include/portable/MemMang/%.c
 	
 
 JSON/%.o: ../JSON/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-./%.o: .././%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../XMEGA_DRIVERS/LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

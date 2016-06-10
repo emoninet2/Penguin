@@ -22,6 +22,7 @@ void DigitalPin_Config(DigitalPin_t *pin ,bool slewRateEnable, bool invertEnable
 void DigitalPin_SetDIr(DigitalPin_t *pin , bool dir);
 void DigitalPin_SetValue(DigitalPin_t *pin);
 void DigitalPin_ClearValue(DigitalPin_t *pin);
+void DigitalPin_ToggleValue(DigitalPin_t *pin);
 bool DigitalPin_GetValue(DigitalPin_t *pin);
 
 

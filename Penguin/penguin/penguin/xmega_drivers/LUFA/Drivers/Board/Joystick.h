@@ -122,7 +122,7 @@
 		#elif (BOARD == BOARD_EVK1100)
 			#include "UC3/EVK1100/Joystick.h"
 		#else
-			#include "Board/Joystick.h"
+			//#include "Board/Joystick.h"
 		#endif
 
 	/* Pseudo-Functions for Doxygen: */

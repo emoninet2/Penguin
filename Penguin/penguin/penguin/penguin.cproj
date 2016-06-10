@@ -54,6 +54,60 @@
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterfaceclock>4000000</avrtoolinterfaceclock>
+    <PercepioTrace>
+      <TargetOS xmlns="">FreeRTOS</TargetOS>
+      <Frequency xmlns="">2000000</Frequency>
+      <EnableTraceInterrupts xmlns="">True</EnableTraceInterrupts>
+      <EnableNonintrusive xmlns="">True</EnableNonintrusive>
+      <EnableTargetOS xmlns="">True</EnableTargetOS>
+      <EnableApplicationOutput xmlns="">True</EnableApplicationOutput>
+      <EnableDataWatchPoints xmlns="">True</EnableDataWatchPoints>
+      <EnablePC xmlns="">False</EnablePC>
+      <EnablePCPolled xmlns="">False</EnablePCPolled>
+      <PolledFrequency xmlns="">1000</PolledFrequency>
+      <EnableMcu xmlns="">False</EnableMcu>
+      <EnableOsAwareness xmlns="">True</EnableOsAwareness>
+      <HWApplicationOutput xmlns="">True</HWApplicationOutput>
+      <HWInterrupt xmlns="">False</HWInterrupt>
+      <HWIntrusiveDataWatch xmlns="">True</HWIntrusiveDataWatch>
+      <HWNonintrusiveDataWatch xmlns="">False</HWNonintrusiveDataWatch>
+      <HWPolledDataWatch xmlns="">False</HWPolledDataWatch>
+      <HWPolledProgramCounterSampling xmlns="">False</HWPolledProgramCounterSampling>
+      <HWProfiling xmlns="">False</HWProfiling>
+      <HWProgramCounterSampling xmlns="">False</HWProgramCounterSampling>
+      <ApplicationOutput0 xmlns="">String</ApplicationOutput0>
+      <ApplicationOutput1 xmlns="">String</ApplicationOutput1>
+      <ApplicationOutput2 xmlns="">String</ApplicationOutput2>
+      <ApplicationOutput3 xmlns="">String</ApplicationOutput3>
+      <ApplicationOutput4 xmlns="">String</ApplicationOutput4>
+      <ApplicationOutput5 xmlns="">String</ApplicationOutput5>
+      <ApplicationOutput6 xmlns="">String</ApplicationOutput6>
+      <ApplicationOutput7 xmlns="">String</ApplicationOutput7>
+      <ApplicationOutput8 xmlns="">String</ApplicationOutput8>
+      <ApplicationOutput9 xmlns="">String</ApplicationOutput9>
+      <ApplicationOutput10 xmlns="">String</ApplicationOutput10>
+      <ApplicationOutput11 xmlns="">String</ApplicationOutput11>
+      <ApplicationOutput12 xmlns="">String</ApplicationOutput12>
+      <ApplicationOutput13 xmlns="">String</ApplicationOutput13>
+      <ApplicationOutput14 xmlns="">String</ApplicationOutput14>
+      <ApplicationOutput15 xmlns="">String</ApplicationOutput15>
+      <ApplicationOutput16 xmlns="">String</ApplicationOutput16>
+      <ApplicationOutput17 xmlns="">String</ApplicationOutput17>
+      <ApplicationOutput18 xmlns="">String</ApplicationOutput18>
+      <ApplicationOutput19 xmlns="">String</ApplicationOutput19>
+      <ApplicationOutput20 xmlns="">String</ApplicationOutput20>
+      <ApplicationOutput21 xmlns="">String</ApplicationOutput21>
+      <ApplicationOutput22 xmlns="">String</ApplicationOutput22>
+      <ApplicationOutput23 xmlns="">String</ApplicationOutput23>
+      <ApplicationOutput24 xmlns="">String</ApplicationOutput24>
+      <ApplicationOutput25 xmlns="">String</ApplicationOutput25>
+      <ApplicationOutput26 xmlns="">String</ApplicationOutput26>
+      <ApplicationOutput27 xmlns="">String</ApplicationOutput27>
+      <ApplicationOutput28 xmlns="">String</ApplicationOutput28>
+      <ApplicationOutput29 xmlns="">String</ApplicationOutput29>
+      <ApplicationOutput30 xmlns="">String</ApplicationOutput30>
+      <ApplicationOutput31 xmlns="">String</ApplicationOutput31>
+    </PercepioTrace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -157,6 +211,9 @@
     <Compile Include="Component_Drivers\nrf24l01p\nrf24l01p_arch_driver.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="Component_Drivers\nrf24l01p\nrf24l01p_mesh.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Component_Drivers\ssd1306\font.c">
       <SubType>compile</SubType>
     </Compile>
@@ -170,6 +227,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Component_Drivers\ssd1306\ssd130g_arch_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Descriptors.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Descriptors.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="FreeRTOS\croutine.c">
@@ -248,6 +311,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="main.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="XMEGA_API\api_common.h">
@@ -1291,13 +1357,13 @@
     <Compile Include="XMEGA_DRIVERS\xmega_drivers.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="XMEGA_SERVICES\RTCServices.c">
+    <Compile Include="XMEGA_SERVICES\rtcServices.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="XMEGA_SERVICES\RTCServices.h">
+    <Compile Include="XMEGA_SERVICES\rtcServices.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="XMEGA_SERVICES\Stream.h">
+    <Compile Include="XMEGA_SERVICES\stream.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="XMEGA_SERVICES\time.c">

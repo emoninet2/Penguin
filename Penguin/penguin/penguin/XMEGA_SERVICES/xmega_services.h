@@ -9,8 +9,8 @@
 #ifndef XMEGA_SERVICES_H_
 #define XMEGA_SERVICES_H_
 
-#include "Stream.h"
-#include "RTCServices.h"
+#include "stream.h"
+#include "rtcServices.h"
 
 
 

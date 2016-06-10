@@ -10,6 +10,7 @@
 #define COMPONENTS_H_
 
 #include "nrf24l01p/nrf24l01p.h"
+#include "nrf24l01p/nrf24l01p_mesh.h"
 #include "ssd1306/ssd1306.h"
 #include "ssd1306/gfx_mono.h"
 

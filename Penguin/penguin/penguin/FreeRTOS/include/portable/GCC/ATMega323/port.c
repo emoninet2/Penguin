@@ -245,6 +245,7 @@ uint16_t usAddress;
 	pxTopOfStack--;
 
 #if defined(__AVR_3_BYTE_PC__) && __AVR_3_BYTE_PC__
+//#if PROGMEM_SIZE>65538 
 	*pxTopOfStack = (portSTACK_TYPE ) 0;
 	pxTopOfStack--;
 #endif

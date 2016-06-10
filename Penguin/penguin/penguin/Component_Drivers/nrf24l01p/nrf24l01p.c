@@ -6,7 +6,7 @@
  */ 
 
 #include "nrf24l01p.h"
-
+#
 
 void _nrf24l01p_ce_pin(bool state){
 	arch_nrf24l01p_ce_pin(state);
@@ -35,7 +35,52 @@ void _nrf24l01p_init(){
 	_nrf24l01p_disable_dynamic_payload_all_pipe();/////////ALSO CREEATE FOR DISABLE AUTO ACK FOR ALL PIPE
 	_nrf24l01p_startup();
 	
+	
+	_nrf24l01p_enable_dynamic_payload();
+	_nrf24l01p_enable_payload_with_ack();
+
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P0);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P1);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P2);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P3);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P4);
+	_nrf24l01p_enable_auto_ack(_NRF24L01P_PIPE_P5);
+
+	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P0);
+	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P1);
+	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P2);
+	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P3);
+	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P4);
+	_nrf24l01p_enable_dynamic_payload_pipe(_NRF24L01P_PIPE_P5);
+
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P0);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P1);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P2);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P3);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P4);
+	_nrf24l01p_enable_rx_on_pipe(_NRF24L01P_PIPE_P5);
+
+	_nrf24l01p_set_auto_retransmission_count(15);
+	_nrf24l01p_set_auto_retransmission_delay(15);
+	_nrf24l01p_set_DataRate(_NRF24L01P_RF_SETUP_RF_DR_250KBPS);
+	_nrf24l01p_flush_rx();
 }
+
+
+void _nrf24l01p_reinit_loop(void){
+	//printf("testing NRF status\r\n");
+	if(_nrf24l01p_get_status() == 0){
+		//printf("nrf not found. (status = 0) waiting for reconnection\r\n");
+		while(_nrf24l01p_get_status() == 0){
+			//printf("\t\t>>\r\n");
+		}
+		//printf("nrf found. reconnecting\r\n");
+		_nrf24l01p_delay_ms(500);
+		_nrf24l01p_init();
+	}
+}
+
+
 
 void _nrf24l01p_read_register(uint8_t address, uint8_t *dataout, int len){
 	_nrf24l01p_csn_pin(0);
@@ -559,37 +604,33 @@ bool _nrf24l01p_readable(_nrf24l01p_pipe_t pipe){
 
 volatile int mystat;
 
-int _nrf24l01p_write(uint8_t *data, int datalen){
-	int error_status = 0;
-	int originalCe = ce_value;//backup original ce_value
-	_nrf24l01p_ce_pin(0);//disable();
+int _nrf24l01p_send(uint8_t *data, int datalen){
+	
+	//_nrf24l01p_reuse_tx_payload();
 	if ( datalen <= 0 ) return 0;
 	if ( datalen > _NRF24L01P_TX_FIFO_SIZE ) datalen = _NRF24L01P_TX_FIFO_SIZE;
-	
 	_nrf24l01p_clear_data_sent_flag();
 	_nrf24l01p_write_tx_payload(data,datalen);
-	
+
+	int error_status = 0;
+	int originalCe = ce_value;//backup original ce_value
 	int originalMode = mode; //backup mode
 	_nrf24l01p_tx_mode();
-	
+	_nrf24l01p_ce_pin(0);//disable();
 	_nrf24l01p_ce_pin(1);//enable();
 	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Thce_us);
 	_nrf24l01p_ce_pin(0);
-	
-	//bool max_retry_flag_reached= 0;
 	while ( !(_nrf24l01p_get_data_sent_flag()) ){
 		if(_nrf24l01p_get_max_retry_flag()){
-			PORTR.OUTTGL = (1<<1);/////////////////////////////////DELETE
 			error_status = -1;
 			break;
 		}
 	}
-
-	_nrf24l01p_flush_tx();
 	
-	
-	_nrf24l01p_clear_data_sent_flag();
 	_nrf24l01p_clear_max_retry_flag();
+	_nrf24l01p_clear_data_sent_flag();
+	//_nrf24l01p_flush_tx();
+	
 	if ( originalMode == _NRF24L01P_MODE_RX ) _nrf24l01p_rx_mode();//restore original mode
 	_nrf24l01p_ce_pin(originalCe);//restore original CE pin status
 	_nrf24l01p_delay_us( _NRF24L01P_TIMING_Tpece2csn_us );
@@ -597,19 +638,63 @@ int _nrf24l01p_write(uint8_t *data, int datalen){
 	return error_status;
 }
 
-int _nrf24l01p_write_to_address(uint64_t address, uint8_t *data, int datalen){
-	_nrf24l01p_set_TX_pipe_address(address);
-	_nrf24l01p_write(data,datalen);
+int _nrf24l01p_resend(){
 	
-}
-int _nrf24l01p_write_to_address_ack(uint64_t address, uint8_t *data, int datalen){
-	_nrf24l01p_set_TX_pipe_address(address);
-	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, address);
-	_nrf24l01p_write(data,datalen);
+	_nrf24l01p_reuse_tx_payload();
+
+	int error_status = 0;
+	int originalCe = ce_value;//backup original ce_value
+	int originalMode = mode; //backup mode
+	_nrf24l01p_tx_mode();
+	_nrf24l01p_ce_pin(0);//disable();
+	_nrf24l01p_ce_pin(1);//enable();
+	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Thce_us);
+	_nrf24l01p_ce_pin(0);
+	while ( !(_nrf24l01p_get_data_sent_flag()) ){
+		if(_nrf24l01p_get_max_retry_flag()){
+			error_status = -1;
+			break;
+		}
+	}
 	
+	_nrf24l01p_clear_max_retry_flag();
+	_nrf24l01p_clear_data_sent_flag();
+	//_nrf24l01p_flush_tx();
 	
+	if ( originalMode == _NRF24L01P_MODE_RX ) _nrf24l01p_rx_mode();//restore original mode
+	_nrf24l01p_ce_pin(originalCe);//restore original CE pin status
+	_nrf24l01p_delay_us( _NRF24L01P_TIMING_Tpece2csn_us );
+	
+	return error_status;
 }
 
+
+
+int _nrf24l01p_send_to_address(uint64_t address, uint8_t *data, int datalen){
+	//_nrf24l01p_disable_payload_with_ack();
+	_nrf24l01p_set_TX_pipe_address(address);
+	return _nrf24l01p_send(data,datalen);
+	
+}
+int _nrf24l01p_send_to_address_ack(uint64_t address, uint8_t *data, int datalen){
+	//_nrf24l01p_enable_payload_with_ack();
+	_nrf24l01p_set_TX_pipe_address(address);
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, address);
+	return _nrf24l01p_send(data,datalen);
+}
+
+void _nrf24l01p_send_until_ack(uint64_t address, uint8_t *data, int datalen){
+	//_nrf24l01p_enable_payload_with_ack();
+	_nrf24l01p_set_TX_pipe_address(address);
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P0, address);
+
+	int txerrflag = _nrf24l01p_send_to_address_ack(address, data,datalen);
+	if(txerrflag == -1) {
+		while(_nrf24l01p_resend() == -1){
+		}
+	}
+
+}
 
 
 int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
@@ -643,6 +728,7 @@ int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
 	}
 	return 0;	
 }
+
 int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
 	
 	int rxPayloadWidth;
@@ -682,9 +768,9 @@ int _nrf24l01p_read_dyn_pld(_nrf24l01p_pipe_t pipe, uint8_t *data){
 }
 
 
-int _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
+void _nrf24l01p_write_ack(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
 
-	if ( datalen <= 0 ) return 0;
+	if ( datalen <= 0 ) return;
 	if ( datalen > _NRF24L01P_TX_FIFO_SIZE ) datalen = _NRF24L01P_TX_FIFO_SIZE;
 
 	_nrf24l01p_write_ack_payload(pipe,data,datalen);

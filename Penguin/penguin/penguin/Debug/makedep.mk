@@ -6,6 +6,8 @@ Component_Drivers\nrf24l01p\nrf24l01p.c
 
 Component_Drivers\ssd1306\font.c
 
+Descriptors.c
+
 FreeRTOS\croutine.c
 
 FreeRTOS\event_groups.c
@@ -186,7 +188,7 @@ XMEGA_DRIVERS\usart_driver.c
 
 XMEGA_DRIVERS\wdt_driver.c
 
-XMEGA_SERVICES\RTCServices.c
+XMEGA_SERVICES\rtcServices.c
 
 XMEGA_SERVICES\time.c
 
