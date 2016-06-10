@@ -43,6 +43,8 @@
 #include "task.h"
 #include "queue.h"
 
+
+
 DigitalPin_t led = {&PORTR, 0};
 DigitalPin_t led2 = {&PORTR, 1};
 
@@ -123,6 +125,7 @@ void thread_1( void *pvParameters ){
 
 
 void thread_2( void *pvParameters ){
+	char myname[10];
 	while(1){
 		vTaskDelay(100);
 		DigitalPin_ToggleValue(&led2);
@@ -191,8 +194,6 @@ int main(void)
 	PORTD.DIRSET = (1<<4);
 
 
-
-
 	CDC_Device_CreateStream(&VirtualSerial_CDC_Interface, &USBSerialStream);
 	GlobalInterruptEnable();
 
@@ -216,6 +217,7 @@ int main(void)
 // 		USB_USBTask();
 	}
 }
+
 
 /** Configures the board hardware and chip peripherals for the demo's functionality. */
 void SetupHardware(void)
