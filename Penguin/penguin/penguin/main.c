@@ -37,6 +37,7 @@
 
 #include "time.h"
 #include "main.h"
+#include "xmega_drivers.h"
 #include "Component_Drivers/components.h"
 #include "XMEGA_API/xmega_api.h"
 #include "XMEGA_SERVICES/xmega_services.h"
@@ -110,10 +111,13 @@ void thread_1( void *pvParameters ){
 		//xQueue = xQueueCreate( 10, sizeof( uint8_t ) );
 
 	uint8_t i =0;
+	bool lcdbackstat = 0;
 	while(1){
 		//xQueueSend( xQueue,( void * ) &i,( TickType_t ) 10 );
 		i++;
 		vTaskDelay(500);
+		lcd03_backlight(lcdbackstat);
+		lcdbackstat = !lcdbackstat;
 		DigitalPin_ToggleValue(&led);
 		
 		vTaskSuspendAll();
@@ -125,14 +129,22 @@ void thread_1( void *pvParameters ){
 }
 
 
+
+
 void thread_2( void *pvParameters ){
-	char myname[10];
+
+	uint8_t writeData[] = {0, 0x0c};
+
+	
 	while(1){
+
 		vTaskDelay(100);
 		DigitalPin_ToggleValue(&led2);
 	}
 }
 
+
+TWI_Master_t lcd03i2c;
 
 
 /** Main program entry point. This routine contains the overall program flow, including initial
@@ -140,15 +152,10 @@ void thread_2( void *pvParameters ){
  */
 int main(void)
 {
-		DigitalPin_SetDIr(&led,1);
-		DigitalPin_SetDIr(&led2,1);
+	DigitalPin_SetDIr(&led,1);
+	DigitalPin_SetDIr(&led2,1);
 	
-		
-		
-		
 	SetupHardware();
-
-
 
 	uint8_t page;
 	uint8_t column;
@@ -176,11 +183,7 @@ int main(void)
 	CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_RC32M_gc );
 	CLKSYS_Disable( OSC_RC2MEN_bm );
 
-
-
 	//char ack_echo_data[] = "hello hello bolkey";
-
-
 
 	char time_string[20];
 	uint8_t rxData[33];
@@ -190,14 +193,57 @@ int main(void)
 	PORTR.DIRSET = (1<<1);
 	PORTD.DIRSET = (1<<4);
 
-
 	CDC_Device_CreateStream(&VirtualSerial_CDC_Interface, &USBSerialStream);
 	GlobalInterruptEnable();
 
-	//creating the threads
-	//xTaskCreate(thread_1, (const char*) "t1", 100, NULL, tskIDLE_PRIORITY, NULL );
-	//xTaskCreate(thread_2,(const char *) "t2", 100, NULL, tskIDLE_PRIORITY, NULL );
-	//
+	asm("nop");
+
+	TWI_MasterInit(&lcd03i2c,
+	&TWIE,
+	TWI_MASTER_INTLVL_OFF_gc,
+	TWI_BAUD(F_CPU, 100000));
+	
+	asm("nop");
+
+	
+
+
+//  	uint8_t writeData[] = {0,0x14};
+// 	TWI_MasterWrite(&lcd03i2c,
+//                      0x64,
+//                      writeData,
+//                      sizeof(writeData));
+// 	asm("nop");
+// 
+// 
+// 	while(lcd03i2c.status != 0){
+// 		TWI_MasterWriteHandler(&lcd03i2c);
+// 		while(!(TWIE.MASTER.STATUS&TWI_MASTER_WIF_bm));
+// 	}
+	
+
+
+	asm("nop");
+
+
+
+
+// 	TWIE.MASTER.ADDR = 0xC8;  // write to RTC
+// 	while(!(TWIE.MASTER.STATUS&TWI_MASTER_WIF_bm));
+// 	TWIE.MASTER.DATA = 0x00;       // write word addr
+// 	while(!(TWIE.MASTER.STATUS&TWI_MASTER_WIF_bm));
+// 	for(int i=0;i<2;i++){                  // write date and time
+// 		TWIE.MASTER.DATA =writeData[i];
+// 		while(!(TWIE.MASTER.STATUS&TWI_MASTER_WIF_bm));
+// 	}
+
+
+
+
+
+	asm("nop");
+
+
 	
 	xTaskCreate(thread_1,(signed portCHAR *) "t1", 100, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_2,(signed portCHAR *) "t2", 100, NULL, tskIDLE_PRIORITY, NULL );

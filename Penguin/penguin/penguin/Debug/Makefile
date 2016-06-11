@@ -34,6 +34,7 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../Component_Drivers/ \
+../Component_Drivers/lcd03 \
 ../Component_Drivers/nrf24l01p/ \
 ../Component_Drivers/ssd1306/ \
 ../FreeRTOS/include/ \
@@ -121,6 +122,7 @@ SUBDIRS :=  \
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../Component_Drivers/lcd03/lcd03.c \
 ../Component_Drivers/nrf24l01p/nrf24l01p.c \
 ../Component_Drivers/ssd1306/font.c \
 ../Descriptors.c \
@@ -223,6 +225,7 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+Component_Drivers/lcd03/lcd03.o \
 Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
@@ -318,6 +321,7 @@ XMEGA_DRIVERS/usart_driver.o \
 XMEGA_DRIVERS/wdt_driver.o
 
 OBJS_AS_ARGS +=  \
+Component_Drivers/lcd03/lcd03.o \
 Component_Drivers/nrf24l01p/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
@@ -413,6 +417,7 @@ XMEGA_DRIVERS/usart_driver.o \
 XMEGA_DRIVERS/wdt_driver.o
 
 C_DEPS +=  \
+Component_Drivers/lcd03/lcd03.d \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
@@ -508,6 +513,7 @@ XMEGA_DRIVERS/usart_driver.d \
 XMEGA_DRIVERS/wdt_driver.d
 
 C_DEPS_AS_ARGS +=  \
+Component_Drivers/lcd03/lcd03.d \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
@@ -800,6 +806,15 @@ LINKER_SCRIPT_DEP+=
 
 
 
+
+
+
+Component_Drivers/lcd03/%.o: ../Component_Drivers/lcd03/%.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 4.9.2
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323" -I"../FATFS"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
 
 Component_Drivers/nrf24l01p/%.o: ../Component_Drivers/nrf24l01p/%.c
 	@echo Building file: $<

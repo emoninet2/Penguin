@@ -120,12 +120,6 @@ main.d main.o: .././main.c \
  ../LUFA/Platform/Platform.h ../LUFA/Platform/../Common/Common.h \
  ../LUFA/Platform/XMEGA/ClockManagement.h \
  ../LUFA/Platform/XMEGA/../../Common/Common.h \
- .././Component_Drivers/components.h \
- .././Component_Drivers/nrf24l01p/nrf24l01p.h \
- .././Component_Drivers/nrf24l01p/nrf24l01p_arch_driver.h \
- ../XMEGA_DRIVERS/../XMEGA_API/xmega_api.h \
- ../XMEGA_DRIVERS/../XMEGA_API/USART.h \
- ../XMEGA_DRIVERS/../XMEGA_API/api_common.h \
  ../XMEGA_DRIVERS/xmega_drivers.h ../XMEGA_DRIVERS/port_driver.h \
  ../XMEGA_DRIVERS/avr_compiler.h ../XMEGA_DRIVERS/spi_driver.h \
  ../XMEGA_DRIVERS/usart_driver.h ../XMEGA_DRIVERS/twi_master_driver.h \
@@ -133,12 +127,21 @@ main.d main.o: .././main.c \
  ../XMEGA_DRIVERS/eeprom_driver.h ../XMEGA_DRIVERS/dma_driver.h \
  ../XMEGA_DRIVERS/adc_driver.h ../XMEGA_DRIVERS/clksys_driver.h \
  ../XMEGA_DRIVERS/rtc_driver.h ../XMEGA_DRIVERS/TC_driver.h \
+ .././Component_Drivers/components.h \
+ .././Component_Drivers/nrf24l01p/nrf24l01p.h \
+ .././Component_Drivers/nrf24l01p/nrf24l01p_arch_driver.h \
+ ../XMEGA_DRIVERS/../XMEGA_API/xmega_api.h \
+ ../XMEGA_DRIVERS/../XMEGA_API/USART.h \
+ ../XMEGA_DRIVERS/../XMEGA_API/api_common.h \
  ../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h \
  .././Component_Drivers/nrf24l01p/nrf24l01p_mesh.h \
  .././Component_Drivers/ssd1306/ssd1306.h \
  .././Component_Drivers/ssd1306/ssd130g_arch_driver.h \
  .././Component_Drivers/ssd1306/font.h \
- .././Component_Drivers/ssd1306/gfx_mono.h .././XMEGA_API/xmega_api.h \
+ .././Component_Drivers/ssd1306/gfx_mono.h \
+ .././Component_Drivers/lcd03/lcd03.h \
+ .././Component_Drivers/lcd03/lcd03_arch_driver.h \
+ ../XMEGA_DRIVERS/twi_master_driver.h .././XMEGA_API/xmega_api.h \
  .././XMEGA_SERVICES/xmega_services.h .././XMEGA_SERVICES/stream.h \
  .././JSON/jsmn.h ../FreeRTOS/include/FreeRTOS.h \
  ../FreeRTOS/FreeRTOSConfig.h ../FreeRTOS/include/projdefs.h \
@@ -401,18 +404,6 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../LUFA/Platform/XMEGA/../../Common/Common.h:
 
-.././Component_Drivers/components.h:
-
-.././Component_Drivers/nrf24l01p/nrf24l01p.h:
-
-.././Component_Drivers/nrf24l01p/nrf24l01p_arch_driver.h:
-
-../XMEGA_DRIVERS/../XMEGA_API/xmega_api.h:
-
-../XMEGA_DRIVERS/../XMEGA_API/USART.h:
-
-../XMEGA_DRIVERS/../XMEGA_API/api_common.h:
-
 ../XMEGA_DRIVERS/xmega_drivers.h:
 
 ../XMEGA_DRIVERS/port_driver.h:
@@ -441,6 +432,18 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../XMEGA_DRIVERS/TC_driver.h:
 
+.././Component_Drivers/components.h:
+
+.././Component_Drivers/nrf24l01p/nrf24l01p.h:
+
+.././Component_Drivers/nrf24l01p/nrf24l01p_arch_driver.h:
+
+../XMEGA_DRIVERS/../XMEGA_API/xmega_api.h:
+
+../XMEGA_DRIVERS/../XMEGA_API/USART.h:
+
+../XMEGA_DRIVERS/../XMEGA_API/api_common.h:
+
 ../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h:
 
 .././Component_Drivers/nrf24l01p/nrf24l01p_mesh.h:
@@ -452,6 +455,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././Component_Drivers/ssd1306/font.h:
 
 .././Component_Drivers/ssd1306/gfx_mono.h:
+
+.././Component_Drivers/lcd03/lcd03.h:
+
+.././Component_Drivers/lcd03/lcd03_arch_driver.h:
+
+../XMEGA_DRIVERS/twi_master_driver.h:
 
 .././XMEGA_API/xmega_api.h:
 

@@ -2,6 +2,8 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+Component_Drivers\lcd03\lcd03.c
+
 Component_Drivers\nrf24l01p\nrf24l01p.c
 
 Component_Drivers\ssd1306\font.c

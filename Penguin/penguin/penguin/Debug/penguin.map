@@ -9,7 +9,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_copy_data.o)
                               Component_Drivers/nrf24l01p/nrf24l01p.o (__do_copy_data)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_clear_bss.o)
-                              Component_Drivers/nrf24l01p/nrf24l01p.o (__do_clear_bss)
+                              Component_Drivers/lcd03/lcd03.o (__do_clear_bss)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_mulshisi3.o)
                               main.o (__mulshisi3)
 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_ashrdi3.o)
@@ -46,6 +46,7 @@ c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/..
 Allocating common symbols
 Common symbol       size              file
 
+lcd03i2c            0x19              Component_Drivers/lcd03/lcd03.o
 USB_IsInitialized   0x1               LUFA/Drivers/USB/Core/USBTask.o
 USB_EndpointTable   0x53              LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
 nrf24l01p_reachable_addresses
@@ -70,12 +71,58 @@ USB_Endpoint_FIFOs  0x294             LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA
 mystat              0x2               Component_Drivers/nrf24l01p/nrf24l01p.o
 USB_Device_RemoteWakeupEnabled
                     0x1               LUFA/Drivers/USB/Core/DeviceStandardReq.o
+psend               0x2               Component_Drivers/lcd03/lcd03.o
 __iob               0x6               c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(iob.o)
 
 Discarded input sections
 
  .data          0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAC_DFP/1.0.29/gcc/dev/atxmega384c3/avrxmega6/crtatxmega384c3.o
  .bss           0x00000000        0x0 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAC_DFP/1.0.29/gcc/dev/atxmega384c3/avrxmega6/crtatxmega384c3.o
+ .text          0x00000000        0x0 Component_Drivers/lcd03/lcd03.o
+ .data          0x00000000        0x0 Component_Drivers/lcd03/lcd03.o
+ .bss           0x00000000        0x0 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_send_via_i2c
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_init
+                0x00000000       0x12 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_send_via_serial
+                0x00000000        0x2 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_send_data
+                0x00000000        0xc Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_cursor_home
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_set_cursor_pos
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_set_cursor_coordinate
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_cursor_display_mode
+                0x00000000       0x24 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_backspace
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_tab
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_smart_line_feed
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_vertical_tab
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_clear_screen
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_carriage_return
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_clear_column
+                0x00000000        0x8 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_tab_set_size
+                0x00000000       0x14 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_startup_message_mode
+                0x00000000       0x14 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_change_i2c_addr
+                0x00000000       0x34 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_get_fifo_status
+                0x00000000        0x2 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_get_software_version
+                0x00000000        0x2 Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_custom_char_ger
+                0x00000000        0x2 Component_Drivers/lcd03/lcd03.o
  .text          0x00000000        0x0 Component_Drivers/nrf24l01p/nrf24l01p.o
  .data          0x00000000        0x0 Component_Drivers/nrf24l01p/nrf24l01p.o
  .bss           0x00000000        0x0 Component_Drivers/nrf24l01p/nrf24l01p.o
@@ -1614,38 +1661,20 @@ Discarded input sections
  .text          0x00000000        0x0 XMEGA_DRIVERS/twi_master_driver.o
  .data          0x00000000        0x0 XMEGA_DRIVERS/twi_master_driver.o
  .bss           0x00000000        0x0 XMEGA_DRIVERS/twi_master_driver.o
- .text.TWI_MasterInit
-                0x00000000       0x22 XMEGA_DRIVERS/twi_master_driver.o
  .text.TWI_MasterState
                 0x00000000        0xc XMEGA_DRIVERS/twi_master_driver.o
  .text.TWI_MasterReady
                 0x00000000        0x8 XMEGA_DRIVERS/twi_master_driver.o
- .text.TWI_MasterWriteRead
-                0x00000000       0x88 XMEGA_DRIVERS/twi_master_driver.o
- .text.TWI_MasterWrite
-                0x00000000        0xc XMEGA_DRIVERS/twi_master_driver.o
  .text.TWI_MasterRead
                 0x00000000       0x12 XMEGA_DRIVERS/twi_master_driver.o
  .text.TWI_MasterArbitrationLostBusErrorHandler
                 0x00000000       0x24 XMEGA_DRIVERS/twi_master_driver.o
- .text.TWI_MasterWriteHandler
-                0x00000000       0x64 XMEGA_DRIVERS/twi_master_driver.o
  .text.TWI_MasterReadHandler
                 0x00000000       0x5a XMEGA_DRIVERS/twi_master_driver.o
  .text.TWI_MasterInterruptHandler
                 0x00000000       0x32 XMEGA_DRIVERS/twi_master_driver.o
  .text.TWI_MasterTransactionFinished
                 0x00000000        0x8 XMEGA_DRIVERS/twi_master_driver.o
- .debug_info    0x00000000      0x86f XMEGA_DRIVERS/twi_master_driver.o
- .debug_abbrev  0x00000000      0x293 XMEGA_DRIVERS/twi_master_driver.o
- .debug_loc     0x00000000      0x637 XMEGA_DRIVERS/twi_master_driver.o
- .debug_aranges
-                0x00000000       0x70 XMEGA_DRIVERS/twi_master_driver.o
- .debug_ranges  0x00000000       0x60 XMEGA_DRIVERS/twi_master_driver.o
- .debug_line    0x00000000      0x3dd XMEGA_DRIVERS/twi_master_driver.o
- .debug_str     0x00000000      0x655 XMEGA_DRIVERS/twi_master_driver.o
- .comment       0x00000000       0x31 XMEGA_DRIVERS/twi_master_driver.o
- .debug_frame   0x00000000       0xf0 XMEGA_DRIVERS/twi_master_driver.o
  .text          0x00000000        0x0 XMEGA_DRIVERS/twi_slave_driver.o
  .data          0x00000000        0x0 XMEGA_DRIVERS/twi_slave_driver.o
  .bss           0x00000000        0x0 XMEGA_DRIVERS/twi_slave_driver.o
@@ -1972,6 +2001,7 @@ user_signatures  0x00850000         0x00000400         rw !x
 Linker script and memory map
 
 LOAD C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAC_DFP/1.0.29/gcc/dev/atxmega384c3/avrxmega6/crtatxmega384c3.o
+LOAD Component_Drivers/lcd03/lcd03.o
 LOAD Component_Drivers/nrf24l01p/nrf24l01p.o
 LOAD Component_Drivers/ssd1306/font.o
 LOAD Descriptors.o
@@ -2172,7 +2202,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x271e
+.text           0x00000000     0x28d2
  *(.vectors)
  .vectors       0x00000000      0x1fc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAC_DFP/1.0.29/gcc/dev/atxmega384c3/avrxmega6/crtatxmega384c3.o
                 0x00000000                __vector_default
@@ -2361,315 +2391,335 @@ END GROUP
                 0x00000312                __vector_120
                 0x00000316                . = ALIGN (0x2)
  *(.text.*)
+ .text.lcd03_arch_i2c_send
+                0x00000316       0x5a Component_Drivers/lcd03/lcd03.o
+ .text.lcd03_send_command
+                0x00000370        0x8 Component_Drivers/lcd03/lcd03.o
+                0x00000370                lcd03_send_command
+ .text.lcd03_backlight
+                0x00000378       0x14 Component_Drivers/lcd03/lcd03.o
+                0x00000378                lcd03_backlight
  .text.CALLBACK_USB_GetDescriptor
-                0x00000316       0x7a Descriptors.o
-                0x00000316                CALLBACK_USB_GetDescriptor
+                0x0000038c       0x7a Descriptors.o
+                0x0000038c                CALLBACK_USB_GetDescriptor
  .text.pxPortInitialiseStack
-                0x00000390       0xdc FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x00000390                pxPortInitialiseStack
+                0x00000406       0xdc FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x00000406                pxPortInitialiseStack
  .text.xPortStartScheduler
-                0x0000046c       0x84 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x0000046c                xPortStartScheduler
+                0x000004e2       0x84 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000004e2                xPortStartScheduler
  .text.vPortYield
-                0x000004f0       0xb2 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x000004f0                vPortYield
+                0x00000566       0xb2 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x00000566                vPortYield
  .text.vPortYieldFromTick
-                0x000005a2       0xb8 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x000005a2                vPortYieldFromTick
+                0x00000618       0xb8 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x00000618                vPortYieldFromTick
  .text.__vector_14
-                0x0000065a        0x6 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x0000065a                __vector_14
+                0x000006d0        0x6 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000006d0                __vector_14
  .text.pvPortMalloc
-                0x00000660       0x6a FreeRTOS/include/portable/MemMang/heap_1.o
-                0x00000660                pvPortMalloc
+                0x000006d6       0x6a FreeRTOS/include/portable/MemMang/heap_1.o
+                0x000006d6                pvPortMalloc
  .text.vPortFree
-                0x000006ca        0x2 FreeRTOS/include/portable/MemMang/heap_1.o
-                0x000006ca                vPortFree
+                0x00000740        0x2 FreeRTOS/include/portable/MemMang/heap_1.o
+                0x00000740                vPortFree
  .text.vListInitialise
-                0x000006cc       0x1c FreeRTOS/list.o
-                0x000006cc                vListInitialise
+                0x00000742       0x1c FreeRTOS/list.o
+                0x00000742                vListInitialise
  .text.vListInitialiseItem
-                0x000006e8        0x8 FreeRTOS/list.o
-                0x000006e8                vListInitialiseItem
+                0x0000075e        0x8 FreeRTOS/list.o
+                0x0000075e                vListInitialiseItem
  .text.vListInsertEnd
-                0x000006f0       0x42 FreeRTOS/list.o
-                0x000006f0                vListInsertEnd
+                0x00000766       0x42 FreeRTOS/list.o
+                0x00000766                vListInsertEnd
  .text.vListInsert
-                0x00000732       0x62 FreeRTOS/list.o
-                0x00000732                vListInsert
+                0x000007a8       0x62 FreeRTOS/list.o
+                0x000007a8                vListInsert
  .text.uxListRemove
-                0x00000794       0x4c FreeRTOS/list.o
-                0x00000794                uxListRemove
+                0x0000080a       0x4c FreeRTOS/list.o
+                0x0000080a                uxListRemove
  .text.prvResetNextTaskUnblockTime
-                0x000007e0       0x3e FreeRTOS/tasks.o
+                0x00000856       0x3e FreeRTOS/tasks.o
  .text.prvAddCurrentTaskToDelayedList
-                0x0000081e       0x6e FreeRTOS/tasks.o
+                0x00000894       0x6e FreeRTOS/tasks.o
  .text.xTaskGenericCreate
-                0x0000088c      0x226 FreeRTOS/tasks.o
-                0x0000088c                xTaskGenericCreate
+                0x00000902      0x226 FreeRTOS/tasks.o
+                0x00000902                xTaskGenericCreate
  .text.vTaskStartScheduler
-                0x00000ab2       0x56 FreeRTOS/tasks.o
-                0x00000ab2                vTaskStartScheduler
+                0x00000b28       0x56 FreeRTOS/tasks.o
+                0x00000b28                vTaskStartScheduler
  .text.vTaskSuspendAll
-                0x00000b08        0xc FreeRTOS/tasks.o
-                0x00000b08                vTaskSuspendAll
+                0x00000b7e        0xc FreeRTOS/tasks.o
+                0x00000b7e                vTaskSuspendAll
  .text.xTaskIncrementTick
-                0x00000b14      0x174 FreeRTOS/tasks.o
-                0x00000b14                xTaskIncrementTick
+                0x00000b8a      0x174 FreeRTOS/tasks.o
+                0x00000b8a                xTaskIncrementTick
  .text.xTaskResumeAll
-                0x00000c88      0x104 FreeRTOS/tasks.o
-                0x00000c88                xTaskResumeAll
+                0x00000cfe      0x104 FreeRTOS/tasks.o
+                0x00000cfe                xTaskResumeAll
  .text.vTaskDelay
-                0x00000d8c       0x40 FreeRTOS/tasks.o
-                0x00000d8c                vTaskDelay
+                0x00000e02       0x40 FreeRTOS/tasks.o
+                0x00000e02                vTaskDelay
  .text.prvIdleTask
-                0x00000dcc       0x62 FreeRTOS/tasks.o
+                0x00000e42       0x62 FreeRTOS/tasks.o
  .text.vTaskSwitchContext
-                0x00000e2e       0xda FreeRTOS/tasks.o
-                0x00000e2e                vTaskSwitchContext
+                0x00000ea4       0xda FreeRTOS/tasks.o
+                0x00000ea4                vTaskSwitchContext
  .text.CDC_Device_ConfigureEndpoints
-                0x00000f08       0x4a LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x00000f08                CDC_Device_ConfigureEndpoints
+                0x00000f7e       0x4a LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x00000f7e                CDC_Device_ConfigureEndpoints
  .text.CDC_Device_SendByte
-                0x00000f52       0x5c LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x00000f52                CDC_Device_SendByte
+                0x00000fc8       0x5c LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x00000fc8                CDC_Device_SendByte
  .text.CDC_Device_putchar
-                0x00000fae       0x22 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x00001024       0x22 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
  .text.CDC_Device_Flush
-                0x00000fd0       0xa0 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x00000fd0                CDC_Device_Flush
+                0x00001046       0xa0 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x00001046                CDC_Device_Flush
  .text.CDC_Device_USBTask
-                0x00001070       0x3a LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x00001070                CDC_Device_USBTask
+                0x000010e6       0x3a LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x000010e6                CDC_Device_USBTask
  .text.CDC_Device_ReceiveByte
-                0x000010aa       0xd6 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x000010aa                CDC_Device_ReceiveByte
+                0x00001120       0xd6 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x00001120                CDC_Device_ReceiveByte
  .text.CDC_Device_getchar
-                0x00001180       0x14 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x000011f6       0x14 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
  .text.CDC_Device_CreateStream
-                0x00001194       0x26 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x00001194                CDC_Device_CreateStream
+                0x0000120a       0x26 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x0000120a                CDC_Device_CreateStream
  .text.CDC_Device_Event_Stub
-                0x000011ba        0x2 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x000011ba                EVENT_CDC_Device_BreakSent
-                0x000011ba                CDC_Device_Event_Stub
-                0x000011ba                EVENT_CDC_Device_LineEncodingChanged
+                0x00001230        0x2 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x00001230                EVENT_CDC_Device_BreakSent
+                0x00001230                CDC_Device_Event_Stub
+                0x00001230                EVENT_CDC_Device_LineEncodingChanged
  .text.CDC_Device_ProcessControlRequest
-                0x000011bc      0x158 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
-                0x000011bc                CDC_Device_ProcessControlRequest
+                0x00001232      0x158 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x00001232                CDC_Device_ProcessControlRequest
  .text.USB_Device_ProcessControlRequest
-                0x00001314      0x2a6 LUFA/Drivers/USB/Core/DeviceStandardReq.o
-                0x00001314                USB_Device_ProcessControlRequest
+                0x0000138a      0x2a6 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+                0x0000138a                USB_Device_ProcessControlRequest
  .text.USB_Event_Stub
-                0x000015ba        0x2 LUFA/Drivers/USB/Core/Events.o
-                0x000015ba                USB_Event_Stub
-                0x000015ba                EVENT_USB_Device_Suspend
-                0x000015ba                EVENT_USB_Device_StartOfFrame
-                0x000015ba                EVENT_USB_Device_Reset
-                0x000015ba                EVENT_USB_Device_WakeUp
+                0x00001630        0x2 LUFA/Drivers/USB/Core/Events.o
+                0x00001630                USB_Event_Stub
+                0x00001630                EVENT_USB_Device_Suspend
+                0x00001630                EVENT_USB_Device_StartOfFrame
+                0x00001630                EVENT_USB_Device_Reset
+                0x00001630                EVENT_USB_Device_WakeUp
  .text.USB_USBTask
-                0x000015bc       0x28 LUFA/Drivers/USB/Core/USBTask.o
-                0x000015bc                USB_USBTask
+                0x00001632       0x28 LUFA/Drivers/USB/Core/USBTask.o
+                0x00001632                USB_USBTask
  .text.Endpoint_Write_Control_Stream_LE
-                0x000015e4      0x12c LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
-                0x000015e4                Endpoint_Write_Control_Stream_LE
+                0x0000165a      0x12c LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+                0x0000165a                Endpoint_Write_Control_Stream_LE
  .text.Endpoint_Write_Control_PStream_LE
-                0x00001710      0x132 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
-                0x00001710                Endpoint_Write_Control_PStream_LE
+                0x00001786      0x132 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+                0x00001786                Endpoint_Write_Control_PStream_LE
  .text.Endpoint_ClearIN
-                0x00001842       0x32 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001842                Endpoint_ClearIN
+                0x000018b8       0x32 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x000018b8                Endpoint_ClearIN
  .text.Endpoint_ClearOUT
-                0x00001874       0x1e LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001874                Endpoint_ClearOUT
+                0x000018ea       0x1e LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x000018ea                Endpoint_ClearOUT
  .text.Endpoint_Read_8
-                0x00001892       0x20 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001892                Endpoint_Read_8
+                0x00001908       0x20 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001908                Endpoint_Read_8
  .text.Endpoint_Write_8
-                0x000018b2       0x20 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x000018b2                Endpoint_Write_8
+                0x00001928       0x20 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001928                Endpoint_Write_8
  .text.Endpoint_SelectEndpoint
-                0x000018d2       0x80 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x000018d2                Endpoint_SelectEndpoint
+                0x00001948       0x80 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001948                Endpoint_SelectEndpoint
  .text.Endpoint_IsINReady
-                0x00001952       0x1a LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001952                Endpoint_IsINReady
+                0x000019c8       0x1a LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x000019c8                Endpoint_IsINReady
  .text.Endpoint_IsOUTReceived
-                0x0000196c       0x34 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x0000196c                Endpoint_IsOUTReceived
+                0x000019e2       0x34 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x000019e2                Endpoint_IsOUTReceived
  .text.Endpoint_IsSETUPReceived
-                0x000019a0       0x34 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x000019a0                Endpoint_IsSETUPReceived
+                0x00001a16       0x34 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001a16                Endpoint_IsSETUPReceived
  .text.Endpoint_ClearSETUP
-                0x000019d4       0x5c LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x000019d4                Endpoint_ClearSETUP
+                0x00001a4a       0x5c LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001a4a                Endpoint_ClearSETUP
  .text.Endpoint_StallTransaction
-                0x00001a30       0x38 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001a30                Endpoint_StallTransaction
+                0x00001aa6       0x38 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001aa6                Endpoint_StallTransaction
  .text.Endpoint_ConfigureEndpoint_PRV
-                0x00001a68       0x8c LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001a68                Endpoint_ConfigureEndpoint_PRV
+                0x00001ade       0x8c LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001ade                Endpoint_ConfigureEndpoint_PRV
  .text.Endpoint_ConfigureEndpointTable
-                0x00001af4       0xe8 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001af4                Endpoint_ConfigureEndpointTable
+                0x00001b6a       0xe8 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001b6a                Endpoint_ConfigureEndpointTable
  .text.Endpoint_ClearEndpoints
-                0x00001bdc       0x40 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001bdc                Endpoint_ClearEndpoints
+                0x00001c52       0x40 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001c52                Endpoint_ClearEndpoints
  .text.Endpoint_ClearStatusStage
-                0x00001c1c       0x36 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001c1c                Endpoint_ClearStatusStage
+                0x00001c92       0x36 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001c92                Endpoint_ClearStatusStage
  .text.Endpoint_WaitUntilReady
-                0x00001c52       0xa2 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001c52                Endpoint_WaitUntilReady
+                0x00001cc8       0xa2 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001cc8                Endpoint_WaitUntilReady
  .text.USB_ResetInterface
-                0x00001cf4       0x64 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
-                0x00001cf4                USB_ResetInterface
+                0x00001d6a       0x64 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+                0x00001d6a                USB_ResetInterface
  .text.USB_Init
-                0x00001d58       0x58 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
-                0x00001d58                USB_Init
+                0x00001dce       0x58 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+                0x00001dce                USB_Init
  .text.USB_INT_DisableAllInterrupts
-                0x00001db0        0xe LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
-                0x00001db0                USB_INT_DisableAllInterrupts
+                0x00001e26        0xe LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+                0x00001e26                USB_INT_DisableAllInterrupts
  .text.USB_INT_ClearAllInterrupts
-                0x00001dbe        0xc LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
-                0x00001dbe                USB_INT_ClearAllInterrupts
+                0x00001e34        0xc LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+                0x00001e34                USB_INT_ClearAllInterrupts
  .text.__vector_125
-                0x00001dca       0xe8 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
-                0x00001dca                __vector_125
+                0x00001e40       0xe8 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+                0x00001e40                __vector_125
  .text.USBThread
-                0x00001eb2       0x1e main.o
-                0x00001eb2                USBThread
+                0x00001f28       0x1e main.o
+                0x00001f28                USBThread
  .text.thread_2
-                0x00001ed0       0x12 main.o
-                0x00001ed0                thread_2
+                0x00001f46       0x12 main.o
+                0x00001f46                thread_2
  .text.thread_1
-                0x00001ee2       0x2e main.o
-                0x00001ee2                thread_1
+                0x00001f58       0x3a main.o
+                0x00001f58                thread_1
  .text.usart_spi_transmit_receive
-                0x00001f10       0x18 main.o
-                0x00001f10                usart_spi_transmit_receive
+                0x00001f92       0x18 main.o
+                0x00001f92                usart_spi_transmit_receive
  .text.ssd1306_write_command
-                0x00001f28       0x2c main.o
+                0x00001faa       0x2c main.o
  .text.ssd1306_write_data
-                0x00001f54       0x44 main.o
-                0x00001f54                ssd1306_write_data
+                0x00001fd6       0x44 main.o
+                0x00001fd6                ssd1306_write_data
  .text.ssd1306_set_page_address
-                0x00001f98        0xa main.o
-                0x00001f98                ssd1306_set_page_address
+                0x0000201a        0xa main.o
+                0x0000201a                ssd1306_set_page_address
  .text.ssd1306_set_column_address
-                0x00001fa2       0x20 main.o
-                0x00001fa2                ssd1306_set_column_address
+                0x00002024       0x20 main.o
+                0x00002024                ssd1306_set_column_address
  .text.usart_init_spi
-                0x00001fc2       0x86 main.o
-                0x00001fc2                usart_init_spi
+                0x00002044       0x86 main.o
+                0x00002044                usart_init_spi
  .text.ssd1306_init
-                0x00002048      0x10c main.o
-                0x00002048                ssd1306_init
+                0x000020ca      0x10c main.o
+                0x000020ca                ssd1306_init
  .text.ssd1306_write_text
-                0x00002154       0x68 main.o
-                0x00002154                ssd1306_write_text
+                0x000021d6       0x68 main.o
+                0x000021d6                ssd1306_write_text
  .text.gfx_mono_framebuffer_put_byte
-                0x000021bc       0x1c main.o
-                0x000021bc                gfx_mono_framebuffer_put_byte
+                0x0000223e       0x1c main.o
+                0x0000223e                gfx_mono_framebuffer_put_byte
  .text.gfx_mono_framebuffer_get_byte
-                0x000021d8       0x1c main.o
-                0x000021d8                gfx_mono_framebuffer_get_byte
+                0x0000225a       0x1c main.o
+                0x0000225a                gfx_mono_framebuffer_get_byte
  .text.gfx_mono_ssd1306_put_byte
-                0x000021f4       0x3c main.o
-                0x000021f4                gfx_mono_ssd1306_put_byte
+                0x00002276       0x3c main.o
+                0x00002276                gfx_mono_ssd1306_put_byte
  .text.SetupHardware
-                0x00002230       0xc0 main.o
-                0x00002230                SetupHardware
- .text.main     0x000022f0      0x124 main.o
-                0x000022f0                main
+                0x000022b2       0xc0 main.o
+                0x000022b2                SetupHardware
+ .text.main     0x00002372      0x13c main.o
+                0x00002372                main
  .text.EVENT_USB_Device_Connect
-                0x00002414       0x1a main.o
-                0x00002414                EVENT_USB_Device_Connect
+                0x000024ae       0x1a main.o
+                0x000024ae                EVENT_USB_Device_Connect
  .text.EVENT_USB_Device_Disconnect
-                0x0000242e       0x18 main.o
-                0x0000242e                EVENT_USB_Device_Disconnect
+                0x000024c8       0x18 main.o
+                0x000024c8                EVENT_USB_Device_Disconnect
  .text.EVENT_USB_Device_ConfigurationChanged
-                0x00002446       0x2e main.o
-                0x00002446                EVENT_USB_Device_ConfigurationChanged
+                0x000024e0       0x2e main.o
+                0x000024e0                EVENT_USB_Device_ConfigurationChanged
  .text.EVENT_USB_Device_ControlRequest
-                0x00002474        0xa main.o
-                0x00002474                EVENT_USB_Device_ControlRequest
+                0x0000250e        0xa main.o
+                0x0000250e                EVENT_USB_Device_ControlRequest
  .text.EVENT_CDC_Device_ControLineStateChanged
-                0x0000247e        0x2 main.o
-                0x0000247e                EVENT_CDC_Device_ControLineStateChanged
+                0x00002518        0x2 main.o
+                0x00002518                EVENT_CDC_Device_ControLineStateChanged
  .text.DigitalPin_SetDIr
-                0x00002480       0x24 XMEGA_API/DIGITALPIN.o
-                0x00002480                DigitalPin_SetDIr
+                0x0000251a       0x24 XMEGA_API/DIGITALPIN.o
+                0x0000251a                DigitalPin_SetDIr
  .text.DigitalPin_ToggleValue
-                0x000024a4       0x20 XMEGA_API/DIGITALPIN.o
-                0x000024a4                DigitalPin_ToggleValue
+                0x0000253e       0x20 XMEGA_API/DIGITALPIN.o
+                0x0000253e                DigitalPin_ToggleValue
  .text.__vector_25
-                0x000024c4       0x14 XMEGA_API/USART.o
-                0x000024c4                __vector_25
+                0x0000255e       0x14 XMEGA_API/USART.o
+                0x0000255e                __vector_25
  .text.__vector_27
-                0x000024d8       0x14 XMEGA_API/USART.o
-                0x000024d8                __vector_27
+                0x00002572       0x14 XMEGA_API/USART.o
+                0x00002572                __vector_27
  .text.__vector_26
-                0x000024ec       0x14 XMEGA_API/USART.o
-                0x000024ec                __vector_26
+                0x00002586       0x14 XMEGA_API/USART.o
+                0x00002586                __vector_26
  .text.__vector_28
-                0x00002500       0x14 XMEGA_API/USART.o
-                0x00002500                __vector_28
+                0x0000259a       0x14 XMEGA_API/USART.o
+                0x0000259a                __vector_28
  .text.__vector_30
-                0x00002514       0x14 XMEGA_API/USART.o
-                0x00002514                __vector_30
+                0x000025ae       0x14 XMEGA_API/USART.o
+                0x000025ae                __vector_30
  .text.__vector_29
-                0x00002528       0x14 XMEGA_API/USART.o
-                0x00002528                __vector_29
+                0x000025c2       0x14 XMEGA_API/USART.o
+                0x000025c2                __vector_29
  .text.__vector_88
-                0x0000253c       0x14 XMEGA_API/USART.o
-                0x0000253c                __vector_88
+                0x000025d6       0x14 XMEGA_API/USART.o
+                0x000025d6                __vector_88
  .text.__vector_90
-                0x00002550       0x14 XMEGA_API/USART.o
-                0x00002550                __vector_90
+                0x000025ea       0x14 XMEGA_API/USART.o
+                0x000025ea                __vector_90
  .text.__vector_89
-                0x00002564       0x14 XMEGA_API/USART.o
-                0x00002564                __vector_89
+                0x000025fe       0x14 XMEGA_API/USART.o
+                0x000025fe                __vector_89
  .text.__vector_58
-                0x00002578       0x14 XMEGA_API/USART.o
-                0x00002578                __vector_58
+                0x00002612       0x14 XMEGA_API/USART.o
+                0x00002612                __vector_58
  .text.__vector_60
-                0x0000258c       0x14 XMEGA_API/USART.o
-                0x0000258c                __vector_60
+                0x00002626       0x14 XMEGA_API/USART.o
+                0x00002626                __vector_60
  .text.__vector_59
-                0x000025a0       0x14 XMEGA_API/USART.o
-                0x000025a0                __vector_59
+                0x0000263a       0x14 XMEGA_API/USART.o
+                0x0000263a                __vector_59
  .text.CCPWrite
-                0x000025b4       0x2a XMEGA_DRIVERS/clksys_driver.o
-                0x000025b4                CCPWrite
+                0x0000264e       0x2a XMEGA_DRIVERS/clksys_driver.o
+                0x0000264e                CCPWrite
  .text.CLKSYS_Disable
-                0x000025de       0x14 XMEGA_DRIVERS/clksys_driver.o
-                0x000025de                CLKSYS_Disable
+                0x00002678       0x14 XMEGA_DRIVERS/clksys_driver.o
+                0x00002678                CLKSYS_Disable
  .text.CLKSYS_Main_ClockSource_Select
-                0x000025f2       0x2a XMEGA_DRIVERS/clksys_driver.o
-                0x000025f2                CLKSYS_Main_ClockSource_Select
+                0x0000268c       0x2a XMEGA_DRIVERS/clksys_driver.o
+                0x0000268c                CLKSYS_Main_ClockSource_Select
  .text.TC0_ConfigClockSource
-                0x0000261c        0xc XMEGA_DRIVERS/TC_driver.o
-                0x0000261c                TC0_ConfigClockSource
+                0x000026b6        0xc XMEGA_DRIVERS/TC_driver.o
+                0x000026b6                TC0_ConfigClockSource
  .text.TC0_SetOverflowIntLevel
-                0x00002628        0xc XMEGA_DRIVERS/TC_driver.o
-                0x00002628                TC0_SetOverflowIntLevel
+                0x000026c2        0xc XMEGA_DRIVERS/TC_driver.o
+                0x000026c2                TC0_SetOverflowIntLevel
+ .text.TWI_MasterInit
+                0x000026ce       0x22 XMEGA_DRIVERS/twi_master_driver.o
+                0x000026ce                TWI_MasterInit
+ .text.TWI_MasterWriteRead
+                0x000026f0       0x88 XMEGA_DRIVERS/twi_master_driver.o
+                0x000026f0                TWI_MasterWriteRead
+ .text.TWI_MasterWrite
+                0x00002778        0xc XMEGA_DRIVERS/twi_master_driver.o
+                0x00002778                TWI_MasterWrite
+ .text.TWI_MasterWriteHandler
+                0x00002784       0x64 XMEGA_DRIVERS/twi_master_driver.o
+                0x00002784                TWI_MasterWriteHandler
  .text.libgcc.div
-                0x00002634       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodsi4.o)
-                0x00002634                __udivmodsi4
- .text.libgcc   0x00002678       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_tablejump2.o)
-                0x00002678                __tablejump2__
+                0x000027e8       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodsi4.o)
+                0x000027e8                __udivmodsi4
+ .text.libgcc   0x0000282c       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_tablejump2.o)
+                0x0000282c                __tablejump2__
  .text.avr-libc
-                0x00002688        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(memset.o)
-                0x00002688                memset
+                0x0000283c        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(memset.o)
+                0x0000283c                memset
  .text.avr-libc
-                0x00002696       0x84 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(fwrite.o)
-                0x00002696                fwrite
-                0x0000271a                . = ALIGN (0x2)
+                0x0000284a       0x84 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(fwrite.o)
+                0x0000284a                fwrite
+                0x000028ce                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000271a        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
-                0x0000271a                _exit
-                0x0000271a                exit
+ .fini9         0x000028ce        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
+                0x000028ce                _exit
+                0x000028ce                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -2688,11 +2738,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000271a        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
+ .fini0         0x000028ce        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
  *(.fini0)
-                0x0000271e                _etext = .
+                0x000028d2                _etext = .
 
-.data           0x00802000      0x2cc load address 0x0000271e
+.data           0x00802000      0x2cc load address 0x000028d2
                 0x00802000                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -3005,7 +3055,7 @@ END GROUP
                 0x008022cc                _edata = .
                 0x008022cc                PROVIDE (__data_end, .)
 
-.bss            0x008022cc     0x7566
+.bss            0x008022cc     0x7581
                 0x008022cc                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
@@ -3058,30 +3108,33 @@ END GROUP
  .bss.framebuffer
                 0x00809339      0x200 main.o
  *(COMMON)
- COMMON         0x00809539        0x3 LUFA/Drivers/USB/Core/DeviceStandardReq.o
-                0x00809539                USB_Device_ConfigurationNumber
-                0x0080953a                USB_Device_CurrentlySelfPowered
-                0x0080953b                USB_Device_RemoteWakeupEnabled
- COMMON         0x0080953c        0xa LUFA/Drivers/USB/Core/USBTask.o
-                0x0080953c                USB_IsInitialized
-                0x0080953d                USB_DeviceState
-                0x0080953e                USB_ControlRequest
- COMMON         0x00809546      0x299 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00809546                USB_Endpoint_SelectedFIFO
-                0x00809548                USB_Endpoint_SelectedHandle
-                0x0080954a                USB_Endpoint_SelectedEndpoint
-                0x0080954b                USB_Endpoint_FIFOs
- COMMON         0x008097df       0x53 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
-                0x008097df                USB_EndpointTable
-                0x00809832                PROVIDE (__bss_end, .)
-                0x0000271e                __data_load_start = LOADADDR (.data)
-                0x000029ea                __data_load_end = (__data_load_start + SIZEOF (.data))
+ COMMON         0x00809539       0x1b Component_Drivers/lcd03/lcd03.o
+                0x00809539                lcd03i2c
+                0x00809552                psend
+ COMMON         0x00809554        0x3 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+                0x00809554                USB_Device_ConfigurationNumber
+                0x00809555                USB_Device_CurrentlySelfPowered
+                0x00809556                USB_Device_RemoteWakeupEnabled
+ COMMON         0x00809557        0xa LUFA/Drivers/USB/Core/USBTask.o
+                0x00809557                USB_IsInitialized
+                0x00809558                USB_DeviceState
+                0x00809559                USB_ControlRequest
+ COMMON         0x00809561      0x299 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00809561                USB_Endpoint_SelectedFIFO
+                0x00809563                USB_Endpoint_SelectedHandle
+                0x00809565                USB_Endpoint_SelectedEndpoint
+                0x00809566                USB_Endpoint_FIFOs
+ COMMON         0x008097fa       0x53 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+                0x008097fa                USB_EndpointTable
+                0x0080984d                PROVIDE (__bss_end, .)
+                0x000028d2                __data_load_start = LOADADDR (.data)
+                0x00002b9e                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00809832        0x0
+.noinit         0x0080984d        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x00809832                _end = .
+                0x0080984d                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -3123,8 +3176,9 @@ END GROUP
 
 .comment        0x00000000       0x41
  *(.comment)
- .comment       0x00000000       0x30 Component_Drivers/ssd1306/font.o
+ .comment       0x00000000       0x30 Component_Drivers/lcd03/lcd03.o
                                  0x31 (size before relaxing)
+ .comment       0x00000030       0x31 Component_Drivers/ssd1306/font.o
  .comment       0x00000030       0x31 Descriptors.o
  .comment       0x00000030       0x31 FreeRTOS/include/portable/GCC/ATMega323/port.o
  .comment       0x00000030       0x31 FreeRTOS/include/portable/MemMang/heap_1.o
@@ -3143,6 +3197,7 @@ END GROUP
  .comment       0x00000030       0x31 XMEGA_API/USART.o
  .comment       0x00000030       0x31 XMEGA_DRIVERS/clksys_driver.o
  .comment       0x00000030       0x31 XMEGA_DRIVERS/TC_driver.o
+ .comment       0x00000030       0x31 XMEGA_DRIVERS/twi_master_driver.o
  .comment       0x00000030       0x11 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(fwrite.o)
                                  0x12 (size before relaxing)
 
@@ -3166,197 +3221,215 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x8c8
+.debug_aranges  0x00000000      0xa10
  *(.debug_aranges)
  .debug_aranges
-                0x00000000       0x18 Component_Drivers/ssd1306/font.o
+                0x00000000       0xd8 Component_Drivers/lcd03/lcd03.o
  .debug_aranges
-                0x00000018       0x20 Descriptors.o
+                0x000000d8       0x18 Component_Drivers/ssd1306/font.o
  .debug_aranges
-                0x00000038       0x48 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000000f0       0x20 Descriptors.o
  .debug_aranges
-                0x00000080       0x38 FreeRTOS/include/portable/MemMang/heap_1.o
+                0x00000110       0x48 FreeRTOS/include/portable/GCC/ATMega323/port.o
  .debug_aranges
-                0x000000b8       0x40 FreeRTOS/list.o
+                0x00000158       0x38 FreeRTOS/include/portable/MemMang/heap_1.o
  .debug_aranges
-                0x000000f8       0xf8 FreeRTOS/tasks.o
+                0x00000190       0x40 FreeRTOS/list.o
  .debug_aranges
-                0x000001f0       0xa8 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+                0x000001d0       0xf8 FreeRTOS/tasks.o
  .debug_aranges
-                0x00000298       0x20 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+                0x000002c8       0xa8 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
  .debug_aranges
-                0x000002b8       0x20 LUFA/Drivers/USB/Core/Events.o
+                0x00000370       0x20 LUFA/Drivers/USB/Core/DeviceStandardReq.o
  .debug_aranges
-                0x000002d8       0x20 LUFA/Drivers/USB/Core/USBTask.o
+                0x00000390       0x20 LUFA/Drivers/USB/Core/Events.o
  .debug_aranges
-                0x000002f8       0xc8 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+                0x000003b0       0x20 LUFA/Drivers/USB/Core/USBTask.o
  .debug_aranges
-                0x000003c0       0x90 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x000003d0       0xc8 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
  .debug_aranges
-                0x00000450       0x30 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+                0x00000498       0x90 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
  .debug_aranges
-                0x00000480       0x30 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+                0x00000528       0x30 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
  .debug_aranges
-                0x000004b0      0x180 main.o
+                0x00000558       0x30 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
  .debug_aranges
-                0x00000630       0x48 XMEGA_API/DIGITALPIN.o
+                0x00000588      0x180 main.o
  .debug_aranges
-                0x00000678      0x120 XMEGA_API/USART.o
+                0x00000708       0x48 XMEGA_API/DIGITALPIN.o
  .debug_aranges
-                0x00000798       0x68 XMEGA_DRIVERS/clksys_driver.o
+                0x00000750      0x120 XMEGA_API/USART.o
  .debug_aranges
-                0x00000800       0xc8 XMEGA_DRIVERS/TC_driver.o
+                0x00000870       0x68 XMEGA_DRIVERS/clksys_driver.o
+ .debug_aranges
+                0x000008d8       0xc8 XMEGA_DRIVERS/TC_driver.o
+ .debug_aranges
+                0x000009a0       0x70 XMEGA_DRIVERS/twi_master_driver.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0xf20c
+.debug_info     0x00000000    0x107e1
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000      0x7ec Component_Drivers/ssd1306/font.o
- .debug_info    0x000007ec      0x999 Descriptors.o
- .debug_info    0x00001185      0xa36 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_info    0x00001bbb      0x1ad FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_info    0x00001d68      0x2cd FreeRTOS/list.o
- .debug_info    0x00002035     0x174c FreeRTOS/tasks.o
- .debug_info    0x00003781     0x1124 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
- .debug_info    0x000048a5     0x11b5 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_info    0x00005a5a       0x7f LUFA/Drivers/USB/Core/Events.o
- .debug_info    0x00005ad9      0x433 LUFA/Drivers/USB/Core/USBTask.o
- .debug_info    0x00005f0c     0x17bd LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
- .debug_info    0x000076c9      0xd1b LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_info    0x000083e4      0xd54 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
- .debug_info    0x00009138      0xa72 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_info    0x00009baa     0x2eb1 main.o
- .debug_info    0x0000ca5b      0x4cc XMEGA_API/DIGITALPIN.o
- .debug_info    0x0000cf27      0x9bf XMEGA_API/USART.o
- .debug_info    0x0000d8e6      0x645 XMEGA_DRIVERS/clksys_driver.o
- .debug_info    0x0000df2b     0x12e1 XMEGA_DRIVERS/TC_driver.o
+ .debug_info    0x00000000      0xa7e Component_Drivers/lcd03/lcd03.o
+ .debug_info    0x00000a7e      0x7ec Component_Drivers/ssd1306/font.o
+ .debug_info    0x0000126a      0x999 Descriptors.o
+ .debug_info    0x00001c03      0xa36 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_info    0x00002639      0x1ad FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_info    0x000027e6      0x2cd FreeRTOS/list.o
+ .debug_info    0x00002ab3     0x174c FreeRTOS/tasks.o
+ .debug_info    0x000041ff     0x1124 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+ .debug_info    0x00005323     0x11b5 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_info    0x000064d8       0x7f LUFA/Drivers/USB/Core/Events.o
+ .debug_info    0x00006557      0x433 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_info    0x0000698a     0x17bd LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_info    0x00008147      0xd1b LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_info    0x00008e62      0xd54 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_info    0x00009bb6      0xa72 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_info    0x0000a628     0x3199 main.o
+ .debug_info    0x0000d7c1      0x4cc XMEGA_API/DIGITALPIN.o
+ .debug_info    0x0000dc8d      0x9bf XMEGA_API/USART.o
+ .debug_info    0x0000e64c      0x645 XMEGA_DRIVERS/clksys_driver.o
+ .debug_info    0x0000ec91     0x12e1 XMEGA_DRIVERS/TC_driver.o
+ .debug_info    0x0000ff72      0x86f XMEGA_DRIVERS/twi_master_driver.o
 
-.debug_abbrev   0x00000000     0x2aec
+.debug_abbrev   0x00000000     0x2fbb
  *(.debug_abbrev)
- .debug_abbrev  0x00000000       0x70 Component_Drivers/ssd1306/font.o
- .debug_abbrev  0x00000070      0x1ac Descriptors.o
- .debug_abbrev  0x0000021c      0x223 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_abbrev  0x0000043f      0x12e FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_abbrev  0x0000056d       0xf8 FreeRTOS/list.o
- .debug_abbrev  0x00000665      0x358 FreeRTOS/tasks.o
- .debug_abbrev  0x000009bd      0x415 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
- .debug_abbrev  0x00000dd2      0x377 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_abbrev  0x00001149       0x44 LUFA/Drivers/USB/Core/Events.o
- .debug_abbrev  0x0000118d      0x21a LUFA/Drivers/USB/Core/USBTask.o
- .debug_abbrev  0x000013a7      0x274 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
- .debug_abbrev  0x0000161b      0x2f2 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_abbrev  0x0000190d      0x2e9 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
- .debug_abbrev  0x00001bf6      0x266 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_abbrev  0x00001e5c      0x694 main.o
- .debug_abbrev  0x000024f0      0x161 XMEGA_API/DIGITALPIN.o
- .debug_abbrev  0x00002651      0x14e XMEGA_API/USART.o
- .debug_abbrev  0x0000279f      0x1c8 XMEGA_DRIVERS/clksys_driver.o
- .debug_abbrev  0x00002967      0x185 XMEGA_DRIVERS/TC_driver.o
+ .debug_abbrev  0x00000000      0x23c Component_Drivers/lcd03/lcd03.o
+ .debug_abbrev  0x0000023c       0x70 Component_Drivers/ssd1306/font.o
+ .debug_abbrev  0x000002ac      0x1ac Descriptors.o
+ .debug_abbrev  0x00000458      0x223 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_abbrev  0x0000067b      0x12e FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_abbrev  0x000007a9       0xf8 FreeRTOS/list.o
+ .debug_abbrev  0x000008a1      0x358 FreeRTOS/tasks.o
+ .debug_abbrev  0x00000bf9      0x415 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+ .debug_abbrev  0x0000100e      0x377 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_abbrev  0x00001385       0x44 LUFA/Drivers/USB/Core/Events.o
+ .debug_abbrev  0x000013c9      0x21a LUFA/Drivers/USB/Core/USBTask.o
+ .debug_abbrev  0x000015e3      0x274 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_abbrev  0x00001857      0x2f2 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_abbrev  0x00001b49      0x2e9 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_abbrev  0x00001e32      0x266 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_abbrev  0x00002098      0x694 main.o
+ .debug_abbrev  0x0000272c      0x161 XMEGA_API/DIGITALPIN.o
+ .debug_abbrev  0x0000288d      0x14e XMEGA_API/USART.o
+ .debug_abbrev  0x000029db      0x1c8 XMEGA_DRIVERS/clksys_driver.o
+ .debug_abbrev  0x00002ba3      0x185 XMEGA_DRIVERS/TC_driver.o
+ .debug_abbrev  0x00002d28      0x293 XMEGA_DRIVERS/twi_master_driver.o
 
-.debug_line     0x00000000     0x650f
+.debug_line     0x00000000     0x6d8a
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000       0xa3 Component_Drivers/ssd1306/font.o
- .debug_line    0x000000a3      0x2e5 Descriptors.o
- .debug_line    0x00000388      0x33c FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_line    0x000006c4      0x20d FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_line    0x000008d1      0x211 FreeRTOS/list.o
- .debug_line    0x00000ae2      0xb39 FreeRTOS/tasks.o
- .debug_line    0x0000161b      0x918 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
- .debug_line    0x00001f33      0x491 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_line    0x000023c4       0x4f LUFA/Drivers/USB/Core/Events.o
- .debug_line    0x00002413      0x1d7 LUFA/Drivers/USB/Core/USBTask.o
- .debug_line    0x000025ea     0x1361 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
- .debug_line    0x0000394b      0x6a7 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_line    0x00003ff2      0x39d LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
- .debug_line    0x0000438f      0x396 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_line    0x00004725     0x115d main.o
- .debug_line    0x00005882      0x1f6 XMEGA_API/DIGITALPIN.o
- .debug_line    0x00005a78      0x516 XMEGA_API/USART.o
- .debug_line    0x00005f8e      0x24f XMEGA_DRIVERS/clksys_driver.o
- .debug_line    0x000061dd      0x332 XMEGA_DRIVERS/TC_driver.o
+ .debug_line    0x00000000      0x422 Component_Drivers/lcd03/lcd03.o
+ .debug_line    0x00000422       0xa3 Component_Drivers/ssd1306/font.o
+ .debug_line    0x000004c5      0x2e5 Descriptors.o
+ .debug_line    0x000007aa      0x33c FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_line    0x00000ae6      0x20d FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_line    0x00000cf3      0x211 FreeRTOS/list.o
+ .debug_line    0x00000f04      0xb39 FreeRTOS/tasks.o
+ .debug_line    0x00001a3d      0x918 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+ .debug_line    0x00002355      0x491 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_line    0x000027e6       0x4f LUFA/Drivers/USB/Core/Events.o
+ .debug_line    0x00002835      0x1d7 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_line    0x00002a0c     0x1361 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_line    0x00003d6d      0x6a7 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_line    0x00004414      0x39d LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_line    0x000047b1      0x396 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_line    0x00004b47     0x11d9 main.o
+ .debug_line    0x00005d20      0x1f6 XMEGA_API/DIGITALPIN.o
+ .debug_line    0x00005f16      0x516 XMEGA_API/USART.o
+ .debug_line    0x0000642c      0x24f XMEGA_DRIVERS/clksys_driver.o
+ .debug_line    0x0000667b      0x332 XMEGA_DRIVERS/TC_driver.o
+ .debug_line    0x000069ad      0x3dd XMEGA_DRIVERS/twi_master_driver.o
 
-.debug_frame    0x00000000     0x18e0
+.debug_frame    0x00000000     0x1b90
  *(.debug_frame)
- .debug_frame   0x00000000       0x24 Descriptors.o
- .debug_frame   0x00000024       0x74 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_frame   0x00000098       0x60 FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_frame   0x000000f8       0x88 FreeRTOS/list.o
- .debug_frame   0x00000180      0x370 FreeRTOS/tasks.o
- .debug_frame   0x000004f0      0x1fc LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
- .debug_frame   0x000006ec       0x48 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_frame   0x00000734       0x24 LUFA/Drivers/USB/Core/Events.o
- .debug_frame   0x00000758       0x2c LUFA/Drivers/USB/Core/USBTask.o
- .debug_frame   0x00000784      0x488 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
- .debug_frame   0x00000c0c      0x164 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_frame   0x00000d70       0x5c LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
- .debug_frame   0x00000dcc       0x8c LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_frame   0x00000e58      0x4e0 main.o
- .debug_frame   0x00001338       0x7c XMEGA_API/DIGITALPIN.o
- .debug_frame   0x000013b4      0x2dc XMEGA_API/USART.o
- .debug_frame   0x00001690       0xdc XMEGA_DRIVERS/clksys_driver.o
- .debug_frame   0x0000176c      0x174 XMEGA_DRIVERS/TC_driver.o
+ .debug_frame   0x00000000      0x1c0 Component_Drivers/lcd03/lcd03.o
+ .debug_frame   0x000001c0       0x24 Descriptors.o
+ .debug_frame   0x000001e4       0x74 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_frame   0x00000258       0x60 FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_frame   0x000002b8       0x88 FreeRTOS/list.o
+ .debug_frame   0x00000340      0x370 FreeRTOS/tasks.o
+ .debug_frame   0x000006b0      0x1fc LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+ .debug_frame   0x000008ac       0x48 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_frame   0x000008f4       0x24 LUFA/Drivers/USB/Core/Events.o
+ .debug_frame   0x00000918       0x2c LUFA/Drivers/USB/Core/USBTask.o
+ .debug_frame   0x00000944      0x488 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_frame   0x00000dcc      0x164 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_frame   0x00000f30       0x5c LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_frame   0x00000f8c       0x8c LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_frame   0x00001018      0x4e0 main.o
+ .debug_frame   0x000014f8       0x7c XMEGA_API/DIGITALPIN.o
+ .debug_frame   0x00001574      0x2dc XMEGA_API/USART.o
+ .debug_frame   0x00001850       0xdc XMEGA_DRIVERS/clksys_driver.o
+ .debug_frame   0x0000192c      0x174 XMEGA_DRIVERS/TC_driver.o
+ .debug_frame   0x00001aa0       0xf0 XMEGA_DRIVERS/twi_master_driver.o
 
-.debug_str      0x00000000     0x59a9
+.debug_str      0x00000000     0x6447
  *(.debug_str)
- .debug_str     0x00000000      0x5d2 Component_Drivers/ssd1306/font.o
+ .debug_str     0x00000000      0x98e Component_Drivers/lcd03/lcd03.o
+                                0xa09 (size before relaxing)
+ .debug_str     0x0000098e      0x4a7 Component_Drivers/ssd1306/font.o
                                 0x606 (size before relaxing)
- .debug_str     0x000005d2      0xa7f Descriptors.o
+ .debug_str     0x00000e35      0xa6d Descriptors.o
                                 0xc59 (size before relaxing)
- .debug_str     0x00001051      0x611 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_str     0x000018a2      0x60b FreeRTOS/include/portable/GCC/ATMega323/port.o
                                 0x7c4 (size before relaxing)
- .debug_str     0x00001662       0xd8 FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_str     0x00001ead       0xd8 FreeRTOS/include/portable/MemMang/heap_1.o
                                 0x247 (size before relaxing)
- .debug_str     0x0000173a      0x13c FreeRTOS/list.o
+ .debug_str     0x00001f85      0x13c FreeRTOS/list.o
                                 0x2b2 (size before relaxing)
- .debug_str     0x00001876      0x765 FreeRTOS/tasks.o
+ .debug_str     0x000020c1      0x765 FreeRTOS/tasks.o
                                 0xb08 (size before relaxing)
- .debug_str     0x00001fdb      0x83f LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+ .debug_str     0x00002826      0x83f LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
                                 0xb6c (size before relaxing)
- .debug_str     0x0000281a      0xa6b LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_str     0x00003065      0xa66 LUFA/Drivers/USB/Core/DeviceStandardReq.o
                                0x11da (size before relaxing)
- .debug_str     0x00003285       0x31 LUFA/Drivers/USB/Core/Events.o
+ .debug_str     0x00003acb       0x31 LUFA/Drivers/USB/Core/Events.o
                                 0x188 (size before relaxing)
- .debug_str     0x000032b6       0x6d LUFA/Drivers/USB/Core/USBTask.o
+ .debug_str     0x00003afc       0x6d LUFA/Drivers/USB/Core/USBTask.o
                                 0x454 (size before relaxing)
- .debug_str     0x00003323      0x360 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_str     0x00003b69      0x360 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
                                 0x969 (size before relaxing)
- .debug_str     0x00003683      0x1eb LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_str     0x00003ec9      0x1eb LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
                                 0xada (size before relaxing)
- .debug_str     0x0000386e      0x21b LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_str     0x000040b4      0x21b LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
                                 0xe88 (size before relaxing)
- .debug_str     0x00003a89       0xdf LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_str     0x000042cf       0xdf LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
                                 0x93b (size before relaxing)
- .debug_str     0x00003b68      0xeb9 main.o
-                               0x1ad9 (size before relaxing)
- .debug_str     0x00004a21      0x1d4 XMEGA_API/DIGITALPIN.o
+ .debug_str     0x000043ae      0xeb7 main.o
+                               0x1c73 (size before relaxing)
+ .debug_str     0x00005265      0x1d4 XMEGA_API/DIGITALPIN.o
                                 0x4c2 (size before relaxing)
- .debug_str     0x00004bf5      0x327 XMEGA_API/USART.o
+ .debug_str     0x00005439      0x327 XMEGA_API/USART.o
                                 0x8b8 (size before relaxing)
- .debug_str     0x00004f1c      0x461 XMEGA_DRIVERS/clksys_driver.o
+ .debug_str     0x00005760      0x461 XMEGA_DRIVERS/clksys_driver.o
                                 0x7c5 (size before relaxing)
- .debug_str     0x0000537d      0x62c XMEGA_DRIVERS/TC_driver.o
+ .debug_str     0x00005bc1      0x62c XMEGA_DRIVERS/TC_driver.o
                                 0xc36 (size before relaxing)
+ .debug_str     0x000061ed      0x25a XMEGA_DRIVERS/twi_master_driver.o
+                                0x655 (size before relaxing)
 
-.debug_loc      0x00000000     0x79ec
+.debug_loc      0x00000000     0x8376
  *(.debug_loc)
- .debug_loc     0x00000000      0x226 Descriptors.o
- .debug_loc     0x00000226      0x281 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_loc     0x000004a7       0xf1 FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_loc     0x00000598      0x145 FreeRTOS/list.o
- .debug_loc     0x000006dd     0x12ec FreeRTOS/tasks.o
- .debug_loc     0x000019c9      0xb5e LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
- .debug_loc     0x00002527      0x2b6 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_loc     0x000027dd       0x22 LUFA/Drivers/USB/Core/USBTask.o
- .debug_loc     0x000027ff     0x22ba LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
- .debug_loc     0x00004ab9      0x5c9 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_loc     0x00005082       0xa3 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
- .debug_loc     0x00005125      0x194 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_loc     0x000052b9     0x192b main.o
- .debug_loc     0x00006be4      0x132 XMEGA_API/DIGITALPIN.o
- .debug_loc     0x00006d16      0x6ea XMEGA_API/USART.o
- .debug_loc     0x00007400      0x2b6 XMEGA_DRIVERS/clksys_driver.o
- .debug_loc     0x000076b6      0x336 XMEGA_DRIVERS/TC_driver.o
+ .debug_loc     0x00000000      0x2fa Component_Drivers/lcd03/lcd03.o
+ .debug_loc     0x000002fa      0x226 Descriptors.o
+ .debug_loc     0x00000520      0x281 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_loc     0x000007a1       0xf1 FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_loc     0x00000892      0x145 FreeRTOS/list.o
+ .debug_loc     0x000009d7     0x12ec FreeRTOS/tasks.o
+ .debug_loc     0x00001cc3      0xb5e LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+ .debug_loc     0x00002821      0x2b6 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_loc     0x00002ad7       0x22 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_loc     0x00002af9     0x22ba LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_loc     0x00004db3      0x5c9 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_loc     0x0000537c       0xa3 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_loc     0x0000541f      0x194 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_loc     0x000055b3     0x1984 main.o
+ .debug_loc     0x00006f37      0x132 XMEGA_API/DIGITALPIN.o
+ .debug_loc     0x00007069      0x6ea XMEGA_API/USART.o
+ .debug_loc     0x00007753      0x2b6 XMEGA_DRIVERS/clksys_driver.o
+ .debug_loc     0x00007a09      0x336 XMEGA_DRIVERS/TC_driver.o
+ .debug_loc     0x00007d3f      0x637 XMEGA_DRIVERS/twi_master_driver.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -3376,26 +3449,28 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0xb18
+.debug_ranges   0x00000000      0xc40
  *(.debug_ranges)
- .debug_ranges  0x00000000       0x10 Descriptors.o
- .debug_ranges  0x00000010       0x38 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_ranges  0x00000048       0x28 FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_ranges  0x00000070       0x30 FreeRTOS/list.o
- .debug_ranges  0x000000a0      0x130 FreeRTOS/tasks.o
- .debug_ranges  0x000001d0       0x98 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
- .debug_ranges  0x00000268       0x58 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_ranges  0x000002c0       0x10 LUFA/Drivers/USB/Core/Events.o
- .debug_ranges  0x000002d0       0x10 LUFA/Drivers/USB/Core/USBTask.o
- .debug_ranges  0x000002e0      0x348 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
- .debug_ranges  0x00000628       0xb8 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_ranges  0x000006e0       0x20 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
- .debug_ranges  0x00000700       0x20 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_ranges  0x00000720      0x1a0 main.o
- .debug_ranges  0x000008c0       0x38 XMEGA_API/DIGITALPIN.o
- .debug_ranges  0x000008f8      0x110 XMEGA_API/USART.o
- .debug_ranges  0x00000a08       0x58 XMEGA_DRIVERS/clksys_driver.o
- .debug_ranges  0x00000a60       0xb8 XMEGA_DRIVERS/TC_driver.o
+ .debug_ranges  0x00000000       0xc8 Component_Drivers/lcd03/lcd03.o
+ .debug_ranges  0x000000c8       0x10 Descriptors.o
+ .debug_ranges  0x000000d8       0x38 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_ranges  0x00000110       0x28 FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_ranges  0x00000138       0x30 FreeRTOS/list.o
+ .debug_ranges  0x00000168      0x130 FreeRTOS/tasks.o
+ .debug_ranges  0x00000298       0x98 LUFA/Drivers/USB/Class/Device/CDCClassDevice.o
+ .debug_ranges  0x00000330       0x58 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_ranges  0x00000388       0x10 LUFA/Drivers/USB/Core/Events.o
+ .debug_ranges  0x00000398       0x10 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_ranges  0x000003a8      0x348 LUFA/Drivers/USB/Core/XMEGA/EndpointStream_XMEGA.o
+ .debug_ranges  0x000006f0       0xb8 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_ranges  0x000007a8       0x20 LUFA/Drivers/USB/Core/XMEGA/USBController_XMEGA.o
+ .debug_ranges  0x000007c8       0x20 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_ranges  0x000007e8      0x1a0 main.o
+ .debug_ranges  0x00000988       0x38 XMEGA_API/DIGITALPIN.o
+ .debug_ranges  0x000009c0      0x110 XMEGA_API/USART.o
+ .debug_ranges  0x00000ad0       0x58 XMEGA_DRIVERS/clksys_driver.o
+ .debug_ranges  0x00000b28       0xb8 XMEGA_DRIVERS/TC_driver.o
+ .debug_ranges  0x00000be0       0x60 XMEGA_DRIVERS/twi_master_driver.o
 
 .debug_macro
  *(.debug_macro)
