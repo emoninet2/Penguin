@@ -34,6 +34,8 @@
  *  the demo and is responsible for the initial application hardware configuration.
  */
 
+
+#include "time.h"
 #include "main.h"
 #include "Component_Drivers/components.h"
 #include "XMEGA_API/xmega_api.h"
@@ -42,7 +44,6 @@
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
-
 
 
 DigitalPin_t led = {&PORTR, 0};
@@ -139,26 +140,23 @@ void thread_2( void *pvParameters ){
  */
 int main(void)
 {
-
+		DigitalPin_SetDIr(&led,1);
+		DigitalPin_SetDIr(&led2,1);
 	
+		
+		
+		
 	SetupHardware();
 
-	rtc_initialize();
 
 
 	uint8_t page;
 	uint8_t column;
-
 	gfx_mono_set_framebuffer(framebuffer);
-
 	ssd1306_init();
-	asm("nop");
 	ssd1306_clear();
-
 	ssd1306_set_display_start_line_address(0);
-
-
-	for (page = 0; page < GFX_MONO_LCD_PAGES; page++) {
+ 	for (page = 0; page < GFX_MONO_LCD_PAGES; page++) {
 		for (column = 0; column < GFX_MONO_LCD_WIDTH; column++) {
 			gfx_mono_ssd1306_put_byte(page, column, 0x00, 1);
 		}
@@ -167,7 +165,6 @@ int main(void)
 	asm("nop");
 	ssd1306_set_page_address(0);
 	ssd1306_write_text("EMON");
-
 
 
 	DigitalPin_SetDIr(&led,1);

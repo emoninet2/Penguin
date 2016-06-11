@@ -188,7 +188,3 @@ XMEGA_DRIVERS\usart_driver.c
 
 XMEGA_DRIVERS\wdt_driver.c
 
-XMEGA_SERVICES\rtcServices.c
-
-XMEGA_SERVICES\time.c
-

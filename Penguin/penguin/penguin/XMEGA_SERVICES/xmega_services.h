@@ -9,11 +9,7 @@
 #ifndef XMEGA_SERVICES_H_
 #define XMEGA_SERVICES_H_
 
+
 #include "stream.h"
-#include "rtcServices.h"
-
-
-
-volatile time_t __system_time;
 
 #endif /* XMEGA_SERVICES_H_ */

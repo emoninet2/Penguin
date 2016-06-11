@@ -1358,19 +1358,7 @@
     <Compile Include="XMEGA_DRIVERS\xmega_drivers.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="XMEGA_SERVICES\rtcServices.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="XMEGA_SERVICES\rtcServices.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="XMEGA_SERVICES\stream.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="XMEGA_SERVICES\time.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="XMEGA_SERVICES\time.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="XMEGA_SERVICES\xmega_services.h">
@@ -1388,7 +1376,6 @@
     <Folder Include="FreeRTOS\include\portable\MemMang\" />
     <Folder Include="JSON" />
     <Folder Include="FreeRTOS" />
-    <Folder Include="FATFS" />
     <Folder Include="LUFA\" />
     <Folder Include="LUFA\Common\" />
     <Folder Include="LUFA\Drivers\" />

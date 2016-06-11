@@ -43,7 +43,6 @@ SUBDIRS :=  \
 ../FreeRTOS/include/portable/MemMang/ \
 ../JSON \
 ../FreeRTOS \
-../FATFS \
 ../LUFA/ \
 ../LUFA/Common/ \
 ../LUFA/Drivers/ \
@@ -213,9 +212,7 @@ C_SRCS +=  \
 ../XMEGA_DRIVERS/twi_master_driver.c \
 ../XMEGA_DRIVERS/twi_slave_driver.c \
 ../XMEGA_DRIVERS/usart_driver.c \
-../XMEGA_DRIVERS/wdt_driver.c \
-../XMEGA_SERVICES/rtcServices.c \
-../XMEGA_SERVICES/time.c
+../XMEGA_DRIVERS/wdt_driver.c
 
 
 PREPROCESSING_SRCS +=  \
@@ -318,9 +315,7 @@ XMEGA_DRIVERS/TC_driver.o \
 XMEGA_DRIVERS/twi_master_driver.o \
 XMEGA_DRIVERS/twi_slave_driver.o \
 XMEGA_DRIVERS/usart_driver.o \
-XMEGA_DRIVERS/wdt_driver.o \
-XMEGA_SERVICES/rtcServices.o \
-XMEGA_SERVICES/time.o
+XMEGA_DRIVERS/wdt_driver.o
 
 OBJS_AS_ARGS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.o \
@@ -415,9 +410,7 @@ XMEGA_DRIVERS/TC_driver.o \
 XMEGA_DRIVERS/twi_master_driver.o \
 XMEGA_DRIVERS/twi_slave_driver.o \
 XMEGA_DRIVERS/usart_driver.o \
-XMEGA_DRIVERS/wdt_driver.o \
-XMEGA_SERVICES/rtcServices.o \
-XMEGA_SERVICES/time.o
+XMEGA_DRIVERS/wdt_driver.o
 
 C_DEPS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
@@ -512,9 +505,7 @@ XMEGA_DRIVERS/TC_driver.d \
 XMEGA_DRIVERS/twi_master_driver.d \
 XMEGA_DRIVERS/twi_slave_driver.d \
 XMEGA_DRIVERS/usart_driver.d \
-XMEGA_DRIVERS/wdt_driver.d \
-XMEGA_SERVICES/rtcServices.d \
-XMEGA_SERVICES/time.d
+XMEGA_DRIVERS/wdt_driver.d
 
 C_DEPS_AS_ARGS +=  \
 Component_Drivers/nrf24l01p/nrf24l01p.d \
@@ -609,9 +600,7 @@ XMEGA_DRIVERS/TC_driver.d \
 XMEGA_DRIVERS/twi_master_driver.d \
 XMEGA_DRIVERS/twi_slave_driver.d \
 XMEGA_DRIVERS/usart_driver.d \
-XMEGA_DRIVERS/wdt_driver.d \
-XMEGA_SERVICES/rtcServices.d \
-XMEGA_SERVICES/time.d
+XMEGA_DRIVERS/wdt_driver.d
 
 OUTPUT_FILE_PATH +=penguin.elf
 
@@ -627,10 +616,6 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
-
-
-
-
 
 
 
@@ -971,13 +956,6 @@ XMEGA_API/%.o: ../XMEGA_API/%.c
 	
 
 XMEGA_DRIVERS/%.o: ../XMEGA_DRIVERS/%.c
-	@echo Building file: $<
-	@echo Invoking: AVR/GNU C Compiler : 4.9.2
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323" -I"../FATFS"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-XMEGA_SERVICES/%.o: ../XMEGA_SERVICES/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323" -I"../FATFS"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
