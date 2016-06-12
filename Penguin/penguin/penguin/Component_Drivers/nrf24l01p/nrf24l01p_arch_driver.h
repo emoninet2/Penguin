@@ -36,13 +36,13 @@ extern "C"{
 
 
 static DigitalPin_t nrf24l01p_csn_pin = {&PORTC, 4};
-static DigitalPin_t nrf24l01p_ce_pin = {&PORTC, 1};
+static DigitalPin_t nrf24l01p_ce_pin = {&PORTC, 0};
 
 #define NRF24L01P_CSN_PIN_PORT	PORTC
 #define NRF24L01P_CSN_PIN_BIT	4
 
 #define NRF24L01P_CE_PIN_PORT	PORTC
-#define NRF24L01P_CE_PIN_BIT	1
+#define NRF24L01P_CE_PIN_BIT	0
 
 #define NRF24L01P_SPI SPIC
 #define NRF24L01P_SPI_PORT PORTC

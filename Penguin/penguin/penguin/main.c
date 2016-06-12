@@ -34,7 +34,8 @@
  *  the demo and is responsible for the initial application hardware configuration.
  */
 
-
+#include <stdlib.h>
+#include <math.h>
 #include "time.h"
 #include "main.h"
 #include "xmega_drivers.h"
@@ -49,6 +50,8 @@
 
 DigitalPin_t led = {&PORTR, 0};
 DigitalPin_t led2 = {&PORTR, 1};
+
+TWI_Master_t lcd03i2c;
 
 
 /** LUFA CDC Class driver interface configuration and state information. This structure is
@@ -116,13 +119,13 @@ void thread_1( void *pvParameters ){
 		//xQueueSend( xQueue,( void * ) &i,( TickType_t ) 10 );
 		i++;
 		vTaskDelay(500);
-		lcd03_backlight(lcdbackstat);
+		//lcd03_backlight(lcdbackstat);
 		lcdbackstat = !lcdbackstat;
 		DigitalPin_ToggleValue(&led);
 		
-		vTaskSuspendAll();
-		fprintf(&USBSerialStream, "fuck you\r\n");
-		xTaskResumeAll();
+// 		vTaskSuspendAll();
+// 		fprintf(&USBSerialStream, "fuck you\r\n");
+// 		xTaskResumeAll();
 		
 		
 	}
@@ -135,8 +138,35 @@ void thread_2( void *pvParameters ){
 
 	uint8_t writeData[] = {0, 0x0c};
 
+		ADCA.CTRLA =   ADC_ENABLE_bm;//no DMA request | enable ADCA module
+		ADCA.CTRLB = ADC_CURRLIMIT_NO_gc | ADC_CONMODE_bm | ADC_RESOLUTION_12BIT_gc;//high imp | no current limit|unsigned | no free run | 12-bit |
+		ADCA.REFCTRL =  ADC_REFSEL_INTVCC_gc /*| ADC_BANDGAP_bm | ADC_TEMPREF_bm*/;
+		ADCA.EVCTRL = ADC_EVSEL_0_gc | ADC_EVACT_NONE_gc ;
+		ADCA.PRESCALER = ADC_PRESCALER_DIV256_gc;
+		ADCA.INTFLAGS = /*ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm |*/ ADC_CH0IF_bm;
+		
+		ADCA.CH0.CTRL = ADC_CH_GAIN_1X_gc | ADC_CH_INPUTMODE_SINGLEENDED_gc;
+		ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_PIN1_gc;
+
+
+
 	
 	while(1){
+	int tempsum = 0;
+	float tempsum_avg = 0;
+	
+	for(int i=0;i<10;i++){
+		ADCA.CTRLA |= ADC_CH0START_bm;
+		while(!(ADCA.INTFLAGS & ADC_CH0IF_bm));
+		tempsum += ADCA.CH0RES;
+	}
+	tempsum_avg = tempsum/10;		
+			//printf("the temp is %d\n\r",  temp);
+			
+			vTaskSuspendAll();
+			fprintf(&USBSerialStream, "the temp is %f\n\r",  (tempsum_avg/2048)*(3.3/1.6));
+			xTaskResumeAll();
+
 
 		vTaskDelay(100);
 		DigitalPin_ToggleValue(&led2);
@@ -144,7 +174,17 @@ void thread_2( void *pvParameters ){
 }
 
 
-TWI_Master_t lcd03i2c;
+
+void thread_3( void *pvParameters ){
+	_nrf24l01p_init();
+	char txData[] = "xmega man";
+	while(1){
+		_nrf24l01p_send_to_address_ack(0x4545454531, (uint8_t*)txData,strlen(txData));
+		vTaskDelay(1000);
+	}
+}
+
+
 
 
 /** Main program entry point. This routine contains the overall program flow, including initial
@@ -246,7 +286,8 @@ int main(void)
 
 	
 	xTaskCreate(thread_1,(signed portCHAR *) "t1", 100, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate(thread_2,(signed portCHAR *) "t2", 100, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
 	
 
