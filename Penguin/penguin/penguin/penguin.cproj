@@ -173,6 +173,7 @@
       <Value>%24(PackRepoDir)\atmel\XMEGAC_DFP\1.0.29\include</Value>
       <Value>..</Value>
       <Value>../XMEGA_DRIVERS</Value>
+      <Value>../XMEGA_API</Value>
       <Value>../LUFA</Value>
       <Value>../FreeRTOS</Value>
       <Value>../FreeRTOS/include</Value>
@@ -203,6 +204,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Component_Drivers\components.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component_Drivers\ds1302\ds1302.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component_Drivers\ds1302\ds1302.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component_Drivers\ds1302\ds1302_arch_driver.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Component_Drivers\lcd03\lcd03.c">
@@ -1382,6 +1392,7 @@
   <ItemGroup>
     <Folder Include="Component_Drivers\" />
     <Folder Include="Component_Drivers\lcd03" />
+    <Folder Include="Component_Drivers\ds1302" />
     <Folder Include="Component_Drivers\nrf24l01p\" />
     <Folder Include="Component_Drivers\ssd1306\" />
     <Folder Include="FreeRTOS\include\" />

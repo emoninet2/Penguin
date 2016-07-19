@@ -22,7 +22,12 @@ void DigitalPin_Config(DigitalPin_t *pin ,bool slewRateEnable, bool invertEnable
 
 
 void DigitalPin_SetDIr(DigitalPin_t *pin , bool dir){
-	if(dir) pin->_port->DIRSET = (1<< pin->_pin);
+	if(dir) {
+		pin->_port->DIRSET = (1<< pin->_pin);
+	}
+	else{
+		pin->_port->DIRCLR = (1<< pin->_pin);
+	}
 }
 
 void DigitalPin_SetValue(DigitalPin_t *pin){
@@ -38,7 +43,7 @@ void DigitalPin_ToggleValue(DigitalPin_t *pin){
 }
 bool DigitalPin_GetValue(DigitalPin_t *pin){
 	bool pinValue;
-	if((pin->_port->IN)&(1<<pin->_pin)) pinValue = 0 ;
-	else pinValue = 1;
+	if((pin->_port->IN)&(1<<(pin->_pin))) pinValue = 1 ;
+	else pinValue = 0;
 	return pinValue;
 }

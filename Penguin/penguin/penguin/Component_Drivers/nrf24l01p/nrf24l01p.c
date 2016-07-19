@@ -69,15 +69,17 @@ void _nrf24l01p_init(){
 
 void _nrf24l01p_reinit_loop(void){
 	//printf("testing NRF status\r\n");
-	if(_nrf24l01p_get_status() == 0){
-		//printf("nrf not found. (status = 0) waiting for reconnection\r\n");
-		while(_nrf24l01p_get_status() == 0){
-			//printf("\t\t>>\r\n");
+	//volatile ntfstatus = _nrf24l01p_get_status();
+	//if(ntfstatus == 0){
+		while(arch_spi_master_transmit_byte_val(_NRF24L01P_SPI_CMD_NOP) == 0){
+			asm("nop");
 		}
-		//printf("nrf found. reconnecting\r\n");
-		_nrf24l01p_delay_ms(500);
 		_nrf24l01p_init();
-	}
+		
+	//}
+	asm("nop");
+	
+
 }
 
 
@@ -163,6 +165,12 @@ int _nrf24l01p_get_status(){
 	_nrf24l01p_csn_pin(0);
 	int temp = arch_spi_master_transmit_byte_val(_NRF24L01P_SPI_CMD_NOP);
 	_nrf24l01p_csn_pin(1);
+	if(temp == 0){
+		//means the nrf is not connected and status reads as 0
+		asm("nop");
+		_nrf24l01p_reinit_loop();
+	}
+	
 	
 	return temp;
 }
@@ -620,13 +628,29 @@ int _nrf24l01p_send(uint8_t *data, int datalen){
 	_nrf24l01p_ce_pin(1);//enable();
 	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Thce_us);
 	_nrf24l01p_ce_pin(0);
+	
+	int attempts = 0;
 	while ( !(_nrf24l01p_get_data_sent_flag()) ){
+	
+		if(_nrf24l01p_get_fifo_flag_tx_empty()){
+			error_status = -2;
+			break;
+		}
+		
 		if(_nrf24l01p_get_max_retry_flag()){
 			error_status = -1;
 			break;
 		}
+		
+		attempts++;
+		if(attempts>100){
+			error_status = -3;
+			_nrf24l01p_flush_tx();
+			break;
+		}
+		
 	}
-	
+	asm("nop");
 	_nrf24l01p_clear_max_retry_flag();
 	_nrf24l01p_clear_data_sent_flag();
 	//_nrf24l01p_flush_tx();

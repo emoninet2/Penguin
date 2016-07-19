@@ -141,11 +141,13 @@ main.d main.o: .././main.c \
  .././Component_Drivers/ssd1306/gfx_mono.h \
  .././Component_Drivers/lcd03/lcd03.h \
  .././Component_Drivers/lcd03/lcd03_arch_driver.h \
- ../XMEGA_DRIVERS/twi_master_driver.h .././XMEGA_API/xmega_api.h \
- .././XMEGA_SERVICES/xmega_services.h .././XMEGA_SERVICES/stream.h \
- .././JSON/jsmn.h ../FreeRTOS/include/FreeRTOS.h \
- ../FreeRTOS/FreeRTOSConfig.h ../FreeRTOS/include/projdefs.h \
- ../FreeRTOS/include/portable.h \
+ ../XMEGA_DRIVERS/twi_master_driver.h \
+ .././Component_Drivers/ds1302/ds1302.h ../XMEGA_API/xmega_api.h \
+ .././Component_Drivers/ds1302/ds1302_arch_driver.h \
+ .././XMEGA_API/xmega_api.h .././XMEGA_SERVICES/xmega_services.h \
+ .././XMEGA_SERVICES/stream.h .././JSON/jsmn.h \
+ ../FreeRTOS/include/FreeRTOS.h ../FreeRTOS/FreeRTOSConfig.h \
+ ../FreeRTOS/include/projdefs.h ../FreeRTOS/include/portable.h \
  ../FreeRTOS/include/portable/GCC/ATMega323/portmacro.h \
  ../FreeRTOS/include/mpu_wrappers.h ../FreeRTOS/include/task.h \
  ../FreeRTOS/include/list.h ../FreeRTOS/include/queue.h
@@ -461,6 +463,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././Component_Drivers/lcd03/lcd03_arch_driver.h:
 
 ../XMEGA_DRIVERS/twi_master_driver.h:
+
+.././Component_Drivers/ds1302/ds1302.h:
+
+../XMEGA_API/xmega_api.h:
+
+.././Component_Drivers/ds1302/ds1302_arch_driver.h:
 
 .././XMEGA_API/xmega_api.h:
 

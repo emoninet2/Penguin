@@ -50,6 +50,10 @@
 
 DigitalPin_t led = {&PORTR, 0};
 DigitalPin_t led2 = {&PORTR, 1};
+DigitalPin_t myswitch = {&PORTF, 1};
+
+volatile bool global_light0_stat = 0;
+volatile bool global_light0_stat_request = 0;
 
 TWI_Master_t lcd03i2c;
 
@@ -124,7 +128,7 @@ void thread_1( void *pvParameters ){
 		DigitalPin_ToggleValue(&led);
 		
 // 		vTaskSuspendAll();
-// 		fprintf(&USBSerialStream, "fuck you\r\n");
+// 		fprintf(&USBSerialStream, "hey\r\n");
 // 		xTaskResumeAll();
 		
 		
@@ -146,7 +150,7 @@ void thread_2( void *pvParameters ){
 		ADCA.INTFLAGS = /*ADC_CH3IF_bm | ADC_CH2IF_bm | ADC_CH1IF_bm |*/ ADC_CH0IF_bm;
 		
 		ADCA.CH0.CTRL = ADC_CH_GAIN_1X_gc | ADC_CH_INPUTMODE_SINGLEENDED_gc;
-		ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_PIN1_gc;
+		ADCA.CH0.MUXCTRL = ADC_CH_MUXPOS_PIN0_gc;
 
 
 
@@ -162,9 +166,12 @@ void thread_2( void *pvParameters ){
 	}
 	tempsum_avg = tempsum/10;		
 			//printf("the temp is %d\n\r",  temp);
+			float adcval = (tempsum_avg/2048)*(3.3/1.6);
 			
+
+
 			vTaskSuspendAll();
-			fprintf(&USBSerialStream, "the temp is %f\n\r",  (tempsum_avg/2048)*(3.3/1.6));
+			fprintf(&USBSerialStream, "the temp is %f\n\r", adcval );
 			xTaskResumeAll();
 
 
@@ -176,15 +183,57 @@ void thread_2( void *pvParameters ){
 
 
 void thread_3( void *pvParameters ){
+	DigitalPin_SetDIr(&myswitch,false);
+	DigitalPin_Config(&myswitch,false,false,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
+	
 	_nrf24l01p_init();
-	char txData[] = "xmega man";
+	char txData[] = "light 0 1";
+	char txData2[] = "light 0 0";
 	while(1){
-		_nrf24l01p_send_to_address_ack(0x4545454531, (uint8_t*)txData,strlen(txData));
-		vTaskDelay(1000);
+		
+// 		if(DigitalPin_GetValue(&myswitch)){
+// 			while(DigitalPin_GetValue(&myswitch));
+			if(global_light0_stat != global_light0_stat_request){
+				global_light0_stat = global_light0_stat_request;
+				if(global_light0_stat){
+					int retval = _nrf24l01p_send_to_address_ack(0x4C4C4C4C31, (uint8_t*)txData,strlen(txData));
+				}
+				else{
+					int retval = _nrf24l01p_send_to_address_ack(0x4C4C4C4C31, (uint8_t*)txData2,strlen(txData2));
+				}
+			} 
+
+// 			
+// 		}
+		
+		
+		//int retval = _nrf24l01p_send_to_address_ack(0x4C4C4C4C31, (uint8_t*)txData,strlen(txData));
+		vTaskDelay(10);
+		
 	}
 }
 
+void thread_4( void *pvParameters ){
+	ds1302_initialize();
+	while(1){
+// 		char temp = ds1302_readReg(0x81);
+// 		fprintf(&USBSerialStream, "halla bol %x %x %x %x %x %x %x %x\r\n",temp);
+		
+		fprintf(&USBSerialStream, "halla bol ");
+		for(int i=0x81;i<=0x91;i+=2){
+			char temp = ds1302_readReg(i);
+			fprintf(&USBSerialStream, "%x ",temp);
+		}
+		fprintf(&USBSerialStream, "\r\n");
+		
+		time_t mytime;
+		ds1302_time(&mytime);
+		fprintf(&USBSerialStream, "timestamp : %d\r\n",mytime);
+		
+		vTaskDelay(1000);
+	}
 
+}
 
 
 /** Main program entry point. This routine contains the overall program flow, including initial
@@ -285,9 +334,10 @@ int main(void)
 
 
 	
-	xTaskCreate(thread_1,(signed portCHAR *) "t1", 100, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
+	//xTaskCreate(thread_1,(signed portCHAR *) "t1", 100, NULL, tskIDLE_PRIORITY, NULL );
+	//xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
+	//xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_4,(signed portCHAR *) "t4", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
 	
 
