@@ -105,9 +105,12 @@ void ds1302_writeReg(uint8_t reg, uint8_t val)
 }
 
 
-void ds1302_set_time(time_t t)
+void ds1302_setTimestamp(time_t t)
 {
 	struct tm *_t = localtime(&t);
+	
+	_t->tm_year -= 30 ;
+	
 	ds1302_writeReg(Seconds, (_t->tm_sec % 10) + ((_t->tm_sec / 10) << 4));
 	ds1302_writeReg(Minutes, (_t->tm_min % 10) + ((_t->tm_min / 10) << 4));
 	ds1302_writeReg(Hours, (_t->tm_hour % 10) + ((_t->tm_hour / 10) << 4));
@@ -115,9 +118,10 @@ void ds1302_set_time(time_t t)
 	ds1302_writeReg(Months, ((_t->tm_mon + 1) % 10) + (((_t->tm_mon + 1) / 10) << 4));
 	ds1302_writeReg(Days, _t->tm_wday + 1);
 	ds1302_writeReg(Years, ((_t->tm_year - 100) % 10) + (((_t->tm_year - 100) / 10) << 4));
+
 }
 
-time_t ds1302_time(time_t  *t)
+time_t ds1302_getTimestamp()
 {
 	char regs[7];
 	ds1302_rst_pin_high();
@@ -136,9 +140,14 @@ time_t ds1302_time(time_t  *t)
 	_t.tm_mday = (regs[3] & 0xF) + (regs[3] >> 4) * 10;
 	_t.tm_mon = (regs[4] & 0xF) + (regs[4] >> 4) * 10 - 1;
 	_t.tm_year = (regs[6] & 0xF) + (regs[6] >> 4) * 10 + 100;
+
 	
-	// convert to timestamp and display (1256729737)
-	return mktime(&_t);
+	
+	asm("nop");
+	time_t temptime;
+	temptime = mktime(&_t);
+	return temptime;
+
 }
 
 

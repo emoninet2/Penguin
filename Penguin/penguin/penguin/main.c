@@ -47,6 +47,7 @@
 #include "task.h"
 #include "queue.h"
 
+volatile time_t system_time;
 
 DigitalPin_t led = {&PORTR, 0};
 DigitalPin_t led2 = {&PORTR, 1};
@@ -215,21 +216,39 @@ void thread_3( void *pvParameters ){
 
 void thread_4( void *pvParameters ){
 	ds1302_initialize();
+	ds1302_setTimestamp(1468959995);
 	while(1){
 // 		char temp = ds1302_readReg(0x81);
 // 		fprintf(&USBSerialStream, "halla bol %x %x %x %x %x %x %x %x\r\n",temp);
+// 		
+// 		fprintf(&USBSerialStream, "halla bol ");
+// 		for(int i=0x81;i<=0x91;i+=2){
+// 			char temp = ds1302_readReg(i);
+// 			fprintf(&USBSerialStream, "%x ",temp);
+// 		}
+// 		fprintf(&USBSerialStream, "\r\n");
+
 		
-		fprintf(&USBSerialStream, "halla bol ");
-		for(int i=0x81;i<=0x91;i+=2){
-			char temp = ds1302_readReg(i);
-			fprintf(&USBSerialStream, "%x ",temp);
-		}
-		fprintf(&USBSerialStream, "\r\n");
+		system_time = ds1302_getTimestamp();
+		//fprintf(&USBSerialStream, "timestamp : %lu\r\n",mytime);
+		//fprintf(&USBSerialStream,"Time as a basic string = %s\r", ctime(&system_time));
 		
-		time_t mytime;
-		ds1302_time(&mytime);
-		fprintf(&USBSerialStream, "timestamp : %d\r\n",mytime);
-		
+		set_system_time(system_time);
+			
+		vTaskDelay(200);
+	}
+
+}
+
+
+void thread_5( void *pvParameters ){
+
+	
+	while(1){
+// 		ssd1306_clear();
+// 		ssd1306_set_page_address(0);
+// 		ssd1306_write_text("EMON");
+		fprintf(&USBSerialStream, "timestamp : %lu\r\n",system_time);
 		vTaskDelay(1000);
 	}
 
@@ -338,6 +357,7 @@ int main(void)
 	//xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
 	//xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_4,(signed portCHAR *) "t4", 500, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_5,(signed portCHAR *) "t5", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
 	
 
