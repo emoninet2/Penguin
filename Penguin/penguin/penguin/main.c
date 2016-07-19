@@ -229,11 +229,11 @@ void thread_4( void *pvParameters ){
 // 		fprintf(&USBSerialStream, "\r\n");
 
 		
-		system_time = ds1302_getTimestamp();
-		//fprintf(&USBSerialStream, "timestamp : %lu\r\n",mytime);
-		//fprintf(&USBSerialStream,"Time as a basic string = %s\r", ctime(&system_time));
+		system_time = ds1302_getTimestamp() - UNIX_OFFSET;
+		fprintf(&USBSerialStream, "epoch timestamp : %lu\r\n",system_time + UNIX_OFFSET);
+		fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&system_time));
 		
-		set_system_time(system_time);
+		//set_system_time(system_time);
 			
 		vTaskDelay(200);
 	}
@@ -248,8 +248,8 @@ void thread_5( void *pvParameters ){
 // 		ssd1306_clear();
 // 		ssd1306_set_page_address(0);
 // 		ssd1306_write_text("EMON");
-		fprintf(&USBSerialStream, "timestamp : %lu\r\n",system_time);
-		vTaskDelay(1000);
+		//fprintf(&USBSerialStream, "timestamp : %lu\r\n",system_time);
+		//vTaskDelay(1000);
 	}
 
 }
@@ -357,7 +357,6 @@ int main(void)
 	//xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
 	//xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_4,(signed portCHAR *) "t4", 500, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate(thread_5,(signed portCHAR *) "t5", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
 	
 
