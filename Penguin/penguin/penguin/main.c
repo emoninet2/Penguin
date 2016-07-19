@@ -47,7 +47,7 @@
 #include "task.h"
 #include "queue.h"
 
-volatile time_t system_time;
+volatile time_t local_timestamp;
 
 DigitalPin_t led = {&PORTR, 0};
 DigitalPin_t led2 = {&PORTR, 1};
@@ -214,9 +214,14 @@ void thread_3( void *pvParameters ){
 	}
 }
 
+struct tm rtc_time;
+
 void thread_4( void *pvParameters ){
 	ds1302_initialize();
-	ds1302_setTimestamp(1468959995);
+	//ds1302_setTimestamp(1468968351 - UNIX_OFFSET );
+	ds1302_setTimestamp(1468983565 - UNIX_OFFSET);
+	//set_zone(+4 * ONE_HOUR);
+
 	while(1){
 // 		char temp = ds1302_readReg(0x81);
 // 		fprintf(&USBSerialStream, "halla bol %x %x %x %x %x %x %x %x\r\n",temp);
@@ -229,9 +234,11 @@ void thread_4( void *pvParameters ){
 // 		fprintf(&USBSerialStream, "\r\n");
 
 		
-		system_time = ds1302_getTimestamp() - UNIX_OFFSET;
-		fprintf(&USBSerialStream, "epoch timestamp : %lu\r\n",system_time + UNIX_OFFSET);
-		fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&system_time));
+		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR;
+		
+		fprintf(&USBSerialStream, "UNIX Timestamp : %lu\r\n",ds1302_getTimestamp() + UNIX_OFFSET);
+		fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&local_timestamp));
+		
 		
 		//set_system_time(system_time);
 			

@@ -107,11 +107,8 @@ void ds1302_writeReg(uint8_t reg, uint8_t val)
 
 void ds1302_setTimestamp(time_t t)
 {
-
 	struct tm *_t = localtime(&t);
-	
-/*	_t->tm_year -= 30 ;*/
-	
+	asm("nop");
 	ds1302_writeReg(Seconds, (_t->tm_sec % 10) + ((_t->tm_sec / 10) << 4));
 	ds1302_writeReg(Minutes, (_t->tm_min % 10) + ((_t->tm_min / 10) << 4));
 	ds1302_writeReg(Hours, (_t->tm_hour % 10) + ((_t->tm_hour / 10) << 4));
@@ -142,8 +139,6 @@ time_t ds1302_getTimestamp()
 	_t.tm_mon = (regs[4] & 0xF) + (regs[4] >> 4) * 10 - 1;
 	_t.tm_year = (regs[6] & 0xF) + (regs[6] >> 4) * 10 + 100;
 
-
-/*	_t.tm_year += 30;*/
 		
 	asm("nop");
 	time_t t;
