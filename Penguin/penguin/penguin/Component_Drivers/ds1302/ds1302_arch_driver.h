@@ -12,17 +12,20 @@
 
 #include <time.h>
 
-DigitalPin_t ds1302_clk = {&PORTB, 5};
-DigitalPin_t ds1302_io = {&PORTB, 6};
-DigitalPin_t ds1302_rst = {&PORTB, 7};
+// DigitalPin_t ds1302_clk = {&PORTB, 5};
+// DigitalPin_t ds1302_io = {&PORTB, 6};
+//DigitalPin_t ds1302_rst = {&PORTB, 7};
 
+DigitalPin_t ds1302_clk = {&PORTB, 6};
+DigitalPin_t ds1302_io = {&PORTB, 4};
+DigitalPin_t ds1302_rst = {&PORTB, 2};
 
 #define wait_us(us)	vTaskDelay(us)
 
-#define ds1302_io_pin_output()	DigitalPin_SetDIr(&ds1302_io , 1)
-#define ds1302_io_pin_input()	DigitalPin_SetDIr(&ds1302_io , 0)
-#define ds1302_clk_pin_output()	DigitalPin_SetDIr(&ds1302_clk , 1)
-#define ds1302_rst_pin_output()	DigitalPin_SetDIr(&ds1302_rst , 1)
+#define ds1302_io_pin_output()	DigitalPin_SetDir(&ds1302_io , 1)
+#define ds1302_io_pin_input()	DigitalPin_SetDir(&ds1302_io , 0)
+#define ds1302_clk_pin_output()	DigitalPin_SetDir(&ds1302_clk , 1)
+#define ds1302_rst_pin_output()	DigitalPin_SetDir(&ds1302_rst , 1)
 
 #define ds1302_io_pin_val()		DigitalPin_GetValue(&ds1302_io)
 

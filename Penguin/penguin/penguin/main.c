@@ -53,6 +53,17 @@ DigitalPin_t led = {&PORTR, 0};
 DigitalPin_t led2 = {&PORTR, 1};
 DigitalPin_t myswitch = {&PORTF, 1};
 
+DigitalPin_t mybutton1 = {&PORTA, 7};
+DigitalPin_t mybutton2 = {&PORTA, 5};
+DigitalPin_t mybutton3 = {&PORTC, 0};
+DigitalPin_t mybutton4 = {&PORTC, 1};
+
+DigitalPin_t myrelay1 = {&PORTA, 6};
+DigitalPin_t myrelay2 = {&PORTA, 4};
+DigitalPin_t myrelay3 = {&PORTA, 2};
+DigitalPin_t myrelay4 = {&PORTE, 0};
+
+
 volatile bool global_light0_stat = 0;
 volatile bool global_light0_stat_request = 0;
 
@@ -184,7 +195,7 @@ void thread_2( void *pvParameters ){
 
 
 void thread_3( void *pvParameters ){
-	DigitalPin_SetDIr(&myswitch,false);
+	DigitalPin_SetDir(&myswitch,false);
 	DigitalPin_Config(&myswitch,false,false,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
 	
 	_nrf24l01p_init();
@@ -216,10 +227,50 @@ void thread_3( void *pvParameters ){
 
 struct tm rtc_time;
 
+
+
+void time_parse_print(char *command){
+	printf("now parsing string\n");
+	int arg_index = 0;
+	char *pch;
+	char *remotch_args[ 10];
+	pch = strtok(command, " ");
+	while(pch != NULL) {
+		remotch_args[arg_index] = pch;
+		arg_index++;
+		if(arg_index >=10) break;
+		pch = strtok (NULL, " ");
+	}
+
+	char time[15];
+	char date[30];
+	char day[15];
+
+	sprintf(day,"%s",remotch_args[0]);
+	sprintf(time,"%s",remotch_args[3]);
+	sprintf(date,"%s %s %s",remotch_args[2],remotch_args[1],remotch_args[4]);
+
+	ssd1306_clear();
+	ssd1306_set_page_address(0);
+	ssd1306_set_column_address(0);
+	ssd1306_write_text(time);
+	ssd1306_set_page_address(1);
+	ssd1306_set_column_address(0);
+	ssd1306_write_text(date);
+	ssd1306_set_page_address(2);
+	ssd1306_set_column_address(0);
+	ssd1306_write_text(day);
+
+
+}
+
+
+
+
 void thread_4( void *pvParameters ){
 	ds1302_initialize();
-	//ds1302_setTimestamp(1468968351 - UNIX_OFFSET );
-	ds1302_setTimestamp(1468983565 - UNIX_OFFSET);
+
+	ds1302_setTimestamp(1469834372    - UNIX_OFFSET);
 	//set_zone(+4 * ONE_HOUR);
 
 	while(1){
@@ -234,32 +285,110 @@ void thread_4( void *pvParameters ){
 // 		fprintf(&USBSerialStream, "\r\n");
 
 		
-		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR;
+		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR + 1000; //OFFSET GMT+4
 		
 		fprintf(&USBSerialStream, "UNIX Timestamp : %lu\r\n",ds1302_getTimestamp() + UNIX_OFFSET);
 		fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&local_timestamp));
 		
+		time_parse_print(ctime(&local_timestamp));//function to print the time and date on lcd
+
 		
 		//set_system_time(system_time);
 			
 		vTaskDelay(200);
 	}
-
 }
+
+bool relayUpdate=0;
+bool relayState1=0,relayState2=0,relayState3=0,relayState4=0;
+
+
+
 
 
 void thread_5( void *pvParameters ){
 
+	DigitalPin_SetDir(&myrelay1,1);
+	DigitalPin_SetDir(&myrelay2,1);
+	DigitalPin_SetDir(&myrelay3,1);
+	DigitalPin_SetDir(&myrelay4,1);
+
+	DigitalPin_Config(&myrelay4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
 	
+	DigitalPin_Config(&mybutton1,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
+	DigitalPin_Config(&mybutton2,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
+	DigitalPin_Config(&mybutton3,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
+	DigitalPin_Config(&mybutton4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
+
+
 	while(1){
-// 		ssd1306_clear();
-// 		ssd1306_set_page_address(0);
-// 		ssd1306_write_text("EMON");
-		//fprintf(&USBSerialStream, "timestamp : %lu\r\n",system_time);
-		//vTaskDelay(1000);
+		vTaskDelay(100);
+
+		if(!DigitalPin_GetValue(&mybutton1)){
+			while(!DigitalPin_GetValue(&mybutton1));
+			relayState1=!relayState1;
+
+
+		}
+
+		if(!DigitalPin_GetValue(&mybutton2)){
+			while(!DigitalPin_GetValue(&mybutton2));
+			relayState2=!relayState2;
+
+		}
+
+		if(!DigitalPin_GetValue(&mybutton3)){
+			while(!DigitalPin_GetValue(&mybutton3));
+			relayState3=!relayState3;
+
+		}
+
+		if(!DigitalPin_GetValue(&mybutton4)){
+			while(!DigitalPin_GetValue(&mybutton4));
+			relayState4=!relayState4;
+
+		}
+
+	
+// 		if(DigitalPin_GetValue(&mybutton4)){
+// 			DigitalPin_SetValue(&led);
+// 			DigitalPin_SetValue(&myrelay1);
+// 			DigitalPin_SetValue(&myrelay2);
+// 			DigitalPin_SetValue(&myrelay3);
+// 			DigitalPin_SetValue(&myrelay4);
+// 		}
+// 		else{
+// 			DigitalPin_ClearValue(&led);
+// 			DigitalPin_ClearValue(&myrelay1);
+// 			DigitalPin_ClearValue(&myrelay2);
+// 			DigitalPin_ClearValue(&myrelay3);
+// 			DigitalPin_ClearValue(&myrelay4);
+// 		}
+
 	}
 
 }
+
+void thread_6( void *pvParameters ){
+	while(1){
+
+		vTaskDelay(200);
+
+		if(relayState1) DigitalPin_SetValue(&myrelay1);
+		else DigitalPin_ClearValue(&myrelay1);
+
+		if(relayState2) DigitalPin_SetValue(&myrelay2);
+		else DigitalPin_ClearValue(&myrelay2);
+
+		if(relayState3) DigitalPin_SetValue(&myrelay3);
+		else DigitalPin_ClearValue(&myrelay3);
+
+		if(relayState4) DigitalPin_SetValue(&myrelay4);
+		else DigitalPin_ClearValue(&myrelay4);
+	}
+}
+
+
 
 
 /** Main program entry point. This routine contains the overall program flow, including initial
@@ -267,8 +396,8 @@ void thread_5( void *pvParameters ){
  */
 int main(void)
 {
-	DigitalPin_SetDIr(&led,1);
-	DigitalPin_SetDIr(&led2,1);
+	DigitalPin_SetDir(&led,1);
+	DigitalPin_SetDir(&led2,1);
 	
 	SetupHardware();
 
@@ -285,12 +414,13 @@ int main(void)
 	}
 
 	asm("nop");
+	ssd1306_clear();
 	ssd1306_set_page_address(0);
 	ssd1306_write_text("EMON");
 
 
-	DigitalPin_SetDIr(&led,1);
-	DigitalPin_SetDIr(&led2,1);
+	DigitalPin_SetDir(&led,1);
+	DigitalPin_SetDir(&led2,1);
 	//PORT_SetDirection(&PORTR,(1<<0));
 
 	CLKSYS_Enable( OSC_RC32MEN_bm );
@@ -313,10 +443,10 @@ int main(void)
 
 	asm("nop");
 
-	TWI_MasterInit(&lcd03i2c,
-	&TWIE,
-	TWI_MASTER_INTLVL_OFF_gc,
-	TWI_BAUD(F_CPU, 100000));
+// 	TWI_MasterInit(&lcd03i2c,
+// 	&TWIE,
+// 	TWI_MASTER_INTLVL_OFF_gc,
+// 	TWI_BAUD(F_CPU, 100000));
 	
 	asm("nop");
 
@@ -364,6 +494,8 @@ int main(void)
 	//xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
 	//xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_4,(signed portCHAR *) "t4", 500, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_5,(signed portCHAR *) "t5", 500, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_6,(signed portCHAR *) "t6", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
 	
 
@@ -373,8 +505,7 @@ int main(void)
 
 	for (;;)
 	{
-// 		CDC_Device_USBTask(&VirtualSerial_CDC_Interface);
-// 		USB_USBTask();
+
 	}
 }
 

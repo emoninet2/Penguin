@@ -19,7 +19,7 @@ typedef struct DigitalPin_enum{
 
 
 void DigitalPin_Config(DigitalPin_t *pin ,bool slewRateEnable, bool invertEnable,PORT_OPC_t opc, PORT_ISC_t isc);
-void DigitalPin_SetDIr(DigitalPin_t *pin , bool dir);
+void DigitalPin_SetDir(DigitalPin_t *pin , bool dir);
 void DigitalPin_SetValue(DigitalPin_t *pin);
 void DigitalPin_ClearValue(DigitalPin_t *pin);
 void DigitalPin_ToggleValue(DigitalPin_t *pin);

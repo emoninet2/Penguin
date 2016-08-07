@@ -21,7 +21,7 @@ void DigitalPin_Config(DigitalPin_t *pin ,bool slewRateEnable, bool invertEnable
 }
 
 
-void DigitalPin_SetDIr(DigitalPin_t *pin , bool dir){
+void DigitalPin_SetDir(DigitalPin_t *pin , bool dir){
 	if(dir) {
 		pin->_port->DIRSET = (1<< pin->_pin);
 	}
