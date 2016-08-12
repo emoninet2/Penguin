@@ -5424,21 +5424,21 @@ void vTaskSwitchContext( void )
     2f48:	80 91 af 22 	lds	r24, 0x22AF	; 0x8022af <relayState3>
     2f4c:	88 23       	and	r24, r24
     2f4e:	29 f0       	breq	.+10     	; 0x2f5a <thread_6+0x14a>
-    2f50:	85 eb       	ldi	r24, 0xB5	; 181
+    2f50:	82 eb       	ldi	r24, 0xB2	; 178
     2f52:	92 e2       	ldi	r25, 0x22	; 34
     2f54:	0e 94 01 1f 	call	0x3e02	; 0x3e02 <DigitalPin_SetValue>
     2f58:	04 c0       	rjmp	.+8      	; 0x2f62 <thread_6+0x152>
-    2f5a:	85 eb       	ldi	r24, 0xB5	; 181
+    2f5a:	82 eb       	ldi	r24, 0xB2	; 178
     2f5c:	92 e2       	ldi	r25, 0x22	; 34
     2f5e:	0e 94 11 1f 	call	0x3e22	; 0x3e22 <DigitalPin_ClearValue>
     2f62:	80 91 ae 22 	lds	r24, 0x22AE	; 0x8022ae <relayState4>
     2f66:	88 23       	and	r24, r24
     2f68:	29 f0       	breq	.+10     	; 0x2f74 <thread_6+0x164>
-    2f6a:	82 eb       	ldi	r24, 0xB2	; 178
+    2f6a:	85 eb       	ldi	r24, 0xB5	; 181
     2f6c:	92 e2       	ldi	r25, 0x22	; 34
     2f6e:	0e 94 01 1f 	call	0x3e02	; 0x3e02 <DigitalPin_SetValue>
     2f72:	88 cf       	rjmp	.-240    	; 0x2e84 <thread_6+0x74>
-    2f74:	82 eb       	ldi	r24, 0xB2	; 178
+    2f74:	85 eb       	ldi	r24, 0xB5	; 181
     2f76:	92 e2       	ldi	r25, 0x22	; 34
     2f78:	0e 94 11 1f 	call	0x3e22	; 0x3e22 <DigitalPin_ClearValue>
     2f7c:	83 cf       	rjmp	.-250    	; 0x2e84 <thread_6+0x74>
@@ -6789,8 +6789,8 @@ void vTaskSwitchContext( void )
     3ae0:	0e 94 c6 1a 	call	0x358c	; 0x358c <ds1302_getTimestamp>
     3ae4:	dc 01       	movw	r26, r24
     3ae6:	cb 01       	movw	r24, r22
-    3ae8:	88 5c       	subi	r24, 0xC8	; 200
-    3aea:	95 4b       	sbci	r25, 0xB5	; 181
+    3ae8:	80 5c       	subi	r24, 0xC0	; 192
+    3aea:	97 4c       	sbci	r25, 0xC7	; 199
     3aec:	af 4f       	sbci	r26, 0xFF	; 255
     3aee:	bf 4f       	sbci	r27, 0xFF	; 255
     3af0:	80 93 d2 98 	sts	0x98D2, r24	; 0x8098d2 <local_timestamp>

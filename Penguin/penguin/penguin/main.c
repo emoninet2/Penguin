@@ -363,8 +363,9 @@ void thread_4( void *pvParameters ){
 		}
 
 
-		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR + ONE_HOUR+1000; //OFFSET GMT+4
-		
+		//local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR + ONE_HOUR+1000; //OFFSET GMT+4
+		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR; //OFFSET GMT+4
+
 		//fprintf(&USBSerialStream, "UNIX Timestamp : %lu\r\n",ds1302_getTimestamp() + UNIX_OFFSET);
 		//fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&local_timestamp));
 		
@@ -484,11 +485,11 @@ void thread_6( void *pvParameters ){
 		if(relayState2) DigitalPin_SetValue(&myrelay2);
 		else DigitalPin_ClearValue(&myrelay2);
 
-		if(relayState3) DigitalPin_SetValue(&myrelay3);
-		else DigitalPin_ClearValue(&myrelay3);
-
-		if(relayState4) DigitalPin_SetValue(&myrelay4);
+		if(relayState3) DigitalPin_SetValue(&myrelay4);
 		else DigitalPin_ClearValue(&myrelay4);
+
+		if(relayState4) DigitalPin_SetValue(&myrelay3);
+		else DigitalPin_ClearValue(&myrelay3);
 	}
 }
 
