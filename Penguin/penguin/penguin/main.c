@@ -68,7 +68,7 @@ volatile bool global_light0_stat = 0;
 volatile bool global_light0_stat_request = 0;
 
 bool relayUpdate=0;
-bool relayState1=0,relayState2=0,relayState3=0,relayState4=0;
+bool relayState1=1,relayState2=1,relayState3=1,relayState4=1;
 
 
 
@@ -198,32 +198,41 @@ void thread_2( void *pvParameters ){
 	}
 }
 
+volatile bool update_time = 0;
+volatile uint32_t mytime = 0;
+
 void *command_handler(char **args,int arg_count){
 
 	if(!strcmp(args[0], "light") ) {
 		if(!strcmp(args[1], "0")) {
 			if(!strcmp(args[2], "0")) {
-				relayState1 = 0;
+				relayState1 = 1;
 			}
 			else if(!strcmp(args[2], "1")) {
-				relayState1 = 1;
+				relayState1 = 0;
 			}
 		}
 		else if(!strcmp(args[1], "1")) {
 			if(!strcmp(args[2], "0")) {
-				relayState2 = 0;
+				relayState2 = 1;
 			}
 			else if(!strcmp(args[2], "1")) {
-				relayState2 = 1;
+				relayState2 = 0;
 			}
 		}
 	}
 	else if(!strcmp(args[0], "fan") ) {
 		if(!strcmp(args[1], "0")) {
-			relayState3 = 0;
+			relayState4 = 1;
 		}
 		else if(!strcmp(args[1], "1")) {
-			relayState3 = 1;
+			relayState4 = 0;
+		}
+	}
+	else if(!strcmp(args[0],"time")){
+		if (!strcmp(args[1], "set")){
+			mytime = atol(args[2]);
+			update_time = 1;
 		}
 	}
 	else{
@@ -238,12 +247,12 @@ void command_parse_execute(char *command){
 	int arg_index = 0;
 	char *pch;
 	char *remotch_args[ 10];
-	pch = strtok(command, " ");
+	pch = strtok(command, " ,");
 	while(pch != NULL) {
 		remotch_args[arg_index] = pch;
 		arg_index++;
 		if(arg_index >=10) break;
-		pch = strtok (NULL, " ");
+		pch = strtok (NULL, " ,");
 	}
 	command_handler(remotch_args,arg_index);
 }
@@ -276,6 +285,7 @@ void thread_3( void *pvParameters ){
 		
 		vTaskDelay(500);
 		if((_nrf24l01p_readable(_NRF24L01P_PIPE_P1))){
+			asm("nop");
 			DigitalPin_ToggleValue(&led2);
 			int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P1, (uint8_t*) rxData);
 			rxData[width] = '\0';
@@ -331,8 +341,9 @@ void time_parse_print(char *command){
 
 void thread_4( void *pvParameters ){
 	ds1302_initialize();
-
-	ds1302_setTimestamp(1469834372    - UNIX_OFFSET);
+	uint32_t myinittime = 1469834372;
+	//uint32_t mytime = 1471011608;
+	//ds1302_setTimestamp(myinittime    - UNIX_OFFSET);
 	//set_zone(+4 * ONE_HOUR);
 
 	while(1){
@@ -346,8 +357,13 @@ void thread_4( void *pvParameters ){
 // 		}
 // 		fprintf(&USBSerialStream, "\r\n");
 
-		
-		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR + 1000; //OFFSET GMT+4
+		if(update_time){
+			ds1302_setTimestamp(mytime    - UNIX_OFFSET);
+			update_time = 0;
+		}
+
+
+		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR + ONE_HOUR+1000; //OFFSET GMT+4
 		
 		//fprintf(&USBSerialStream, "UNIX Timestamp : %lu\r\n",ds1302_getTimestamp() + UNIX_OFFSET);
 		//fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&local_timestamp));
@@ -369,7 +385,6 @@ void thread_4( void *pvParameters ){
 void thread_5( void *pvParameters ){
 
 
-	
 	DigitalPin_Config(&mybutton1,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
 	DigitalPin_Config(&mybutton2,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
 	DigitalPin_Config(&mybutton3,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
@@ -485,6 +500,11 @@ void thread_6( void *pvParameters ){
  */
 int main(void)
 {
+	volatile time_t mytime = atol("1471006630");
+	//volatile time_t mytime = 1471006630 ;
+	asm("nop");
+
+
 	DigitalPin_SetDir(&led,1);
 	DigitalPin_SetDir(&led2,1);
 	
@@ -571,7 +591,7 @@ int main(void)
 // 		while(!(TWIE.MASTER.STATUS&TWI_MASTER_WIF_bm));
 // 	}
 
-
+	
 
 
 
