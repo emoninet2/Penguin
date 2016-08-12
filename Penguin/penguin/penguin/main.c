@@ -67,6 +67,12 @@ DigitalPin_t myrelay4 = {&PORTE, 0};
 volatile bool global_light0_stat = 0;
 volatile bool global_light0_stat_request = 0;
 
+bool relayUpdate=0;
+bool relayState1=0,relayState2=0,relayState3=0,relayState4=0;
+
+
+
+
 TWI_Master_t lcd03i2c;
 
 
@@ -192,35 +198,89 @@ void thread_2( void *pvParameters ){
 	}
 }
 
+void *command_handler(char **args,int arg_count){
 
+	if(!strcmp(args[0], "light") ) {
+		if(!strcmp(args[1], "0")) {
+			if(!strcmp(args[2], "0")) {
+				relayState1 = 0;
+			}
+			else if(!strcmp(args[2], "1")) {
+				relayState1 = 1;
+			}
+		}
+		else if(!strcmp(args[1], "1")) {
+			if(!strcmp(args[2], "0")) {
+				relayState2 = 0;
+			}
+			else if(!strcmp(args[2], "1")) {
+				relayState2 = 1;
+			}
+		}
+	}
+	else if(!strcmp(args[0], "fan") ) {
+		if(!strcmp(args[1], "0")) {
+			relayState3 = 0;
+		}
+		else if(!strcmp(args[1], "1")) {
+			relayState3 = 1;
+		}
+	}
+	else{
+
+	}
+
+	return 0;
+}
+
+void command_parse_execute(char *command){
+
+	int arg_index = 0;
+	char *pch;
+	char *remotch_args[ 10];
+	pch = strtok(command, " ");
+	while(pch != NULL) {
+		remotch_args[arg_index] = pch;
+		arg_index++;
+		if(arg_index >=10) break;
+		pch = strtok (NULL, " ");
+	}
+	command_handler(remotch_args,arg_index);
+}
 
 void thread_3( void *pvParameters ){
-	DigitalPin_SetDir(&myswitch,false);
-	DigitalPin_Config(&myswitch,false,false,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
-	
 	_nrf24l01p_init();
-	char txData[] = "light 0 1";
-	char txData2[] = "light 0 0";
-	while(1){
-		
-// 		if(DigitalPin_GetValue(&myswitch)){
-// 			while(DigitalPin_GetValue(&myswitch));
-			if(global_light0_stat != global_light0_stat_request){
-				global_light0_stat = global_light0_stat_request;
-				if(global_light0_stat){
-					int retval = _nrf24l01p_send_to_address_ack(0x4C4C4C4C31, (uint8_t*)txData,strlen(txData));
-				}
-				else{
-					int retval = _nrf24l01p_send_to_address_ack(0x4C4C4C4C31, (uint8_t*)txData2,strlen(txData2));
-				}
-			} 
 
-// 			
-// 		}
+	//LEFT
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P1, 0x4C4C4C4C31);
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P2, 0x4C4C4C4C32);
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P3, 0x4C4C4C4C33);
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P4, 0x4C4C4C4C34);
+	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P5, 0x4C4C4C4C35);
+	char rxData[35];
+
+	while(1){
+
+		char config;
+		char fifo;
+
+		_nrf24l01p_read_register(_NRF24L01P_REG_CONFIG,&config,1);
+		_nrf24l01p_read_register(_NRF24L01P_REG_FIFO_STATUS,&fifo,1);
+
+		fprintf(&USBSerialStream,"status : %x\r\n", _nrf24l01p_get_status());
+		fprintf(&USBSerialStream,"config : %x\r\n", config);
+		fprintf(&USBSerialStream,"fifo : %x\r\n", fifo);
+
+
+
 		
-		
-		//int retval = _nrf24l01p_send_to_address_ack(0x4C4C4C4C31, (uint8_t*)txData,strlen(txData));
-		vTaskDelay(10);
+		vTaskDelay(500);
+		if((_nrf24l01p_readable(_NRF24L01P_PIPE_P1))){
+			DigitalPin_ToggleValue(&led2);
+			int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P1, (uint8_t*) rxData);
+			rxData[width] = '\0';
+			command_parse_execute(rxData);
+		}
 		
 	}
 }
@@ -267,6 +327,8 @@ void time_parse_print(char *command){
 
 
 
+
+
 void thread_4( void *pvParameters ){
 	ds1302_initialize();
 
@@ -287,9 +349,11 @@ void thread_4( void *pvParameters ){
 		
 		local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR + 1000; //OFFSET GMT+4
 		
-		fprintf(&USBSerialStream, "UNIX Timestamp : %lu\r\n",ds1302_getTimestamp() + UNIX_OFFSET);
-		fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&local_timestamp));
+		//fprintf(&USBSerialStream, "UNIX Timestamp : %lu\r\n",ds1302_getTimestamp() + UNIX_OFFSET);
+		//fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&local_timestamp));
 		
+		_nrf24l01p_print_info();
+
 		time_parse_print(ctime(&local_timestamp));//function to print the time and date on lcd
 
 		
@@ -299,21 +363,12 @@ void thread_4( void *pvParameters ){
 	}
 }
 
-bool relayUpdate=0;
-bool relayState1=0,relayState2=0,relayState3=0,relayState4=0;
-
-
 
 
 
 void thread_5( void *pvParameters ){
 
-	DigitalPin_SetDir(&myrelay1,1);
-	DigitalPin_SetDir(&myrelay2,1);
-	DigitalPin_SetDir(&myrelay3,1);
-	DigitalPin_SetDir(&myrelay4,1);
 
-	DigitalPin_Config(&myrelay4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
 	
 	DigitalPin_Config(&mybutton1,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
 	DigitalPin_Config(&mybutton2,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
@@ -370,9 +425,43 @@ void thread_5( void *pvParameters ){
 }
 
 void thread_6( void *pvParameters ){
+
+	DigitalPin_Config(&mybutton1,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
+	DigitalPin_Config(&mybutton2,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
+	DigitalPin_Config(&mybutton3,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
+	DigitalPin_Config(&mybutton4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
+
+	DigitalPin_SetDir(&myrelay1,1);
+	DigitalPin_SetDir(&myrelay2,1);
+	DigitalPin_SetDir(&myrelay3,1);
+	DigitalPin_SetDir(&myrelay4,1);
+
+	DigitalPin_Config(&myrelay4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
+
 	while(1){
 
-		vTaskDelay(200);
+		vTaskDelay(100);
+
+		if(!DigitalPin_GetValue(&mybutton1)){
+			while(!DigitalPin_GetValue(&mybutton1));
+			relayState1=!relayState1;
+		}
+
+		if(!DigitalPin_GetValue(&mybutton2)){
+			while(!DigitalPin_GetValue(&mybutton2));
+			relayState2=!relayState2;
+		}
+
+		if(!DigitalPin_GetValue(&mybutton3)){
+			while(!DigitalPin_GetValue(&mybutton3));
+			relayState3=!relayState3;
+		}
+
+		if(!DigitalPin_GetValue(&mybutton4)){
+			while(!DigitalPin_GetValue(&mybutton4));
+			relayState4=!relayState4;
+		}
+
 
 		if(relayState1) DigitalPin_SetValue(&myrelay1);
 		else DigitalPin_ClearValue(&myrelay1);
@@ -492,9 +581,9 @@ int main(void)
 	
 	//xTaskCreate(thread_1,(signed portCHAR *) "t1", 100, NULL, tskIDLE_PRIORITY, NULL );
 	//xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
-	//xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_4,(signed portCHAR *) "t4", 500, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate(thread_5,(signed portCHAR *) "t5", 500, NULL, tskIDLE_PRIORITY, NULL );
+	//xTaskCreate(thread_5,(signed portCHAR *) "t5", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_6,(signed portCHAR *) "t6", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
 	

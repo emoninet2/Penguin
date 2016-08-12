@@ -568,11 +568,8 @@ void _nrf24l01p_disable_dynamic_payload_with_ack(){
 //////////////////////////////////////////////////////////////////////////
 
 
-
 void _nrf24l01p_print_info(){
-// 	printf("config : %x\r\n", read_register(_NRF24L01P_REG_CONFIG));
-// 	printf("status : %x\r\n", read_register(_NRF24L01P_REG_STATUS));
-// 	printf("fifo status : %x\r\n",read_register(_NRF24L01P_REG_FIFO_STATUS));
+
 }
 
 

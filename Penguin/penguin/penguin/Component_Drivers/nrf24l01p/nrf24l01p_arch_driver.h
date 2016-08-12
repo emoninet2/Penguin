@@ -36,13 +36,13 @@ extern "C"{
 
 
 static DigitalPin_t nrf24l01p_csn_pin = {&PORTC, 4};
-static DigitalPin_t nrf24l01p_ce_pin = {&PORTC, 0};
+static DigitalPin_t nrf24l01p_ce_pin = {&PORTB, 7};
 
 #define NRF24L01P_CSN_PIN_PORT	PORTC
 #define NRF24L01P_CSN_PIN_BIT	4
 
-#define NRF24L01P_CE_PIN_PORT	PORTC
-#define NRF24L01P_CE_PIN_BIT	0
+#define NRF24L01P_CE_PIN_PORT	PORTB
+#define NRF24L01P_CE_PIN_BIT	7
 
 #define NRF24L01P_SPI SPIC
 #define NRF24L01P_SPI_PORT PORTC
@@ -66,6 +66,7 @@ static void arch_nrf24l01p_csn_pin(bool state){
 
 static void arch_nrf24l01p_initialize(){
 	NRF24L01P_SPI_PORT.DIRSET = (1<<5) | (1<<4) | (1<<7);
+	NRF24L01P_SPI_PORT.DIRCLR = (1<<6);
 	NRF24L01P_SPI.CTRL = (1<<SPI_ENABLE_bp) | (1<<SPI_MASTER_bp);
 	NRF24L01P_CSN_PIN_PORT.DIRSET = (1<<NRF24L01P_CSN_PIN_BIT);
 	NRF24L01P_CE_PIN_PORT.DIRSET = (1<<NRF24L01P_CE_PIN_BIT);
