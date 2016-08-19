@@ -47,11 +47,33 @@
 #include "task.h"
 #include "queue.h"
 
+
+//#define PROGRAM_ENTERS_BOOTLOADER 1
+
+
+
+
+#define soft_reset()        \
+do                          \
+{                           \
+	wdt_enable(WDTO_15MS);  \
+	for(;;)                 \
+	{                       \
+	}                       \
+} while(0)
+
+
+
+
 volatile time_t local_timestamp;
 
-DigitalPin_t led = {&PORTR, 0};
+DigitalPin_t led1 = {&PORTR, 0};
 DigitalPin_t led2 = {&PORTR, 1};
-DigitalPin_t myswitch = {&PORTF, 1};
+DigitalPin_t powLedR = {&PORTD, 4};
+DigitalPin_t powLedG = {&PORTD, 5};
+
+DigitalPin_t myswitch1 = {&PORTF, 1};
+DigitalPin_t myswitch2 = {&PORTF, 2};
 
 DigitalPin_t mybutton1 = {&PORTA, 7};
 DigitalPin_t mybutton2 = {&PORTA, 5};
@@ -128,7 +150,7 @@ void USBThread( void *pvParameters ){
 }
 
 
-
+volatile bool nrf_led_flag  =0;
 
 
 void thread_1( void *pvParameters ){
@@ -143,7 +165,7 @@ void thread_1( void *pvParameters ){
 		vTaskDelay(500);
 		//lcd03_backlight(lcdbackstat);
 		lcdbackstat = !lcdbackstat;
-		DigitalPin_ToggleValue(&led);
+		DigitalPin_ToggleValue(&led1);
 		
 // 		vTaskSuspendAll();
 // 		fprintf(&USBSerialStream, "hey\r\n");
@@ -153,7 +175,7 @@ void thread_1( void *pvParameters ){
 	}
 }
 
-
+volatile uint32_t temperatureadcval = 0;
 
 
 void thread_2( void *pvParameters ){
@@ -184,17 +206,17 @@ void thread_2( void *pvParameters ){
 	}
 	tempsum_avg = tempsum/10;		
 			//printf("the temp is %d\n\r",  temp);
-			float adcval = (tempsum_avg/2048)*(3.3/1.6);
-			
-
-
-			vTaskSuspendAll();
-			fprintf(&USBSerialStream, "the temp is %f\n\r", adcval );
-			xTaskResumeAll();
-
-
-		vTaskDelay(100);
-		DigitalPin_ToggleValue(&led2);
+			temperatureadcval = (tempsum_avg/2048)*(3.3/1.6);
+// 			
+// 
+// 
+// 			vTaskSuspendAll();
+// 			fprintf(&USBSerialStream, "the temp is %f\n\r", temperatureadcval );
+// 			xTaskResumeAll();
+// 
+// 
+// 		vTaskDelay(100);
+// 		DigitalPin_ToggleValue(&led2);
 	}
 }
 
@@ -223,10 +245,10 @@ void *command_handler(char **args,int arg_count){
 	}
 	else if(!strcmp(args[0], "fan") ) {
 		if(!strcmp(args[1], "0")) {
-			relayState4 = 1;
+			relayState3 = 1;
 		}
 		else if(!strcmp(args[1], "1")) {
-			relayState4 = 0;
+			relayState3 = 0;
 		}
 	}
 	else if(!strcmp(args[0],"time")){
@@ -234,6 +256,28 @@ void *command_handler(char **args,int arg_count){
 			mytime = atol(args[2]);
 			update_time = 1;
 		}
+	}
+	else if(!strcmp(args[0],"bootloader")){
+
+#if defined(PROGRAM_ENTERS_BOOTLOADER)
+		cli();
+		CCPWrite(&(PMIC.CTRL), PMIC_IVSEL_bm );
+		soft_reset();
+#else
+		uint8_t jmpE = (uint8_t)((BOOT_SECTION_START/2)>>16);
+		uint8_t jmpH = (uint8_t)((BOOT_SECTION_START/2)>>8);
+		uint8_t jmpL = (uint8_t)((BOOT_SECTION_START/2)>>0);
+		//cli();
+		//CCPWrite(&(PMIC.CTRL), PMIC_IVSEL_bm );
+		asm("ldi ZH, %0"::"i" (jmpH):"r30","r31");
+		asm("ldi ZL, %0"::"i" (jmpL):"r30","r31");
+		EIND = jmpE;
+		asm("eijmp");
+#endif
+
+
+
+
 	}
 	else{
 
@@ -286,7 +330,7 @@ void thread_3( void *pvParameters ){
 		vTaskDelay(500);
 		if((_nrf24l01p_readable(_NRF24L01P_PIPE_P1))){
 			asm("nop");
-			DigitalPin_ToggleValue(&led2);
+			nrf_led_flag = 1;
 			int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P1, (uint8_t*) rxData);
 			rxData[width] = '\0';
 			command_parse_execute(rxData);
@@ -303,22 +347,25 @@ void time_parse_print(char *command){
 	printf("now parsing string\n");
 	int arg_index = 0;
 	char *pch;
-	char *remotch_args[ 10];
+	char *time_tokens[ 10];
 	pch = strtok(command, " ");
 	while(pch != NULL) {
-		remotch_args[arg_index] = pch;
+		time_tokens[arg_index] = pch;
 		arg_index++;
 		if(arg_index >=10) break;
 		pch = strtok (NULL, " ");
 	}
 
 	char time[15];
-	char date[30];
-	char day[15];
+	char daydate[30];
+	//char day[15];
+	char temperature[10];
 
-	sprintf(day,"%s",remotch_args[0]);
-	sprintf(time,"%s",remotch_args[3]);
-	sprintf(date,"%s %s %s",remotch_args[2],remotch_args[1],remotch_args[4]);
+	/*sprintf(temperature, "%lu", temperatureadcval );*/
+
+	//sprintf(day,"%s",time_tokens[0]);
+	sprintf(time,"%s",time_tokens[3]);
+	sprintf(daydate,"%s , %s %s %s",time_tokens[0], time_tokens[2],time_tokens[1],time_tokens[4]);
 
 	ssd1306_clear();
 	ssd1306_set_page_address(0);
@@ -326,11 +373,10 @@ void time_parse_print(char *command){
 	ssd1306_write_text(time);
 	ssd1306_set_page_address(1);
 	ssd1306_set_column_address(0);
-	ssd1306_write_text(date);
-	ssd1306_set_page_address(2);
-	ssd1306_set_column_address(0);
-	ssd1306_write_text(day);
-
+	ssd1306_write_text(daydate);
+// 	ssd1306_set_page_address(2);
+// 	ssd1306_set_column_address(0);
+// 	ssd1306_write_text(temperature);
 
 }
 
@@ -342,23 +388,11 @@ void time_parse_print(char *command){
 void thread_4( void *pvParameters ){
 	ds1302_initialize();
 	uint32_t myinittime = 1469834372;
-	//uint32_t mytime = 1471011608;
-	//ds1302_setTimestamp(myinittime    - UNIX_OFFSET);
-	//set_zone(+4 * ONE_HOUR);
 
 	while(1){
-// 		char temp = ds1302_readReg(0x81);
-// 		fprintf(&USBSerialStream, "halla bol %x %x %x %x %x %x %x %x\r\n",temp);
-// 		
-// 		fprintf(&USBSerialStream, "halla bol ");
-// 		for(int i=0x81;i<=0x91;i+=2){
-// 			char temp = ds1302_readReg(i);
-// 			fprintf(&USBSerialStream, "%x ",temp);
-// 		}
-// 		fprintf(&USBSerialStream, "\r\n");
 
 		if(update_time){
-			ds1302_setTimestamp(mytime    - UNIX_OFFSET);
+			ds1302_setTimestamp(mytime - UNIX_OFFSET);
 			update_time = 0;
 		}
 
@@ -374,6 +408,14 @@ void thread_4( void *pvParameters ){
 		time_parse_print(ctime(&local_timestamp));//function to print the time and date on lcd
 
 		
+		if(nrf_led_flag){
+			DigitalPin_ClearValue(&led2);
+			vTaskDelay(200);
+			DigitalPin_SetValue(&led2);
+			nrf_led_flag = 0;
+		}
+
+
 		//set_system_time(system_time);
 			
 		vTaskDelay(200);
@@ -382,64 +424,6 @@ void thread_4( void *pvParameters ){
 
 
 
-
-void thread_5( void *pvParameters ){
-
-
-	DigitalPin_Config(&mybutton1,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
-	DigitalPin_Config(&mybutton2,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
-	DigitalPin_Config(&mybutton3,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
-	DigitalPin_Config(&mybutton4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
-
-
-	while(1){
-		vTaskDelay(100);
-
-		if(!DigitalPin_GetValue(&mybutton1)){
-			while(!DigitalPin_GetValue(&mybutton1));
-			relayState1=!relayState1;
-
-
-		}
-
-		if(!DigitalPin_GetValue(&mybutton2)){
-			while(!DigitalPin_GetValue(&mybutton2));
-			relayState2=!relayState2;
-
-		}
-
-		if(!DigitalPin_GetValue(&mybutton3)){
-			while(!DigitalPin_GetValue(&mybutton3));
-			relayState3=!relayState3;
-
-		}
-
-		if(!DigitalPin_GetValue(&mybutton4)){
-			while(!DigitalPin_GetValue(&mybutton4));
-			relayState4=!relayState4;
-
-		}
-
-	
-// 		if(DigitalPin_GetValue(&mybutton4)){
-// 			DigitalPin_SetValue(&led);
-// 			DigitalPin_SetValue(&myrelay1);
-// 			DigitalPin_SetValue(&myrelay2);
-// 			DigitalPin_SetValue(&myrelay3);
-// 			DigitalPin_SetValue(&myrelay4);
-// 		}
-// 		else{
-// 			DigitalPin_ClearValue(&led);
-// 			DigitalPin_ClearValue(&myrelay1);
-// 			DigitalPin_ClearValue(&myrelay2);
-// 			DigitalPin_ClearValue(&myrelay3);
-// 			DigitalPin_ClearValue(&myrelay4);
-// 		}
-
-	}
-
-}
-
 void thread_6( void *pvParameters ){
 
 	DigitalPin_Config(&mybutton1,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_INPUT_DISABLE_gc);
@@ -447,12 +431,18 @@ void thread_6( void *pvParameters ){
 	DigitalPin_Config(&mybutton3,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
 	DigitalPin_Config(&mybutton4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
 
+
+	DigitalPin_SetValue(&myrelay1);
+	DigitalPin_SetValue(&myrelay2);
+	DigitalPin_SetValue(&myrelay3);
+	DigitalPin_SetValue(&myrelay4);
+
 	DigitalPin_SetDir(&myrelay1,1);
 	DigitalPin_SetDir(&myrelay2,1);
 	DigitalPin_SetDir(&myrelay3,1);
 	DigitalPin_SetDir(&myrelay4,1);
 
-	DigitalPin_Config(&myrelay4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
+	//DigitalPin_Config(&myrelay4,0,0,PORT_OPC_PULLUP_gc,PORT_ISC_BOTHEDGES_gc);
 
 	while(1){
 
@@ -501,15 +491,34 @@ void thread_6( void *pvParameters ){
  */
 int main(void)
 {
+
+
+	CLKSYS_Enable( OSC_RC32MEN_bm );
+	do {} while ( CLKSYS_IsReady( OSC_RC32MRDY_bm ) == 0 );
+	CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_RC32M_gc );
+	CLKSYS_Disable( OSC_RC2MEN_bm );
+
 	volatile time_t mytime = atol("1471006630");
 	//volatile time_t mytime = 1471006630 ;
 	asm("nop");
 
+	//DigitalPin_Config(&powLedG,0,1,PORT_OPC_TOTEM_gc,PORT_ISC_INPUT_DISABLE_gc);
 
-	DigitalPin_SetDir(&led,1);
+
+	DigitalPin_SetValue(&led1);
+	DigitalPin_SetValue(&led2);
+	DigitalPin_SetDir(&led1,1);
 	DigitalPin_SetDir(&led2,1);
+	DigitalPin_SetDir(&powLedR,1);
+	DigitalPin_SetDir(&powLedG,1);
+
 	
-	SetupHardware();
+	DigitalPin_SetValue(&powLedR);//off
+	//DigitalPin_ClearValue(&powLedR);//on
+	
+	DigitalPin_SetValue(&powLedG);//on
+	DigitalPin_ClearValue(&powLedG);//off
+	//SetupHardware();//Use this to initialize USB
 
 	uint8_t page;
 	uint8_t column;
@@ -529,14 +538,9 @@ int main(void)
 	ssd1306_write_text("EMON");
 
 
-	DigitalPin_SetDir(&led,1);
+	DigitalPin_SetDir(&led1,1);
 	DigitalPin_SetDir(&led2,1);
 	//PORT_SetDirection(&PORTR,(1<<0));
-
-	CLKSYS_Enable( OSC_RC32MEN_bm );
-	do {} while ( CLKSYS_IsReady( OSC_RC32MRDY_bm ) == 0 );
-	CLKSYS_Main_ClockSource_Select( CLK_SCLKSEL_RC32M_gc );
-	CLKSYS_Disable( OSC_RC2MEN_bm );
 
 	//char ack_echo_data[] = "hello hello bolkey";
 
@@ -548,19 +552,16 @@ int main(void)
 	PORTR.DIRSET = (1<<1);
 	PORTD.DIRSET = (1<<4);
 
-	CDC_Device_CreateStream(&VirtualSerial_CDC_Interface, &USBSerialStream);
-	GlobalInterruptEnable();
+	//CDC_Device_CreateStream(&VirtualSerial_CDC_Interface, &USBSerialStream);
+	//GlobalInterruptEnable();
 
-	asm("nop");
 
 // 	TWI_MasterInit(&lcd03i2c,
 // 	&TWIE,
 // 	TWI_MASTER_INTLVL_OFF_gc,
 // 	TWI_BAUD(F_CPU, 100000));
 	
-	asm("nop");
 
-	
 
 
 //  	uint8_t writeData[] = {0,0x14};
@@ -578,10 +579,6 @@ int main(void)
 	
 
 
-	asm("nop");
-
-
-
 
 // 	TWIE.MASTER.ADDR = 0xC8;  // write to RTC
 // 	while(!(TWIE.MASTER.STATUS&TWI_MASTER_WIF_bm));
@@ -594,26 +591,21 @@ int main(void)
 
 	
 
-
-
-	asm("nop");
-
-
 	
 	//xTaskCreate(thread_1,(signed portCHAR *) "t1", 100, NULL, tskIDLE_PRIORITY, NULL );
 	//xTaskCreate(thread_2,(signed portCHAR *) "t2", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_3,(signed portCHAR *) "t3", 500, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate(thread_4,(signed portCHAR *) "t4", 500, NULL, tskIDLE_PRIORITY, NULL );
+	xTaskCreate(thread_4,(signed portCHAR *) "t4", 1000, NULL, tskIDLE_PRIORITY, NULL );
 	//xTaskCreate(thread_5,(signed portCHAR *) "t5", 500, NULL, tskIDLE_PRIORITY, NULL );
 	xTaskCreate(thread_6,(signed portCHAR *) "t6", 500, NULL, tskIDLE_PRIORITY, NULL );
-	xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
+	//xTaskCreate(USBThread,(signed portCHAR *) "usb", 200, NULL, tskIDLE_PRIORITY, NULL );
 	
 
 	//starting the scheduler
 	vTaskStartScheduler();
 
 
-	for (;;)
+	while(1)
 	{
 
 	}
