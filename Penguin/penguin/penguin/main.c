@@ -251,6 +251,20 @@ void *command_handler(char **args,int arg_count){
 			relayState3 = 0;
 		}
 	}
+	else if(!strcmp(args[0], "all") ) {
+		if(!strcmp(args[1], "0")) {
+			relayState1 = 1;
+			relayState2 = 1;
+			relayState3 = 1;
+			relayState4 = 1;
+		}
+		else if(!strcmp(args[1], "1")) {
+			relayState1 = 0;
+			relayState2 = 0;
+			relayState3 = 0;
+			relayState4 = 0;
+		}
+	}
 	else if(!strcmp(args[0],"time")){
 		if (!strcmp(args[1], "set")){
 			mytime = atol(args[2]);
@@ -317,14 +331,15 @@ void thread_3( void *pvParameters ){
 		char config;
 		char fifo;
 
-		_nrf24l01p_read_register(_NRF24L01P_REG_CONFIG,&config,1);
-		_nrf24l01p_read_register(_NRF24L01P_REG_FIFO_STATUS,&fifo,1);
+// 		_nrf24l01p_read_register(_NRF24L01P_REG_CONFIG,&config,1);
+// 		_nrf24l01p_read_register(_NRF24L01P_REG_FIFO_STATUS,&fifo,1);
+// 
+// 		fprintf(&USBSerialStream,"status : %x\r\n", _nrf24l01p_get_status());
+// 		fprintf(&USBSerialStream,"config : %x\r\n", config);
+// 		fprintf(&USBSerialStream,"fifo : %x\r\n", fifo);
 
-		fprintf(&USBSerialStream,"status : %x\r\n", _nrf24l01p_get_status());
-		fprintf(&USBSerialStream,"config : %x\r\n", config);
-		fprintf(&USBSerialStream,"fifo : %x\r\n", fifo);
-
-
+// 		uint8_t myjunk[] = "hello how do u do";
+// 		_nrf24l01p_send_to_address_ack(0xAABBCCDD01,myjunk,strlen(myjunk));
 
 		
 		vTaskDelay(500);
@@ -389,12 +404,28 @@ void thread_4( void *pvParameters ){
 	ds1302_initialize();
 	uint32_t myinittime = 1469834372;
 
+
+	char line1[30];
+	char line2[30];
+	char line3[30];
+	char line4[30];
+
 	while(1){
+
+		sprintf(line1,"Light 0 : %d",!relayState1);
+		sprintf(line2,"Light 1 : %d",!relayState2);
+		sprintf(line3,"Fan      : %d",!relayState3);
+		//sprintf(line4,"Light 0 : \t %d",relayState1);
+
+
 
 		if(update_time){
 			ds1302_setTimestamp(mytime - UNIX_OFFSET);
 			update_time = 0;
 		}
+
+		
+
 
 
 		//local_timestamp = ds1302_getTimestamp() + 4*ONE_HOUR + ONE_HOUR+1000; //OFFSET GMT+4
@@ -403,9 +434,23 @@ void thread_4( void *pvParameters ){
 		//fprintf(&USBSerialStream, "UNIX Timestamp : %lu\r\n",ds1302_getTimestamp() + UNIX_OFFSET);
 		//fprintf(&USBSerialStream,"Time as a basic string = %s\n\r", ctime(&local_timestamp));
 		
-		_nrf24l01p_print_info();
+		
+		ssd1306_clear();
 
-		time_parse_print(ctime(&local_timestamp));//function to print the time and date on lcd
+		ssd1306_set_page_address(0);
+		ssd1306_set_column_address(0);
+		ssd1306_write_text(line1);
+
+		ssd1306_set_page_address(1);
+		ssd1306_set_column_address(0);
+		ssd1306_write_text(line2);
+
+		ssd1306_set_page_address(2);
+		ssd1306_set_column_address(0);
+		ssd1306_write_text(line3);
+
+
+		//time_parse_print(ctime(&local_timestamp));//function to print the time and date on lcd
 
 		
 		if(nrf_led_flag){
@@ -419,6 +464,8 @@ void thread_4( void *pvParameters ){
 		//set_system_time(system_time);
 			
 		vTaskDelay(200);
+		
+
 	}
 }
 
@@ -512,7 +559,6 @@ int main(void)
 	DigitalPin_SetDir(&powLedR,1);
 	DigitalPin_SetDir(&powLedG,1);
 
-	
 	DigitalPin_SetValue(&powLedR);//off
 	//DigitalPin_ClearValue(&powLedR);//on
 	
