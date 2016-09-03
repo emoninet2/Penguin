@@ -242,6 +242,14 @@ void *command_handler(char **args,int arg_count){
 				relayState2 = 0;
 			}
 		}
+		else if(!strcmp(args[1], "2")) {
+			if(!strcmp(args[2], "0")) {
+				relayState4 = 1;
+			}
+			else if(!strcmp(args[2], "1")) {
+				relayState4 = 0;
+			}
+		}
 	}
 	else if(!strcmp(args[0], "fan") ) {
 		if(!strcmp(args[1], "0")) {
@@ -412,9 +420,10 @@ void thread_4( void *pvParameters ){
 
 	while(1){
 
-		sprintf(line1,"Light 0 : %d",!relayState1);
-		sprintf(line2,"Light 1 : %d",!relayState2);
-		sprintf(line3,"Fan      : %d",!relayState3);
+		sprintf(line1,"Light 0 :   %d",!relayState1);
+		sprintf(line2,"Light 1 :   %d",!relayState2);
+		sprintf(line3,"Light 2 :   %d",!relayState4);
+		sprintf(line4,"Fan      :   %d",!relayState3);
 		//sprintf(line4,"Light 0 : \t %d",relayState1);
 
 
@@ -449,6 +458,10 @@ void thread_4( void *pvParameters ){
 		ssd1306_set_column_address(0);
 		ssd1306_write_text(line3);
 
+
+		ssd1306_set_page_address(3);
+		ssd1306_set_column_address(0);
+		ssd1306_write_text(line4);
 
 		//time_parse_print(ctime(&local_timestamp));//function to print the time and date on lcd
 
