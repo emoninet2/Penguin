@@ -101,7 +101,7 @@ void lcd03_set_cursor_coordinate(uint8_t line, uint8_t col);
 	* the mode for the cursor display to either hide, underline or blink
 	* @param mode the mode of cursor display
 	*/
-void lcd03_cursor_display_mode(LCD03_CURSOR_DISP_t mode);
+void lcd03_cursor_display_mode(LCD03_CURSOR_DISP_t _nrf24l01p_RxTxMode);
 /**
 	* backspace
 	*/
@@ -139,12 +139,12 @@ void lcd03_tab_set_size(uint8_t size);
 	* back light 
 	* @param mode 0-> backlight off, 1-> backlight on
 	*/
-void lcd03_backlight(bool mode);
+void lcd03_backlight(bool _nrf24l01p_RxTxMode);
 /**
 	* startup message mode, enable or disable the startup message
 	* @param mode 0-> disable, 1-> enable
 	*/
-void lcd03_startup_message_mode(bool mode);
+void lcd03_startup_message_mode(bool _nrf24l01p_RxTxMode);
 /**
 	* change address of i2c device
 	*/

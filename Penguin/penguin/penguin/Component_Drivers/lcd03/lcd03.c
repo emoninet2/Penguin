@@ -37,8 +37,8 @@ void lcd03_set_cursor_pos(uint8_t pos){
 void lcd03_set_cursor_coordinate(uint8_t line, uint8_t col){
 	lcd03_send_command(LCD03_CMD_SET_CURSOR_COORDINATE);
 }
-void lcd03_cursor_display_mode(LCD03_CURSOR_DISP_t mode){
-	switch(mode){
+void lcd03_cursor_display_mode(LCD03_CURSOR_DISP_t _nrf24l01p_RxTxMode){
+	switch(_nrf24l01p_RxTxMode){
 		case 	LCD03_CURSOR_HIDE		:	lcd03_send_command(LCD03_CMD_HIDE_CURSOR);break;
 		case	LCD03_CURSOR_UNDERLINE	:	lcd03_send_command(LCD03_CMD_SHOW_UNDERLINE_CURSOR);break;
 		case	LCD03_CURSOR_BLINKING	:	lcd03_send_command(LCD03_CMD_SHOW_BLINKING_CURSOR);break;
@@ -70,12 +70,12 @@ void lcd03_tab_set_size(uint8_t size){
 	lcd03_send_command(LCD03_CMD_TAB_SET);
 	lcd03_send_data(size);
 }
-void lcd03_backlight(bool mode){
-	if(mode) {lcd03_send_command(LCD03_CMD_BACKLIGHT_ON);}
+void lcd03_backlight(bool _nrf24l01p_RxTxMode){
+	if(_nrf24l01p_RxTxMode) {lcd03_send_command(LCD03_CMD_BACKLIGHT_ON);}
 	else {lcd03_send_command(LCD03_CMD_BACKLIGHT_OFF);}
 }
-void lcd03_startup_message_mode(bool mode){
-	if(mode) {lcd03_send_command(LCD03_CMD_ENABLE_STARTUP_MESSAGE);}
+void lcd03_startup_message_mode(bool _nrf24l01p_RxTxMode){
+	if(_nrf24l01p_RxTxMode) {lcd03_send_command(LCD03_CMD_ENABLE_STARTUP_MESSAGE);}
 	else {lcd03_send_command(LCD03_CMD_DISABLE_STARTUP_MESSAGE);}
 }
 void lcd03_change_i2c_addr(LCD03_I2C_ADDRESS_t addr){

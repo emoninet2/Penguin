@@ -45,10 +45,10 @@
  * @param clk2en enable double speed
  * @param mpcen enable multiprocessor communication
  */
-void usart_config(USART_t *usart_unit,PORT_t *port_unit, USART_CMODE_t mode, USART_PMODE_t pmode, USART_CHSIZE_t chsize, uint8_t clk2xen, uint8_t mpcmen){
+void usart_config(USART_t *usart_unit,PORT_t *port_unit, USART_CMODE_t _nrf24l01p_RxTxMode, USART_PMODE_t pmode, USART_CHSIZE_t chsize, uint8_t clk2xen, uint8_t mpcmen){
 	usart_unit->CTRLB = USART_RXEN_bm | USART_TXEN_bm;
 	usart_unit->CTRLB |= (clk2xen<<USART_CLK2X_bp) | (mpcmen<<USART_MPCM_bp);
-	usart_unit->CTRLC = mode |pmode | chsize;
+	usart_unit->CTRLC = _nrf24l01p_RxTxMode |pmode | chsize;
 
 	
 	if( (usart_unit == &USARTC0) || (usart_unit == &USARTD0) || (usart_unit == &USARTE0) || (usart_unit == &USARTF0) ){

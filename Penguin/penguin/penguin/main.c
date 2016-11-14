@@ -323,6 +323,8 @@ void command_parse_execute(char *command){
 	command_handler(remotch_args,arg_index);
 }
 
+
+volatile int g_cnt = 0;
 void thread_3( void *pvParameters ){
 	_nrf24l01p_init();
 
@@ -334,31 +336,31 @@ void thread_3( void *pvParameters ){
 	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P5, 0x4C4C4C4C35);
 	char rxData[35];
 
+	
+	char myjunk [32];
+
+	
 	while(1){
 
 		char config;
 		char fifo;
 
-// 		_nrf24l01p_read_register(_NRF24L01P_REG_CONFIG,&config,1);
-// 		_nrf24l01p_read_register(_NRF24L01P_REG_FIFO_STATUS,&fifo,1);
-// 
-// 		fprintf(&USBSerialStream,"status : %x\r\n", _nrf24l01p_get_status());
-// 		fprintf(&USBSerialStream,"config : %x\r\n", config);
-// 		fprintf(&USBSerialStream,"fifo : %x\r\n", fifo);
-
-// 		uint8_t myjunk[] = "hello how do u do";
-// 		_nrf24l01p_send_to_address_ack(0xAABBCCDD01,myjunk,strlen(myjunk));
-
-		
-		vTaskDelay(500);
-		if((_nrf24l01p_readable(_NRF24L01P_PIPE_P1))){
+		//vTaskDelay(500);
+		if((_nrf24l01p_readableOnPipe(_NRF24L01P_PIPE_P1))){
 			asm("nop");
 			nrf_led_flag = 1;
 			int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P1, (uint8_t*) rxData);
 			rxData[width] = '\0';
 			command_parse_execute(rxData);
 		}
+		//_nrf24l01p_send((uint8_t*) myjunk, myjunk);
 		
+		
+		
+		sprintf(myjunk, "cnt : %x",g_cnt++);
+		_nrf24l01p_send_to_address_ack(0x656d6f6e31, (uint8_t*) myjunk, myjunk);
+		_nrf24l01p_PTX_Handle();
+
 	}
 }
 

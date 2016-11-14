@@ -91,7 +91,7 @@ void SPI_MasterInit(SPI_Master_t *spi,
                     SPI_t *module,
                     PORT_t *port,
                     bool lsbFirst,
-                    SPI_MODE_t mode,
+                    SPI_MODE_t _nrf24l01p_RxTxMode,
                     SPI_INTLVL_t intLevel,
                     bool clk2x,
                     SPI_PRESCALER_t clockDivision)
@@ -105,7 +105,7 @@ void SPI_MasterInit(SPI_Master_t *spi,
 	                      SPI_ENABLE_bm |                  /* Enable SPI module. */
 	                      (lsbFirst ? SPI_DORD_bm  : 0) |  /* Data order. */
 	                      SPI_MASTER_bm |                  /* SPI master. */
-	                      mode;                            /* SPI mode. */
+	                      _nrf24l01p_RxTxMode;                            /* SPI mode. */
 
 	/* Interrupt level. */
 	spi->module->INTCTRL = intLevel;
@@ -136,7 +136,7 @@ void SPI_SlaveInit(SPI_Slave_t *spi,
                    SPI_t *module,
                    PORT_t *port,
                    bool lsbFirst,
-                   SPI_MODE_t mode,
+                   SPI_MODE_t _nrf24l01p_RxTxMode,
                    SPI_INTLVL_t intLevel)
 {
 	/* SPI module. */
@@ -145,7 +145,7 @@ void SPI_SlaveInit(SPI_Slave_t *spi,
 
 	spi->module->CTRL = SPI_ENABLE_bm |                /* Enable SPI module. */
 	                    (lsbFirst ? SPI_DORD_bm : 0) | /* Data order. */
-	                    mode;                          /* SPI mode. */
+	                    _nrf24l01p_RxTxMode;                          /* SPI mode. */
 
 	/* Interrupt level. */
 	spi->module->INTCTRL = intLevel;

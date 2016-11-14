@@ -134,11 +134,11 @@
 				{
 					case 0:
 						AVR32_PM.OSCCTRL0.startup = Startup;
-						AVR32_PM.OSCCTRL0.mode    = Type;
+						AVR32_PM.OSCCTRL0._nrf24l01p_RxTxMode    = Type;
 						break;
 					case 1:
 						AVR32_PM.OSCCTRL1.startup = Startup;
-						AVR32_PM.OSCCTRL1.mode    = Type;
+						AVR32_PM.OSCCTRL1._nrf24l01p_RxTxMode    = Type;
 						break;
 					default:
 						return false;
