@@ -236,8 +236,6 @@ Discarded input sections
  .text          0x00000000        0x0 Component_Drivers/nrf24l01p/nrf24l01p.o
  .data          0x00000000        0x0 Component_Drivers/nrf24l01p/nrf24l01p.o
  .bss           0x00000000        0x0 Component_Drivers/nrf24l01p/nrf24l01p.o
- .text._nrf24l01p_reuse_tx_payload
-                0x00000000       0x14 Component_Drivers/nrf24l01p/nrf24l01p.o
  .text._nrf24l01p_write_ack_payload
                 0x00000000       0x4e Component_Drivers/nrf24l01p/nrf24l01p.o
  .text._nrf24l01p_write_tx_payload_noack
@@ -302,8 +300,6 @@ Discarded input sections
                 0x00000000        0xe Component_Drivers/nrf24l01p/nrf24l01p.o
  .text._nrf24l01p_PRX_Handle
                 0x00000000       0x10 Component_Drivers/nrf24l01p/nrf24l01p.o
- .text._nrf24l01p_resend
-                0x00000000       0x78 Component_Drivers/nrf24l01p/nrf24l01p.o
  .text._nrf24l01p_send_to_address
                 0x00000000       0x1e Component_Drivers/nrf24l01p/nrf24l01p.o
  .text._nrf24l01p_send_until_ack
@@ -2555,7 +2551,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000     0x3f48
+.text           0x00000000     0x3f68
  *(.vectors)
  .vectors       0x00000000      0x1fc C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/XMEGAC_DFP/1.0.29/gcc/dev/atxmega384c3/avrxmega6/crtatxmega384c3.o
                 0x00000000                __vector_default
@@ -2771,418 +2767,421 @@ END GROUP
  .text._nrf24l01p_flush_rx
                 0x000009f0       0x14 Component_Drivers/nrf24l01p/nrf24l01p.o
                 0x000009f0                _nrf24l01p_flush_rx
+ .text._nrf24l01p_reuse_tx_payload
+                0x00000a04       0x14 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000a04                _nrf24l01p_reuse_tx_payload
  .text._nrf24l01p_read_rx_payload_width
-                0x00000a04       0x24 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000a04                _nrf24l01p_read_rx_payload_width
+                0x00000a18       0x24 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000a18                _nrf24l01p_read_rx_payload_width
  .text._nrf24l01p_power_up
-                0x00000a28       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000a28                _nrf24l01p_power_up
+                0x00000a3c       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000a3c                _nrf24l01p_power_up
  .text._nrf24l01p_power_down
-                0x00000a60       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000a60                _nrf24l01p_power_down
+                0x00000a74       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000a74                _nrf24l01p_power_down
  .text._nrf24l01p_rx_mode
-                0x00000a98       0x3e Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000a98                _nrf24l01p_rx_mode
+                0x00000aac       0x3e Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000aac                _nrf24l01p_rx_mode
  .text._nrf24l01p_tx_mode
-                0x00000ad6       0x3e Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000ad6                _nrf24l01p_tx_mode
+                0x00000aea       0x3e Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000aea                _nrf24l01p_tx_mode
  .text._nrf24l01p_enable_auto_ack
-                0x00000b14       0x4e Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000b14                _nrf24l01p_enable_auto_ack
+                0x00000b28       0x4e Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000b28                _nrf24l01p_enable_auto_ack
  .text._nrf24l01p_disable_auto_ack_all_pipes
-                0x00000b62       0x24 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000b62                _nrf24l01p_disable_auto_ack_all_pipes
+                0x00000b76       0x24 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000b76                _nrf24l01p_disable_auto_ack_all_pipes
  .text._nrf24l01p_enable_rx_on_pipe
-                0x00000b86       0x4e Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000b86                _nrf24l01p_enable_rx_on_pipe
+                0x00000b9a       0x4e Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000b9a                _nrf24l01p_enable_rx_on_pipe
  .text._nrf24l01p_set_auto_retransmission_count
-                0x00000bd4       0x42 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000bd4                _nrf24l01p_set_auto_retransmission_count
+                0x00000be8       0x42 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000be8                _nrf24l01p_set_auto_retransmission_count
  .text._nrf24l01p_set_auto_retransmission_delay
-                0x00000c16       0x48 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000c16                _nrf24l01p_set_auto_retransmission_delay
+                0x00000c2a       0x48 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000c2a                _nrf24l01p_set_auto_retransmission_delay
  .text._nrf24l01p_set_DataRate
-                0x00000c5e       0x42 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000c5e                _nrf24l01p_set_DataRate
+                0x00000c72       0x42 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000c72                _nrf24l01p_set_DataRate
  .text._nrf24l01p_set_RX_pipe_address
-                0x00000ca0       0xdc Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000ca0                _nrf24l01p_set_RX_pipe_address
+                0x00000cb4       0xdc Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000cb4                _nrf24l01p_set_RX_pipe_address
  .text._nrf24l01p_set_TX_pipe_address
-                0x00000d7c       0x86 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000d7c                _nrf24l01p_set_TX_pipe_address
+                0x00000d90       0x86 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000d90                _nrf24l01p_set_TX_pipe_address
  .text._nrf24l01p_get_fifo_flag_rx_empty
-                0x00000e02       0x26 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000e02                _nrf24l01p_get_fifo_flag_rx_empty
+                0x00000e16       0x26 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000e16                _nrf24l01p_get_fifo_flag_rx_empty
  .text._nrf24l01p_get_fifo_flag_tx_empty
-                0x00000e28       0x28 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000e28                _nrf24l01p_get_fifo_flag_tx_empty
+                0x00000e3c       0x28 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000e3c                _nrf24l01p_get_fifo_flag_tx_empty
  .text._nrf24l01p_enable_dynamic_payload_pipe
-                0x00000e50       0x4e Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000e50                _nrf24l01p_enable_dynamic_payload_pipe
+                0x00000e64       0x4e Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000e64                _nrf24l01p_enable_dynamic_payload_pipe
  .text._nrf24l01p_disable_dynamic_payload_all_pipe
-                0x00000e9e       0x24 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000e9e                _nrf24l01p_disable_dynamic_payload_all_pipe
+                0x00000eb2       0x24 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000eb2                _nrf24l01p_disable_dynamic_payload_all_pipe
  .text._nrf24l01p_enable_dynamic_payload
-                0x00000ec2       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000ec2                _nrf24l01p_enable_dynamic_payload
+                0x00000ed6       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000ed6                _nrf24l01p_enable_dynamic_payload
  .text._nrf24l01p_enable_payload_with_ack
-                0x00000efa       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000efa                _nrf24l01p_enable_payload_with_ack
+                0x00000f0e       0x38 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000f0e                _nrf24l01p_enable_payload_with_ack
  .text._nrf24l01p_default_config
-                0x00000f32       0x90 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000f32                _nrf24l01p_default_config
+                0x00000f46       0x90 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000f46                _nrf24l01p_default_config
  .text._nrf24l01p_stateMode
-                0x00000fc2       0x8c Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00000fc2                _nrf24l01p_stateMode
+                0x00000fd6       0x8c Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000fd6                _nrf24l01p_stateMode
  .text._nrf24l01p_startup
-                0x0000104e       0x70 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x0000104e                _nrf24l01p_startup
+                0x00001062       0x70 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001062                _nrf24l01p_startup
  .text._nrf24l01p_init
-                0x000010be       0x26 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000010be                _nrf24l01p_init
+                0x000010d2       0x26 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x000010d2                _nrf24l01p_init
  .text._nrf24l01p_reinit_loop
-                0x000010e4       0x16 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000010e4                _nrf24l01p_reinit_loop
+                0x000010f8       0x16 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x000010f8                _nrf24l01p_reinit_loop
  .text._nrf24l01p_get_status
-                0x000010fa       0x2c Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000010fa                _nrf24l01p_get_status
+                0x0000110e       0x2c Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x0000110e                _nrf24l01p_get_status
  .text._nrf24l01p_get_tx_fifo_full_flag
-                0x00001126        0x8 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00001126                _nrf24l01p_get_tx_fifo_full_flag
+                0x0000113a        0x8 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x0000113a                _nrf24l01p_get_tx_fifo_full_flag
  .text._nrf24l01p_get_max_retry_flag
-                0x0000112e       0x14 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x0000112e                _nrf24l01p_get_max_retry_flag
+                0x00001142       0x14 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001142                _nrf24l01p_get_max_retry_flag
  .text._nrf24l01p_clear_max_retry_flag
-                0x00001142       0x2a Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00001142                _nrf24l01p_clear_max_retry_flag
+                0x00001156       0x2a Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001156                _nrf24l01p_clear_max_retry_flag
  .text._nrf24l01p_get_data_sent_flag
-                0x0000116c       0x18 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x0000116c                _nrf24l01p_get_data_sent_flag
+                0x00001180       0x18 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001180                _nrf24l01p_get_data_sent_flag
  .text._nrf24l01p_clear_data_sent_flag
-                0x00001184       0x2a Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00001184                _nrf24l01p_clear_data_sent_flag
+                0x00001198       0x2a Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001198                _nrf24l01p_clear_data_sent_flag
  .text._nrf24l01p_clear_data_ready_flag
-                0x000011ae       0x2a Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000011ae                _nrf24l01p_clear_data_ready_flag
+                0x000011c2       0x2a Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x000011c2                _nrf24l01p_clear_data_ready_flag
  .text._nrf24l01p_readable
-                0x000011d8        0xa Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000011d8                _nrf24l01p_readable
+                0x000011ec        0xa Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x000011ec                _nrf24l01p_readable
  .text._nrf24l01p_writable
-                0x000011e2        0xa Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000011e2                _nrf24l01p_writable
+                0x000011f6        0xa Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x000011f6                _nrf24l01p_writable
  .text._nrf24l01p_PTX_Handle
-                0x000011ec       0x96 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000011ec                _nrf24l01p_PTX_Handle
+                0x00001200       0xa2 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001200                _nrf24l01p_PTX_Handle
  .text._nrf24l01p_readableOnPipe
-                0x00001282       0x34 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00001282                _nrf24l01p_readableOnPipe
+                0x000012a2       0x34 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x000012a2                _nrf24l01p_readableOnPipe
  .text._nrf24l01p_send
-                0x000012b6       0x3c Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000012b6                _nrf24l01p_send
+                0x000012d6       0x3c Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x000012d6                _nrf24l01p_send
  .text._nrf24l01p_send_to_address_ack
-                0x000012f2       0x6e Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x000012f2                _nrf24l01p_send_to_address_ack
+                0x00001312       0x6e Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001312                _nrf24l01p_send_to_address_ack
  .text._nrf24l01p_read_dyn_pld
-                0x00001360       0x62 Component_Drivers/nrf24l01p/nrf24l01p.o
-                0x00001360                _nrf24l01p_read_dyn_pld
+                0x00001380       0x62 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00001380                _nrf24l01p_read_dyn_pld
  .text.pxPortInitialiseStack
-                0x000013c2       0xdc FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x000013c2                pxPortInitialiseStack
+                0x000013e2       0xdc FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000013e2                pxPortInitialiseStack
  .text.xPortStartScheduler
-                0x0000149e       0x84 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x0000149e                xPortStartScheduler
+                0x000014be       0x84 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000014be                xPortStartScheduler
  .text.vPortYield
-                0x00001522       0xb2 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x00001522                vPortYield
+                0x00001542       0xb2 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x00001542                vPortYield
  .text.vPortYieldFromTick
-                0x000015d4       0xb8 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x000015d4                vPortYieldFromTick
+                0x000015f4       0xb8 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000015f4                vPortYieldFromTick
  .text.__vector_14
-                0x0000168c        0x6 FreeRTOS/include/portable/GCC/ATMega323/port.o
-                0x0000168c                __vector_14
+                0x000016ac        0x6 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000016ac                __vector_14
  .text.pvPortMalloc
-                0x00001692       0x6a FreeRTOS/include/portable/MemMang/heap_1.o
-                0x00001692                pvPortMalloc
+                0x000016b2       0x6a FreeRTOS/include/portable/MemMang/heap_1.o
+                0x000016b2                pvPortMalloc
  .text.vPortFree
-                0x000016fc        0x2 FreeRTOS/include/portable/MemMang/heap_1.o
-                0x000016fc                vPortFree
+                0x0000171c        0x2 FreeRTOS/include/portable/MemMang/heap_1.o
+                0x0000171c                vPortFree
  .text.vListInitialise
-                0x000016fe       0x1c FreeRTOS/list.o
-                0x000016fe                vListInitialise
+                0x0000171e       0x1c FreeRTOS/list.o
+                0x0000171e                vListInitialise
  .text.vListInitialiseItem
-                0x0000171a        0x8 FreeRTOS/list.o
-                0x0000171a                vListInitialiseItem
+                0x0000173a        0x8 FreeRTOS/list.o
+                0x0000173a                vListInitialiseItem
  .text.vListInsertEnd
-                0x00001722       0x42 FreeRTOS/list.o
-                0x00001722                vListInsertEnd
+                0x00001742       0x42 FreeRTOS/list.o
+                0x00001742                vListInsertEnd
  .text.vListInsert
-                0x00001764       0x62 FreeRTOS/list.o
-                0x00001764                vListInsert
+                0x00001784       0x62 FreeRTOS/list.o
+                0x00001784                vListInsert
  .text.uxListRemove
-                0x000017c6       0x4c FreeRTOS/list.o
-                0x000017c6                uxListRemove
+                0x000017e6       0x4c FreeRTOS/list.o
+                0x000017e6                uxListRemove
  .text.prvIdleTask
-                0x00001812        0x2 FreeRTOS/tasks.o
+                0x00001832        0x2 FreeRTOS/tasks.o
  .text.prvAddCurrentTaskToDelayedList
-                0x00001814       0x6e FreeRTOS/tasks.o
+                0x00001834       0x6e FreeRTOS/tasks.o
  .text.xTaskGenericCreate
-                0x00001882      0x210 FreeRTOS/tasks.o
-                0x00001882                xTaskGenericCreate
+                0x000018a2      0x210 FreeRTOS/tasks.o
+                0x000018a2                xTaskGenericCreate
  .text.vTaskStartScheduler
-                0x00001a92       0x56 FreeRTOS/tasks.o
-                0x00001a92                vTaskStartScheduler
+                0x00001ab2       0x56 FreeRTOS/tasks.o
+                0x00001ab2                vTaskStartScheduler
  .text.vTaskSuspendAll
-                0x00001ae8        0xc FreeRTOS/tasks.o
-                0x00001ae8                vTaskSuspendAll
+                0x00001b08        0xc FreeRTOS/tasks.o
+                0x00001b08                vTaskSuspendAll
  .text.xTaskIncrementTick
-                0x00001af4      0x1ac FreeRTOS/tasks.o
-                0x00001af4                xTaskIncrementTick
+                0x00001b14      0x1ac FreeRTOS/tasks.o
+                0x00001b14                xTaskIncrementTick
  .text.xTaskResumeAll
-                0x00001ca0      0x104 FreeRTOS/tasks.o
-                0x00001ca0                xTaskResumeAll
+                0x00001cc0      0x104 FreeRTOS/tasks.o
+                0x00001cc0                xTaskResumeAll
  .text.vTaskDelay
-                0x00001da4       0x40 FreeRTOS/tasks.o
-                0x00001da4                vTaskDelay
+                0x00001dc4       0x40 FreeRTOS/tasks.o
+                0x00001dc4                vTaskDelay
  .text.vTaskSwitchContext
-                0x00001de4       0xda FreeRTOS/tasks.o
-                0x00001de4                vTaskSwitchContext
+                0x00001e04       0xda FreeRTOS/tasks.o
+                0x00001e04                vTaskSwitchContext
  .text.USB_Event_Stub
-                0x00001ebe        0x2 LUFA/Drivers/USB/Core/Events.o
-                0x00001ebe                USB_Event_Stub
-                0x00001ebe                EVENT_USB_Device_Suspend
-                0x00001ebe                EVENT_USB_Device_StartOfFrame
-                0x00001ebe                EVENT_USB_Device_Reset
-                0x00001ebe                EVENT_USB_Device_WakeUp
+                0x00001ede        0x2 LUFA/Drivers/USB/Core/Events.o
+                0x00001ede                USB_Event_Stub
+                0x00001ede                EVENT_USB_Device_Suspend
+                0x00001ede                EVENT_USB_Device_StartOfFrame
+                0x00001ede                EVENT_USB_Device_Reset
+                0x00001ede                EVENT_USB_Device_WakeUp
  .text.Endpoint_SelectEndpoint
-                0x00001ec0       0x80 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001ec0                Endpoint_SelectEndpoint
+                0x00001ee0       0x80 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001ee0                Endpoint_SelectEndpoint
  .text.Endpoint_ConfigureEndpoint_PRV
-                0x00001f40       0x8c LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001f40                Endpoint_ConfigureEndpoint_PRV
+                0x00001f60       0x8c LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001f60                Endpoint_ConfigureEndpoint_PRV
  .text.Endpoint_ClearEndpoints
-                0x00001fcc       0x40 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
-                0x00001fcc                Endpoint_ClearEndpoints
+                0x00001fec       0x40 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x00001fec                Endpoint_ClearEndpoints
  .text.__vector_125
-                0x0000200c       0xe8 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
-                0x0000200c                __vector_125
+                0x0000202c       0xe8 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+                0x0000202c                __vector_125
  .text.thread_6
-                0x000020f4      0x180 main.o
-                0x000020f4                thread_6
+                0x00002114      0x180 main.o
+                0x00002114                thread_6
  .text.usart_spi_transmit_receive
-                0x00002274       0x18 main.o
-                0x00002274                usart_spi_transmit_receive
+                0x00002294       0x18 main.o
+                0x00002294                usart_spi_transmit_receive
  .text.ssd1306_write_command
-                0x0000228c       0x2c main.o
+                0x000022ac       0x2c main.o
  .text.ssd1306_write_data
-                0x000022b8       0x44 main.o
-                0x000022b8                ssd1306_write_data
+                0x000022d8       0x44 main.o
+                0x000022d8                ssd1306_write_data
  .text.ssd1306_set_page_address
-                0x000022fc        0xa main.o
-                0x000022fc                ssd1306_set_page_address
+                0x0000231c        0xa main.o
+                0x0000231c                ssd1306_set_page_address
  .text.ssd1306_set_column_address
-                0x00002306       0x20 main.o
-                0x00002306                ssd1306_set_column_address
+                0x00002326       0x20 main.o
+                0x00002326                ssd1306_set_column_address
  .text.ssd1306_clear
-                0x00002326       0x30 main.o
+                0x00002346       0x30 main.o
  .text.usart_init_spi
-                0x00002356       0x86 main.o
-                0x00002356                usart_init_spi
+                0x00002376       0x86 main.o
+                0x00002376                usart_init_spi
  .text.ssd1306_init
-                0x000023dc      0x10c main.o
-                0x000023dc                ssd1306_init
+                0x000023fc      0x10c main.o
+                0x000023fc                ssd1306_init
  .text.ssd1306_write_text
-                0x000024e8       0x68 main.o
-                0x000024e8                ssd1306_write_text
+                0x00002508       0x68 main.o
+                0x00002508                ssd1306_write_text
  .text.gfx_mono_framebuffer_put_byte
-                0x00002550       0x1c main.o
-                0x00002550                gfx_mono_framebuffer_put_byte
+                0x00002570       0x1c main.o
+                0x00002570                gfx_mono_framebuffer_put_byte
  .text.gfx_mono_framebuffer_get_byte
-                0x0000256c       0x1c main.o
-                0x0000256c                gfx_mono_framebuffer_get_byte
+                0x0000258c       0x1c main.o
+                0x0000258c                gfx_mono_framebuffer_get_byte
  .text.gfx_mono_ssd1306_put_byte
-                0x00002588       0x3c main.o
-                0x00002588                gfx_mono_ssd1306_put_byte
+                0x000025a8       0x3c main.o
+                0x000025a8                gfx_mono_ssd1306_put_byte
  .text.ds1302_arch_initialize
-                0x000025c4       0x16 main.o
-                0x000025c4                ds1302_arch_initialize
+                0x000025e4       0x16 main.o
+                0x000025e4                ds1302_arch_initialize
  .text.ds1302_initialize
-                0x000025da       0x2e main.o
-                0x000025da                ds1302_initialize
+                0x000025fa       0x2e main.o
+                0x000025fa                ds1302_initialize
  .text.ds1302_writeByte
-                0x00002608       0x64 main.o
-                0x00002608                ds1302_writeByte
+                0x00002628       0x64 main.o
+                0x00002628                ds1302_writeByte
  .text.ds1302_readByte
-                0x0000266c       0x62 main.o
-                0x0000266c                ds1302_readByte
+                0x0000268c       0x62 main.o
+                0x0000268c                ds1302_readByte
  .text.ds1302_writeReg
-                0x000026ce       0x4e main.o
-                0x000026ce                ds1302_writeReg
+                0x000026ee       0x4e main.o
+                0x000026ee                ds1302_writeReg
  .text.ds1302_setTimestamp
-                0x0000271c      0x148 main.o
-                0x0000271c                ds1302_setTimestamp
+                0x0000273c      0x148 main.o
+                0x0000273c                ds1302_setTimestamp
  .text.ds1302_getTimestamp
-                0x00002864      0x11a main.o
-                0x00002864                ds1302_getTimestamp
+                0x00002884      0x11a main.o
+                0x00002884                ds1302_getTimestamp
  .text.thread_4
-                0x0000297e      0x19c main.o
-                0x0000297e                thread_4
+                0x0000299e      0x19c main.o
+                0x0000299e                thread_4
  .text.command_handler
-                0x00002b1a      0x1de main.o
-                0x00002b1a                command_handler
+                0x00002b3a      0x1de main.o
+                0x00002b3a                command_handler
  .text.command_parse_execute
-                0x00002cf8       0x7a main.o
-                0x00002cf8                command_parse_execute
+                0x00002d18       0x7a main.o
+                0x00002d18                command_parse_execute
  .text.thread_3
-                0x00002d72      0x11a main.o
-                0x00002d72                thread_3
- .text.main     0x00002e8c      0x14e main.o
-                0x00002e8c                main
+                0x00002d92      0x11a main.o
+                0x00002d92                thread_3
+ .text.main     0x00002eac      0x14e main.o
+                0x00002eac                main
  .text.EVENT_USB_Device_Connect
-                0x00002fda       0x1a main.o
-                0x00002fda                EVENT_USB_Device_Connect
+                0x00002ffa       0x1a main.o
+                0x00002ffa                EVENT_USB_Device_Connect
  .text.EVENT_USB_Device_Disconnect
-                0x00002ff4       0x18 main.o
-                0x00002ff4                EVENT_USB_Device_Disconnect
+                0x00003014       0x18 main.o
+                0x00003014                EVENT_USB_Device_Disconnect
  .text.DigitalPin_Config
-                0x0000300c       0x38 XMEGA_API/DIGITALPIN.o
-                0x0000300c                DigitalPin_Config
+                0x0000302c       0x38 XMEGA_API/DIGITALPIN.o
+                0x0000302c                DigitalPin_Config
  .text.DigitalPin_SetDir
-                0x00003044       0x44 XMEGA_API/DIGITALPIN.o
-                0x00003044                DigitalPin_SetDir
+                0x00003064       0x44 XMEGA_API/DIGITALPIN.o
+                0x00003064                DigitalPin_SetDir
  .text.DigitalPin_SetValue
-                0x00003088       0x20 XMEGA_API/DIGITALPIN.o
-                0x00003088                DigitalPin_SetValue
- .text.DigitalPin_ClearValue
                 0x000030a8       0x20 XMEGA_API/DIGITALPIN.o
-                0x000030a8                DigitalPin_ClearValue
+                0x000030a8                DigitalPin_SetValue
+ .text.DigitalPin_ClearValue
+                0x000030c8       0x20 XMEGA_API/DIGITALPIN.o
+                0x000030c8                DigitalPin_ClearValue
  .text.DigitalPin_GetValue
-                0x000030c8       0x22 XMEGA_API/DIGITALPIN.o
-                0x000030c8                DigitalPin_GetValue
+                0x000030e8       0x22 XMEGA_API/DIGITALPIN.o
+                0x000030e8                DigitalPin_GetValue
  .text.__vector_25
-                0x000030ea       0x14 XMEGA_API/USART.o
-                0x000030ea                __vector_25
+                0x0000310a       0x14 XMEGA_API/USART.o
+                0x0000310a                __vector_25
  .text.__vector_27
-                0x000030fe       0x14 XMEGA_API/USART.o
-                0x000030fe                __vector_27
+                0x0000311e       0x14 XMEGA_API/USART.o
+                0x0000311e                __vector_27
  .text.__vector_26
-                0x00003112       0x14 XMEGA_API/USART.o
-                0x00003112                __vector_26
+                0x00003132       0x14 XMEGA_API/USART.o
+                0x00003132                __vector_26
  .text.__vector_28
-                0x00003126       0x14 XMEGA_API/USART.o
-                0x00003126                __vector_28
+                0x00003146       0x14 XMEGA_API/USART.o
+                0x00003146                __vector_28
  .text.__vector_30
-                0x0000313a       0x14 XMEGA_API/USART.o
-                0x0000313a                __vector_30
+                0x0000315a       0x14 XMEGA_API/USART.o
+                0x0000315a                __vector_30
  .text.__vector_29
-                0x0000314e       0x14 XMEGA_API/USART.o
-                0x0000314e                __vector_29
+                0x0000316e       0x14 XMEGA_API/USART.o
+                0x0000316e                __vector_29
  .text.__vector_88
-                0x00003162       0x14 XMEGA_API/USART.o
-                0x00003162                __vector_88
+                0x00003182       0x14 XMEGA_API/USART.o
+                0x00003182                __vector_88
  .text.__vector_90
-                0x00003176       0x14 XMEGA_API/USART.o
-                0x00003176                __vector_90
+                0x00003196       0x14 XMEGA_API/USART.o
+                0x00003196                __vector_90
  .text.__vector_89
-                0x0000318a       0x14 XMEGA_API/USART.o
-                0x0000318a                __vector_89
+                0x000031aa       0x14 XMEGA_API/USART.o
+                0x000031aa                __vector_89
  .text.__vector_58
-                0x0000319e       0x14 XMEGA_API/USART.o
-                0x0000319e                __vector_58
+                0x000031be       0x14 XMEGA_API/USART.o
+                0x000031be                __vector_58
  .text.__vector_60
-                0x000031b2       0x14 XMEGA_API/USART.o
-                0x000031b2                __vector_60
+                0x000031d2       0x14 XMEGA_API/USART.o
+                0x000031d2                __vector_60
  .text.__vector_59
-                0x000031c6       0x14 XMEGA_API/USART.o
-                0x000031c6                __vector_59
+                0x000031e6       0x14 XMEGA_API/USART.o
+                0x000031e6                __vector_59
  .text.CCPWrite
-                0x000031da       0x2a XMEGA_DRIVERS/clksys_driver.o
-                0x000031da                CCPWrite
+                0x000031fa       0x2a XMEGA_DRIVERS/clksys_driver.o
+                0x000031fa                CCPWrite
  .text.CLKSYS_Disable
-                0x00003204       0x14 XMEGA_DRIVERS/clksys_driver.o
-                0x00003204                CLKSYS_Disable
+                0x00003224       0x14 XMEGA_DRIVERS/clksys_driver.o
+                0x00003224                CLKSYS_Disable
  .text.CLKSYS_Main_ClockSource_Select
-                0x00003218       0x2a XMEGA_DRIVERS/clksys_driver.o
-                0x00003218                CLKSYS_Main_ClockSource_Select
+                0x00003238       0x2a XMEGA_DRIVERS/clksys_driver.o
+                0x00003238                CLKSYS_Main_ClockSource_Select
  .text.TC0_ConfigClockSource
-                0x00003242        0xc XMEGA_DRIVERS/TC_driver.o
-                0x00003242                TC0_ConfigClockSource
+                0x00003262        0xc XMEGA_DRIVERS/TC_driver.o
+                0x00003262                TC0_ConfigClockSource
  .text.TC0_SetOverflowIntLevel
-                0x0000324e        0xc XMEGA_DRIVERS/TC_driver.o
-                0x0000324e                TC0_SetOverflowIntLevel
+                0x0000326e        0xc XMEGA_DRIVERS/TC_driver.o
+                0x0000326e                TC0_SetOverflowIntLevel
  .text.avr-libc
-                0x0000325a      0x73e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libprintf_flt.a(vfprintf_flt.o)
-                0x0000325a                vfprintf
+                0x0000327a      0x73e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libprintf_flt.a(vfprintf_flt.o)
+                0x0000327a                vfprintf
  .text.libgcc.div
-                0x00003998       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_divmodhi4.o)
-                0x00003998                _div
-                0x00003998                __divmodhi4
+                0x000039b8       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_divmodhi4.o)
+                0x000039b8                _div
+                0x000039b8                __divmodhi4
  .text.libgcc.div
-                0x000039c0       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodsi4.o)
-                0x000039c0                __udivmodsi4
+                0x000039e0       0x44 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodsi4.o)
+                0x000039e0                __udivmodsi4
  .text.libgcc.builtins
-                0x00003a04       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_ashrdi3.o)
-                0x00003a04                __ashrdi3
-                0x00003a08                __lshrdi3
+                0x00003a24       0x3c c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_ashrdi3.o)
+                0x00003a24                __ashrdi3
+                0x00003a28                __lshrdi3
  .text.libgcc.div
-                0x00003a40       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodhi4.o)
-                0x00003a40                __udivmodhi4
+                0x00003a60       0x28 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_udivmodhi4.o)
+                0x00003a60                __udivmodhi4
  .text.libgcc.mul
-                0x00003a68       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_muluhisi3.o)
-                0x00003a68                __muluhisi3
+                0x00003a88       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_muluhisi3.o)
+                0x00003a88                __muluhisi3
  .text.libgcc.mul
-                0x00003a7e       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_umulhisi3.o)
-                0x00003a7e                __umulhisi3
+                0x00003a9e       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_umulhisi3.o)
+                0x00003a9e                __umulhisi3
  .text.avr-libc
-                0x00003a9c       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(atol.o)
-                0x00003a9c                atol
+                0x00003abc       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(atol.o)
+                0x00003abc                atol
  .text.avr-libc
-                0x00003aea      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(ftoa_engine.o)
-                0x00003aea                __ftoa_engine
+                0x00003b0a      0x1b0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(ftoa_engine.o)
+                0x00003b0a                __ftoa_engine
  .text.avr-libc
-                0x00003c9a       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strnlen_P.o)
-                0x00003c9a                strnlen_P
+                0x00003cba       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strnlen_P.o)
+                0x00003cba                strnlen_P
  .text.avr-libc
-                0x00003cb0        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strtok.o)
-                0x00003cb0                strtok
+                0x00003cd0        0x8 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strtok.o)
+                0x00003cd0                strtok
  .text.avr-libc
-                0x00003cb8       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strcmp.o)
-                0x00003cb8                strcmp
+                0x00003cd8       0x12 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strcmp.o)
+                0x00003cd8                strcmp
  .text.avr-libc
-                0x00003cca       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strnlen.o)
-                0x00003cca                strnlen
+                0x00003cea       0x16 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strnlen.o)
+                0x00003cea                strnlen
  .text.avr-libc
-                0x00003ce0       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strtok_r.o)
-                0x00003ce0                strtok_r
+                0x00003d00       0x4e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(strtok_r.o)
+                0x00003d00                strtok_r
  .text.avr-libc
-                0x00003d2e       0x2a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(mulsi10.o)
-                0x00003d2e                __mulsi_const_10
+                0x00003d4e       0x2a c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(mulsi10.o)
+                0x00003d4e                __mulsi_const_10
  .text.avr-libc
-                0x00003d58       0x70 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(fputc.o)
-                0x00003d58                fputc
+                0x00003d78       0x70 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(fputc.o)
+                0x00003d78                fputc
  .text.avr-libc
-                0x00003dc8       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(sprintf.o)
-                0x00003dc8                sprintf
+                0x00003de8       0x54 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(sprintf.o)
+                0x00003de8                sprintf
  .text.avr-libc
-                0x00003e1c       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(ultoa_invert.o)
-                0x00003e1c                __ultoa_invert
+                0x00003e3c       0xbc c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(ultoa_invert.o)
+                0x00003e3c                __ultoa_invert
  .text.libgcc.mul
-                0x00003ed8       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_mulsi3.o)
-                0x00003ed8                __mulsi3
+                0x00003ef8       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_mulsi3.o)
+                0x00003ef8                __mulsi3
  .text.libgcc.div
-                0x00003ef8       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_divmodsi4.o)
-                0x00003ef8                __divmodsi4
+                0x00003f18       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_divmodsi4.o)
+                0x00003f18                __divmodsi4
  .text.libgcc.div
-                0x00003f26       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_negsi2.o)
-                0x00003f26                __negsi2
+                0x00003f46       0x10 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_negsi2.o)
+                0x00003f46                __negsi2
  .text.libgcc.mul
-                0x00003f36        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_usmulhisi3.o)
-                0x00003f36                __usmulhisi3
-                0x00003f3a                __usmulhisi3_tail
-                0x00003f44                . = ALIGN (0x2)
+                0x00003f56        0xe c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_usmulhisi3.o)
+                0x00003f56                __usmulhisi3
+                0x00003f5a                __usmulhisi3_tail
+                0x00003f64                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00003f44        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
-                0x00003f44                _exit
-                0x00003f44                exit
+ .fini9         0x00003f64        0x0 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
+                0x00003f64                _exit
+                0x00003f64                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -3201,11 +3200,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00003f44        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
+ .fini0         0x00003f64        0x4 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/avrxmega6\libgcc.a(_exit.o)
  *(.fini0)
-                0x00003f48                _etext = .
+                0x00003f68                _etext = .
 
-.data           0x00802000      0x372 load address 0x00003f48
+.data           0x00802000      0x372 load address 0x00003f68
                 0x00802000                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -3661,8 +3660,8 @@ END GROUP
  COMMON         0x008098d0        0x2 c:/program files (x86)/atmel/studio/7.0/toolchain/avr8/avr8-gnu-toolchain/bin/../lib/gcc/avr/4.9.2/../../../../avr/lib/avrxmega6\libc.a(dst_pointer.o)
                 0x008098d0                __dst_ptr
                 0x008098d2                PROVIDE (__bss_end, .)
-                0x00003f48                __data_load_start = LOADADDR (.data)
-                0x000042ba                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00003f68                __data_load_start = LOADADDR (.data)
+                0x000042da                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x008098d2        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
@@ -3764,170 +3763,170 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0xa18
+.debug_aranges  0x00000000      0xa10
  *(.debug_aranges)
  .debug_aranges
-                0x00000000      0x2c8 Component_Drivers/nrf24l01p/nrf24l01p.o
+                0x00000000      0x2c0 Component_Drivers/nrf24l01p/nrf24l01p.o
  .debug_aranges
-                0x000002c8       0x18 Component_Drivers/ssd1306/font.o
+                0x000002c0       0x18 Component_Drivers/ssd1306/font.o
  .debug_aranges
-                0x000002e0       0x48 FreeRTOS/include/portable/GCC/ATMega323/port.o
+                0x000002d8       0x48 FreeRTOS/include/portable/GCC/ATMega323/port.o
  .debug_aranges
-                0x00000328       0x38 FreeRTOS/include/portable/MemMang/heap_1.o
+                0x00000320       0x38 FreeRTOS/include/portable/MemMang/heap_1.o
  .debug_aranges
-                0x00000360       0x40 FreeRTOS/list.o
+                0x00000358       0x40 FreeRTOS/list.o
  .debug_aranges
-                0x000003a0       0xc8 FreeRTOS/tasks.o
+                0x00000398       0xc8 FreeRTOS/tasks.o
  .debug_aranges
-                0x00000468       0x20 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+                0x00000460       0x20 LUFA/Drivers/USB/Core/DeviceStandardReq.o
  .debug_aranges
-                0x00000488       0x20 LUFA/Drivers/USB/Core/Events.o
+                0x00000480       0x20 LUFA/Drivers/USB/Core/Events.o
  .debug_aranges
-                0x000004a8       0x20 LUFA/Drivers/USB/Core/USBTask.o
+                0x000004a0       0x20 LUFA/Drivers/USB/Core/USBTask.o
  .debug_aranges
-                0x000004c8       0x90 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+                0x000004c0       0x90 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
  .debug_aranges
-                0x00000558       0x30 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+                0x00000550       0x30 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
  .debug_aranges
-                0x00000588      0x1f8 main.o
+                0x00000580      0x1f8 main.o
  .debug_aranges
-                0x00000780       0x48 XMEGA_API/DIGITALPIN.o
+                0x00000778       0x48 XMEGA_API/DIGITALPIN.o
  .debug_aranges
-                0x000007c8      0x120 XMEGA_API/USART.o
+                0x000007c0      0x120 XMEGA_API/USART.o
  .debug_aranges
-                0x000008e8       0x68 XMEGA_DRIVERS/clksys_driver.o
+                0x000008e0       0x68 XMEGA_DRIVERS/clksys_driver.o
  .debug_aranges
-                0x00000950       0xc8 XMEGA_DRIVERS/TC_driver.o
+                0x00000948       0xc8 XMEGA_DRIVERS/TC_driver.o
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0xfe1e
+.debug_info     0x00000000     0xfd18
  *(.debug_info .gnu.linkonce.wi.*)
- .debug_info    0x00000000     0x2ed8 Component_Drivers/nrf24l01p/nrf24l01p.o
- .debug_info    0x00002ed8      0x7ec Component_Drivers/ssd1306/font.o
- .debug_info    0x000036c4      0xa36 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_info    0x000040fa      0x1ad FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_info    0x000042a7      0x2cd FreeRTOS/list.o
- .debug_info    0x00004574     0x11b3 FreeRTOS/tasks.o
- .debug_info    0x00005727     0x11b5 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_info    0x000068dc       0x7f LUFA/Drivers/USB/Core/Events.o
- .debug_info    0x0000695b      0x433 LUFA/Drivers/USB/Core/USBTask.o
- .debug_info    0x00006d8e      0xd1b LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_info    0x00007aa9      0xa72 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_info    0x0000851b     0x5156 main.o
- .debug_info    0x0000d671      0x4c8 XMEGA_API/DIGITALPIN.o
- .debug_info    0x0000db39      0x9bf XMEGA_API/USART.o
- .debug_info    0x0000e4f8      0x645 XMEGA_DRIVERS/clksys_driver.o
- .debug_info    0x0000eb3d     0x12e1 XMEGA_DRIVERS/TC_driver.o
+ .debug_info    0x00000000     0x2dd2 Component_Drivers/nrf24l01p/nrf24l01p.o
+ .debug_info    0x00002dd2      0x7ec Component_Drivers/ssd1306/font.o
+ .debug_info    0x000035be      0xa36 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_info    0x00003ff4      0x1ad FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_info    0x000041a1      0x2cd FreeRTOS/list.o
+ .debug_info    0x0000446e     0x11b3 FreeRTOS/tasks.o
+ .debug_info    0x00005621     0x11b5 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_info    0x000067d6       0x7f LUFA/Drivers/USB/Core/Events.o
+ .debug_info    0x00006855      0x433 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_info    0x00006c88      0xd1b LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_info    0x000079a3      0xa72 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_info    0x00008415     0x5156 main.o
+ .debug_info    0x0000d56b      0x4c8 XMEGA_API/DIGITALPIN.o
+ .debug_info    0x0000da33      0x9bf XMEGA_API/USART.o
+ .debug_info    0x0000e3f2      0x645 XMEGA_DRIVERS/clksys_driver.o
+ .debug_info    0x0000ea37     0x12e1 XMEGA_DRIVERS/TC_driver.o
 
-.debug_abbrev   0x00000000     0x2496
+.debug_abbrev   0x00000000     0x24a5
  *(.debug_abbrev)
- .debug_abbrev  0x00000000      0x438 Component_Drivers/nrf24l01p/nrf24l01p.o
- .debug_abbrev  0x00000438       0x70 Component_Drivers/ssd1306/font.o
- .debug_abbrev  0x000004a8      0x223 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_abbrev  0x000006cb      0x12e FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_abbrev  0x000007f9       0xf8 FreeRTOS/list.o
- .debug_abbrev  0x000008f1      0x321 FreeRTOS/tasks.o
- .debug_abbrev  0x00000c12      0x377 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_abbrev  0x00000f89       0x44 LUFA/Drivers/USB/Core/Events.o
- .debug_abbrev  0x00000fcd      0x21a LUFA/Drivers/USB/Core/USBTask.o
- .debug_abbrev  0x000011e7      0x2f2 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_abbrev  0x000014d9      0x266 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_abbrev  0x0000173f      0x75d main.o
- .debug_abbrev  0x00001e9c      0x15f XMEGA_API/DIGITALPIN.o
- .debug_abbrev  0x00001ffb      0x14e XMEGA_API/USART.o
- .debug_abbrev  0x00002149      0x1c8 XMEGA_DRIVERS/clksys_driver.o
- .debug_abbrev  0x00002311      0x185 XMEGA_DRIVERS/TC_driver.o
+ .debug_abbrev  0x00000000      0x447 Component_Drivers/nrf24l01p/nrf24l01p.o
+ .debug_abbrev  0x00000447       0x70 Component_Drivers/ssd1306/font.o
+ .debug_abbrev  0x000004b7      0x223 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_abbrev  0x000006da      0x12e FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_abbrev  0x00000808       0xf8 FreeRTOS/list.o
+ .debug_abbrev  0x00000900      0x321 FreeRTOS/tasks.o
+ .debug_abbrev  0x00000c21      0x377 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_abbrev  0x00000f98       0x44 LUFA/Drivers/USB/Core/Events.o
+ .debug_abbrev  0x00000fdc      0x21a LUFA/Drivers/USB/Core/USBTask.o
+ .debug_abbrev  0x000011f6      0x2f2 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_abbrev  0x000014e8      0x266 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_abbrev  0x0000174e      0x75d main.o
+ .debug_abbrev  0x00001eab      0x15f XMEGA_API/DIGITALPIN.o
+ .debug_abbrev  0x0000200a      0x14e XMEGA_API/USART.o
+ .debug_abbrev  0x00002158      0x1c8 XMEGA_DRIVERS/clksys_driver.o
+ .debug_abbrev  0x00002320      0x185 XMEGA_DRIVERS/TC_driver.o
 
-.debug_line     0x00000000     0x5b55
+.debug_line     0x00000000     0x5acb
  *(.debug_line .debug_line.* .debug_line_end)
- .debug_line    0x00000000     0x13c0 Component_Drivers/nrf24l01p/nrf24l01p.o
- .debug_line    0x000013c0       0xa3 Component_Drivers/ssd1306/font.o
- .debug_line    0x00001463      0x33c FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_line    0x0000179f      0x20d FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_line    0x000019ac      0x211 FreeRTOS/list.o
- .debug_line    0x00001bbd      0x89d FreeRTOS/tasks.o
- .debug_line    0x0000245a      0x491 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_line    0x000028eb       0x4f LUFA/Drivers/USB/Core/Events.o
- .debug_line    0x0000293a      0x1d7 LUFA/Drivers/USB/Core/USBTask.o
- .debug_line    0x00002b11      0x6a7 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_line    0x000031b8      0x396 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_line    0x0000354e     0x1979 main.o
- .debug_line    0x00004ec7      0x1f7 XMEGA_API/DIGITALPIN.o
- .debug_line    0x000050be      0x516 XMEGA_API/USART.o
- .debug_line    0x000055d4      0x24f XMEGA_DRIVERS/clksys_driver.o
- .debug_line    0x00005823      0x332 XMEGA_DRIVERS/TC_driver.o
+ .debug_line    0x00000000     0x1335 Component_Drivers/nrf24l01p/nrf24l01p.o
+ .debug_line    0x00001335       0xa3 Component_Drivers/ssd1306/font.o
+ .debug_line    0x000013d8      0x33c FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_line    0x00001714      0x20d FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_line    0x00001921      0x211 FreeRTOS/list.o
+ .debug_line    0x00001b32      0x89d FreeRTOS/tasks.o
+ .debug_line    0x000023cf      0x491 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_line    0x00002860       0x4f LUFA/Drivers/USB/Core/Events.o
+ .debug_line    0x000028af      0x1d7 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_line    0x00002a86      0x6a7 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_line    0x0000312d      0x396 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_line    0x000034c3     0x197a main.o
+ .debug_line    0x00004e3d      0x1f7 XMEGA_API/DIGITALPIN.o
+ .debug_line    0x00005034      0x516 XMEGA_API/USART.o
+ .debug_line    0x0000554a      0x24f XMEGA_DRIVERS/clksys_driver.o
+ .debug_line    0x00005799      0x332 XMEGA_DRIVERS/TC_driver.o
 
-.debug_frame    0x00000000     0x1e5c
+.debug_frame    0x00000000     0x1e38
  *(.debug_frame)
- .debug_frame   0x00000000      0xb3c Component_Drivers/nrf24l01p/nrf24l01p.o
- .debug_frame   0x00000b3c       0x74 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_frame   0x00000bb0       0x60 FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_frame   0x00000c10       0x88 FreeRTOS/list.o
- .debug_frame   0x00000c98      0x2a8 FreeRTOS/tasks.o
- .debug_frame   0x00000f40       0x48 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_frame   0x00000f88       0x24 LUFA/Drivers/USB/Core/Events.o
- .debug_frame   0x00000fac       0x2c LUFA/Drivers/USB/Core/USBTask.o
- .debug_frame   0x00000fd8      0x164 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_frame   0x0000113c       0x8c LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_frame   0x000011c8      0x6ec main.o
- .debug_frame   0x000018b4       0x7c XMEGA_API/DIGITALPIN.o
- .debug_frame   0x00001930      0x2dc XMEGA_API/USART.o
- .debug_frame   0x00001c0c       0xdc XMEGA_DRIVERS/clksys_driver.o
- .debug_frame   0x00001ce8      0x174 XMEGA_DRIVERS/TC_driver.o
+ .debug_frame   0x00000000      0xb18 Component_Drivers/nrf24l01p/nrf24l01p.o
+ .debug_frame   0x00000b18       0x74 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_frame   0x00000b8c       0x60 FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_frame   0x00000bec       0x88 FreeRTOS/list.o
+ .debug_frame   0x00000c74      0x2a8 FreeRTOS/tasks.o
+ .debug_frame   0x00000f1c       0x48 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_frame   0x00000f64       0x24 LUFA/Drivers/USB/Core/Events.o
+ .debug_frame   0x00000f88       0x2c LUFA/Drivers/USB/Core/USBTask.o
+ .debug_frame   0x00000fb4      0x164 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_frame   0x00001118       0x8c LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_frame   0x000011a4      0x6ec main.o
+ .debug_frame   0x00001890       0x7c XMEGA_API/DIGITALPIN.o
+ .debug_frame   0x0000190c      0x2dc XMEGA_API/USART.o
+ .debug_frame   0x00001be8       0xdc XMEGA_DRIVERS/clksys_driver.o
+ .debug_frame   0x00001cc4      0x174 XMEGA_DRIVERS/TC_driver.o
 
-.debug_str      0x00000000     0x601e
+.debug_str      0x00000000     0x6013
  *(.debug_str)
- .debug_str     0x00000000     0x114a Component_Drivers/nrf24l01p/nrf24l01p.o
-                               0x121f (size before relaxing)
- .debug_str     0x0000114a      0x4da Component_Drivers/ssd1306/font.o
+ .debug_str     0x00000000     0x113f Component_Drivers/nrf24l01p/nrf24l01p.o
+                               0x1214 (size before relaxing)
+ .debug_str     0x0000113f      0x4da Component_Drivers/ssd1306/font.o
                                 0x606 (size before relaxing)
- .debug_str     0x00001624      0x60c FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_str     0x00001619      0x60c FreeRTOS/include/portable/GCC/ATMega323/port.o
                                 0x7c4 (size before relaxing)
- .debug_str     0x00001c30       0xcf FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_str     0x00001c25       0xcf FreeRTOS/include/portable/MemMang/heap_1.o
                                 0x247 (size before relaxing)
- .debug_str     0x00001cff      0x13c FreeRTOS/list.o
+ .debug_str     0x00001cf4      0x13c FreeRTOS/list.o
                                 0x2b2 (size before relaxing)
- .debug_str     0x00001e3b      0x57f FreeRTOS/tasks.o
+ .debug_str     0x00001e30      0x57f FreeRTOS/tasks.o
                                 0x8c7 (size before relaxing)
- .debug_str     0x000023ba      0xe24 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_str     0x000023af      0xe24 LUFA/Drivers/USB/Core/DeviceStandardReq.o
                                0x11da (size before relaxing)
- .debug_str     0x000031de       0x31 LUFA/Drivers/USB/Core/Events.o
+ .debug_str     0x000031d3       0x31 LUFA/Drivers/USB/Core/Events.o
                                 0x188 (size before relaxing)
- .debug_str     0x0000320f       0x79 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_str     0x00003204       0x79 LUFA/Drivers/USB/Core/USBTask.o
                                 0x454 (size before relaxing)
- .debug_str     0x00003288      0x32d LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_str     0x0000327d      0x32d LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
                                 0xada (size before relaxing)
- .debug_str     0x000035b5      0x192 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_str     0x000035aa      0x192 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
                                 0x93b (size before relaxing)
- .debug_str     0x00003747     0x1ae9 main.o
+ .debug_str     0x0000373c     0x1ae9 main.o
                                0x2975 (size before relaxing)
- .debug_str     0x00005230       0x3f XMEGA_API/DIGITALPIN.o
+ .debug_str     0x00005225       0x3f XMEGA_API/DIGITALPIN.o
                                 0x4cd (size before relaxing)
- .debug_str     0x0000526f      0x322 XMEGA_API/USART.o
+ .debug_str     0x00005264      0x322 XMEGA_API/USART.o
                                 0x8c3 (size before relaxing)
- .debug_str     0x00005591      0x461 XMEGA_DRIVERS/clksys_driver.o
+ .debug_str     0x00005586      0x461 XMEGA_DRIVERS/clksys_driver.o
                                 0x7c5 (size before relaxing)
- .debug_str     0x000059f2      0x62c XMEGA_DRIVERS/TC_driver.o
+ .debug_str     0x000059e7      0x62c XMEGA_DRIVERS/TC_driver.o
                                 0xc36 (size before relaxing)
 
-.debug_loc      0x00000000     0x7744
+.debug_loc      0x00000000     0x7697
  *(.debug_loc)
- .debug_loc     0x00000000     0x294b Component_Drivers/nrf24l01p/nrf24l01p.o
- .debug_loc     0x0000294b      0x281 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_loc     0x00002bcc       0xf1 FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_loc     0x00002cbd      0x145 FreeRTOS/list.o
- .debug_loc     0x00002e02      0xde8 FreeRTOS/tasks.o
- .debug_loc     0x00003bea      0x2b6 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_loc     0x00003ea0       0x22 LUFA/Drivers/USB/Core/USBTask.o
- .debug_loc     0x00003ec2      0x5c9 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_loc     0x0000448b      0x194 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_loc     0x0000461f     0x237f main.o
- .debug_loc     0x0000699e       0xd0 XMEGA_API/DIGITALPIN.o
- .debug_loc     0x00006a6e      0x6ea XMEGA_API/USART.o
- .debug_loc     0x00007158      0x2b6 XMEGA_DRIVERS/clksys_driver.o
- .debug_loc     0x0000740e      0x336 XMEGA_DRIVERS/TC_driver.o
+ .debug_loc     0x00000000     0x289e Component_Drivers/nrf24l01p/nrf24l01p.o
+ .debug_loc     0x0000289e      0x281 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_loc     0x00002b1f       0xf1 FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_loc     0x00002c10      0x145 FreeRTOS/list.o
+ .debug_loc     0x00002d55      0xde8 FreeRTOS/tasks.o
+ .debug_loc     0x00003b3d      0x2b6 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_loc     0x00003df3       0x22 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_loc     0x00003e15      0x5c9 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_loc     0x000043de      0x194 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_loc     0x00004572     0x237f main.o
+ .debug_loc     0x000068f1       0xd0 XMEGA_API/DIGITALPIN.o
+ .debug_loc     0x000069c1      0x6ea XMEGA_API/USART.o
+ .debug_loc     0x000070ab      0x2b6 XMEGA_DRIVERS/clksys_driver.o
+ .debug_loc     0x00007361      0x336 XMEGA_DRIVERS/TC_driver.o
 
 .debug_macinfo
  *(.debug_macinfo)
@@ -3947,23 +3946,23 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0xa80
+.debug_ranges   0x00000000      0xa78
  *(.debug_ranges)
- .debug_ranges  0x00000000      0x300 Component_Drivers/nrf24l01p/nrf24l01p.o
- .debug_ranges  0x00000300       0x38 FreeRTOS/include/portable/GCC/ATMega323/port.o
- .debug_ranges  0x00000338       0x28 FreeRTOS/include/portable/MemMang/heap_1.o
- .debug_ranges  0x00000360       0x30 FreeRTOS/list.o
- .debug_ranges  0x00000390      0x100 FreeRTOS/tasks.o
- .debug_ranges  0x00000490       0x58 LUFA/Drivers/USB/Core/DeviceStandardReq.o
- .debug_ranges  0x000004e8       0x10 LUFA/Drivers/USB/Core/Events.o
- .debug_ranges  0x000004f8       0x10 LUFA/Drivers/USB/Core/USBTask.o
- .debug_ranges  0x00000508       0xb8 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
- .debug_ranges  0x000005c0       0x20 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
- .debug_ranges  0x000005e0      0x248 main.o
- .debug_ranges  0x00000828       0x38 XMEGA_API/DIGITALPIN.o
- .debug_ranges  0x00000860      0x110 XMEGA_API/USART.o
- .debug_ranges  0x00000970       0x58 XMEGA_DRIVERS/clksys_driver.o
- .debug_ranges  0x000009c8       0xb8 XMEGA_DRIVERS/TC_driver.o
+ .debug_ranges  0x00000000      0x2f8 Component_Drivers/nrf24l01p/nrf24l01p.o
+ .debug_ranges  0x000002f8       0x38 FreeRTOS/include/portable/GCC/ATMega323/port.o
+ .debug_ranges  0x00000330       0x28 FreeRTOS/include/portable/MemMang/heap_1.o
+ .debug_ranges  0x00000358       0x30 FreeRTOS/list.o
+ .debug_ranges  0x00000388      0x100 FreeRTOS/tasks.o
+ .debug_ranges  0x00000488       0x58 LUFA/Drivers/USB/Core/DeviceStandardReq.o
+ .debug_ranges  0x000004e0       0x10 LUFA/Drivers/USB/Core/Events.o
+ .debug_ranges  0x000004f0       0x10 LUFA/Drivers/USB/Core/USBTask.o
+ .debug_ranges  0x00000500       0xb8 LUFA/Drivers/USB/Core/XMEGA/Endpoint_XMEGA.o
+ .debug_ranges  0x000005b8       0x20 LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o
+ .debug_ranges  0x000005d8      0x248 main.o
+ .debug_ranges  0x00000820       0x38 XMEGA_API/DIGITALPIN.o
+ .debug_ranges  0x00000858      0x110 XMEGA_API/USART.o
+ .debug_ranges  0x00000968       0x58 XMEGA_DRIVERS/clksys_driver.o
+ .debug_ranges  0x000009c0       0xb8 XMEGA_DRIVERS/TC_driver.o
 
 .debug_macro
  *(.debug_macro)

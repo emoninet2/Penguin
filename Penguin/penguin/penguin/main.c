@@ -360,6 +360,9 @@ void thread_3( void *pvParameters ){
 		sprintf(myjunk, "cnt : %x",g_cnt++);
 		_nrf24l01p_send_to_address_ack(0x656d6f6e31, (uint8_t*) myjunk, myjunk);
 		_nrf24l01p_PTX_Handle();
+		
+
+		
 
 	}
 }

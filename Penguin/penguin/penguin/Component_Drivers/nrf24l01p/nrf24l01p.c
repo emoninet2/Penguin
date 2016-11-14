@@ -663,13 +663,14 @@ int _nrf24l01p_PTX_Handle(){
 				
 				//if max retry is reached when Shockburst is enabled, 
 				if(_nrf24l01p_get_max_retry_flag()){
+					_nrf24l01p_reuse_tx_payload();//////////////////??????
 					_nrf24l01p_clear_max_retry_flag();
 				}
 				
 				if(_nrf24l01p_readable()){
+					_nrf24l01p_reuse_tx_payload();//////////////////??????
 					break;//momentarily break the loop so RX handler can process data
 				}
-				
 			}
 			
 			_nrf24l01p_read_register(_NRF24L01P_REG_FIFO_STATUS,&fiffooo,sizeof(fiffooo));
@@ -747,40 +748,7 @@ int _nrf24l01p_send(uint8_t *data, int datalen){
 
 	_nrf24l01p_write_tx_payload(data,datalen);
 	
-	//if(_nrf24l01p_writable()){
-	//	_nrf24l01p_PTX_Handle();
-	//}
 	
-}
-
-int _nrf24l01p_resend(){
-	
-	_nrf24l01p_reuse_tx_payload();
-
-	int error_status = 0;
-	int originalCe = _nrf24l01p_ce_value;//backup original ce_value
-	int originalMode = mode; //backup mode
-	_nrf24l01p_tx_mode();
-	_nrf24l01p_ce_pin(0);//disable();
-	_nrf24l01p_ce_pin(1);//enable();
-	_nrf24l01p_delay_us(_NRF24L01P_TIMING_Thce_us);
-	_nrf24l01p_ce_pin(0);
-	while ( !(_nrf24l01p_get_data_sent_flag()) ){
-		if(_nrf24l01p_get_max_retry_flag()){
-			error_status = -1;
-			break;
-		}
-	}
-	
-	_nrf24l01p_clear_max_retry_flag();
-	_nrf24l01p_clear_data_sent_flag();
-	//_nrf24l01p_flush_tx();
-	
-	if ( originalMode == _NRF24L01P_MODE_RX ) _nrf24l01p_rx_mode();//restore original mode
-	_nrf24l01p_ce_pin(originalCe);//restore original CE pin status
-	_nrf24l01p_delay_us( _NRF24L01P_TIMING_Tpece2csn_us );
-	
-	return error_status;
 }
 
 

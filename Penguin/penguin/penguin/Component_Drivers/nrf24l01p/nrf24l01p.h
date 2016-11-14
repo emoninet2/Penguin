@@ -527,6 +527,8 @@ int _nrf24l01p_PTX_Handle();
 int _nrf24l01p_PRX_Handle();
 bool _nrf24l01p_writable();
 bool _nrf24l01p_readable();
+int _nrf24l01p_send(uint8_t *data, int datalen);
+
 /**@}*/ 
 
 /**
@@ -534,8 +536,8 @@ bool _nrf24l01p_readable();
  */
  /**@{*/ 
 bool _nrf24l01p_readableOnPipe(_nrf24l01p_pipe_t pipe);
-int _nrf24l01p_send(uint8_t *data, int datalen);
-int _nrf24l01p_resend();
+
+
 int _nrf24l01p_send_to_address(pipeAddrType_t address, uint8_t *data, int datalen);
 int _nrf24l01p_send_to_address_ack(pipeAddrType_t address, uint8_t *data, int datalen);
 void _nrf24l01p_send_until_ack(pipeAddrType_t address, uint8_t *data, int datalen);
