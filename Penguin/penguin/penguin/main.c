@@ -345,7 +345,7 @@ void thread_3( void *pvParameters ){
 		char config;
 		char fifo;
 
-		//vTaskDelay(500);
+		vTaskDelay(100);
 		if((_nrf24l01p_readableOnPipe(_NRF24L01P_PIPE_P1))){
 			asm("nop");
 			nrf_led_flag = 1;

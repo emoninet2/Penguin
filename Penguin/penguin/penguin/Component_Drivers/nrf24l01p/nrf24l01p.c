@@ -651,7 +651,7 @@ int _nrf24l01p_PTX_Handle(){
 		int originalMode = _nrf24l01p_mode; //backup mode
 		
 		_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
-
+		
 		_nrf24l01p_clear_max_retry_flag();
 
 		//send all data in payload. comment the line to send single packet at a time
@@ -665,17 +665,18 @@ int _nrf24l01p_PTX_Handle(){
 				if(_nrf24l01p_get_max_retry_flag()){
 					_nrf24l01p_clear_max_retry_flag();
 				}
-
+				
+				if(_nrf24l01p_readable()){
+					break;//momentarily break the loop so RX handler can process data
+				}
+				
 			}
 			
 			_nrf24l01p_read_register(_NRF24L01P_REG_FIFO_STATUS,&fiffooo,sizeof(fiffooo));
 			_nrf24l01p_read_register(_NRF24L01P_REG_STATUS,&stattoo,sizeof(stattoo));
 			
 			asm("nop");
-			
-			//if(_nrf24l01p_get_max_retry_flag()){
-			//	_nrf24l01p_clear_max_retry_flag();
-			//}
+
 		}
 		
 		
@@ -688,14 +689,22 @@ int _nrf24l01p_PTX_Handle(){
 }
 int _nrf24l01p_PRX_Handle(){
 	
+	if(_nrf24l01p_readable()){
+		int error_status = 0;
+		int originalMode = _nrf24l01p_mode; //backup mode
+		
+		_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
+		
+	}
+	
+	
 }
-
-
 
 bool _nrf24l01p_readable(){
-
+	bool HasData = 0;
+	HasData = !_nrf24l01p_get_fifo_flag_rx_empty();
+	return HasData;
 }
-
 
 bool _nrf24l01p_writable(){
 	bool HasData = 0;
