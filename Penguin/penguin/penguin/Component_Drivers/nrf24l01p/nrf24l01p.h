@@ -33,6 +33,9 @@
 
 #include "nrf24l01p_arch_driver.h"
 
+#define _NRF24L01P_PTX_noBlocking_MaxSoftRetry  10 //use 0 for blocking
+
+
 #define _NRF24L01P_TX_FIFO_COUNT   3
 #define _NRF24L01P_RX_FIFO_COUNT   3
 
@@ -104,7 +107,6 @@
 
 
 
-
 /** @name NRF24L01+ config address
  *  These are the congig registers 
  */
@@ -120,9 +122,6 @@
 /**@}*/ 
 
 
-
-
-
 /** @name NRF24L01+ setup register
  *  These are bits of the setup register
  */
@@ -132,9 +131,6 @@
 #define _NRF24L01P_RF_SETUP_RF_DR_LOW_BIT        (1 << 5)
 #define _NRF24L01P_RF_SETUP_RF_DR_MASK           (_NRF24L01P_RF_SETUP_RF_DR_LOW_BIT|_NRF24L01P_RF_SETUP_RF_DR_HIGH_BIT)
 /**@}*/ 
-
-
-
 
 
 
@@ -294,7 +290,6 @@ typedef enum {
 
 
 
-
 /**
  * @name NRF24L01+ state variables
  */
@@ -303,6 +298,8 @@ bool _nrf24l01p_ce_value;/**< state of the CE pin*/
 bool _nrf24l01p_csn_value;/**< state of the CSN pin */
 uint8_t mode;/**< state of the as being in TX or RX mode */
 nRF24L01P_Mode_Type _nrf24l01p_mode;/**< state of the radio */
+bool _nrf24l01p_PTX_noBlockingExitFlag;
+unsigned int _nrf24l01p_PTX_noBlocking_SoftRetryCnt;
 /**@}*/ 
 
 

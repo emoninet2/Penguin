@@ -36,7 +36,32 @@ SUBDIRS :=  \
 ../Component_Drivers/ \
 ../Component_Drivers/lcd03 \
 ../Component_Drivers/ds1302 \
-../Component_Drivers/nrf24l01p/ \
+../Component_Drivers/NRF24L01P/ \
+../Component_Drivers/NRF24L01P/.git/ \
+../Component_Drivers/NRF24L01P/.git/hooks/ \
+../Component_Drivers/NRF24L01P/.git/info/ \
+../Component_Drivers/NRF24L01P/.git/logs/ \
+../Component_Drivers/NRF24L01P/.git/logs/refs/ \
+../Component_Drivers/NRF24L01P/.git/logs/refs/heads/ \
+../Component_Drivers/NRF24L01P/.git/logs/refs/remotes/ \
+../Component_Drivers/NRF24L01P/.git/logs/refs/remotes/origin/ \
+../Component_Drivers/NRF24L01P/.git/objects/ \
+../Component_Drivers/NRF24L01P/.git/objects/2a/ \
+../Component_Drivers/NRF24L01P/.git/objects/78/ \
+../Component_Drivers/NRF24L01P/.git/objects/7b/ \
+../Component_Drivers/NRF24L01P/.git/objects/7e/ \
+../Component_Drivers/NRF24L01P/.git/objects/a3/ \
+../Component_Drivers/NRF24L01P/.git/objects/ae/ \
+../Component_Drivers/NRF24L01P/.git/objects/cc/ \
+../Component_Drivers/NRF24L01P/.git/objects/ff/ \
+../Component_Drivers/NRF24L01P/.git/objects/info/ \
+../Component_Drivers/NRF24L01P/.git/objects/pack/ \
+../Component_Drivers/NRF24L01P/.git/refs/ \
+../Component_Drivers/NRF24L01P/.git/refs/heads/ \
+../Component_Drivers/NRF24L01P/.git/refs/remotes/ \
+../Component_Drivers/NRF24L01P/.git/refs/remotes/origin/ \
+../Component_Drivers/NRF24L01P/.git/refs/tags/ \
+../Component_Drivers/NRF24L01P/arch \
 ../Component_Drivers/ssd1306/ \
 ../FreeRTOS/include/ \
 ../FreeRTOS/include/portable/ \
@@ -125,7 +150,7 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../Component_Drivers/ds1302/ds1302.c \
 ../Component_Drivers/lcd03/lcd03.c \
-../Component_Drivers/nrf24l01p/nrf24l01p.c \
+../Component_Drivers/NRF24L01P/nrf24l01p.c \
 ../Component_Drivers/ssd1306/font.c \
 ../Descriptors.c \
 ../FreeRTOS/croutine.c \
@@ -229,7 +254,7 @@ ASM_SRCS +=
 OBJS +=  \
 Component_Drivers/ds1302/ds1302.o \
 Component_Drivers/lcd03/lcd03.o \
-Component_Drivers/nrf24l01p/nrf24l01p.o \
+Component_Drivers/NRF24L01P/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
 FreeRTOS/croutine.o \
@@ -326,7 +351,7 @@ XMEGA_DRIVERS/wdt_driver.o
 OBJS_AS_ARGS +=  \
 Component_Drivers/ds1302/ds1302.o \
 Component_Drivers/lcd03/lcd03.o \
-Component_Drivers/nrf24l01p/nrf24l01p.o \
+Component_Drivers/NRF24L01P/nrf24l01p.o \
 Component_Drivers/ssd1306/font.o \
 Descriptors.o \
 FreeRTOS/croutine.o \
@@ -423,7 +448,7 @@ XMEGA_DRIVERS/wdt_driver.o
 C_DEPS +=  \
 Component_Drivers/ds1302/ds1302.d \
 Component_Drivers/lcd03/lcd03.d \
-Component_Drivers/nrf24l01p/nrf24l01p.d \
+Component_Drivers/NRF24L01P/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
 FreeRTOS/croutine.d \
@@ -520,7 +545,7 @@ XMEGA_DRIVERS/wdt_driver.d
 C_DEPS_AS_ARGS +=  \
 Component_Drivers/ds1302/ds1302.d \
 Component_Drivers/lcd03/lcd03.d \
-Component_Drivers/nrf24l01p/nrf24l01p.d \
+Component_Drivers/NRF24L01P/nrf24l01p.d \
 Component_Drivers/ssd1306/font.d \
 Descriptors.d \
 FreeRTOS/croutine.d \
@@ -831,7 +856,7 @@ Component_Drivers/lcd03/%.o: ../Component_Drivers/lcd03/%.c
 	@echo Finished building: $<
 	
 
-Component_Drivers/nrf24l01p/%.o: ../Component_Drivers/nrf24l01p/%.c
+Component_Drivers/NRF24L01P/%.o: ../Component_Drivers/NRF24L01P/%.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 4.9.2
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DARCH=ARCH_XMEGA -DBOARD=BOARD_C3_XPLAINED -DF_CPU=32000000UL -DUSE_LUFA_CONFIG_HEADER -DF_USB=48000000UL  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\include" -I".." -I"../XMEGA_DRIVERS" -I"../XMEGA_API" -I"../LUFA" -I"../FreeRTOS" -I"../FreeRTOS/include" -I"../FreeRTOS/include/portable/GCC/ATMega323" -I"../FATFS"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atxmega384c3 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\XMEGAC_DFP\1.0.29\gcc\dev\atxmega384c3" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
