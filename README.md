@@ -1,3 +1,3 @@
 # Penguin
 
-![N|Solid](Penguin/resources/Demo.JPG)
+![N|Solid](Penguin/resources/demo.JPG)
