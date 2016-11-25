@@ -33,6 +33,7 @@
 
 #include "nrf24l01p_arch_driver.h"
 
+#define NRF24L01P_FIFO_SIZE    5
 #define _NRF24L01P_PTX_noBlocking_MaxSoftRetry  10 //use 0 for blocking
 
 
@@ -216,6 +217,9 @@
  */
 #define pipeAddrType_t uint64_t
 
+
+
+
 /**
  * @brief CRC options
  * camn be 8 bit or 16 bit CRC
@@ -300,6 +304,10 @@ uint8_t mode;/**< state of the as being in TX or RX mode */
 nRF24L01P_Mode_Type _nrf24l01p_mode;/**< state of the radio */
 bool _nrf24l01p_PTX_noBlockingExitFlag;
 unsigned int _nrf24l01p_PTX_noBlocking_SoftRetryCnt;
+
+nRF24L01P_Mode_Type _nrf24l01p_mode;/**< state of the radio */
+
+
 /**@}*/ 
 
 
@@ -517,9 +525,15 @@ void _nrf24l01p_disable_dynamic_payload_with_ack();
  * @name NRF24L01+ mid level functions
  */
  /**@{*/ 
+	 
+
+
+	 
 int _nrf24l01p_startup();
 int _nrf24l01p_default_config();
 int _nrf24l01p_stateMode(nRF24L01P_Mode_Type mode);
+void _nrf24l01p_PTX();
+void _nrf24l01p_PRX();
 int _nrf24l01p_PTX_Handle();
 int _nrf24l01p_PRX_Handle();
 bool _nrf24l01p_writable();

@@ -9,7 +9,6 @@
 #ifndef NRF24L01P_ARCH_XMEGA_H_
 #define NRF24L01P_ARCH_XMEGA_H_
 
-
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>

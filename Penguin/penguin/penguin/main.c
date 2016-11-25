@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <math.h>
-#include "time.h"
-#include "main.h"
+
 #include "xmega_drivers.h"
 #include "Component_Drivers/components.h"
 #include "XMEGA_API/xmega_api.h"
@@ -166,25 +165,19 @@ void radio_thread( void *pvParameters ){
 	char myjunk [32];
 	
 	int g_cnt = 0;
-	
+	//relayState[2] = 0;
 	while(1){
 		char config;
 		char fifo;
 		
-		vTaskDelay(100);
-		//if((_nrf24l01p_readableOnPipe(_NRF24L01P_PIPE_P1))){
-		if(_nrf24l01p_readable()){
-			asm("nop");
-			radioRXnotificationLed = 1;
-			int width = _nrf24l01p_read_dyn_pld(_NRF24L01P_PIPE_P1, (uint8_t*) rxData);
-			rxData[width] = '\0';
-			command_parse_execute(rxData);
-		}
-
-
-		sprintf(myjunk, "emon : %x",g_cnt++);
-		_nrf24l01p_send_to_address_ack(0x656d6f6e31, (uint8_t*) myjunk, strlen(myjunk));
-		_nrf24l01p_PTX_Handle();
+		vTaskDelay(200);
+		_nrf24l01p_PRX();
+		
+		sprintf(myjunk, "xmega : %x",g_cnt++);
+		//_nrf24l01p_send_to_address_ack(0xAABBCCDDEE, (uint8_t*) myjunk, strlen(myjunk));
+		//_nrf24l01p_send_to_address_ack(0x656d6f6e31, (uint8_t*) myjunk, strlen(myjunk));
+		_nrf24l01p_PTX();
+		//_nrf24l01p_PTX_Handle();
 		
 	}
 }
@@ -260,8 +253,6 @@ void glcd_thread( void *pvParameters ){
 		else{
 			vTaskDelay(200);
 		}
-
-		
 
 	}
 }

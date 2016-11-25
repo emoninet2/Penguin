@@ -524,13 +524,13 @@ void _nrf24l01p_disable_dynamic_payload_with_ack(){
 
 //////////////////////////////////////////////////////////////////////////
 
-
 void _nrf24l01p_print_info(){
 
 }
 
-
 //////////////////////////////////////////////////////////////////////////
+
+
 
 
 int _nrf24l01p_startup(){
@@ -635,41 +635,34 @@ volatile uint8_t stattoo = 0;
 
 
 int _nrf24l01p_PTX_Handle(){
+	
+	nRF24L01P_Mode_Type originalMode = _nrf24l01p_mode; //backup mode
+	_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
 
-	_nrf24l01p_PTX_noBlocking_SoftRetryCnt = 0;
-	_nrf24l01p_PTX_noBlockingExitFlag = 0;
 	int error_status = 0;
+	
+	
 	if(_nrf24l01p_writable() && !_nrf24l01p_readable() ){
 
-		nRF24L01P_Mode_Type originalMode = _nrf24l01p_mode; //backup mode
-		
-		_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
-		
 		_nrf24l01p_clear_max_retry_flag();
 
-
 		//send all data in payload. comment the line to send single packet at a time
-		while(!_nrf24l01p_get_fifo_flag_tx_empty() ){//while TX FIFO has data
-			_nrf24l01p_clear_data_sent_flag();  //clear data sent flag before the next packet is sent
+		while(1){//while TX FIFO has data
 			
-			while(!_nrf24l01p_get_data_sent_flag()){ //wait until flag set when data sent
+			
+			
+			//while(1){ //wait until flag set when data sent
 				_nrf24l01p_stateMode(_NRF24L01P_MODE_TX);
 				_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
 				
-				//if max retry is reached when Shockburst is enabled, 
-				if(_nrf24l01p_get_max_retry_flag()){
-					//_nrf24l01p_reuse_tx_payload();//////////////////??????
+				if(_nrf24l01p_get_data_sent_flag())break;
 
-					if(_nrf24l01p_PTX_noBlocking_SoftRetryCnt++ > _NRF24L01P_PTX_noBlocking_MaxSoftRetry){
-						_nrf24l01p_PTX_noBlockingExitFlag = 1;
-						break;
-					}
-				}
-			}
-			if(_nrf24l01p_PTX_noBlockingExitFlag){
-				_nrf24l01p_reuse_tx_payload();//////////////////??????
-				break;
-			}
+				if(_nrf24l01p_get_max_retry_flag())break;
+			
+
+			if(_nrf24l01p_get_fifo_flag_tx_empty())break;
+
+
 			asm("nop");
 		}
 		
@@ -707,6 +700,105 @@ bool _nrf24l01p_writable(){
 }
 
 
+
+
+void _nrf24l01p_PTX(){
+	
+
+	//backup original machine state
+	nRF24L01P_Mode_Type originalMode = _nrf24l01p_mode;
+	
+	//switching to STANDBY to avoid data reception during state check (ATOMIC state check)
+	_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
+	
+	//has data to write and no data to read. Do not enter PTX with data in PRX payload.
+	//This is because, if the PRX is full, then sending a data and will forever wait for ACK
+	//and it will never get the ACK because the PRX fifo is full
+	if(_nrf24l01p_writable() && !_nrf24l01p_readable()){
+
+		//blocked until data sent
+		while(1){
+			
+			volatile uint8_t myX = _nrf24l01p_get_status();
+			
+			
+			//clear data sent flag before the next packet is sent
+			_nrf24l01p_clear_data_sent_flag();
+			
+			//strobe CE for single transmission
+			_nrf24l01p_stateMode(_NRF24L01P_MODE_TX);
+			_nrf24l01p_delay_us(_NRF24L01P_TIMING_Tstby2a_us);
+			_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
+			
+			//break when DS flag is set and a single payload is sent or all data on RX FIFO sent
+			if(_nrf24l01p_get_data_sent_flag() || !_nrf24l01p_writable()  ) {
+				break;
+			}
+			
+			//if max retry flag is set
+			if(_nrf24l01p_get_max_retry_flag() ) {
+				break;
+			}
+			
+			
+		}
+		//clear data sent flag
+		_nrf24l01p_clear_data_sent_flag();
+		
+		//if got ack packet, just flush it
+		if(_nrf24l01p_get_data_ready_flag()){
+			//do what needs to be done with the ACK payload here
+			_nrf24l01p_flush_rx();
+		}
+	}
+	//restore original machine state
+	_nrf24l01p_stateMode(originalMode);
+	
+}
+
+
+void _nrf24l01p_PRX(){
+
+	//backup original machine state
+	nRF24L01P_Mode_Type originalMode = _nrf24l01p_mode;
+	
+	//switching to STANDBY to avoid data reception during state check (ATOMIC state check)
+	_nrf24l01p_stateMode(_NRF24L01P_MODE_STANDBY);
+	
+	//if readable (if RX payload data in RX FIFO)
+	if(_nrf24l01p_readable()){
+		
+		while(1){
+
+			char rxData[32];
+			int pipe = _nrf24l01p_get_rx_payload_pipe();
+			int width = _nrf24l01p_read_dyn_pld(pipe, rxData);
+			rxData[width] = '\0';
+
+			command_parse_execute(rxData);
+			//what needs to be done with the data read
+			//printf("MESG: %s\n", rxData);
+
+			if(!_nrf24l01p_readable()) break;
+			
+
+		}
+	}
+	//restore original machine state
+	_nrf24l01p_stateMode(originalMode);
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
 int _nrf24l01p_send(uint8_t *data, int datalen){
 
 	if ( datalen <= 0 ) return 0;
@@ -714,7 +806,6 @@ int _nrf24l01p_send(uint8_t *data, int datalen){
 
 	if(_nrf24l01p_get_tx_fifo_full_flag()) return -1;
 	//while(_nrf24l01p_get_tx_fifo_full_flag());
-
 	_nrf24l01p_write_tx_payload(data,datalen);
 	return 0;
 }
@@ -780,8 +871,10 @@ int _nrf24l01p_read(_nrf24l01p_pipe_t pipe, uint8_t *data, int datalen){
 		return rxPayloadWidth;
 	}
 
-	else {//if pipe not readable
-		return 0;
+	//if RX FIFO is full even after reading data, then flush RX FIFO
+	if(_nrf24l01p_get_fifo_flag_rx_full()){
+		_nrf24l01p_clear_data_ready_flag();
+		_nrf24l01p_flush_rx();
 	}
 	return 0;	
 }
