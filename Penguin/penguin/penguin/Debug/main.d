@@ -28,14 +28,17 @@ main.d main.o: .././main.c \
  ../XMEGA_DRIVERS/clksys_driver.h ../XMEGA_DRIVERS/rtc_driver.h \
  ../XMEGA_DRIVERS/TC_driver.h .././Component_Drivers/components.h \
  .././Component_Drivers/NRF24L01P/nrf24l01p.h \
+ .././Component_Drivers/NRF24L01P/NRF24L01pDriver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
- .././Component_Drivers/NRF24L01P/nrf24l01p_arch_driver.h \
  .././Component_Drivers/NRF24L01P/arch/nrf24l01p_arch_xmega.h \
  ../XMEGA_DRIVERS/../XMEGA_API/xmega_api.h \
  ../XMEGA_DRIVERS/../XMEGA_API/USART.h \
  ../XMEGA_DRIVERS/../XMEGA_API/api_common.h \
  ../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h \
+ .././Component_Drivers/NRF24L01P/NRF24L01pRegisters.h \
+ .././Component_Drivers/NRF24L01P/NRF24L01pConfig.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
  .././Component_Drivers/ssd1306/ssd1306.h \
  .././Component_Drivers/ssd1306/ssd130g_arch_driver.h \
  .././Component_Drivers/ssd1306/font.h \
@@ -126,11 +129,11 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 .././Component_Drivers/NRF24L01P/nrf24l01p.h:
 
+.././Component_Drivers/NRF24L01P/NRF24L01pDriver.h:
+
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h:
-
-.././Component_Drivers/NRF24L01P/nrf24l01p_arch_driver.h:
 
 .././Component_Drivers/NRF24L01P/arch/nrf24l01p_arch_xmega.h:
 
@@ -141,6 +144,12 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../XMEGA_DRIVERS/../XMEGA_API/api_common.h:
 
 ../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h:
+
+.././Component_Drivers/NRF24L01P/NRF24L01pRegisters.h:
+
+.././Component_Drivers/NRF24L01P/NRF24L01pConfig.h:
+
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 
 .././Component_Drivers/ssd1306/ssd1306.h:
 

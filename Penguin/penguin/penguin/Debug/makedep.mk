@@ -6,7 +6,9 @@ Component_Drivers\ds1302\ds1302.c
 
 Component_Drivers\lcd03\lcd03.c
 
-Component_Drivers\NRF24L01P\nrf24l01p.c
+Component_Drivers\NRF24L01P\NRF24L01p.c
+
+Component_Drivers\NRF24L01P\NRF24L01pDriver.c
 
 Component_Drivers\ssd1306\font.c
 

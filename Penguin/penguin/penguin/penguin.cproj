@@ -255,13 +255,22 @@
     <Compile Include="Component_Drivers\NRF24L01P\arch\nrf24l01p_arch_rpi3.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Component_Drivers\NRF24L01P\nrf24l01p.c">
+    <Compile Include="Component_Drivers\NRF24L01P\NRF24L01p.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Component_Drivers\NRF24L01P\nrf24l01p.h">
+    <Compile Include="Component_Drivers\NRF24L01P\NRF24L01p.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="Component_Drivers\NRF24L01P\nrf24l01p_arch_driver.h">
+    <Compile Include="Component_Drivers\NRF24L01P\NRF24L01pConfig.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component_Drivers\NRF24L01P\NRF24L01pDriver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component_Drivers\NRF24L01P\NRF24L01pDriver.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="Component_Drivers\NRF24L01P\NRF24L01pRegisters.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="Component_Drivers\ssd1306\font.c">
@@ -1419,30 +1428,6 @@
     <Folder Include="Component_Drivers\lcd03" />
     <Folder Include="Component_Drivers\ds1302" />
     <Folder Include="Component_Drivers\NRF24L01P\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\hooks\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\info\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\logs\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\logs\refs\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\logs\refs\heads\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\logs\refs\remotes\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\logs\refs\remotes\origin\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\2a\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\78\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\7b\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\7e\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\a3\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\ae\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\cc\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\ff\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\info\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\objects\pack\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\refs\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\refs\heads\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\refs\remotes\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\refs\remotes\origin\" />
-    <Folder Include="Component_Drivers\NRF24L01P\.git\refs\tags\" />
     <Folder Include="Component_Drivers\NRF24L01P\arch" />
     <Folder Include="Component_Drivers\ssd1306\" />
     <Folder Include="FreeRTOS\include\" />
@@ -1528,93 +1513,6 @@
     <Folder Include="XMEGA_DRIVERS" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Component_Drivers\NRF24L01P\.git\config">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\description">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\HEAD">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\applypatch-msg.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\commit-msg.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\post-update.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\pre-applypatch.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\pre-commit.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\pre-push.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\pre-rebase.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\pre-receive.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\prepare-commit-msg.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\hooks\update.sample">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\index">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\info\exclude">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\logs\HEAD">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\logs\refs\heads\master">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\logs\refs\remotes\origin\HEAD">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\2a\fef8f3ee855784ea1ca01b00eb50164528ad60">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\78\2ab6345eddbebe3ef441e7785f73fa8e6445d1">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\7b\bbd0785ab87dc588b6e76a73512bfa1fca9661">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\7e\8ed141f7dcb7fa1d1c07bfd2585c45aa0e00a4">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\a3\7a1feff398974dabf87621dba01c01aac0f91d">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\ae\79a4cd8ba1d0666f9943a778c2af797ec999fe">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\cc\feccdfe2975d4a4093bf7ac8bfc4d3c623299d">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\objects\ff\d6c339656e95591e89a490c0a1a9a62e2aae5c">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\packed-refs">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\refs\heads\master">
-      <SubType>compile</SubType>
-    </None>
-    <None Include="Component_Drivers\NRF24L01P\.git\refs\remotes\origin\HEAD">
-      <SubType>compile</SubType>
-    </None>
     <None Include="Component_Drivers\NRF24L01P\README.md">
       <SubType>compile</SubType>
     </None>

@@ -1,7 +1,6 @@
-Component_Drivers/NRF24L01P/NRF24L01p.d \
- Component_Drivers/NRF24L01P/NRF24L01p.o: \
- ../Component_Drivers/NRF24L01P/NRF24L01p.c \
- ../Component_Drivers/NRF24L01P/NRF24L01p.h \
+Component_Drivers/NRF24L01P/NRF24L01pDriver.d \
+ Component_Drivers/NRF24L01P/NRF24L01pDriver.o: \
+ ../Component_Drivers/NRF24L01P/NRF24L01pDriver.c \
  ../Component_Drivers/NRF24L01P/NRF24L01pDriver.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -37,11 +36,7 @@ Component_Drivers/NRF24L01P/NRF24L01p.d \
  ../XMEGA_DRIVERS/dma_driver.h ../XMEGA_DRIVERS/adc_driver.h \
  ../XMEGA_DRIVERS/clksys_driver.h ../XMEGA_DRIVERS/rtc_driver.h \
  ../XMEGA_DRIVERS/TC_driver.h ../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h \
- ../Component_Drivers/NRF24L01P/NRF24L01pRegisters.h \
- ../Component_Drivers/NRF24L01P/NRF24L01pConfig.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h
-
-../Component_Drivers/NRF24L01P/NRF24L01p.h:
+ ../Component_Drivers/NRF24L01P/NRF24L01pRegisters.h
 
 ../Component_Drivers/NRF24L01P/NRF24L01pDriver.h:
 
@@ -128,7 +123,3 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../XMEGA_DRIVERS/../XMEGA_API/DIGITALPIN.h:
 
 ../Component_Drivers/NRF24L01P/NRF24L01pRegisters.h:
-
-../Component_Drivers/NRF24L01P/NRF24L01pConfig.h:
-
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:

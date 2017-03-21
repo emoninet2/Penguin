@@ -43,7 +43,7 @@ void board_config(){
 	DigitalPin_SetValue(&led2);
 	DigitalPin_SetValue(&powLedR);//off
 	DigitalPin_SetValue(&powLedG);//on
-	DigitalPin_ClearValue(&powLedG);//off
+	//DigitalPin_ClearValue(&powLedG);//off
 
 	
 }
@@ -144,7 +144,44 @@ void command_parse_execute(char *command){
 
 
 
+RadioConfig_t RadioConfig;
+RxPipeConfig_t RxPipeConfig[6];
 
+void RadioReset(){
+
+  RadioConfig.DataReadyInterruptEnabled = 0;
+  RadioConfig.DataSentInterruptFlagEnabled = 0;
+  RadioConfig.MaxRetryInterruptFlagEnabled = 0;
+  RadioConfig.Crc = CONFIG_CRC_16BIT;
+  RadioConfig.AutoReTransmissionCount = 15;
+  RadioConfig.AutoReTransmitDelayX250us = 15;
+  RadioConfig.frequencyOffset = 2;
+  RadioConfig.datarate = RF_SETUP_RF_DR_2MBPS;
+  RadioConfig.RfPower = RF_SETUP_RF_PWR_0DBM;
+  RadioConfig.PllLock = 0;
+  RadioConfig.ContWaveEnabled = 0;
+  RadioConfig.FeatureDynamicPayloadEnabled = 1;
+  RadioConfig.FeaturePayloadWithAckEnabled = 1;
+  RadioConfig.FeatureDynamicPayloadWithNoAckEnabled = 1;
+  
+    RxPipeConfig[0].address = 0x11223344EE;
+    RxPipeConfig[1].address = 0x9A4524CE01;
+    RxPipeConfig[2].address = 0x9A4524CE02;
+    RxPipeConfig[3].address = 0x9A4524CE03;
+    RxPipeConfig[4].address = 0x9A4524CE04;
+    RxPipeConfig[5].address = 0x9A4524CE05;
+
+  
+  int i;
+  for(i=0;i<6;i++){
+    RxPipeConfig[i].PipeEnabled = 1;
+    RxPipeConfig[i].autoAckEnabled = 1;
+    RxPipeConfig[i].dynamicPayloadEnabled = 1;
+  }
+  
+  
+  ResetConfigValues(&RadioConfig, RxPipeConfig);
+}
 
 
 
@@ -154,32 +191,40 @@ void command_parse_execute(char *command){
 
 void radio_thread( void *pvParameters ){
 	
-	_nrf24l01p_init();
-	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P1, 0x4C4C4C4C31);
-	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P2, 0x4C4C4C4C32);
-	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P3, 0x4C4C4C4C33);
-	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P4, 0x4C4C4C4C34);
-	_nrf24l01p_set_RX_pipe_address(_NRF24L01P_PIPE_P5, 0x4C4C4C4C35);
-	
-	char rxData[32];
-	char myjunk [32];
-	
-	int g_cnt = 0;
-	//relayState[2] = 0;
+  RadioReset();
+
+  char myMesg[32];
+  Payload_t payload;
+  
+  payload.UseAck = 1;
+  
+
+  payload.address = 0x11223344EE;
+  payload.data = (uint8_t*)myMesg;
+  payload.length = strlen(myMesg);
+  payload.retransmitCount = 15;
+  
+  
 	while(1){
-		char config;
-		char fifo;
-		
+		if(readable()){
+			uint8_t RxData[32];
+			Payload_t payload;
+			payload.data = RxData;
+          
+			clear_data_ready_flag();
+			readPayload(&payload);
+			payload.data[payload.length] = '\0';
+			command_parse_execute(payload.data);
+
+			flush_rx();
+
+		}
+    
 		vTaskDelay(200);
-		_nrf24l01p_PRX();
-		
-		sprintf(myjunk, "xmega : %x",g_cnt++);
-		//_nrf24l01p_send_to_address_ack(0xAABBCCDDEE, (uint8_t*) myjunk, strlen(myjunk));
-		//_nrf24l01p_send_to_address_ack(0x656d6f6e31, (uint8_t*) myjunk, strlen(myjunk));
-		_nrf24l01p_PTX();
-		//_nrf24l01p_PTX_Handle();
-		
 	}
+  
+
+	
 }
 
 	

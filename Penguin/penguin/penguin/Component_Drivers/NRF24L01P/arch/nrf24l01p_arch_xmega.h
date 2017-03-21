@@ -43,38 +43,49 @@ static DigitalPin_t nrf24l01p_ce_pin = {&PORTB, 7};
 #define NRF24L01P_SPI SPIC
 #define NRF24L01P_SPI_PORT PORTC
 
-static void arch_nrf24l01p_initialize(){
+
+//////////////////////////////////////////////////////////////////////////
+
+static void port_Initialize(){
 	NRF24L01P_SPI_PORT.DIRSET = (1<<5) | (1<<4) | (1<<7);
 	NRF24L01P_SPI_PORT.DIRCLR = (1<<6);
 	NRF24L01P_SPI.CTRL = (1<<SPI_ENABLE_bp) | (1<<SPI_MASTER_bp);
 	NRF24L01P_CSN_PIN_PORT.DIRSET = (1<<NRF24L01P_CSN_PIN_BIT);
 	NRF24L01P_CE_PIN_PORT.DIRSET = (1<<NRF24L01P_CE_PIN_BIT);
 }
-
-static void arch_nrf24l01p_ce_pin(bool state){
-	
-	if(state) DigitalPin_SetValue(&nrf24l01p_ce_pin) ;
-	else DigitalPin_ClearValue(&nrf24l01p_ce_pin);
-	
+static void port_DeInitialize(){
+  
 }
-
-static void arch_nrf24l01p_csn_pin(bool state){
-	if(state) DigitalPin_SetValue(&nrf24l01p_csn_pin) ;
+static void port_Pin_CE(bool val){
+	if(val) DigitalPin_SetValue(&nrf24l01p_ce_pin) ;
+	else DigitalPin_ClearValue(&nrf24l01p_ce_pin);
+}
+static void port_Pin_CSN(bool val){
+	if(val) DigitalPin_SetValue(&nrf24l01p_csn_pin) ;
 	else DigitalPin_ClearValue(&nrf24l01p_csn_pin);
 }
-
-
-
-static int arch_spi_master_transcieve(uint8_t *data,  int len)
-{
+static int port_SPI_Transcieve(uint8_t *dataInOut, unsigned int size){
 	int i;
-	for(i=0;i<len;i++){
-		NRF24L01P_SPI.DATA = data[i];
-		while(!(NRF24L01P_SPI.STATUS &(1<<SPI_IF_bp)));
-		data[i]=  NRF24L01P_SPI.DATA;
+	for(i=0;i<size;i++){
+  	NRF24L01P_SPI.DATA = dataInOut[i];
+  	while(!(NRF24L01P_SPI.STATUS &(1<<SPI_IF_bp)));
+  	dataInOut[i]=  NRF24L01P_SPI.DATA;
 	}
-	
 }
+static void port_DelayMs(unsigned int ms){
+	_nrf24l01p_delay_ms(ms);
+}
+static void port_DelayUs(unsigned int us){
+	_nrf24l01p_delay_us(us);
+}
+static unsigned int port_ClockMs(){
+
+}
+
+
+
+
+
 
 #if defined (__cplusplus)
 }
