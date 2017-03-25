@@ -119,10 +119,10 @@ void RadioMode(RadioState_t mode){
 
 
 bool readable(){
-    return get_data_ready_flag() || !get_fifo_flag_rx_empty(); 
+    return (get_data_ready_flag() || !get_fifo_flag_rx_empty())&& (get_rx_payload_pipe() != 7)  ; 
 }
 bool writable(){
-    return !get_fifo_flag_tx_empty();
+    return !get_fifo_flag_tx_full();
     
 }
 bool readableOnPipe(pipe_t pipe){
