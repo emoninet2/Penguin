@@ -164,75 +164,77 @@ ErrorStatus_t readPayload(Payload_t *payload){
 ErrorStatus_t TransmitPayload(Payload_t *payload){
     ErrorStatus_t error;
     if(TxPipeAddress != payload->address){
-        set_TX_pipe_address(payload->address);
-        TxPipeAddress = payload->address;
+	    set_TX_pipe_address(payload->address);
+	    TxPipeAddress = payload->address;
     }
 
     if(payload->UseAck){
-        
-        if(RxPipeConfig[PIPE_P0].autoAckEnabled == 0){
-            enable_auto_ack(PIPE_P0, 1);
-        }
-        if(RxPipeConfig[PIPE_P0].PipeEnabled == 0){
-            enable_rx_on_pipe(PIPE_P0, 1);
-        }
-        set_RX_pipe_address(PIPE_P0, payload->address);
-        
-        
-        writePayload(payload);
-        
-        RadioState_t originalState = RadioState;
-        RadioMode(MODE_STANDBY);
-        
+	    
+	    if(RxPipeConfig[PIPE_P0].autoAckEnabled == 0){
+		    enable_auto_ack(PIPE_P0, 1);
+	    }
+	    if(RxPipeConfig[PIPE_P0].PipeEnabled == 0){
+		    enable_rx_on_pipe(PIPE_P0, 1);
+	    }
+	    set_RX_pipe_address(PIPE_P0, payload->address);
+	    
+	    
+	    writePayload(payload);
+	    
+	    RadioState_t originalState = RadioState;
+	    RadioMode(MODE_STANDBY);
+	    
 
-        if(writable()){
-            clear_data_sent_flag();
-            while(1){
-                RadioMode(MODE_TX);   
-                RadioMode(MODE_STANDBY);
-                
-                if(get_data_sent_flag()){
-                    error = SUCCESS;
-                    break;
-                }
-                if(get_max_retry_flag()){
-                    clear_max_retry_flag();
-                    if(get_plos_count()>=payload->retransmitCount){
-                        set_frequency_offset(RadioConfig.frequencyOffset);
-                        error = ERROR;
-                        break;
-                    }
-                }
-            }
+	    if(writable()){
+		    clear_data_sent_flag();
+		    while(1){
+			    RadioMode(MODE_TX);
+			    RadioMode(MODE_STANDBY);
+			    
+			    if(get_data_sent_flag()){
+				    error = SUCCESS;
+				    break;
+			    }
+			    if(get_max_retry_flag()){
+				    clear_max_retry_flag();
+				    if(get_plos_count()>=payload->retransmitCount){
+					    set_frequency_offset(RadioConfig.frequencyOffset);
+					    error = ERROR;
+					    break;
+				    }
+			    }
+		    }
 
-        }
-        
-        RadioMode(originalState);
-        
-        set_RX_pipe_address(PIPE_P0, RxPipeConfig[PIPE_P0].address);
-        if(RxPipeConfig[PIPE_P0].autoAckEnabled == 0){
-            enable_auto_ack(PIPE_P0, 0);
-        }
-        if(RxPipeConfig[PIPE_P0].PipeEnabled == 0){
-            enable_rx_on_pipe(PIPE_P0, 0);
-        }
-    }else{
-        set_TX_pipe_address(payload->address);
-        writePayload(payload);
-        RadioState_t originalState = RadioState;
-        if(writable()){
-            clear_data_sent_flag();
-            while(1){
-                RadioMode(MODE_TX);   
-                RadioMode(MODE_STANDBY);
-                if(get_data_sent_flag()){
-                    error = SUCCESS;
-                break;
-                }
-            }
-        }
-        RadioMode(originalState);
-    }
+	    }
+	    
+	    RadioMode(originalState);
+	    
+	    set_RX_pipe_address(PIPE_P0, RxPipeConfig[PIPE_P0].address);
+	    if(RxPipeConfig[PIPE_P0].autoAckEnabled == 0){
+		    enable_auto_ack(PIPE_P0, 0);
+	    }
+	    if(RxPipeConfig[PIPE_P0].PipeEnabled == 0){
+		    enable_rx_on_pipe(PIPE_P0, 0);
+	    }
+	    }else{
+			set_TX_pipe_address(payload->address);
+			writePayload(payload);
+			RadioState_t originalState = RadioState;
+			if(writable()){
+				clear_data_sent_flag();
+				while(1){
+					RadioMode(MODE_TX);
+					RadioMode(MODE_STANDBY);
+					if(get_data_sent_flag()){
+						error = SUCCESS;
+						break;
+					}
+				}
+			}
+			RadioMode(originalState);
+		}
+    
+    flush_tx();
     return error;
 }
 ErrorStatus_t ReceivePayload(Payload_t *payload){

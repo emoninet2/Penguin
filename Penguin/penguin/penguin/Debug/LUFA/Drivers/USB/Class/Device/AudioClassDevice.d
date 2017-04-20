@@ -3,11 +3,11 @@ LUFA/Drivers/USB/Class/Device/AudioClassDevice.d \
  ../LUFA/Drivers/USB/Class/Device/AudioClassDevice.c \
  ../LUFA/Drivers/USB/Class/Device/../../Core/USBMode.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/../../../Common/Common.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdbool.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stddef.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/../../../Common/Architectures.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/../../../Common/BoardTypes.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/../../../Common/ArchitectureSpecific.h \
@@ -39,15 +39,15 @@ LUFA/Drivers/USB/Class/Device/AudioClassDevice.d \
  ../LUFA/Drivers/USB/Class/Device/../../Core/USBMode.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/USBController.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/USBController_XMEGA.h \
- ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../../../../Common/Common.h \
+ c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../USBMode.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../Events.h \
- ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../../../../Common/Common.h \
+ c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../USBMode.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../USBTask.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../USBInterrupt.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/USBInterrupt_XMEGA.h \
- ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/../../../../Common/Common.h \
+ c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/../USBMode.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/../Events.h \
  ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/../USBController.h \
@@ -93,12 +93,12 @@ LUFA/Drivers/USB/Class/Device/AudioClassDevice.d \
  ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/CDCClassCommon.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/../../Core/StdDescriptors.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/HIDClass.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/Device/HIDClassDevice.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/HIDClassCommon.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/HIDParser.h \
- ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/../../../../Common/Common.h \
+ c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/HIDReportData.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/HIDClassCommon.h \
  ../LUFA/Drivers/USB/Class/Device/../../Class/MassStorageClass.h \
@@ -122,15 +122,15 @@ LUFA/Drivers/USB/Class/Device/AudioClassDevice.d \
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/../../../Common/Common.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdint.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdbool.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stddef.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/../../../Common/Architectures.h:
 
@@ -194,13 +194,13 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/USBController_XMEGA.h:
 
-../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../../../../Common/Common.h:
+c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h:
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../USBMode.h:
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../Events.h:
 
-../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../../../../Common/Common.h:
+c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h:
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../USBMode.h:
 
@@ -210,7 +210,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/USBInterrupt_XMEGA.h:
 
-../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/../../../../Common/Common.h:
+c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h:
 
 ../LUFA/Drivers/USB/Class/Device/../../Core/XMEGA/../XMEGA/../USBMode.h:
 
@@ -302,7 +302,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdarg.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:
 
 ../LUFA/Drivers/USB/Class/Device/../../Class/HIDClass.h:
 
@@ -312,7 +312,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 
 ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/HIDParser.h:
 
-../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/../../../../Common/Common.h:
+c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h:
 
 ../LUFA/Drivers/USB/Class/Device/../../Class/Device/../Common/HIDReportData.h:
 

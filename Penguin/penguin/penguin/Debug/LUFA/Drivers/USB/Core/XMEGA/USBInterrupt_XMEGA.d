@@ -2,11 +2,11 @@ LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.d \
  LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.o: \
  ../LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.c \
  ../LUFA/Drivers/USB/Core/XMEGA/../../../../Common/Common.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdint.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdbool.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h \
- c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stddef.h \
+ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../../../../Common/Architectures.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../../../../Common/BoardTypes.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../../../../Common/ArchitectureSpecific.h \
@@ -41,11 +41,11 @@ LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.d \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../USBMode.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../USBController.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/USBController_XMEGA.h \
- ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../../../../Common/Common.h \
+ c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBMode.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../Events.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBTask.h \
- ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../../../../Common/Common.h \
+ c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBMode.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBController.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../Events.h \
@@ -58,7 +58,7 @@ LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.d \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBInterrupt.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../Endpoint.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/Endpoint_XMEGA.h \
- ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/../../../../Common/Common.h \
+ c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/../USBTask.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/../USBInterrupt.h \
  ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/../USBController.h \
@@ -73,15 +73,15 @@ LUFA/Drivers/USB/Core/XMEGA/USBInterrupt_XMEGA.d \
 
 ../LUFA/Drivers/USB/Core/XMEGA/../../../../Common/Common.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdint.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stdbool.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h:
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\string.h:
 
-c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\4.9.2\include\stddef.h:
+c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 ../LUFA/Drivers/USB/Core/XMEGA/../../../../Common/Architectures.h:
 
@@ -151,7 +151,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/USBController_XMEGA.h:
 
-../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../../../../Common/Common.h:
+c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h:
 
 ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBMode.h:
 
@@ -159,7 +159,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBTask.h:
 
-../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../../../../Common/Common.h:
+c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h:
 
 ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../USBMode.h:
 
@@ -185,7 +185,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/Endpoint_XMEGA.h:
 
-../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/../../../../Common/Common.h:
+c:\users\emon1\desktop\penguin\penguin\penguin\penguin\lufa\common\common.h:
 
 ../LUFA/Drivers/USB/Core/XMEGA/../XMEGA/../XMEGA/../XMEGA/../USBTask.h:
 
